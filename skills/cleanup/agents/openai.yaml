@@ -1,0 +1,5 @@
+interface:
+  display_name: "Cleanup"
+  short_description: "Review stale artifacts and apply approved recoverable cleanup"
+policy:
+  allow_implicit_invocation: false

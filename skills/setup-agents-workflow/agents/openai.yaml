@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup Agents Workflow"
+  short_description: "Configure project rules, skills and installation"
+policy:
+  allow_implicit_invocation: false

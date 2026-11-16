@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ask Workflow"
+  short_description: "Explain the workflow and choose the next skill"
+policy:
+  allow_implicit_invocation: false

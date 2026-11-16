@@ -1,0 +1,5 @@
+interface:
+  display_name: "Implement Spec"
+  short_description: "Implement a spec with independent review and human acceptance"
+policy:
+  allow_implicit_invocation: false
