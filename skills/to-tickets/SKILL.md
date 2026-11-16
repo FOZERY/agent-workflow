@@ -12,7 +12,7 @@ Read root `AGENTS.md` and its requirement, tracker and artifact pointers. Establ
 
 ## Defaults
 
-Use these when the project instructions settle nothing for tickets, and mention once that `setup-agents-workflow` can configure the project. Confirm with the user before the first file write.
+Use these when the project instructions settle nothing for tickets, and mention once that `setup-workflow` can configure the project. Confirm with the user before the first file write.
 
 - **Input:** the current conversation, or the spec the user references.
 - **Location:** `.docs/tasks/<feature-slug>/`, one file per ticket named `<NN>-<slug>.md` and numbered in dependency order, so blockers come first. Use the local ticket template below with `Status: open`.

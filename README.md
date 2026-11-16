@@ -23,12 +23,12 @@ flowchart LR
 
 A typical task:
 
-1. You run `/setup-agents-workflow` once per project. The agent reads the repository, asks about the gaps and writes the rules to `AGENTS.md`.
+1. You run `/setup-workflow` once per project. The agent reads the repository, asks about the gaps and writes the rules to `AGENTS.md`.
 2. If the task is unclear, you discuss it first: `/grilling` asks questions until the goal and limits are agreed, `/to-spec` turns the discussion into requirements. Ready requirements, for example from Jira, skip this step.
 3. You run `/implement` with the task. The agent writes the code and runs the project checks. If you ask for TDD, a separate subagent writes the tests first.
 4. A fresh reviewer subagent checks the change. The agent fixes clear-cut findings itself and brings decisions to you. After three review rounds it stops and asks you how to proceed.
 5. The agent explains what changed, how it works and which files to look at. You accept the result or give feedback, which starts another round.
-6. The agent commits only on your request or under project rules. `/pr` prepares or opens a pull request when you ask.
+6. The agent commits only on your request or under project rules. It prepares or opens a pull request under the project delivery procedure and permissions.
 
 If your client cannot launch subagents, you run `/code-review` in a separate session with the brief the agent prepares. In Codex, skills start with `$` instead of `/`.
 
@@ -37,12 +37,12 @@ If your client cannot launch subagents, you run `/code-review` in a separate ses
 You need Node.js 22.20+ and a local copy of this repository. From the project you want to configure, run:
 
 ```bash
-npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-agents-workflow --skill writing-for-agents
+npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-workflow --skill writing-for-agents
 ```
 
 The installer asks which client to use; `--agent claude-code` or `--agent codex` skips the question. Add `--global` to install for all your projects. The public repository `FOZERY/agent-workflow` had no published skills on 2026-11-16, so install from a local copy.
 
-Then run `/setup-agents-workflow`. The agent:
+Then run `/setup-workflow`. The agent:
 
 1. Reads existing instructions, documentation, scripts and CI.
 2. Asks about what it could not find: tests, reviewer model, permissions, where tasks and documents live.
@@ -86,4 +86,4 @@ It recommends a skill and stops; it does not start the work.
 
 Package metadata and discovery were checked in isolated test projects. A full run from setup to PR has not been tested, and clients may behave differently. The repository installs no hooks, background updates or services.
 
-Original contributions are [MIT-licensed](LICENSE). Third-party material keeps its [copyright notices and MIT terms](THIRD_PARTY_NOTICES.md), including HumanLayer material in the optional PR body format. Read [UPSTREAM.md](docs/UPSTREAM.md) before redistributing or updating the adapted skills.
+Original contributions are [MIT-licensed](LICENSE). Third-party material keeps its [copyright notices and MIT terms](THIRD_PARTY_NOTICES.md). Read [UPSTREAM.md](docs/UPSTREAM.md) before redistributing or updating the adapted skills.

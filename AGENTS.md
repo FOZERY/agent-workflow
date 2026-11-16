@@ -11,7 +11,7 @@ This repository contains reusable English skill prompts and their documentation,
 
 ## Editing contracts
 
-Write and edit skills and agent instructions following [writing-for-agents](skills/writing-for-agents/SKILL.md). Keep repository prose and agent instructions in English; preserve source-language examples where they are part of an imported language guide. Keep `SKILL.md` at package root and supporting material under `references/`. `agents/openai.yaml` is client metadata, not an execution agent.
+Write and edit skills and agent instructions following [writing-for-agents](skills/writing-for-agents/SKILL.md). For human-facing text, follow [human-text](skills/human-text/SKILL.md) and its applicable language reference. Keep repository prose and agent instructions in English; preserve source-language examples where they are part of an imported language guide. Keep `SKILL.md` at package root and supporting material under `references/`. `agents/openai.yaml` is client metadata, not an execution agent.
 
 Keep reusable skills project-aware. Project sources and procedures control artifact locations, test scope and authority; changes must not introduce automatic publication, mandatory infrastructure or blanket approval. Preserve the specific independent-review/human-acceptance gates of the implementation routes unless the owner explicitly changes that contract.
 

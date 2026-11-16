@@ -2,7 +2,7 @@
 
 Read this when configuring or revising PR/MR preparation, creation or updates. Establish the project's format, delivery checkpoints, targets and permissions. Setup records this procedure; it does not publish a PR/MR.
 
-The adapted `pr` skill can prepare content or carry out authorized publication. Project rules determine which route applies; choosing the skill does not grant Git or external-write permissions.
+Project rules determine whether the agent prepares content or carries out authorized publication; configuration does not grant Git or external-write permissions.
 
 ## Explore before asking
 
@@ -26,7 +26,7 @@ Capture required prefixes, naming rules and fields without inventing product fac
 
 Ask: "What evidence should the description contain? Which hooks or checks must run before a PR is prepared or published, which run afterward in CI, and where are those requirements defined? How should failed, unavailable or pending checks appear in the description?"
 
-Link to the existing quality/delivery rules and their gate order; ask there for any missing decisions. Record real results and their scope, not fabricated before/after evidence. Establish which hooks run through Git operations and which checks need a separate command. The `pr` skill executes authorized prerequisites when performing delivery; content-only preparation does not imply those effects. A failed hook does not authorize bypassing it. Define whether a draft may be published with pending checks and how post-publication CI is followed.
+Link to the existing quality/delivery rules and their gate order; ask there for any missing decisions. Record real results and their scope, not fabricated before/after evidence. Establish which hooks run through Git operations and which checks need a separate command. Content-only preparation does not imply those effects. A failed hook does not authorize bypassing it. Define whether a draft may be published with pending checks and how post-publication CI is followed.
 
 ### Assignees, reviewers and labels
 

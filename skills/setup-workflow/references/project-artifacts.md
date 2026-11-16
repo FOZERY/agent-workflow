@@ -23,7 +23,7 @@ Establish how each selected client loads root `AGENTS.md`:
 | --- | --- |
 | Codex | Natively. |
 | Claude Code | Natively from v2.1.277, but only when no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` exists in the working directory or above. When one exists, or the session cannot read `AGENTS.md`, add the line `@AGENTS.md` to the project's `CLAUDE.md`. See [Claude Code memory](https://code.claude.com/docs/en/memory). |
-| OMP | Natively in the main session. Task subagents do not receive it; see [writing activation](plain-writing.md#discover-and-plan). |
+| OMP | Natively in the main session. Task subagents do not receive it; see [writing activation](human-text.md#discover-and-plan). |
 
 Preserve existing client wrappers and add only the import or pointer the table requires. If another file already owns shared instructions, resolve ownership with the owner before changing it; do not duplicate policies or silently move them. If shared instructions cannot change, agree an allowed local mechanism and report the limitation. Preview client integration edits separately from installation effects and label loading unverified where it cannot be observed.
 
@@ -37,7 +37,7 @@ Put the memory pointers below in root `AGENTS.md` with concrete repository-root-
 
 These are task-boundary or decision triggers, not instructions to reload every document on every turn.
 
-Only when the owner opts into session-wide `plain-writing`, add the short session-start trigger from [writing activation](plain-writing.md) to root `AGENTS.md` or the explicitly selected global source, after installation. Preserve document formats and approval rules without copying the style guide. A selected skill's required style dependency is a separate package decision; it does not authorize this pointer or add calls to unrelated skills.
+Only when the owner opts into session-wide `human-text`, add the short session-start trigger from [writing activation](human-text.md) to root `AGENTS.md` or the explicitly selected global source, after installation. Preserve document formats and approval rules without copying the style guide. A selected skill's required style dependency is a separate package decision; it does not authorize this pointer or add calls to unrelated skills.
 
 ## CONTEXT.md: recent conversation continuity
 

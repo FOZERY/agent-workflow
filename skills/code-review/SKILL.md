@@ -11,7 +11,7 @@ When coordinating `implement` or `implement-spec`, read [the implementation revi
 
 ## Defaults
 
-Use these when the project instructions settle nothing for review, and mention once that `setup-agents-workflow` can configure the project. In a subagent, put that mention in your result.
+Use these when the project instructions settle nothing for review, and mention once that `setup-workflow` can configure the project. In a subagent, put that mention in your result.
 
 - **Base:** the merge-base of `HEAD` with the default branch (`origin/HEAD`, otherwise `main` or `master`).
 - **Endpoint:** the working tree, including the task's staged, unstaged and untracked files.

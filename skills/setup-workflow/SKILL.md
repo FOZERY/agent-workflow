@@ -1,11 +1,11 @@
 ---
-name: setup-agents-workflow
+name: setup-workflow
 description: "Configure or revise a project's agent workflow, select its skills and install the approved packages."
 argument-hint: "[project context or settings to change]"
 disable-model-invocation: true
 ---
 
-# Setup Agents Workflow
+# Setup Workflow
 
 Adapt the engineering workflow to the project: its sources, artifacts, permissions, human checkpoints and delivery rules. The user supplies knowledge and decisions; you write the instructions. Use the same procedure for a new project, an existing repository or a targeted revision.
 
@@ -55,15 +55,15 @@ Explain the resulting route: analyst-owned, read-only requirements can bypass `t
 
 #### C. Workflow skills and installation targets
 
-On initial setup, after discussing project purpose and task sources, read [skill selection and installation](references/skills.md). Follow [existing-installation checks and optional writing activation](references/plain-writing.md) before asking whether or where to install `plain-writing`. Offer the selectable skills from [the kit catalog](references/catalog.md) as an optional multi-select before conditional workflow branches; any subset or none is valid. Explain omissions and dependency conflicts without silently adding packages.
+On initial setup, after discussing project purpose and task sources, read [skill selection and installation](references/skills.md). Follow [existing-installation checks and optional writing activation](references/human-text.md) before asking whether or where to install `human-text`. Offer the selectable skills from [the kit catalog](references/catalog.md) as an optional multi-select before conditional workflow branches; any subset or none is valid. Explain omissions and dependency conflicts without silently adding packages.
 
 On a rerun, read these references only when the requested change affects skills, writing activation, clients, scope or deployment. Preserve a suitable existing style installation and effective global trigger. Explain gaps and propose only necessary approved changes; do not silently substitute an upstream package for an unavailable adaptation.
 
-For enabled wayfinding, specification, decomposition, prototype or architecture routes, read [the planning-procedure interview](references/planning.md). Establish the applicable map/task representation, authorship, experiment boundaries and decision/report gates. Configure only selected routes; an installed helper does not authorize its operations.
+For enabled wayfinding, specification or decomposition routes, read [the planning-procedure interview](references/planning.md). Establish the applicable map/task representation, authorship, experiment boundaries and decision/report gates. Configure only selected routes.
 
 #### D. Project triage, when used
 
-Discuss this only if triage is part of the selected workflow. Installation alone does not authorize triage.
+Discuss this only if incident or request triage is part of the project's workflow. Installation alone does not authorize it.
 
 Read [the project triage interview](references/triage.md) for this branch. Establish the existing procedure, its evidence and routing rules, related-work checks, permitted outcomes and human decisions before mapping labels. A label vocabulary alone is not a triage contract.
 
@@ -85,7 +85,7 @@ Configure routine read-only exploration separately from selecting `research`. Sh
 
 Capture the agreed exploration policy in root `AGENTS.md` or its workflow reference, even when `research` is not selected. Prefer delegated substantial reading/search when agreed, not a separate agent for every small file. Give helpers bounded questions and request compact findings, source pointers and uncertainty; no file is required for routine exploration. Verify the selected role's actual capabilities, preserve approval requirements and reference native profile settings rather than duplicating them. Deep `research` is a separate report-producing procedure; its reader and writer may be different agents.
 
-If the owner enables session-wide `plain-writing`, draft only its short session-start reading pointer in the deployment plan, not a copy of the style guide. Defer new activation text until the end of setup, after the package is installed and readable. A skill that requires the package loads it for its own work; that dependency does not authorize a session-wide pointer. Required document structure, technical meaning and approval rules remain authoritative. Declining activation leaves existing personal instructions unchanged.
+If the owner enables session-wide `human-text`, draft only its short session-start reading pointer in the deployment plan, not a copy of the style guide. Defer new activation text until the end of setup, after the package is installed and readable. A skill that requires the package loads it for its own work; that dependency does not authorize a session-wide pointer. Required document structure, technical meaning and approval rules remain authoritative. Declining activation leaves existing personal instructions unchanged.
 
 Discuss code edits, dependency installation, environment changes and external writes separately. For Git and delivery, settle commit, push, PR/MR creation or updates, merge and deployment independently, including target repositories/branches and approval requirements. An authorized commit does not imply an authorized push. Missing authorization is not permission. User preferences cannot relax applicable company or higher-priority restrictions.
 
@@ -184,7 +184,7 @@ On initial setup, create or reuse the three core artifacts and their loading poi
 
 ### 7. Install the approved skills, when requested
 
-If package deployment or optional writing activation was approved, follow [skill selection and installation](references/skills.md) after saving project configuration. Only when style activation was selected, also follow [writing activation](references/plain-writing.md): install or verify `plain-writing`, then add its approved project/global pointer at the end of setup. Perform only approved changes and preserve working installations and unrelated instructions. A pointer-only gap needs no reinstall. If changes were declined or unnecessary, skip them and report actual status.
+If package deployment or optional writing activation was approved, follow [skill selection and installation](references/skills.md) after saving project configuration. Only when style activation was selected, also follow [writing activation](references/human-text.md): install or verify `human-text`, then add its approved project/global pointer at the end of setup. Perform only approved changes and preserve working installations and unrelated instructions. A pointer-only gap needs no reinstall. If changes were declined or unnecessary, skip them and report actual status.
 
 **Done when:** each requested deployment has an observed result or precise blocker, including its dependencies and client discovery status. Report partial success accurately. Installation neither invokes the installed workflows nor grants them permissions.
 
@@ -202,5 +202,5 @@ When artifact roles, memory policy or loading change, walk through resuming a se
 
 When writing activation changes, check declined integration, missing-package and pointer-only cases, an existing working setup, a shadowing profile/override and any requested helper coverage. Confirm initial loading and reload after context loss or source changes, rather than a read before every message. Verify each targeted client separately and distinguish saved pointers/discovery from observed style adherence; do not launch live clients or helpers without approval for that probe.
 
-**Done when:** you can identify the saved instruction entrypoint and workflow contract, context and lessons status, support documents, selected skills and their deployment/discovery results, verified checks, unverified capabilities and blocked actions. On a rerun, report the changes and preserved settings. Tell the user how to start permitted work and how to invoke setup again in their selected client: `$setup-agents-workflow` in Codex, or `/setup-agents-workflow` where slash invocation is supported. A repeat invocation shows the current setup and allows revising it. Stop after setup; do not begin a feature or deliver changes automatically.
+**Done when:** you can identify the saved instruction entrypoint and workflow contract, context and lessons status, support documents, selected skills and their deployment/discovery results, verified checks, unverified capabilities and blocked actions. On a rerun, report the changes and preserved settings. Tell the user how to start permitted work and how to invoke setup again in their selected client: `$setup-workflow` in Codex, or `/setup-workflow` where slash invocation is supported. A repeat invocation shows the current setup and allows revising it. Stop after setup; do not begin a feature or deliver changes automatically.
 

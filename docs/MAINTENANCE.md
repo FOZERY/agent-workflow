@@ -12,7 +12,7 @@ A prompt change is a behavior change, even when only Markdown changes. A success
 | `skills/<name>/references/` | Conditional guidance, templates and shared supporting procedures |
 | `skills/<name>/agents/openai.yaml` | Optional client-facing name, description and invocation policy |
 | `FLOW.md` | How the skills connect, phase boundaries and the implementation review loop |
-| `skills/setup-agents-workflow/references/catalog.md` | Selectable skills and their groups, helper skills and the dependency graph |
+| `skills/setup-workflow/references/catalog.md` | Selectable skills and their groups, helper skills and the dependency graph |
 | `docs/SKILLS.md` | Catalog for people: invocation modes, purpose and results; links to the dependency graph |
 | `docs/SETUP.md` | Installation, configuration and the files setup creates |
 | `docs/UPSTREAM.md` | Original sources, pinned baselines and adaptation decisions |

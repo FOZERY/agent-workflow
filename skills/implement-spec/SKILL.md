@@ -6,11 +6,11 @@ disable-model-invocation: true
 
 # Implement a specification
 
-Requires the adapted `code-review` skill and its `references/implementation-cycle.md`, plus `plain-writing` for the coordinator's explanation of the integrated result. Locate both installed packages and read the shared cycle before starting; resolve missing dependencies with the user rather than silently installing them. This skill orchestrates the agreed scope without calling `implement`; it reads `tdd` only when the user asks for TDD.
+Requires the adapted `code-review` skill and its `references/implementation-cycle.md`, plus `human-text` for the coordinator's explanation of the integrated result. Locate both installed packages and read the shared cycle before starting; resolve missing dependencies with the user rather than silently installing them. This skill orchestrates the agreed scope without calling `implement`; it reads `tdd` only when the user asks for TDD.
 
 ## Defaults
 
-Use these when the project instructions settle nothing for this specification's execution, and mention once that `setup-agents-workflow` can configure the project.
+Use these when the project instructions settle nothing for this specification's execution, and mention once that `setup-workflow` can configure the project.
 
 - **Workspace and checks:** as in `implement`: the current checkout and branch, proposing a task branch when on the default branch; narrow checks while working and the full required set before review.
 - **Slices:** planned in the conversation when no tickets exist.

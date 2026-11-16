@@ -25,23 +25,21 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 
 | Need | Candidate |
 | --- | --- |
-| Configure or revise project procedures, permissions, artifact locations or selected packages | `setup-agents-workflow` |
+| Configure or revise project procedures, permissions, artifact locations or selected packages | `setup-workflow` |
 | Challenge an idea, clarify the desired outcome and uncover overlooked questions | `grilling` |
 | Explore questions while developing domain terms and decision records | `grill-with-docs` |
-| Agree domain language, business concepts and consequential decisions | `grill-with-docs` (it loads the `domain-modeling` helper) |
+| Agree domain language, business concepts and consequential decisions | `grill-with-docs` |
 | Investigate a question deeply and preserve a sourced research report | `research` |
 | Find the route through a large, uncertain effort too big for one session | `wayfinder` |
-| Reason about module boundaries and interfaces | `codebase-design` |
-| Run a bounded experiment to answer a design question | A prototype ticket in `wayfinder`, which loads the `prototype` helper |
-| Diagnose architectural friction in an existing codebase | `improve-codebase-architecture` |
-| Evaluate an incoming issue, relevance, ownership and overlapping work | `triage` |
+| Reason about module boundaries, investigate architecture or evaluate an incoming issue | Follow the project procedure and inspect relevant evidence |
+| Run a bounded experiment to answer a design question | A prototype ticket in `wayfinder` |
 | Synthesize agreed requirements, then decompose work if needed | `to-spec`, `to-tickets` |
 | Write independent test-first checks through a test-author subagent | `tdd` |
 | Implement one agreed task, or coordinate a specification/task graph | `implement`, `implement-spec` |
 | Review current changes independently, including before a commit | `code-review` |
-| Prepare or publish a PR/MR under project delivery rules | `pr` |
+| Prepare or publish a PR/MR | Follow project delivery rules and permissions |
 | Discuss experience and preserve confirmed project lessons | `retro` |
-| Improve prose; refactor existing documents; retire stale artifacts | `plain-writing`; `refactor-docs`; `cleanup`, respectively |
+| Improve prose; refactor existing documents; retire stale artifacts | `human-text`; `refactor-docs`; `cleanup`, respectively |
 
 Recommend only the relevant next step and explain its input, expected result and outstanding human decision. Existing analyst-owned requirements may go directly to implementation; they need not pass through spec/ticket authoring. Routine fact lookup does not require a deep research report. A ready-for-human-review task needs the person's review, not another skill merely to keep the agent busy.
 

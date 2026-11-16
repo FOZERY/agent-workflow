@@ -1,3 +1,0 @@
-interface:
-  display_name: "PR"
-  short_description: "Prepare or publish PRs/MRs under project rules"

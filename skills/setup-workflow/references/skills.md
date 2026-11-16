@@ -4,13 +4,13 @@ Read this on initial setup, or when the user changes the workflow's skill set, t
 
 ## Choose the workflow, not just packages
 
-After discussing project purpose and task sources, follow [existing-installation checks and optional writing activation](plain-writing.md). Then offer the selectable skills from [the kit catalog](catalog.md) before conditional workflow interviews, using its four-question layout. Show each option's purpose, known installation status and recommendation. Helper skills come in only as dependencies of the selected callers.
+After discussing project purpose and task sources, follow [existing-installation checks and optional writing activation](human-text.md). Then offer the selectable skills from [the kit catalog](catalog.md) before conditional workflow interviews, using its four-question layout. Show each option's purpose, known installation status and recommendation. Helper skills come in only as dependencies of the selected callers.
 
 Ask: "Which skills would you like to use in this project?" Use the client's native multi-select question tool when available, one question per catalog group in a single call. Otherwise show the same groups as a numbered list and accept names, numbers or `none`; plain Markdown checkboxes are not interactive controls.
 
 Every top-level skill is optional; there is no mandatory baseline or fixed pipeline. Once a skill is selected, its required dependencies are mandatory for that selection, not independent optional checkboxes. Offer recommendations without treating them as selections, and preselect only owner-requested suggested defaults. If the owner declines standalone style integration and selects no other packages, skip installation entirely. An empty engineering selection does not cancel a separately approved style installation.
 
-Use the owner's selection to determine which conditional workflow interviews apply. A read-only incident-analysis workflow may use triage even when tracker mutations are forbidden. Revisit the selection before final approval only if later interview answers change its suitability.
+Use the owner's selection to determine which conditional workflow interviews apply. Revisit the selection before final approval only if later interview answers change its suitability.
 
 Offer `ask-workflow` as an optional guide for workflow questions and next-step advice. It can be installed on its own before or after setup, has no required skill dependencies and recommends procedures without executing them. Selecting it does not select the rest of the catalog.
 
@@ -28,7 +28,7 @@ Before confirming the set, explain relevant omissions once, without pressuring t
 
 Take each selected skill's required packages from [the dependency table](catalog.md#dependencies) and follow them transitively until the set is complete. For a package version that differs from this kit's, read its actual skill calls instead.
 
-The `plain-writing` dependency of `implement` and `implement-spec` serves the parent's walkthrough only; it neither enables session-wide style activation nor becomes a requirement of standalone `code-review`. The configured reviewer must also be able to load any additional review skills the project requires. Explain that selecting an implementation route includes independent review, an explanation of the result and human acceptance.
+The `human-text` dependency of `implement` and `implement-spec` serves the parent's walkthrough only; it neither enables session-wide style activation nor becomes a requirement of standalone `code-review`. The configured reviewer must also be able to load any additional review skills the project requires. Explain that selecting an implementation route includes independent review, an explanation of the result and human acceptance.
 
 Show each selected skill's dependency chain, why each dependency is required, and its installation/discovery status for each target client. Reuse compatible, loadable global or project installations instead of adding duplicate copies. Plan shared dependencies once. A package installed for one client does not satisfy another client's requirement unless that client can actually load it.
 
@@ -40,9 +40,9 @@ Never deploy a new caller while its required dependencies are missing, incompati
 
 The [kit catalog](catalog.md) lists the packages of this setup's kit version. Confirm that each selected package exists in the installation source before planning; an old setup summary is not evidence of availability.
 
-For this workflow, use `FOZERY/agent-workflow` as the default repository source, not the upstream authors' repositories. Bootstrap installs `setup-agents-workflow` and `writing-for-agents`; setup installs only the owner's selected packages, their dependencies and `plain-writing` if accepted. Credits are not installation targets. Agree any different source explicitly.
+For this workflow, use `FOZERY/agent-workflow` as the default repository source, not the upstream authors' repositories. Bootstrap installs `setup-workflow` and `writing-for-agents`; setup installs only the owner's selected packages, their dependencies and `human-text` if accepted. Credits are not installation targets. Agree any different source explicitly.
 
-Resolve a published revision or an approved local checkout before planning installation. Start from the source the bootstrap used: the `setup-agents-workflow` entry in the installer lock file, `skills-lock.json` in the project or `~/.agents/.skill-lock.json` for a user-wide install, records its `source`. Install the remaining packages from that same revision. If the lock names no usable source or the remote is empty, report that and ask for the local checkout path. Installing skills does not authorize publishing the repository.
+Resolve a published revision or an approved local checkout before planning installation. Start from the source the bootstrap used: the `setup-workflow` entry in the installer lock file, `skills-lock.json` in the project or `~/.agents/.skill-lock.json` for a user-wide install, records its `source`. Install the remaining packages from that same revision. If the lock names no usable source or the remote is empty, report that and ask for the local checkout path. Installing skills does not authorize publishing the repository.
 
 For each selected skill and dependency, identify the source, reviewed version or commit, actual package and compatibility with project policy and the target client. Preserve provenance and bundled support files. An unchanged upstream skill is not interchangeable with a planned project-aware adaptation. Ask before selecting an external replacement; never silently fetch a same-named skill to fill a gap.
 
@@ -50,7 +50,7 @@ If a package is missing or incompatible, explain the affected workflow and the a
 
 ## Choose clients, scope and changes
 
-Ask only for unresolved choices: which agents receive the skills, and in which scope. Reuse the `plain-writing` installation and activation choices already established. Recommend a scope by setting:
+Ask only for unresolved choices: which agents receive the skills, and in which scope. Reuse the `human-text` installation and activation choices already established. Recommend a scope by setting:
 
 - **Personal machine:** install user-wide, so every project runs the same kit version. Each project's rules still come from its own `AGENTS.md`.
 - **Team repository:** install into the project and track the skill directories in Git, so every member runs the same version.
@@ -98,7 +98,7 @@ Use `npx skills` for clients it supports. The reviewed npm release is `skills@1.
 Build `npx skills@1.9.0 add` with the agreed repository/revision or local source, exact approved names through `--skill`, and selected clients through `--agent`. Include dependencies only after bundle approval; `npx skills` does not infer this workflow's dependency graph. For example, after publication, if project-level Codex needs both `refactor-docs` and its missing dependency:
 
 ```bash
-npx skills@1.9.0 add FOZERY/agent-workflow --skill plain-writing --agent codex
+npx skills@1.9.0 add FOZERY/agent-workflow --skill human-text --agent codex
 ```
 
 Verify that Codex can load the dependency and its references before installing the caller:

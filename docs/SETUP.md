@@ -11,7 +11,7 @@ The installer is [`skills@1.9.0`](https://registry.npmjs.org/skills/1.9.0); it n
 From the target project, with a local copy of this kit:
 
 ```bash
-npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-agents-workflow --skill writing-for-agents --agent codex
+npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-workflow --skill writing-for-agents --agent codex
 ```
 
 - For Claude Code, use `--agent claude-code`. Without `--agent`, the installer asks.
@@ -25,7 +25,7 @@ The public source `FOZERY/agent-workflow` had no published skills on 2026-11-16.
 - **Personal machine:** install the kit user-wide. Every project gets the same version; each project's rules still come from its own `AGENTS.md`.
 - **Team repository:** install into the project and commit the skill folders, so everyone runs the same version.
 
-Keep one copy per skill name. In Claude Code a user-wide skill wins over a project skill with the same name; in Codex two copies make `$name` ambiguous. For example, an upstream `code-review` or `grilling` installed user-wide replaces this kit's version, and `implement` stops at review. Setup checks both scopes for every selected skill and asks how to resolve each conflict; see [the same-name check](../skills/setup-agents-workflow/references/skills.md#check-same-name-copies).
+Keep one copy per skill name. In Claude Code a user-wide skill wins over a project skill with the same name; in Codex two copies make `$name` ambiguous. For example, an upstream `code-review` or `grilling` installed user-wide replaces this kit's version, and `implement` stops at review. Setup checks both scopes for every selected skill and asks how to resolve each conflict; see [the same-name check](../skills/setup-workflow/references/skills.md#check-same-name-copies).
 
 ### Keep the licenses
 
@@ -37,11 +37,11 @@ Take the agent identifier from the installer's [supported-agent list](https://gi
 
 ### Start setup
 
-Run `/setup-agents-workflow`, or `$setup-agents-workflow` in Codex. Reload skills first if your client needs it. A package's `agents/openai.yaml` is client metadata, not a separate agent.
+Run `/setup-workflow`, or `$setup-workflow` in Codex. Reload skills first if your client needs it. A package's `agents/openai.yaml` is client metadata, not a separate agent.
 
 ## What setup asks about
 
-The [setup prompt](../skills/setup-agents-workflow/SKILL.md) defines the interview. The agent asks only about the topics that apply:
+The [setup prompt](../skills/setup-workflow/SKILL.md) defines the interview. The agent asks only about the topics that apply:
 
 | Topic | What gets decided |
 | --- | --- |
@@ -57,9 +57,9 @@ The [setup prompt](../skills/setup-agents-workflow/SKILL.md) defines the intervi
 
 The agent reads commands and configuration itself instead of asking you to list them. Sources it cannot reach and missing permissions are reported as gaps. Choosing a reviewer model does not make it available: setup checks that the agent can actually launch it and records it as blocked otherwise.
 
-### Plain writing
+### Human text
 
-Setup looks for a compatible `plain-writing` user-wide, then in the project, and asks where to install it if there is none. Installing it and enabling it for every session are separate decisions; the session pointer is added only once the package is readable. `implement`, `implement-spec` and `refactor-docs` use it for their own text without enabling it for the session. If you decline, your personal instructions stay as they are.
+Setup looks for a compatible `human-text` user-wide, then in the project, and asks where to install it if there is none. Installing it and enabling it for every session are separate decisions; the session pointer is added only once the package is readable. `implement`, `implement-spec` and `refactor-docs` use it for their own text without enabling it for the session. If you decline, your personal instructions stay as they are.
 
 ## What setup creates
 
@@ -90,15 +90,15 @@ A leading dot does not make files private. Agree whether they are tracked, liste
 
 You review two plans: changes to the rules and supporting files, and the skill installation. You can approve either one alone. A compatible installed skill is reused; a user-wide upgrade affects other projects and needs its own agreement.
 
-All top-level skills are optional. Required dependencies of a selected skill are installed or verified first ([list](SKILLS.md#dependencies)): `implement` and `implement-spec` need `code-review` and `plain-writing`, `refactor-docs` needs `plain-writing`, standalone `code-review` needs neither. `tdd` stays optional and runs only on your request.
+All top-level skills are optional. Required dependencies of a selected skill are installed or verified first ([list](SKILLS.md#dependencies)): `implement` and `implement-spec` need `code-review` and `human-text`, `refactor-docs` needs `human-text`, standalone `code-review` needs neither. `tdd` stays optional and runs only on your request.
 
 Setup does not create remote repositories, issues, labels, PRs or features. With nothing selected, nothing is installed. A failed dependency blocks only the skill that needs it.
 
 ## Example projects
 
-- **Company project with ready requirements.** Jira and Confluence stay the source; set read-only access if writes are forbidden. Skip `to-spec` and `to-tickets` and select `implement`. Record who accepts the work and the separate commit, push and PR permissions. `triage` can compare active work without changing statuses.
+- **Company project with ready requirements.** Jira and Confluence stay the source; set read-only access if writes are forbidden. Skip `to-spec` and `to-tickets` and select `implement`. Record who accepts the work and the separate commit, push and PR permissions.
 - **Personal project from an idea.** Use `grilling` or `wayfinder` where something is unclear, then `to-spec` and `to-tickets` if useful. Set the reviewer, test scope and publication permissions explicitly: owning the project does not mean unlimited automation.
-- **Small experiment.** Edit as usual or use a `wayfinder` prototype ticket; the implementation skills are not needed. If you do select `implement` or `implement-spec`, their review and acceptance gates still apply.
+- **Small experiment.** Edit as usual or use a bounded experiment to answer a `wayfinder` ticket; the implementation skills are not needed. If you do select `implement` or `implement-spec`, their review and acceptance gates still apply.
 
 ## Rerun and troubleshooting
 

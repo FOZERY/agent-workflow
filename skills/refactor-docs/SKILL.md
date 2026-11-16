@@ -1,6 +1,6 @@
 ---
 name: refactor-docs
-description: Refactor existing human-facing documentation for clarity and structure while preserving technical meaning. Use when asked to rewrite or remove AI-generated filler from ADRs, specifications, READMEs or guides. Requires plain-writing.
+description: Refactor existing human-facing documentation for clarity and structure while preserving technical meaning. Use when asked to rewrite or remove AI-generated filler from ADRs, specifications, READMEs or guides. Requires human-text.
 ---
 
 # Refactor docs
@@ -9,11 +9,11 @@ Edit the expression and organization of existing human-facing documentation, not
 
 ## 1. Load the required writing skill
 
-Resolve and read the installed `plain-writing` skill through the client's skill mechanism or a verified installed path, together with its applicable language reference. Reuse a readable, compatible global or project installation. A source checkout, an instruction mentioning the name or availability in another client does not establish that this client can load the dependency.
+Resolve and read the installed `human-text` skill through the client's skill mechanism or a verified installed path, together with its applicable language reference. Reuse a readable, compatible global or project installation. A source checkout, an instruction mentioning the name or availability in another client does not establish that this client can load the dependency.
 
 If the skill or a required reference is missing, inaccessible or incompatible, stop before editing documents and report the missing dependency. Request an approved installation through project setup; do not substitute remembered rules or silently install a replacement. Using this dependency for document editing does not authorize a session-wide style pointer or global instruction changes.
 
-**Done when:** this client's complete `plain-writing` package has been loaded and its applicable guidance is in context.
+**Done when:** this client's complete `human-text` package has been loaded and its applicable guidance is in context.
 
 ## 2. Establish scope and preserve meaning
 
@@ -27,7 +27,7 @@ Treat commands, code, paths, identifiers, API names, errors, dates, quantities a
 
 ## 3. Rewrite within that contract
 
-Apply `plain-writing` to the prose. Lead with the fact the reader needs, name the actor and action, and group related information under useful headings. Replace filler, unsupported praise, repeated introductions and narration about the document with the supported content itself. Where a claim lacks evidence, flag it for the owner instead of inventing a number or explanation.
+Apply `human-text` to the prose. Lead with the fact the reader needs, name the actor and action, and group related information under useful headings. Replace filler, unsupported praise, repeated introductions and narration about the document with the supported content itself. Where a claim lacks evidence, flag it for the owner instead of inventing a number or explanation.
 
 Remove wording or repetition only when no distinct fact, condition or reasoning is lost. Keep one authoritative explanation and a usable pointer where another reader needs it. Concision is not a word-count target: necessary caveats, counterexamples and trade-offs stay. Preserve deliberate terminology and document structure even when a general style preference suggests another form.
 

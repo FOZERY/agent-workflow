@@ -6,11 +6,11 @@ disable-model-invocation: true
 
 # Implement a task
 
-Requires the adapted `code-review` skill, including its `references/implementation-cycle.md`, and `plain-writing` for the parent's explanation of the implementation. Locate both installed packages and read the shared cycle before starting. If a dependency or required reviewer capability is unavailable, resolve it with the user rather than silently installing packages or substituting self-review.
+Requires the adapted `code-review` skill, including its `references/implementation-cycle.md`, and `human-text` for the parent's explanation of the implementation. Locate both installed packages and read the shared cycle before starting. If a dependency or required reviewer capability is unavailable, resolve it with the user rather than silently installing packages or substituting self-review.
 
 ## Defaults
 
-Use these when the project instructions settle nothing for implementation, and mention once that `setup-agents-workflow` can configure the project.
+Use these when the project instructions settle nothing for implementation, and mention once that `setup-workflow` can configure the project.
 
 - **Workspace:** the current checkout and branch. On the default branch, propose a task branch name and ask before editing.
 - **Checks:** the commands in the project's scripts, task runner or CI configuration. While working, run the narrowest relevant ones, such as the type check and the affected test files; run the full required set once before review.
@@ -41,4 +41,4 @@ Follow the installed `code-review` package's [shared cycle](../code-review/refer
 
 After corrections or human feedback, repeat checks and fresh review of the current changes. `Ready for review` is not completion. Finish only when the human accepts the reviewed revision or explicitly ends the task, as defined by that cycle.
 
-Commit only on the authorized project route, including an explicit human commit request. Do not automatically push, invoke `pr`, merge, close tracker items or remove worktrees; those actions need their own request or project authorization.
+Commit only on the authorized project route, including an explicit human commit request. Do not automatically push, publish a PR/MR, merge, close tracker items or remove worktrees; those actions need their own request or project authorization.

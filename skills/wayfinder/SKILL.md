@@ -72,7 +72,7 @@ Record each answer in the project's authoritative decision location and link it 
 
 ## Defaults
 
-Use these when the project instructions settle nothing for wayfinding, and mention once that `setup-agents-workflow` can configure the project. Confirm with the user before the first file write.
+Use these when the project instructions settle nothing for wayfinding, and mention once that `setup-workflow` can configure the project. Confirm with the user before the first file write.
 
 - **Map:** `.docs/planning/<effort-slug>/map.md`, using the map body above.
 - **Tickets:** one file per ticket beside the map, named `<NN>-<slug>.md` in creation order. Each holds `Type:` (`research`, `prototype`, `grilling` or `task`; `grilling` when unsure), `Status:` (`open`, `claimed by <session name>` or `resolved`), `Blocked by:` (ticket file names or `none`), the `## Question` and, once resolved, `## Answer`.
@@ -86,8 +86,8 @@ Use these when the project instructions settle nothing for wayfinding, and menti
 Every ticket is either **HITL** (human in the loop, worked _with_ a human who speaks for themselves) or **AFK**, driven by the agent alone. A HITL ticket only resolves through that live exchange; the agent never stands in for the human's side of it (a grilling agent that answers its own questions has broken this).
 
 - **Research** (AFK): Resolve an evidence gap. Use the project's read-only exploration policy for quick facts; use `research` for an in-depth investigation with a reusable report. Delegation, sources and the report writer follow project permissions; a read-only helper returns findings to the authorized writer.
-- **Prototype** (HITL): Raise the fidelity of discussion with a bounded experiment by using `prototype`. Link any approved artifact. Use when "how should it look" or "how should it behave" needs a concrete answer.
-- **Grilling** (HITL): Conversation, using `grilling` and `domain-modeling` for questions and terminology within their project permissions.
+- **Prototype** (HITL): Raise the fidelity of discussion with an authorized, bounded experiment. Link any approved artifact. Use when "how should it look" or "how should it behave" needs a concrete answer.
+- **Grilling** (HITL): Conversation, using `grilling` for questions and clarifying terminology within project permissions.
 - **Task** (HITL or AFK): Operational work that must happen before a decision can be made. Establish its scope and authorization separately, including changes to services, accounts or data. If a human must do it, provide the precise checklist. Record the observed result and safe source pointers, never credentials themselves.
 
 ## Fog of war
@@ -119,7 +119,7 @@ Two modes. Either way, **never resolve more than one ticket per session**, with 
 
 User invokes with a loose idea.
 
-1. **Name the destination.** Use `grilling` and `domain-modeling` to clarify what this map is finding its way to. The destination fixes the effort's scope.
+1. **Name the destination.** Use `grilling` to clarify what this map is finding its way to and resolve relevant terminology. The destination fixes the effort's scope.
 2. **Map the frontier.** Grill breadth-first across the open decisions. If the route is already clear and fits one session, stop and ask how the user wants to proceed instead of manufacturing a map.
 3. **Draft the map:** Destination, Notes and the known fog. Use the project's format, reusing an existing authoritative map where applicable.
 4. **Draft the tickets you can specify now**, then their blocking edges and cross-references. Use real identifiers only after records exist; local drafts use explicit draft references, not invented issue numbers. Save or publish only through the approved project procedure. If writing is forbidden, present the proposal for the owner.

@@ -10,7 +10,7 @@ If an analyst-owned or read-only specification already exists, preserve it as au
 
 ## Defaults
 
-Use these when the project instructions settle nothing for specifications, and mention once that `setup-agents-workflow` can configure the project. Confirm with the user before the first file write.
+Use these when the project instructions settle nothing for specifications, and mention once that `setup-workflow` can configure the project. Confirm with the user before the first file write.
 
 - **Location:** `.docs/tasks/<feature-slug>/spec.md`, beside the tickets that `to-tickets` writes.
 - **Format:** the template below, with only the relevant sections.

@@ -32,7 +32,7 @@ Run affected checks after corrections and obtain a new fresh-context review of t
 
 ## 3. Explain the implementation, then ask for decisions
 
-Before writing this handoff, load the parent's installed `plain-writing` skill and applicable language reference unless they are already in context. Resolve a missing dependency with the user; do not silently install it. This use requires no session-wide or global style activation.
+Before writing this handoff, load the parent's installed `human-text` skill and applicable language reference unless they are already in context. Resolve a missing dependency with the user; do not silently install it. This use requires no session-wide or global style activation.
 
 After permitted corrections and their checks/review, explain the current implementation before listing remaining findings, whether or not any remain. Base the explanation on the current code and observed results. Cover:
 
@@ -54,6 +54,6 @@ The human's decisions and feedback become constraints for the next implementatio
 
 Implementation is complete when required gates are satisfied and the human explicitly accepts the current reviewed revision, asks to commit that revision, or explicitly confirms the task is finished. A request for an intermediate/WIP commit is not acceptance; use project commit policy and continue the task. If the human ends incomplete work, report it as stopped with remaining scope, not successfully implemented.
 
-Execute an authorized commit request under project commit rules. Acceptance alone does not request a commit or publication. The user may invoke `pr` afterward or explicitly ask the agent to use it; the implementation cycle does not invoke it automatically. Report actual commit status and keep push, PR/MR, merge and tracker transitions under their separate permissions.
+Execute an authorized commit request under project commit rules. Acceptance alone does not request a commit or publication. Report actual commit status and keep push, PR/MR, merge and tracker transitions under their separate permissions.
 
 **Done when:** the accepted or stopped state is clear, any requested authorized commit has an observed result, and remaining delivery actions are named without being performed implicitly.

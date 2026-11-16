@@ -14,7 +14,7 @@ Preserve the accepted layout. If none exists and domain documentation is needed,
 
 ## Writing rules
 
-Use `domain-modeling` for agreed vocabulary and consequential decisions when that skill is available and the project permits the action. Otherwise propose the record to its owner. The ability to read a source does not authorize editing it.
+Record agreed vocabulary and consequential decisions when the project permits the action; otherwise propose the record to its owner. The ability to read a source does not authorize editing it.
 
 Keep definitions free of implementation plans. A spec records behavior and acceptance; an ADR records a consequential decision, alternatives and trade-offs; the glossary defines the language used by both. Conversation context remains a separate artifact.
 

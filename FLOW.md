@@ -4,7 +4,7 @@ How the skills connect, from setup to delivery. The [README](README.md) gives th
 
 ## 1. Set up the project
 
-`setup-agents-workflow` reads the project, asks about the gaps, writes the rules and installs the chosen skills. You approve the rules and the installation separately. The rules cover where tasks and requirements live, what the agent may do, how to test and review, where a human checks the work and how to commit and deliver; the full list is in [SETUP.md](docs/SETUP.md#what-setup-asks-about).
+`setup-workflow` reads the project, asks about the gaps, writes the rules and installs the chosen skills. You approve the rules and the installation separately. The rules cover where tasks and requirements live, what the agent may do, how to test and review, where a human checks the work and how to commit and deliver; the full list is in [SETUP.md](docs/SETUP.md#what-setup-asks-about).
 
 The rules go to root `AGENTS.md`. Memory goes to `CONTEXT.md` and `LESSONS.md` in `.docs/`; the folder can change, the file names cannot. Setup keeps existing project rules instead of replacing them with a template.
 
@@ -17,11 +17,11 @@ The task starts as an idea, an incident, a change request or an approved spec. U
 | Situation | Skill | Ready to implement when |
 | --- | --- | --- |
 | Unclear goal or missed constraints | `grilling`; `grill-with-docs` if domain terms also need work | Goal, limits and blocking questions are agreed |
-| Unclear domain terms or important choices | `grill-with-docs` (loads `domain-modeling`) | Shared terms and accepted decisions, recorded where useful |
+| Unclear domain terms or important choices | `grill-with-docs` | Shared terms and accepted decisions, recorded where useful |
 | Missing facts | Ordinary read-only exploration; `research` for a reusable report | Findings with sources and stated remaining doubts |
-| Large, uncertain effort | `wayfinder`, with research or prototype tickets if needed | A route through decision tickets (not implementation tasks) |
-| Module or interface design | `codebase-design`; `improve-codebase-architecture` for existing code | A reasoned design direction, no automatic refactor |
-| Incident or incoming task to evaluate | `triage` | Relevance, owner, related work and an allowed next step |
+| Large, uncertain effort | `wayfinder`, with research or bounded experiments if needed | A route through decision tickets (not implementation tasks) |
+| Module or interface design | Explore the existing code and trade-offs | A reasoned design direction, no automatic refactor |
+| Incident or incoming task to evaluate | Follow the project procedure | Relevance, owner, related work and an allowed next step |
 | Requirements to write or split | `to-spec`, then `to-tickets` if useful | Approved requirements and checkable slices with real dependencies |
 | Ready requirements from an analyst | Read the source directly | Enough context and acceptance criteria to start |
 
@@ -35,7 +35,7 @@ Implementation can continue in the same thread; compaction or a new session is o
 
 ## 3. Implement and verify
 
-`implement` handles one agreed task, `implement-spec` a spec and its slices. Neither needs a new local spec or tracker. Both use `code-review` with its [shared implementation cycle](skills/code-review/references/implementation-cycle.md) and `plain-writing` for the final explanation.
+`implement` handles one agreed task, `implement-spec` a spec and its slices. Neither needs a new local spec or tracker. Both use `code-review` with its [shared implementation cycle](skills/code-review/references/implementation-cycle.md) and `human-text` for the final explanation.
 
 Before editing, the agent settles repositories, worktrees, branches and file ownership, and records the task's base commit so a resumed task reviews the whole change. Delegation, parallel work and integration follow project rules; a separate worktree or integration branch is optional.
 
@@ -69,7 +69,7 @@ flowchart TD
     H -->|Commit reviewed result| A
     A --> D{"Delivery requested and authorized?"}
     D -->|No| S["Stop with accepted code"]
-    D -->|Yes| P["Project commit procedure or pr"]
+    D -->|Yes| P["Project delivery procedure"]
 ```
 
 The [shared cycle](skills/code-review/references/implementation-cycle.md) holds the exact steps. In short:
@@ -90,21 +90,16 @@ A missing required skill or source blocks the review. Incomplete required covera
 
 Acceptance does not commit, push, open a PR/MR, close tasks or merge. Each of these needs its own permission. Commit rules come from setup; the kit has no commit skill. A project may allow intermediate commits or early draft PRs; that does not change what counts as acceptance.
 
-`pr` runs when you ask or when project rules allow it. It uses the project's format and metadata. To publish, it also tells the source branch apart from the target repository and base, checks for an existing PR and passes the required hooks and checks. It either:
-
-- gives you the title, body, metadata and the publication steps still missing, when you asked only for the text or publish yourself. Preparing text runs no hooks and writes nothing to Git;
-- or creates or updates the PR by the allowed method and checks the result on the remote.
-
-Pending CI stays pending. An open PR does not mean merge, deploy or branch cleanup.
+Prepare or publish PRs/MRs through the project procedure and only within its permissions. Preparing text does not authorize Git writes or publication. Pending CI stays pending; an open PR does not mean merge, deploy or branch cleanup.
 
 ## 5. Learn and maintain
 
 These skills run whenever useful: during a task, between tasks or after delivery.
 
 - `retro` discusses what happened with you. Confirmed lessons go to `LESSONS.md`; a short summary and open questions go to `CONTEXT.md`. Mandatory rules and important decisions stay in their own documents; a lesson can link to them but not override them.
-- `refactor-docs` improves existing documents without changing their meaning; it requires `plain-writing`.
+- `refactor-docs` improves existing documents without changing their meaning; it requires `human-text`.
 - `cleanup` proposes which outdated artifacts to retire, with evidence, then makes only the approved changes in a recoverable way.
-- `plain-writing` can guide all text for people when the project enables it in setup.
+- `human-text` can guide all text for people when the project enables it in setup.
 - `ask-workflow` answers workflow questions at any stage: it reads the rules and skills, recommends a route and stops.
 
 ## What is not verified

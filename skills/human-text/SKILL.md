@@ -1,9 +1,9 @@
 ---
-name: plain-writing
+name: human-text
 description: "Plain writing for a person: write the way a colleague explains out loud. Use for any text a person reads, or when asked to make a text clearer."
 ---
 
-# Plain writing
+# Human text
 
 The reader is a busy colleague who knows the field but not this task.
 Write the way a good colleague explains out loud.

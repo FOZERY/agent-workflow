@@ -1,6 +1,6 @@
 # Project planning procedures
 
-Read when configuring or revising enabled `wayfinder`, `to-spec`, `to-tickets`, `prototype`, `codebase-design` or `improve-codebase-architecture` routes. Discuss only applicable branches. Installing a helper neither selects every route nor authorizes its actions. Reuse existing procedures and ask about missing decisions, not facts already documented.
+Read when configuring or revising enabled `wayfinder`, `to-spec` or `to-tickets` routes. Discuss only applicable branches. Reuse existing procedures and ask about missing decisions, not facts already documented.
 
 ## Maps and decision work
 
