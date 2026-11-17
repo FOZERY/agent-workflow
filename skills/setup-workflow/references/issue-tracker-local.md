@@ -4,8 +4,8 @@ Use the task/spec locations agreed in the project contract. Preserve an existing
 
 ## Layout and authority
 
-- If no layout exists, propose a feature area under `.docs/tasks/<feature-slug>/`.
-- Specifications and implementation tickets may be separate files or a grouped document, according to the agreed format and readers.
+- If no project layout is specified, use `.scratch/<feature-slug>/`, with the specification at `spec.md`.
+- Put one implementation ticket in each `issues/<NN>-<slug>.md`, numbered from `01` in dependency order. A different agreed project layout must be explicit in its skill settings.
 - Use stable task IDs or paths for references; record discussion, status and dependency information in the accepted fields.
 
 A project may use different paths or externally owned requirements. A Jira ticket or Confluence spec remains authoritative when that is the accepted source; do not create a duplicate local version to bypass denied writes.
@@ -16,7 +16,7 @@ Agree who may create/edit each artifact and which fields or state changes requir
 
 Fetch a ticket by its concrete path/ID and read its relevant discussion. Find work by the agreed directory, state and dependency conventions, not filename order alone. Preserve other writers' edits and respect the project's claim/ownership rules.
 
-If triage is enabled, read its procedure and role mapping. A `Status:` field can represent the accepted states, but do not introduce a second competing state scheme or force GitHub labels onto an existing local tracker.
+Record the readiness vocabulary required by selected planning skills. Their default is `ready-for-agent`; agree a project equivalent when needed. Readiness does not authorize implementation or publication.
 
 ## Publishing and updating
 

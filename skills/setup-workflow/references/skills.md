@@ -1,14 +1,14 @@
 # Skill selection and installation
 
-Read this on initial setup, or when the user changes the workflow's skill set, target clients, installation scope or deployment. The setup skill itself needs no other skills to conduct this interview. Installing the selected workflow's dependencies is a separate, approved stage after its configuration is saved.
+Read when packages, clients, scope or deployment change. Setup itself works alone. Original Matt packages can be installed individually but retain their runtime prerequisites; inspect the actual calls and [catalog](catalog.md#dependencies) before declaring readiness.
 
 ## Choose the workflow, not just packages
 
-After discussing project purpose and task sources, follow [existing-installation checks and optional writing activation](human-text.md). Then offer the selectable skills from [the kit catalog](catalog.md) before conditional workflow interviews, using its four-question layout. Show each option's purpose, known installation status and recommendation. Helper skills come in only as dependencies of the selected callers.
+After discussing project purpose and task sources, follow [project writing configuration](writing.md). Then offer engineering packages from [the catalog](catalog.md) before conditional workflow interviews. Show purpose, installation status and recommendation. A group or joined option does not create a dependency.
 
-Ask: "Which skills would you like to use in this project?" Use the client's native multi-select question tool when available, one question per catalog group in a single call. Otherwise show the same groups as a numbered list and accept names, numbers or `none`; plain Markdown checkboxes are not interactive controls.
+Ask which skills the project needs, including user-suggested packages. Use a native choice tool or a conversation as appropriate; the catalog groups are a guide, not a fixed questionnaire.
 
-Every top-level skill is optional; there is no mandatory baseline or fixed pipeline. Once a skill is selected, its required dependencies are mandatory for that selection, not independent optional checkboxes. Offer recommendations without treating them as selections, and preselect only owner-requested suggested defaults. If the owner declines standalone style integration and selects no other packages, skip installation entirely. An empty engineering selection does not cancel a separately approved style installation.
+All package selections are optional. Do not preselect recommendations as decisions. The project can approve additional prerequisites for a configured route; explain those separately. Selecting no package means no installation, without removing existing skills or instructions.
 
 Use the owner's selection to determine which conditional workflow interviews apply. Revisit the selection before final approval only if later interview answers change its suitability.
 
@@ -22,35 +22,33 @@ Keep three decisions distinct:
 
 A globally installed skill can be unnecessary or unauthorized in this project. Disabling a workflow does not mean deleting a shared global skill. Installation neither invokes a skill nor grants its actions.
 
-## Explain omissions and resolve dependencies
+## Separate packages from project requirements
 
-Before confirming the set, explain relevant omissions once, without pressuring the owner to select more. Without `grilling`, its standalone interview procedure is unavailable, but setup still conducts its own interview. Without `implement`, that implementation command is unavailable; other project-authorized ways of implementing work are not automatically prohibited.
+The twelve project-aware Matt adaptations add only the agreed project-instructions paragraph. Original skill calls remain, including `domain-modeling` and `prototype` in Wayfinder and `codebase-design` in TDD. These helpers are included in the kit but must still be installed for the target client.
 
-Take each selected skill's required packages from [the dependency table](catalog.md#dependencies) and follow them transitively until the set is complete. For a package version that differs from this kit's, read its actual skill calls instead.
+Check both original prerequisites and extra requirements of the approved project contract.
+If a prerequisite is absent, obtain a bounded source/install decision or leave the affected route unavailable.
+Do not silently restore removed helpers, replace required procedures or modify package prompts during setup.
 
-The `human-text` dependency of `implement` and `implement-spec` serves the parent's walkthrough only; it neither enables session-wide style activation nor becomes a requirement of standalone `code-review`. The configured reviewer must also be able to load any additional review skills the project requires. Explain that selecting an implementation route includes independent review, an explanation of the result and human acceptance.
+Record roles, paths, language, writing routes and additional skills in root `AGENTS.md` or its project-owned references.
+Do not rewrite installed reusable prompts for each project. Package maintenance is a separate change.
+Installation neither invokes a skill nor authorizes global instruction edits.
 
-Show each selected skill's dependency chain, why each dependency is required, and its installation/discovery status for each target client. Reuse compatible, loadable global or project installations instead of adding duplicate copies. Plan shared dependencies once. A package installed for one client does not satisfy another client's requirement unless that client can actually load it.
-
-If a required dependency was unchecked or is missing, explain that the caller cannot be installed for use without it. Ask the owner to approve the complete bundle, use an already available compatible dependency, drop the caller, or keep the requested route configured but undeployed. An alternative is valid only where the caller actually supports it. Approval of one selected skill is not silent approval to download its prerequisites or change global style instructions.
-
-Never deploy a new caller while its required dependencies are missing, incompatible, unreadable or unapproved. If the owner keeps an unresolved selection, record the route as unavailable and leave that caller uninstalled; unrelated selections can proceed. Existing incomplete installations are reported, not deleted or claimed ready. Missing dependencies do not make the whole catalog mandatory.
-
-## Establish the source and dependency closure
+## Establish the package source
 
 The [kit catalog](catalog.md) lists the packages of this setup's kit version. Confirm that each selected package exists in the installation source before planning; an old setup summary is not evidence of availability.
 
-For this workflow, use `FOZERY/agent-workflow` as the default repository source, not the upstream authors' repositories. Bootstrap installs `setup-workflow` and `writing-for-agents`; setup installs only the owner's selected packages, their dependencies and `human-text` if accepted. Credits are not installation targets. Agree any different source explicitly.
+For this catalog, use `FOZERY/agent-workflow` as the default source unless another was agreed. Bootstrap needs only `setup-workflow`. Install other packages only when individually selected or explicitly required by the approved project contract. Original-source credits are not installation targets.
 
 Resolve a published revision or an approved local checkout before planning installation. Start from the source the bootstrap used: the `setup-workflow` entry in the installer lock file, `skills-lock.json` in the project or `~/.agents/.skill-lock.json` for a user-wide install, records its `source`. Install the remaining packages from that same revision. If the lock names no usable source or the remote is empty, report that and ask for the local checkout path. Installing skills does not authorize publishing the repository.
 
-For each selected skill and dependency, identify the source, reviewed version or commit, actual package and compatibility with project policy and the target client. Preserve provenance and bundled support files. An unchanged upstream skill is not interchangeable with a planned project-aware adaptation. Ask before selecting an external replacement; never silently fetch a same-named skill to fill a gap.
+For each approved package, identify the source, version, compatibility and complete references. Preserve provenance and notices. Ask before substituting a same-named package from another source; never treat an upstream package as interchangeable merely because its name matches.
 
-If a package is missing or incompatible, explain the affected workflow and the available decision: an explicitly approved compatible source, a different agreed route or keeping that dependent workflow unavailable. Continue unaffected setup; do not fabricate an installation or declare that workflow ready.
+If a package is missing or incompatible, explain the affected project route and the decision needed. Continue unrelated work without fabricating installation or readiness.
 
 ## Choose clients, scope and changes
 
-Ask only for unresolved choices: which agents receive the skills, and in which scope. Reuse the `human-text` installation and activation choices already established. Recommend a scope by setting:
+Ask only for unresolved client and scope choices. Reuse accepted deployment and activation decisions. Recommend scope by setting:
 
 - **Personal machine:** install user-wide, so every project runs the same kit version. Each project's rules still come from its own `AGENTS.md`.
 - **Team repository:** install into the project and track the skill directories in Git, so every member runs the same version.
@@ -59,7 +57,7 @@ Different skills may use different scopes when the owner asks. Inspect only auth
 
 ### Check same-name copies
 
-A same-named skill from another source breaks the kit's callers even when the kit's own copy is installed. For example, an upstream `code-review` lacks `references/implementation-cycle.md`, so `implement` stops at review. Check every selected skill and every dependency, for each target client, in both scopes:
+A same-named copy from another source can shadow a selected package or violate the approved project procedure. Check each selected name for each target client in both scopes; a collision does not make an unrelated skill a package dependency.
 
 | Client | Project skills | User-wide skills | Same name in both scopes |
 | --- | --- | --- | --- |
@@ -67,7 +65,7 @@ A same-named skill from another source breaks the kit's callers even when the ki
 | Codex | `.agents/skills/` | `~/.agents/skills/`, `~/.codex/skills/` | Both load, and `$name` becomes ambiguous and does not resolve by name. |
 | OMP | `.omp/skills/` | `~/.omp/agent/skills/` | Unverified; read the current OMP skill documentation before relying on precedence. |
 
-Claude Code also ships a bundled `code-review`. An installed kit `code-review` replaces it for `/code-review`, while the bundled alias `/review` keeps running the bundled skill. Without a kit copy, `/code-review` runs the bundled skill, which lacks the implementation cycle.
+Claude Code also has a bundled `code-review`. An installed selected copy replaces `/code-review`, while `/review` keeps the client's bundled behavior. Inspect the effective version when an original implementation calls review; there is no longer a self-contained local reviewer fallback.
 
 Identify each copy's origin through the `source` of its installer lock entry, its symlink target, or a content comparison with this kit's package. A copy counts as the kit's when its source is this kit or its content matches the kit package. Keep a matching kit copy instead of reinstalling it.
 
@@ -79,7 +77,7 @@ When another copy shadows or collides with a kit package, show its path, origin 
 
 Install exactly one copy per name for each client. In a team repository, record in the contract which skill names a personal install would shadow, so members can check their own machines.
 
-Prepare a bounded plan listing selected roots and their required dependency closure, reasons for prerequisite additions, reused installations, sources/versions, clients, scopes, paths, install/copy/link method, installer/runtime, network effects, lock files and legal-notice destinations. Include style instruction targets and exact pointer text only when session-wide writing activation was selected; a required style package alone does not authorize a pointer. Avoid duplicating lock-file facts in permanent instructions.
+Prepare a bounded plan listing approved packages and reasons, reused copies, versions, clients, scopes, paths, install/copy/link method, runtime, network effects, lock files and bundled notices. Show project-required combinations and instruction pointers separately. Availability of a package does not authorize editing instructions.
 
 ## Obtain installation approval
 
@@ -89,22 +87,17 @@ If the owner declines installation, save only approved configuration and report 
 
 ## Execute the approved plan
 
-After the configuration stage, execute the approved bundle yourself. Install or verify prerequisites first, then install each caller only after its required dependencies are loadable by the same target client. A bundle is one approved deployment, not necessarily one CLI command. Stop an affected caller if a prerequisite fails; continue independent approved bundles and report partial results. Keep complete package directories, support files and notices, preserve unrelated installations and edits, and stop an operation if its effects differ from approval.
+After configuration, execute only the approved deployment. Packages can install independently. If a configured route has project prerequisites, verify those before calling that route ready; continue unrelated approved installs after a failure.
 
-For separate skill installation or export, preserve applicable copyright notices and full license terms even when the source stores them centrally. This kit uses repository-root `LICENSE` for original contributions and `THIRD_PARTY_NOTICES.md` for inherited material; preserve both in approved accompanying distribution material, including any retained package credits. A shared notice for several skills is sufficient when its coverage is clear. Do not assume a skill-directory-only installer also copies root files. Include these copies in the approved plan; if the required notices cannot be preserved, block the affected distribution rather than omit them.
+Copy complete package directories in their original layout. Preserve bundled notices where present. For packages without a license file, include the root third-party notice alongside them as part of the approved install or export.
 
 Use `npx skills` for clients it supports. The reviewed npm release is `skills@1.9.0`, requiring Node.js 22.20 or newer; use the approved version and consult its [command reference](https://github.com/vercel-labs/skills/blob/50894c1d98bc45ca1ab127213e59d6525065b5e7/docs/commands.md) and [supported-agent paths](https://github.com/vercel-labs/skills/blob/50894c1d98bc45ca1ab127213e59d6525065b5e7/docs/agents.md). Our skill repository is its source; a separate npm package for this kit is not required.
 
-Build `npx skills@1.9.0 add` with the agreed repository/revision or local source, exact approved names through `--skill`, and selected clients through `--agent`. Include dependencies only after bundle approval; `npx skills` does not infer this workflow's dependency graph. For example, after publication, if project-level Codex needs both `refactor-docs` and its missing dependency:
+Build `npx skills@1.9.0 add` with the agreed source, exact approved `--skill` names and selected `--agent` clients. The installer does not infer project composition. For example, either package can install alone:
 
 ```bash
 npx skills@1.9.0 add FOZERY/agent-workflow --skill human-text --agent codex
-```
-
-Verify that Codex can load the dependency and its references before installing the caller:
-
-```bash
-npx skills@1.9.0 add FOZERY/agent-workflow --skill refactor-docs --agent codex
+npx skills@1.9.0 add FOZERY/agent-workflow --skill asd-ste100 --agent codex
 ```
 
 Use `--global` only for approved global destinations and `--copy` when that installation method was agreed. Non-interactive `--yes` is acceptable only after the exact plan is approved. Avoid all-skills/all-agents selectors. Account for lock files, canonical copies and symlinks in the approved write set. For an unsupported client, agree a documented installation method instead of guessing a compatible agent name. Do not download or execute a CLI outside the approved tool/download scope.
@@ -113,8 +106,8 @@ On partial failure, report each successful, failed and unattempted operation. Do
 
 ## Verify deployment
 
-Inspect package files, references, installer lock entries and the selected client's discovery mechanism for every requested root and its transitive prerequisites. Repeat the [same-name check](#check-same-name-copies) so each name resolves to the kit copy. Distinguish present on disk, discoverable and tested by invocation. A caller is ready only when its required closure is loadable in that client's effective scope. Explain reload requirements; do not launch another agent or exercise a mutating workflow just to test discovery without permission.
+Inspect the requested package files, bundled references, notices, lock entries and client discovery. Repeat the [same-name check](#check-same-name-copies). Distinguish present, discoverable and tested by invocation. Check additional project prerequisites only for a route that requires them. Explain reload requirements; do not launch another agent or mutating workflow merely to test discovery.
 
 Report which requested skills are ready for the agreed use, which are installed but not yet discovery-verified, and which are unavailable or incompatible. The installer lock files are the deployment record; keep no second copy of their data.
 
-**Done when:** the selected roots and required dependency closure are explicit for each client, every deployment effect was approved, and each requested bundle is verified or has a precise blocker. No new caller was deployed without its prerequisites; unchanged installations are preserved and no workflow gains permissions from installation.
+**Done when:** each approved package has an observed installation/discovery result or precise blocker; configured project routes are checked separately. Unchanged installations are preserved, no unselected package was added, and installation granted no operational permission.

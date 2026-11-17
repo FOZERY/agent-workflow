@@ -11,7 +11,7 @@ The installer is [`skills@1.9.0`](https://registry.npmjs.org/skills/1.9.0); it n
 From the target project, with a local copy of this kit:
 
 ```bash
-npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-workflow --skill writing-for-agents --agent codex
+npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-workflow --agent codex
 ```
 
 - For Claude Code, use `--agent claude-code`. Without `--agent`, the installer asks.
@@ -25,11 +25,11 @@ The public source `FOZERY/agent-workflow` had no published skills on 2026-11-16.
 - **Personal machine:** install the kit user-wide. Every project gets the same version; each project's rules still come from its own `AGENTS.md`.
 - **Team repository:** install into the project and commit the skill folders, so everyone runs the same version.
 
-Keep one copy per skill name. In Claude Code a user-wide skill wins over a project skill with the same name; in Codex two copies make `$name` ambiguous. For example, an upstream `code-review` or `grilling` installed user-wide replaces this kit's version, and `implement` stops at review. Setup checks both scopes for every selected skill and asks how to resolve each conflict; see [the same-name check](../skills/setup-workflow/references/skills.md#check-same-name-copies).
+Keep one copy per name. A user-wide copy can shadow a project copy, and duplicate Codex names can be ambiguous. Check selected packages and their actual upstream dependencies through [the same-name check](../skills/setup-workflow/references/skills.md#check-same-name-copies).
 
 ### Keep the licenses
 
-The installer may copy only the skill folders. Keep the kit's `LICENSE` and `THIRD_PARTY_NOTICES.md` next to the installed copies, starting with the setup skill itself; the installer's receipt shows where the skills went. See [distribution requirements](../THIRD_PARTY_NOTICES.md#distribution).
+Preserve bundled licenses. For packages without one, include the applicable root third-party notice alongside installation or export. See [distribution requirements](../THIRD_PARTY_NOTICES.md#distribution).
 
 ### OMP and other clients
 
@@ -41,25 +41,50 @@ Run `/setup-workflow`, or `$setup-workflow` in Codex. Reload skills first if you
 
 ## What setup asks about
 
-The [setup prompt](../skills/setup-workflow/SKILL.md) defines the interview. The agent asks only about the topics that apply:
+The [setup prompt](../skills/setup-workflow/SKILL.md) guides a free conversation, not a fixed questionnaire.
+The agent reads existing rules and examples, then asks about missing decisions.
 
 | Topic | What gets decided |
 | --- | --- |
-| Product and scope | What the product does; repositories, folders and environments; links to existing documentation |
-| Tasks and requirements | Where tasks come from; who owns specs; read, create, edit, comment and status rights for each source |
-| Skills and installation | Which skills, their dependencies, existing copies, clients and project or user-wide scope |
-| Triage, if selected | Incident evidence, releases, routing, related work, duplicates and when to escalate |
-| Domain and design | Who owns the glossary and ADRs, accepted decisions, diagram formats, board access and publication rights |
-| Collaboration | Where a human checks the work; read-only exploration versus delegated work; implementation roles |
-| Testing and review | Test levels, fixtures, coverage priorities, infrastructure limits, reviewer model, extra review skills, which fixes the agent may make itself |
-| Git and delivery | When and who commits, message format, hooks, push targets, PR/MR templates and metadata, separate publish and merge rights |
-| Memory and visibility | Who writes context and lessons, retention, paths, whether files are tracked, ignored or local |
+| Project and sources | Purpose, working scope, authoritative requirements, tracker and artifact locations |
+| Working agreement | Autonomy, human checkpoints, delegation, concurrent work and external-write permissions |
+| Selected skills | Project-specific settings, additional skills, coding practices and reading pointers |
+| Testing | Test types, representative tests, command sources and infrastructure constraints |
+| Review | Requirement and standards sources, preferred procedure, scope and permitted corrections |
+| Git and delivery | Commit checkpoints and convention; separate push, PR/MR, merge and deployment permissions |
+| Writing and memory | Languages, writing routes, context and lessons, update authority and visibility |
 
-The agent reads commands and configuration itself instead of asking you to list them. Sources it cannot reach and missing permissions are reported as gaps. Choosing a reviewer model does not make it available: setup checks that the agent can actually launch it and records it as blocked otherwise.
+You can add requirements outside these topics. Setup puts them in the relevant shared or skill-specific section.
+It checks selected packages and capabilities without launching a live agent merely to prove availability.
 
-### Human text
+### Automation settings
 
-Setup looks for a compatible `human-text` user-wide, then in the project, and asks where to install it if there is none. Installing it and enabling it for every session are separate decisions; the session pointer is added only once the package is readable. `implement`, `implement-spec` and `refactor-docs` use it for their own text without enabling it for the session. If you decline, your personal instructions stay as they are.
+TDD and review each have `trigger` and `execution` settings.
+`trigger` selects automatic use during implementation or a separate manual invocation.
+`execution` selects the current session, a subagent or a separate session.
+Review also has `followup`: report findings, or make authorized fixes and re-review.
+
+The [setting definitions](../skills/setup-workflow/references/AGENTS.md#automation-settings) specify their meanings and limits.
+The user decides whether to accept the work. Review procedure selection is prose, not a `review.skill` flag.
+TDD remains a test–implementation cycle, not a separate bulk test-writing phase.
+If a setting is omitted, the skill's default applies. Explicit `manual` is a different choice.
+Setup records settings in `AGENTS.md`; it adds no runtime flag parser or thread-creation service.
+
+### Writing routes
+
+The three writing packages work independently. Setup can assign them these project roles in `AGENTS.md`; installing setup alone does not require or activate them.
+
+| Output | Skill | When it loads |
+| --- | --- | --- |
+| Conversation | `human-text` | At the first prompt, before the first reply |
+| Artifacts, including docs, ADRs, specs, tickets, context and lessons | `asd-ste100` | Before drafting or editing the artifact |
+| Rules, including skills, `AGENTS.md` and procedural references | `writing-for-agents` | Before drafting or editing rules |
+
+The artifact skill contains concise principles and before/after examples. It does not bundle the standard or its dictionary.
+ASD-STE100 is English. Non-English artifacts retain the required language and use an adaptation.
+Full conformance needs the official standard and a terminology review; a short sentence or successful install is not proof.
+The [writing contract](../skills/setup-workflow/references/writing.md) covers client loading, scope and helper instructions.
+Approve package selection and project pointers separately from global activation. The reusable prompts remain unchanged; the project's `AGENTS.md` assigns scope, language and loading triggers.
 
 ## What setup creates
 
@@ -84,21 +109,28 @@ Only the memory folder can change; the file names stay fixed and `AGENTS.md` sta
 
 Setup keeps existing documents and client wrappers. A file with an old name is renamed only through an agreed migration. Setup reuses existing runbooks and creates supporting documents only where they help; it does not create empty specs, ADRs or trackers.
 
+The [reference AGENTS.md structure](../skills/setup-workflow/references/AGENTS.md) contains shared rules and named skill sections.
+Setup fills applicable sections from agreed facts and adds sections or practice pointers for user additions. It grants no default permissions.
+
 A leading dot does not make files private. Agree whether they are tracked, listed in `.gitignore` or in the local `.git/info/exclude`. Ignore rules do not untrack existing files or remove history. Global client settings and built-in memory are configured separately.
 
 ## Approval and installation
 
 You review two plans: changes to the rules and supporting files, and the skill installation. You can approve either one alone. A compatible installed skill is reused; a user-wide upgrade affects other projects and needs its own agreement.
 
-All top-level skills are optional. Required dependencies of a selected skill are installed or verified first ([list](SKILLS.md#dependencies)): `implement` and `implement-spec` need `code-review` and `human-text`, `refactor-docs` needs `human-text`, standalone `code-review` needs neither. `tdd` stays optional and runs only on your request.
+Our `setup-workflow` can install alone. Twelve Matt-derived packages add only the project-instructions paragraph; their original procedures and calls remain.
+Check the [catalog](SKILLS.md#dependencies) before calling a route ready. Required missing helpers or conflicting mandatory steps remain explicit blockers.
+Some prompts retain the original `/setup-matt-pocock-skills` command. Our setup is not an installed alias.
+The kit includes `research`, `domain-modeling`, `prototype` and `codebase-design` for the relevant workflow branches. Setup proposes required missing deployments with the selected callers; it does not silently install them.
 
-Setup does not create remote repositories, issues, labels, PRs or features. With nothing selected, nothing is installed. A failed dependency blocks only the skill that needs it.
+Setup installs nothing when no extra package is selected. It creates no remote repositories, issues, labels, PRs or features.
+If deployment fails or is declined, only the project route that needs that package remains unavailable.
 
 ## Example projects
 
-- **Company project with ready requirements.** Jira and Confluence stay the source; set read-only access if writes are forbidden. Skip `to-spec` and `to-tickets` and select `implement`. Record who accepts the work and the separate commit, push and PR permissions.
-- **Personal project from an idea.** Use `grilling` or `wayfinder` where something is unclear, then `to-spec` and `to-tickets` if useful. Set the reviewer, test scope and publication permissions explicitly: owning the project does not mean unlimited automation.
-- **Small experiment.** Edit as usual or use a bounded experiment to answer a `wayfinder` ticket; the implementation skills are not needed. If you do select `implement` or `implement-spec`, their review and acceptance gates still apply.
+- **Company project with ready requirements.** Keep source and permission ownership in the project contract. Inspect original implementation and publication steps before claiming compatibility with a read-only tracker.
+- **Personal project from an idea.** Select relevant skills, then approve their prerequisites and operations explicitly. Ownership does not grant unlimited automation.
+- **Small experiment.** Wayfinder calls `prototype` for prototype tickets and `research` for research tickets. Inspect their artifact, branch and publication requirements against project permissions.
 
 ## Rerun and troubleshooting
 

@@ -29,13 +29,9 @@ Native blocking links can depend on GitLab tier and instance capabilities. Where
 
 Check the actual state of all blockers against the project's completion criteria. A fix issue being present, closed or merged is not proof of deployment or incident resolution.
 
-## Triage and merge requests
+## Readiness
 
-Read the project triage procedure before evaluating a request. It determines routing, evidence, overlapping-work checks, outcomes and escalation; the role mapping supplies vocabulary only.
-
-Incoming MRs are part of triage only when the project says so. Agree discovery filters for authors and states; do not include the team's delivery work by default. Read body, discussion and diff through the approved interface. The upstream MR-list JSON example is `glab mr list -F json`; verify support before relying on it.
-
-PR/MR content preparation follows the project's separate format and metadata rules. Triage permission does not imply permission to create, edit or merge an MR.
+Record the readiness vocabulary required by selected planning skills. Their default is `ready-for-agent`; agree a project equivalent when needed. Readiness does not authorize implementation or publication.
 
 ## Publishing and fetching
 

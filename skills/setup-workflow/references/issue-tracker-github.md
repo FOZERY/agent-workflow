@@ -30,11 +30,9 @@ For an approved API implementation, sub-issue and dependency writes require the 
 
 A dependency is satisfied only when its blocking work meets the project's completion rule. A linked issue or existing fix ticket does not prove that the affected system is fixed.
 
-## Triage
+## Readiness
 
-Before triaging, read the declared project procedure for request types, evidence, routing, overlapping work, outcomes and escalation. Use the separate vocabulary mapping; labels do not replace that procedure.
-
-Incoming PRs are a triage surface only if the project includes them. Agree which authors and states belong in discovery; do not treat the team's own delivery PRs as incoming requests by default. Read the PR body, comments and diff through the approved method. Preparing PR content is a separate workflow with its own format.
+Record the readiness vocabulary required by selected planning skills. Their default is `ready-for-agent`; agree a project equivalent when needed. Readiness does not authorize implementation or publication.
 
 ## Publishing and fetching
 

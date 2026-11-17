@@ -1,49 +1,44 @@
 ---
 name: implement-spec
-description: "Implement an agreed specification and its task graph, then obtain independent review and human acceptance."
+description: "Implement the result of /to-spec and /to-tickets in code."
 disable-model-invocation: true
 ---
 
-# Implement a specification
+Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
 
-Requires the adapted `code-review` skill and its `references/implementation-cycle.md`, plus `human-text` for the coordinator's explanation of the integrated result. Locate both installed packages and read the shared cycle before starting; resolve missing dependencies with the user rather than silently installing them. This skill orchestrates the agreed scope without calling `implement`; it reads `tdd` only when the user asks for TDD.
+You have been provided a spec. This spec should have tickets associated with it, describing how to implement the spec.
 
-## Defaults
+The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
 
-Use these when the project instructions settle nothing for this specification's execution, and mention once that `setup-workflow` can configure the project.
+The goal is the entire spec implemented on a single **integration branch**, with every ticket resolved the way the issue tracker closes work.
 
-- **Workspace and checks:** as in `implement`: the current checkout and branch, proposing a task branch when on the default branch; narrow checks while working and the full required set before review.
-- **Slices:** planned in the conversation when no tickets exist.
-- **Execution:** the main agent implements slices one at a time in dependency order; parallel subagents only when the project permits delegation.
+The tickets are not a list of steps. They are a **task graph** with blocking relationships between them. This means there is always a **frontier** of tickets which are ready to be grabbed.
 
-## 1. Establish scope and execution ownership
+Start every subagent with a fresh context window.
 
-Read root `AGENTS.md` (or the project's `CLAUDE.md`), the authoritative spec and any associated tickets through approved sources. External or read-only requirements are valid. If tickets do not exist, plan bounded implementation slices in the agreed location or conversation; creating tracker records is not a prerequisite.
+Communication to and from subagents should be sparse. Communicate primarily through **context pointers**: to the spec, tickets, research notes, and previous commits. Don't duplicate information already available via pointers.
 
-Identify acceptance criteria, dependencies and unresolved decisions. Where tickets exist, treat them as a task graph: the **frontier** contains work whose prerequisites are satisfied under project rules, not merely items without a blocking label. Clarify missing task sources directly; setup is needed only if the owner wants to configure the broader workflow.
+**Implementer subagents** should be run in the background where possible for maximum concurrency.
 
-Confirm repositories, workspaces/worktrees, branches, file ownership and integration responsibility. Use the project's implementation profiles, delegation permissions and concurrency limits. A shared working copy is valid with non-overlapping ownership; isolated worktrees or an integration branch are options, not requirements. Preserve existing work and ask before changing an incompatible base.
+## Steps
 
-Record the immutable original comparison base for each affected repository before editing; preserve it across resumed work. Coordinate writers and integration so review can identify the complete stable change, including uncommitted files. Serialize shared-index or overlapping writes.
+1. Read the spec and tickets to understand the task graph.
 
-**Done when:** the approved scope, graph or slices, execution targets, ownership and review/test policies are known.
+2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. This lets **implementer subagents** focus on implementation rather than exploration.
 
-## 2. Implement the available work
+3. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.
 
-Select unblocked slices. Delegate independent work only where permitted, with fresh bounded briefs containing the task, source pointers, project rules, acceptance criteria, file ownership and test policy. Pass the applicable instructions explicitly when the harness does not inherit them. Main-agent implementation is the fallback when delegation is unavailable or disallowed.
+4. Use a fresh **implementer subagent** for each ticket, each in its own worktree on its own branch. Each implementer subagent:
+   - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
+   - calls the Skill tool with `tdd` to build the ticket;
+   - merges the integration branch tip into its own branch before reporting done
 
-Keep exploration read-only where that is its role; it can return sourced findings without creating a research file. Use approved artifact locations only when a durable record is needed.
+5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent**.
 
-Each implementer changes only its assigned scope and runs the required checks. If the user asked for TDD, the coordinator runs the `tdd` cycles for each slice: it launches the test-author subagent, and implementers write production code for a behavior only after its test is red. Otherwise follow ordinary project testing requirements.
+6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
 
-Integrate completed slices through the authorized project procedure. Reconcile overlapping edits and dependency changes before advancing the frontier. A branch merge, commit, push or tracker transition requires its own authority; it is not implicit in completing a slice. Test the integrated result at the required level, not just each isolated slice.
+7. Once all tickets are complete, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single fresh **implementer subagent**.
 
-**Done when:** each in-scope requirement is implemented and verified, or its blocker is explicit. Partial completion remains partial; scope changes require the human.
+8. If a draft PR exists, mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
 
-## 3. Review the integrated result and obtain acceptance
-
-Follow the installed `code-review` package's [shared cycle](../code-review/references/implementation-cycle.md) for review, corrections, the plain-language implementation walkthrough and human decisions. The coordinator dispatches the configured fresh-context reviewer with the complete integrated scope, relevant per-slice evidence and project review rules. Per-ticket reviews can supplement, but do not replace, review of the integrated result.
-
-Resolve deterministic findings within authority and return decision-dependent findings to the human. After corrections or human feedback, run affected checks and obtain a fresh review covering the updated integration. Resolve the reference inside the installed dependency if packages are not siblings.
-
-Finish only at the human-acceptance checkpoint defined by the shared cycle. Report implemented scope, remaining limitations and actual workspace/branch locations. A request to commit follows project commit policy; PR publication, ticket closure, merging and worktree cleanup are separate authorized actions, not automatic completion steps.
+9. Clean up all **implementer subagent** worktrees.

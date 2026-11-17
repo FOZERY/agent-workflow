@@ -28,22 +28,24 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 | Configure or revise project procedures, permissions, artifact locations or selected packages | `setup-workflow` |
 | Challenge an idea, clarify the desired outcome and uncover overlooked questions | `grilling` |
 | Explore questions while developing domain terms and decision records | `grill-with-docs` |
-| Agree domain language, business concepts and consequential decisions | `grill-with-docs` |
-| Investigate a question deeply and preserve a sourced research report | `research` |
+| Agree domain language, business concepts and consequential decisions | `domain-modeling`, also used by `grill-with-docs` |
+| Investigate a question deeply, including a wayfinder research ticket | `research` |
 | Find the route through a large, uncertain effort too big for one session | `wayfinder` |
 | Reason about module boundaries, investigate architecture or evaluate an incoming issue | Follow the project procedure and inspect relevant evidence |
-| Run a bounded experiment to answer a design question | A prototype ticket in `wayfinder` |
+| Run a bounded experiment to answer a design question | `prototype`, also used by prototype tickets in `wayfinder` |
+| Design a module interface or choose a test seam | `codebase-design` |
 | Synthesize agreed requirements, then decompose work if needed | `to-spec`, `to-tickets` |
-| Write independent test-first checks through a test-author subagent | `tdd` |
+| Run original test-first red–green cycles | `tdd` |
 | Implement one agreed task, or coordinate a specification/task graph | `implement`, `implement-spec` |
 | Review current changes independently, including before a commit | `code-review` |
 | Prepare or publish a PR/MR | Follow project delivery rules and permissions |
-| Discuss experience and preserve confirmed project lessons | `retro` |
-| Improve prose; refactor existing documents; retire stale artifacts | `human-text`; `refactor-docs`; `cleanup`, respectively |
+| Inspect session evidence for agent-environment improvements | `retro` |
+| Write conversational replies; write artifacts; write reusable agent rules | `human-text`; `asd-ste100`; `writing-for-agents`, respectively |
+| Refactor existing artifacts; retire stale artifacts | `refactor-docs`; `cleanup`, respectively |
 
 Recommend only the relevant next step and explain its input, expected result and outstanding human decision. Existing analyst-owned requirements may go directly to implementation; they need not pass through spec/ticket authoring. Routine fact lookup does not require a deep research report. A ready-for-human-review task needs the person's review, not another skill merely to keep the agent busy.
 
-Implementation may stay in the discussion thread. Optional TDD uses a fresh test-author subagent, while the implementation review uses a fresh reviewer subagent or a user-run review session. Consult the installed implementation cycle for precise review and acceptance gates. A commit request, a passing check and permission to publish are distinct facts.
+Twelve Matt-derived skills add only the project-instructions paragraph; their original calls and action defaults remain. The kit includes the fixed helper dependencies, but the target client must have them installed. Read the actual prompt before advising. The former local separate test-author and three-round acceptance cycle are absent.
 
 If the candidate or its required dependencies are missing, explain that gap and the setup/install decision instead of treating it as runnable. Naming several related skills does not require installing them all. Reuse configured artifact locations and distinguish recent `CONTEXT.md`, durable `LESSONS.md`, mandatory project rules and authoritative requirements/ADRs.
 

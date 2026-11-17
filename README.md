@@ -1,53 +1,36 @@
 # agent-workflow
 
-Skills for coding agents (Claude Code, Codex, OMP) that follow your project's rules. You run setup once: the agent learns where tasks come from, how to test, who reviews and what it may do without asking. After that you call only the skills a task needs.
-
-The kit adapts skills from [Matt Pocock](https://github.com/mattpocock/skills) and [Kirill Sachkov](https://github.com/KirillSachkov/agent-kit). The skills are prompts: they tell the agent what to do, but they do not enforce permissions or run on their own.
+Workflow skills for coding agents, based on [Matt Pocock's skills](https://github.com/mattpocock/skills), with project setup and writing tools.
+Twelve Matt packages add only a project-instructions paragraph; `grill-with-docs` and `writing-for-agents` remain exact copies.
+The kit includes their fixed helper dependencies. These are prompts, not permission enforcement; check client installations and project permissions before execution.
 
 ## How it works
 
-```mermaid
-flowchart LR
-    S["Setup the project"] --> E{"Task entry"}
-    E -->|Idea or uncertainty| P["Clarify and plan"]
-    E -->|Ready requirements| I["Implement and verify"]
-    P --> I
-    I --> R["Independent review and corrections"]
-    R --> H["Human review"]
-    H -->|Changes requested| I
-    H -->|Accepted| D["Commit or PR only when authorized"]
-    M["Optional maintenance: retro, document refactoring, cleanup"]
-    D -.-> M
-    M -.-> S
-```
+1. Install the packages you need and check their prerequisites.
+2. Use `grilling` directly for an interview, or our `setup-workflow` to configure project rules in `AGENTS.md`.
+3. Use configured project settings where specified and the skill's defaults elsewhere. Check prerequisites and required actions before running it.
 
-A typical task:
-
-1. You run `/setup-workflow` once per project. The agent reads the repository, asks about the gaps and writes the rules to `AGENTS.md`.
-2. If the task is unclear, you discuss it first: `/grilling` asks questions until the goal and limits are agreed, `/to-spec` turns the discussion into requirements. Ready requirements, for example from Jira, skip this step.
-3. You run `/implement` with the task. The agent writes the code and runs the project checks. If you ask for TDD, a separate subagent writes the tests first.
-4. A fresh reviewer subagent checks the change. The agent fixes clear-cut findings itself and brings decisions to you. After three review rounds it stops and asks you how to proceed.
-5. The agent explains what changed, how it works and which files to look at. You accept the result or give feedback, which starts another round.
-6. The agent commits only on your request or under project rules. It prepares or opens a pull request under the project delivery procedure and permissions.
-
-If your client cannot launch subagents, you run `/code-review` in a separate session with the brief the agent prepares. In Codex, skills start with `$` instead of `/`.
+Setup records shared rules and named skill sections in `AGENTS.md`. TDD and review can be automatic or manual.
+Review can report findings or lead to authorized fixes and another review. The user decides whether to accept the work.
 
 ## Install
 
-You need Node.js 22.20+ and a local copy of this repository. From the project you want to configure, run:
+You need Node.js 22.20+ and a local copy of this repository. Install either writing skill on its own:
 
 ```bash
-npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-workflow --skill writing-for-agents
+npx skills@1.9.0 add ~/projects/agent-workflow --skill human-text --agent codex
+npx skills@1.9.0 add ~/projects/agent-workflow --skill asd-ste100 --agent codex
 ```
 
-The installer asks which client to use; `--agent claude-code` or `--agent codex` skips the question. Add `--global` to install for all your projects. The public repository `FOZERY/agent-workflow` had no published skills on 2026-11-16, so install from a local copy.
+The installer can select any catalog package, including `setup-workflow`. Some original skills need additional packages at execution time.
+Use `--agent claude-code` for Claude Code. Add `--global` only for an intended user-wide installation.
 
-Then run `/setup-workflow`. The agent:
+To configure the project, install and run `/setup-workflow` (`$setup-workflow` in Codex). It:
 
 1. Reads existing instructions, documentation, scripts and CI.
-2. Asks about what it could not find: tests, reviewer model, permissions, where tasks and documents live.
+2. Discusses missing decisions: test practices, automation, permissions, artifact locations and any additional skills or coding guidance.
 3. Shows the draft rules and, separately, the list of skills to install.
-4. After your approval, writes the rules and installs the chosen skills with their dependencies.
+4. After approval, writes the project rules and installs only the approved packages.
 
 The result:
 
@@ -59,7 +42,11 @@ AGENTS.md          project rules for the agent
 
 You can choose another folder instead of `.docs/`; the file names stay fixed. Jira, Confluence and other existing sources stay the source of truth. Run setup again to see the current settings and change some of them; the rest stays as it was.
 
-The installer copies skill folders without the root license files. Keep `LICENSE` and `THIRD_PARTY_NOTICES.md` next to installed copies ([details](THIRD_PARTY_NOTICES.md#distribution)). Scope choice, OMP and troubleshooting are in [SETUP.md](docs/SETUP.md).
+The project can assign conversation to `human-text`, artifacts to `asd-ste100` and reusable rules to `writing-for-agents`.
+Setup records approved triggers and additional requirements in `AGENTS.md`; it does not modify the reusable skill prompts.
+
+Preserve bundled licenses. For packages without one, copy the applicable [third-party notice](THIRD_PARTY_NOTICES.md#distribution) alongside installation or export.
+Scope choice, OMP and setup details are in [SETUP.md](docs/SETUP.md).
 
 ## Which skill to use
 

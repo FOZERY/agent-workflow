@@ -1,57 +1,91 @@
 ---
 name: code-review
-description: "Review committed or uncommitted changes against project standards and task requirements. Use for standalone review or as the independent reviewer in an implementation workflow."
+description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
 ---
 
-# Code review
+Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
 
-Review without editing the implementation. This skill works in a standalone thread or inside the configured reviewer subagent. It does not recursively launch another mandatory review team. Split review work only if the project explicitly configures and permits it.
+Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
-When coordinating `implement` or `implement-spec`, read [the implementation review cycle](references/implementation-cycle.md). A reviewer executing an assigned review follows the process below and returns findings to its caller.
+- **Standards**: does the code conform to this repo's documented coding standards?
+- **Spec**: does the code faithfully implement the originating issue / spec?
 
-## Defaults
+Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings. Start every sub-agent with a fresh context window.
 
-Use these when the project instructions settle nothing for review, and mention once that `setup-workflow` can configure the project. In a subagent, put that mention in your result.
+The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
 
-- **Base:** the merge-base of `HEAD` with the default branch (`origin/HEAD`, otherwise `main` or `master`).
-- **Endpoint:** the working tree, including the task's staged, unstaged and untracked files.
-- **Spec:** the task the caller supplies; otherwise the issues referenced in commit messages since the base; otherwise ask.
-- **Standards:** the repository's lint, format and type-check configuration and its contributing guide.
+## Process
 
-## 1. Resolve policy and review scope
+### 1. Pin the fixed point
 
-Read root `AGENTS.md` (or the project's `CLAUDE.md`), its review procedure, coding/testing standards and required project review skills. Use the supplied task/spec and accepted decisions as requirement sources. Ask the user about missing scope or conflicting requirements; as a subagent without access to the user, return the question to your caller as a blocker. No tracker or local spec file is mandatory. If a required source or skill is inaccessible, mark the affected mandatory review checks as blocked. Continue review within the available scope, without treating missing required coverage as a pass.
+Whatever the user said is the fixed point (a commit SHA, branch name, tag, `main`, `HEAD~5`, etc.). If they didn't specify one, ask for it.
 
-Establish an immutable comparison base and the endpoint being reviewed. Resolve a branch/tag to its revision; use the project's merge-base or direct-comparison convention; without one, use the [default base](#defaults) and state it in the result. Preserve the original task base across resumed work so prior task commits remain included.
+Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
 
-Include the agreed committed, staged, unstaged and relevant untracked changes. A `HEAD`-only diff does not review uncommitted implementation. For working-tree review, use a read-only scoped snapshot or content identities for the reviewed files and relevant context, leaving the real index and unrelated work untouched. State exclusions. If the files change during review, mark the result stale and obtain a stable view; never commit or stage merely to make review possible.
+Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here, not inside two parallel sub-agents.
 
-**Done when:** sources, scope and stable base/endpoint are identified. If there are no changes, report that scope result rather than inventing findings.
+### 2. Identify the spec source
 
-## 2. Review two axes
+Look for the originating spec, in this order:
 
-Keep the axes visible so one cannot hide a failure in the other:
+1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched via the workflow in the tracker doc.
+2. A path the user passed as an argument.
+3. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
+4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
 
-- **Standards:** apply the project's documented rules, required review skills and agreed focus areas. Cite the applicable rule for violations. Check the permitted test strategy and verification evidence; do not demand integration infrastructure, new abstractions or extra coverage merely from personal preference.
-- **Spec:** trace accepted behavior and constraints through the complete change, including missing/incorrect behavior, regressions and scope creep. Check relevant edge cases and integration boundaries. Use the requirement source, not only the implementer's explanation.
+### 3. Identify the standards sources
 
-Inspect enough surrounding code to substantiate findings. Reuse valid check results; run additional checks only within reviewer permissions and disclose their side effects. Missing evidence is not a passing check. A missing spec leaves requirement coverage limited; review what can be established without claiming full Spec acceptance.
+Search the repo for every file that documents how code should be written. When `CODING_STANDARDS.md` or `CONTRIBUTING.md` exists, it must be on the list.
 
-Distinguish observed violations and defects from design suggestions. Heuristics about naming, duplication, coupling or speculative abstraction are prompts to investigate, not automatic reasons to refactor working code. Avoid duplicating a verified tooling report without adding evidence, but surface failed or missing mandatory checks.
+On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
-On repeat review, verify previous findings against the new revision, include the human's feedback and decisions, and look for regressions caused by fixes. Keep the full task change in scope, not just the latest correction.
+- **The repo overrides.** A documented repo standard always wins; where it endorses something the baseline would flag, suppress the smell.
+- **Always a judgement call.** Each smell is a labelled heuristic ("possible Feature Envy"), never a hard violation. Like any standard here, skip anything tooling already enforces.
 
-**Done when:** both axes and the requested focus areas have evidence-backed results or explicit coverage limits.
+Each smell reads *what it is* → *how to fix*; match it against the diff:
 
-## 3. Return actionable findings
+- **Mysterious Name**: a function, variable, or type whose name doesn't reveal what it does or holds. → rename it; if no honest name comes, the design's murky.
+- **Duplicated Code**: the same logic shape appears in more than one hunk or file in the change. → extract the shared shape, call it from both.
+- **Feature Envy**: a method that reaches into another object's data more than its own. → move the method onto the data it envies.
+- **Data Clumps**: the same few fields or params keep travelling together (a type wanting to be born). → bundle them into one type, pass that.
+- **Primitive Obsession**: a primitive or string standing in for a domain concept that deserves its own type. → give the concept its own small type.
+- **Repeated Switches**: the same `switch`/`if`-cascade on the same type recurs across the change. → replace with polymorphism, or one map both sites share.
+- **Shotgun Surgery**: one logical change forces scattered edits across many files in the diff. → gather what changes together into one module.
+- **Divergent Change**: one file or module is edited for several unrelated reasons. → split so each module changes for one reason.
+- **Speculative Generality**: abstraction, parameters, or hooks added for needs the spec doesn't have. → delete it; inline back until a real need shows.
+- **Message Chains**: long `a.b().c().d()` navigation the caller shouldn't depend on. → hide the walk behind one method on the first object.
+- **Middle Man**: a class or function that mostly just delegates onward. → cut it, call the real target direct.
+- **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
-For each finding, give its axis, severity/impact, file and location, evidence, rule or requirement, and recommended next action. Classify the action separately from severity:
+### 4. Spawn both sub-agents in parallel
 
-- **Deterministic correction:** an explicit rule or accepted decision uniquely determines an in-scope fix without changing behavior, public contracts or architecture. A constant required by a documented convention can qualify; a style label alone does not.
-- **Human decision:** requirements, business behavior, architecture, public contracts, competing implementations or authority need a choice. Explain the question and meaningful options without choosing on the owner's behalf.
+Issue both sub-agent calls together, in the foreground, and aggregate the reports they return.
 
-The reviewer recommends; the parent verifies the finding and whether it may act. Keep suggestions and uncertain findings distinct from defects. The reviewer does not edit files, commit, publish or accept the task.
+**Standards sub-agent prompt** should include:
 
-Return findings grouped by Standards and Spec, plus the reviewed base/endpoint, check evidence, unresolved prior findings and coverage limits. State whether mandatory review coverage is complete or blocked and why. With no actionable findings, say so for the actual scope; that result does not clear blocked coverage or express human acceptance.
+- The full diff command and commit list.
+- The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
+- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
 
-**Done when:** the caller can identify what can be corrected under existing rules, what requires a decision, and which exact changes were reviewed.
+**Spec sub-agent prompt** should include:
+
+- The diff command and commit list.
+- The path or fetched contents of the spec.
+- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
+
+If the spec is missing, skip the Spec sub-agent and note this in the final report.
+
+### 5. Aggregate
+
+Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+
+End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
+
+## Why two axes
+
+A change can pass one axis and fail the other:
+
+- Code that follows every standard but implements the wrong thing → **Standards pass, Spec fail.**
+- Code that does exactly what the issue asked but breaks the project's conventions → **Spec pass, Standards fail.**
+
+Reporting them separately stops one axis from masking the other.

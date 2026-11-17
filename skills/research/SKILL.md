@@ -1,17 +1,14 @@
 ---
 name: research
-description: Conduct an in-depth investigation against primary sources and preserve a sourced research report. Use when the user needs a durable investigation, comparison or evidence review, rather than a quick lookup or routine file reading.
+description: Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.
 ---
 
-Research produces a reusable report. Routine file reading, repository searches and quick web lookups follow the project's read-only exploration policy; they can return findings to the parent agent without creating files.
+Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
 
-Read project instructions for the research scope, permitted sources, delegation profile, artifact location and write authority. Reuse settled choices; clarify only gaps that affect this investigation. If no report location is configured, use the folder where the repository already keeps research notes, or `.docs/research/<topic>.md` when there is none. Confirm before the first write and mention once that `setup-workflow` can configure the project.
+Spin up a **background agent** to do the research, so you keep working while it reads. Start it with a fresh context window.
 
-Use the project's approved research role or harness preset rather than prescribing a model. Delegate bounded questions with fresh context when authorized and supported; use background execution where available. Without a project policy, run independent lines of inquiry as read-only background subagents where the client supports them. If delegation is unavailable or forbidden, investigate in the main agent within its authority. A read-only researcher returns findings and sources to the coordinating agent; an authorized writer saves the report. In OMP (the oh-my-pi coding agent), a `scout` does not receive write duties.
+Its job:
 
-1. Establish the question, relevant scope and what the report needs to resolve. Break the investigation into the necessary lines of inquiry.
-2. Investigate against **primary sources**: official documentation, source code, specifications and first-party APIs. Follow material claims back to the source that owns them. Compare relevant alternatives, examine conflicting evidence and pursue gaps that affect the answer. Distinguish verified facts, inference and unresolved questions; state version/date limits where they matter.
-3. Synthesize the evidence into one Markdown report containing the question and scope, findings with source links, supported conclusions, limitations and open questions. Record the investigation date and relevant versions. Keep only sections useful to this question; depth comes from evidence, not report length.
-4. Save the report at the agreed project location through the authorized writer. Check its references and report the destination and remaining uncertainty. If writing is blocked, return the findings and identify the missing permission or destination; do not claim the artifact was saved or silently create a competing local copy.
-
-**Done when:** the investigation's material questions have sourced answers or explicit evidence gaps, and the report is saved at the agreed location or its blocked delivery is clearly reported.
+1. Investigate the question against **primary sources** (official docs, source code, specs, first-party APIs), not a secondary write-up of them. Follow every claim back to the source that owns it.
+2. Write the findings to a single Markdown file, citing each claim's source.
+3. Save it where the repo already keeps such notes; match the existing convention, and if there is none, put it somewhere sensible and say where.

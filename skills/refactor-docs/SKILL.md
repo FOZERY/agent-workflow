@@ -1,19 +1,19 @@
 ---
 name: refactor-docs
-description: Refactor existing human-facing documentation for clarity and structure while preserving technical meaning. Use when asked to rewrite or remove AI-generated filler from ADRs, specifications, READMEs or guides. Requires human-text.
+description: Refactor existing documentation and factual memory for clarity and structure while preserving technical meaning. Use for ADRs, specifications, READMEs, guides, CONTEXT.md and LESSONS.md.
 ---
 
 # Refactor docs
 
-Edit the expression and organization of existing human-facing documentation, not the decisions or requirements it records. Skills (`SKILL.md` and their `references/`), `AGENTS.md`, `CLAUDE.md`, `CONTEXT.md` and `LESSONS.md` are written for agents and are outside this skill; edit them with the `writing-for-agents` skill. File retirement belongs to artifact cleanup; code refactoring and policy changes are separate work.
+Edit the expression and organization of existing artifacts, not their decisions or requirements. This includes factual context and lesson entries. Reusable execution rules are outside this procedure; handle them as a separate, authorized change under the project contract. Classify mixed sections by purpose. File retirement and code refactoring are separate work.
 
-## 1. Load the required writing skill
+## 1. Establish the writing rules
 
-Resolve and read the installed `human-text` skill through the client's skill mechanism or a verified installed path, together with its applicable language reference. Reuse a readable, compatible global or project installation. A source checkout, an instruction mentioning the name or availability in another client does not establish that this client can load the dependency.
+Read applicable project instructions for language, style, document formats and required sources.
+This package works without another writing skill. If the project requires one, treat it as a project prerequisite and resolve missing access before affected edits.
+Do not silently install packages or change session-wide instructions.
 
-If the skill or a required reference is missing, inaccessible or incompatible, stop before editing documents and report the missing dependency. Request an approved installation through project setup; do not substitute remembered rules or silently install a replacement. Using this dependency for document editing does not authorize a session-wide style pointer or global instruction changes.
-
-**Done when:** this client's complete `human-text` package has been loaded and its applicable guidance is in context.
+**Done when:** the applicable writing rules are known and any required project source is readable.
 
 ## 2. Establish scope and preserve meaning
 
@@ -27,7 +27,7 @@ Treat commands, code, paths, identifiers, API names, errors, dates, quantities a
 
 ## 3. Rewrite within that contract
 
-Apply `human-text` to the prose. Lead with the fact the reader needs, name the actor and action, and group related information under useful headings. Replace filler, unsupported praise, repeated introductions and narration about the document with the supported content itself. Where a claim lacks evidence, flag it for the owner instead of inventing a number or explanation.
+Write clear artifact prose in the project's format and language. Lead with the supported fact, name the actor and action, keep one idea per sentence and group related information. Replace filler, unsupported praise and repetition with supported content. Flag claims without evidence instead of inventing precision. Follow additional styles only when the task or project requires them.
 
 Remove wording or repetition only when no distinct fact, condition or reasoning is lost. Keep one authoritative explanation and a usable pointer where another reader needs it. Concision is not a word-count target: necessary caveats, counterexamples and trade-offs stay. Preserve deliberate terminology and document structure even when a general style preference suggests another form.
 

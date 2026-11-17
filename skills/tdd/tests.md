@@ -2,7 +2,7 @@
 
 ## Good Tests
 
-**Behavior-focused**: Test the project-approved observable contract at the chosen level. Unit tests of business logic are valid; these examples do not require integration infrastructure.
+**Integration-style**: Test through real interfaces, not mocks of internal parts.
 
 ```typescript
 // GOOD: Tests observable behavior
@@ -17,14 +17,14 @@ test("user can checkout with valid cart", async () => {
 Characteristics:
 
 - Tests behavior users/callers care about
-- Uses the agreed interface, which may be a business function, module boundary or system API
+- Uses public API only
 - Survives internal refactors
 - Describes WHAT, not HOW
-- Assertions together establish one behavior, without an arbitrary assertion-count limit
+- One logical assertion per test
 
 ## Bad Tests
 
-**Implementation-detail tests**: Coupled to incidental structure rather than a required contract. The example is weak when payment dispatch itself is not part of the agreed behavior.
+**Implementation-detail tests**: Coupled to internal structure.
 
 ```typescript
 // BAD: Tests implementation details
@@ -37,14 +37,12 @@ test("checkout calls paymentService.process", async () => {
 
 Red flags:
 
-- Mocking collaborators merely to assert implementation wiring
-- Testing private details without a required invariant
-- Asserting call counts/order where they are not part of the contract
+- Mocking internal collaborators
+- Testing private methods
+- Asserting on call counts/order
 - Test breaks when refactoring without behavior change
 - Test name describes HOW not WHAT
-- Using a side channel unrelated to the agreed behavior
-
-The database example below assumes the contract is user retrieval. A persistence or migration contract may legitimately require inspecting database state when the project authorizes that test level.
+- Verifying through external means instead of interface
 
 ```typescript
 // BAD: Bypasses interface to verify

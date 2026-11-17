@@ -1,12 +1,15 @@
 ---
 name: human-text
-description: "Plain writing for a person: write the way a colleague explains out loud. Use for any text a person reads, or when asked to make a text clearer."
+description: "Write clear, natural text for a person: replies, explanations, questions, handoffs and document prose. Use when writing for people or making their text clearer."
 ---
 
 # Human text
 
 The reader is a busy colleague who knows the field but not this task.
 Write the way a good colleague explains out loud.
+
+This package works on its own. Apply it to the text requested by the user.
+Project instructions determine its scope, startup loading and precedence over other writing styles.
 
 **Before you write in a language that has a file in `references/`, read that file**: Russian, [ru.md](references/ru.md).
 It holds the words, the punctuation and the rereading questions of that language. For a language without a file, the rules below are enough.
@@ -73,7 +76,7 @@ When the reader must decide or do something, end the text with one block. It hol
 Write a command or a prompt in a code block, ready to copy. Files worth opening go in a short list just before the block, a reason on each line.
 
 When the app gives you a tool that asks the reader a question with options, ask the block's questions through it, all in one call; make each question stand on its own, since the dialog may hide the text above it.
-Text that leaves the chat, such as a PR body or a file, keeps the block as text. The block has no quote bar; its words follow the reader's language:
+For a document, use the block as text only when the document's purpose and required format call for a reader decision.
 
 ```markdown
 **Нужно от тебя**

@@ -1,6 +1,6 @@
 # Preserve each document's role
 
-Read the applicable sections when editing ADRs, specifications or READMEs. The project's existing format and ownership remain authoritative.
+Read the applicable sections when editing ADRs, specifications, READMEs or project memory. The project's existing format and ownership remain authoritative.
 
 ## ADRs
 
@@ -13,3 +13,11 @@ Preserve required behavior, acceptance criteria, scope exclusions, edge cases, d
 ## READMEs and technical guides
 
 Organize around the intended reader's task and the project's required sections. Preserve prerequisites, working commands, compatibility constraints, warnings, limitations and documentation links. Separate an example value from a required setting. Remove repeated marketing language without replacing it with invented performance or reliability claims. Keep existing installation and operational facts unless a separately authorized technical update has evidence.
+
+## Project memory
+
+Preserve dates, sources, conditions, unresolved questions and the distinction between confirmed lessons and hypotheses.
+Keep context chronological and lessons scoped to their original evidence or owner confirmation.
+An editorial change cannot promote a preference into policy or turn an old observation into proof of the current state.
+Retain the memory writer's approval and concurrency rules.
+
