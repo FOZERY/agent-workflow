@@ -135,7 +135,7 @@ Walk through only relevant cases:
 - No project setting: use the skill's default where permitted. Explicit `manual`: no automatic launch by implementation.
 - TDD uses the agreed tests and examples without adding a separate test-author procedure.
 - Review reports only, or fixes and re-reviews within the agreed authority and cycle limit; user acceptance remains separate.
-- The selected comparison covers the intended changes at the review checkpoint; a committed-only diff cannot verify uncommitted work.
+- Default pre-commit review uses the intended working-tree snapshot. If a project selects a different reviewer or endpoint, check its coverage at the agreed checkpoint.
 - A requested helper, source or separate session is unavailable: identify the blocked step or agreed handoff.
 - An added skill, tool, MCP integration or policy pointer is available to the intended reader, including delegated workers, or reported as a prerequisite. Availability is not permission to act.
 - A task needs only an implementation plan: its artifact stays with that task, and the chosen executor can consume it without a new spec or tickets.

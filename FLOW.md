@@ -102,7 +102,7 @@ Parallel work also identifies disjoint file ownership and how each executor can 
 Planning stops at the saved artifact and does not start implementation agents. Approved diagram-only delegation is the optional exception described below.
 
 Setup agrees a receiving executor and records how it reads the approved plan and source task in project instructions.
-Matt prompts remain unchanged. `implement-spec` still requires its specification and ticket graph.
+Setup does not modify the bundled prompts. `implement-spec` still requires its specification and ticket graph.
 `to-tickets` can decompose a plan when separately tracked work is useful; it is not required for plan-based execution.
 
 ### Optional design diagrams
@@ -125,7 +125,7 @@ Use the [package procedure](skills/excalidraw-diagram/SKILL.md) and [generated p
 
 Choose the receiver by its actual input contract:
 
-- [`implement`](skills/implement/SKILL.md) handles a task described by a specification or tickets. Its upstream defaults call TDD where possible, run checks, call review and commit.
+- [`implement`](skills/implement/SKILL.md) handles a task described by a specification or tickets. By default, it calls TDD where possible, runs checks and reviews the task's changes before an authorized commit.
 - A project-configured executor can consume an approved plan plus its source task. Pass shared contracts and the assigned work package to each delegated worker. Use Orca when the user's or project's rules select it.
 - [`implement-spec`](skills/implement-spec/SKILL.md) coordinates a specification and ticket graph through integration branches, per-ticket workers and worktrees. It is not a plan-only executor.
 
@@ -137,11 +137,13 @@ Project settings select automatic or manual TDD and review, their execution loca
 Manual means a separate user invocation, not an automatic launch by implementation.
 Manual review is a completion gate only when project rules require it; otherwise the user decides whether to request it.
 
-The bundled [`code-review`](skills/code-review/SKILL.md) compares committed changes against a fixed point.
-For pre-commit review, configure a compatible working-tree procedure or report the coverage gap. See [review coverage](skills/setup-workflow/references/AGENTS.md#review-coverage).
+By default, `implement` passes the task's file paths and review base to the bundled [`code-review`](skills/code-review/SKILL.md) before committing.
+Both reviewers use the same pinned Git tree. It captures the latest intended changes in staged, unstaged and nonignored untracked files without including unrelated work.
+The bundled skill also supports explicit committed branch, PR and commit reviews. `implement-spec` reviews its integration branch after merging the tickets.
+Project settings take precedence. Require a custom reviewer only if the bundled procedure cannot cover the chosen policy or approved scope. Report any remaining [coverage gap](skills/setup-workflow/references/AGENTS.md#review-coverage).
 Report-only review returns findings for a decision. Fix-and-rereview permits corrections only within the agreed scope and cycle limit.
 Failed required checks, inaccessible mandatory sources and unresolved required review findings do not count as success.
-The user accepts the work. Commit, push, PR/MR, merge and deployment follow their separate project rules.
+The user accepts the work. Review grants no permission to commit, push, open a PR/MR, merge or deploy.
 
 ## 4. Retrospective and maintenance
 
@@ -210,8 +212,8 @@ No `to-spec` or `to-tickets` call is needed. If no compatible plan receiver is c
 ## Project settings and defaults
 
 Twelve skills read project instructions before starting: `code-review`, `implement`, `implement-spec`, `research`, `retro`, `tdd`, `to-spec`, `to-tickets`, `wayfinder`, `domain-modeling`, `prototype` and `codebase-design`.
-Specified sources, paths and workflow settings apply; unspecified settings retain upstream defaults.
-That paragraph is their only change from M1. `grill-with-docs` and `writing-for-agents` remain exact copies.
+Specified sources, paths and workflow settings apply. Unspecified settings use the bundled defaults.
+The [source ledger](docs/UPSTREAM.md) records the local adaptations to M1, including the review changes to `code-review` and `implement`. `grill-with-docs` and `writing-for-agents` remain exact copies.
 The kit includes all fixed helper dependencies; check [the required client installations](skills/setup-workflow/references/catalog.md#dependencies).
 
 - `grilling` remains our adapted interview and can run without setup.
@@ -219,7 +221,7 @@ The kit includes all fixed helper dependencies; check [the required client insta
 - `wayfinder` calls `grilling`, `domain-modeling`, `research` and `prototype` on their original branches.
 - `tdd` consults `codebase-design` when the interface or test seam is in question.
 - `to-spec` and `to-tickets` use project artifact settings where specified, with upstream formats and publication defaults elsewhere.
-- `implement` and `implement-spec` use the agreed TDD and review settings; their other upstream steps remain.
+- `implement` and `implement-spec` use the agreed TDD and review settings. Their default review checkpoints differ: before commit for `implement`, after ticket merges for `implement-spec`.
 - `retro` proposes environment improvements. Recording approved outcomes in project memory needs an explicit project rule.
 
 
@@ -229,7 +231,7 @@ Setup reads the selected skills before promising a configured route.
 For TDD and review, setup asks separately about automatic or manual launch and execution location, in that order for each activity.
 It also agrees the applicable implementation routes and reporting versus authorized fixes with another review.
 Test practices and review sources come from the project. The user accepts the work; acceptance is not a flag.
-It [matches review coverage to the implementation checkpoint](skills/setup-workflow/references/AGENTS.md#review-coverage), including whether the intended changes are committed or in the working tree.
+Setup [matches review coverage to each implementation checkpoint](skills/setup-workflow/references/AGENTS.md#review-coverage). It checks whether the selected procedure covers the approved scope at that point.
 
 Setup does not rewrite installed packages. An unavailable helper or conflicting mandatory step must be reported.
 Settings are prompt instructions, not an execution engine. Delegated workers need the applicable rules and readable source pointers.

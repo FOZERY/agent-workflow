@@ -22,7 +22,7 @@ A globally installed skill can be unnecessary or unauthorized in this project. D
 
 ## Separate packages from project requirements
 
-The twelve project-aware Matt adaptations add only the agreed project-instructions paragraph. Original skill calls remain, including `domain-modeling` and `prototype` in Wayfinder and `codebase-design` in TDD. These helpers are included in the kit but must still be installed for the target client.
+The project-aware Matt packages retain their original skill calls, including `domain-modeling` and `prototype` in Wayfinder and `codebase-design` in TDD. This kit supplies those helpers, but the target client still needs them installed. The bundled `implement` and `code-review` default to a scoped working-tree snapshot at the pre-commit checkpoint.
 
 Check both original prerequisites and extra requirements of the approved project contract.
 If a prerequisite is absent, obtain a bounded source/install decision or leave the affected route unavailable.

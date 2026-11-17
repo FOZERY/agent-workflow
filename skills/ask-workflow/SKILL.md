@@ -40,7 +40,7 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 | Synthesize agreed requirements, then decompose work if needed | `to-spec`, `to-tickets` |
 | Run original test-first red–green cycles | `tdd` |
 | Implement one agreed task, or coordinate a specification/task graph | `implement`, `implement-spec` |
-| Review committed changes since a fixed point | `code-review` |
+| Review scoped uncommitted changes or an explicit committed branch, PR or commit | `code-review` |
 | Prepare or publish a PR/MR | Follow project delivery rules and permissions |
 | Inspect session evidence for agent-environment improvements | `retro` |
 | Write conversational replies; write artifacts; write reusable agent rules | `human-text`; `asd-ste100`; `writing-for-agents`, respectively |
@@ -60,9 +60,11 @@ For design diagrams, recommend `excalidraw-diagram` only when a visual explanati
 
 Point to the package prompt and project setup rules for the drawing route. Keep generation references and library JSON out of advice context. The worker returns editable `.excalidraw` and PNG paths, visual-check results and caveats. Missing delegation, required assets or render permission blocks only the diagram branch, with no same-context fallback. Keep ADR decisions and contracts in authoritative text; diagrams do not replace prototypes, plan approval or user acceptance.
 
-For pre-commit review, confirm that the selected procedure covers the intended staged, unstaged and untracked changes. This kit's `code-review` defaults to `<base>...HEAD`, which excludes uncommitted work. Use an explicit compatible project procedure or report the coverage gap; advice does not authorize a commit to make review runnable.
+For pre-commit review, explain the bundled `implement` default: it sends the task's file paths and review base to `code-review`. Both reviewers use the same pinned working-tree snapshot. It includes intended staged, unstaged and nonignored untracked changes within those paths. For explicit branch, PR or commit review, recommend the committed endpoint.
 
-Twelve Matt-derived skills add only the project-instructions paragraph; their original calls and action defaults remain. The kit includes the fixed helper dependencies, but the target client must have them installed. Read the actual prompt before advising. The former local separate test-author and three-round acceptance cycle are absent.
+Apply explicit project settings first. Recommend a custom reviewer only if the bundled procedure cannot cover the chosen policy or approved scope. If the required procedure cannot cover the intended changes, report the gap. A separate manual invocation remains manual. Neither review nor setup grants permission to delegate, commit or publish.
+
+The kit includes the fixed helper dependencies, but the target client must have them installed. Read the actual prompt before advising. The former local separate test-author and three-round acceptance cycle are absent.
 
 If the candidate or its required dependencies are missing, explain that gap and the setup/install decision instead of treating it as runnable. Naming several related skills does not require installing them all. Reuse configured artifact locations and distinguish recent `CONTEXT.md`, durable `LESSONS.md`, mandatory project rules and authoritative requirements/ADRs.
 

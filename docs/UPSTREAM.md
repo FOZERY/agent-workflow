@@ -8,13 +8,18 @@ This kit adapts upstream skills; it is not a mirror, and the upstream authors do
 
 `grill-with-docs` and `writing-for-agents` remain exact full copies of M1 `5863806dd4e15c63174bee4e7515a4256792ecfa`.
 
-Twelve packages add only the project-instructions paragraph below to their original `SKILL.md`: `code-review`, `implement`, `implement-spec`, `research`, `retro`, `tdd`, `to-spec`, `to-tickets`, `wayfinder`, `domain-modeling`, `prototype` and `codebase-design`. Their remaining bytes, supporting files and client metadata match M1.
+Ten packages add only the project-instructions paragraph below to their original `SKILL.md`: `implement-spec`, `research`, `retro`, `tdd`, `to-spec`, `to-tickets`, `wayfinder`, `domain-modeling`, `prototype` and `codebase-design`. Their remaining bytes, supporting files and client metadata match M1.
 
 > Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
 
-This paragraph is the complete approved difference for those twelve packages.
-TDD and Wayfinder again retain their original helper calls. The three restored helpers include all upstream supporting files.
-No project rules means the skill's original defaults apply; setup is not a new prerequisite.
+`code-review` and `implement` also include that paragraph and have scoped pre-commit review adaptations:
+
+- `code-review` pins a scoped working-tree snapshot before a commit. The two review axes use the same tree. Committed comparisons still use pinned base and head commits. Client metadata now describes both endpoints.
+- `implement` passes the source task, review base and owned paths. It uses the snapshot by default and checks that the reviewed content is what it commits. Project rules can still select a different procedure.
+
+The snapshot design was informed by [Kirill's `code-review` at `1d44154`](https://github.com/KirillSachkov/agent-kit/blob/1d4415445e3686b53110fd10a013fae6344e95cb/skills/engineering/code-review/SKILL.md). This is a design reference, not an imported prompt or a new accepted baseline.
+TDD and Wayfinder retain their original helper calls. The three restored helpers include all upstream supporting files.
+Without project settings, the documented package defaults apply. Setup is not a new prerequisite.
 `grilling` and `setup-workflow` have broader local adaptations. Other local packages retain their own contracts.
 All fixed skill dependencies are included in the kit. Client installation, capabilities and permissions still require verification.
 `triage`, `pr` and `improve-codebase-architecture` remain absent.
@@ -63,7 +68,7 @@ Current upstream branches: [Matt](https://github.com/mattpocock/skills), [Kirill
 | [excalidraw-diagram](../skills/excalidraw-diagram/SKILL.md) | Local consent/delegation entrypoint; retained [generation prompt and renderer](https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd) and [credited component libraries](../skills/excalidraw-diagram/references/libraries.md#provenance) | E1, E2; mixed rights, see package notice |
 | [home-repo-init](../skills/home-repo-init/SKILL.md) | Original instructions informed by AI Hero's [The Home Repo Pattern](https://www.aihero.dev/the-home-repo-pattern) | Conceptual article reference, updated 2026-11-12; no imported prompt or code |
 
-The fourteen M1-derived packages retain upstream supporting-file locations, metadata and literal setup invocation names. Original `/setup-matt-pocock-skills` references were not rewritten to `/setup-workflow`.
+The fourteen M1-derived packages retain upstream layout and metadata except for the adaptations above. Where the original `/setup-matt-pocock-skills` prompts remain, they were not renamed to `/setup-workflow`.
 
 Kirill's [engineering adaptations at K1](https://github.com/KirillSachkov/agent-kit/tree/3b5e37249118aff3d3dfb547977939145524d525/skills/engineering) inform project-owned sources, permissions, test policy, working-copy ownership and review scope. They are comparison references, not evidence that every package was copied wholesale. The [source setup directory](https://github.com/KirillSachkov/agent-kit/tree/3b5e37249118aff3d3dfb547977939145524d525/skills/engineering/setup-matt-pocock-skills) informed the retained domain and GitHub/GitLab/local tracker seeds. The triage seed and extended interviews were retired during setup simplification.
 

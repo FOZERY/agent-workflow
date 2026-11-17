@@ -13,11 +13,11 @@ This repository contains reusable English skill prompts and their documentation,
 
 At the first prompt of a session, before replying, read [human-text](skills/human-text/SKILL.md) and its applicable language reference unless already in context. Use it for conversation. Before artifact prose, read [asd-ste100](skills/asd-ste100/SKILL.md); this includes docs, ADRs, specs, tickets, `CONTEXT.md` and `LESSONS.md`. Before reusable rules, read [writing-for-agents](skills/writing-for-agents/SKILL.md); this includes skills, `AGENTS.md` and procedural references. Classify mixed sections by purpose. Reuse guidance while available; reload it after context loss or a source change.
 
-Preserve the pinned package layout and client metadata of Matt-derived skills. The exact-copy set and approved adaptations are recorded in [docs/UPSTREAM.md](docs/UPSTREAM.md). Twelve packages add only the agreed project-instructions paragraph. Keep their remaining source unchanged unless the owner authorizes more. `grilling` and `setup-workflow` have separate local adaptations.
+Preserve the pinned package layout and client metadata of Matt-derived skills except for the approved adaptations in [docs/UPSTREAM.md](docs/UPSTREAM.md). Keep all other source unchanged unless the owner authorizes more.
 
 For local packages and repository documentation, keep prose in English and supporting material under `references/`. Preserve imported source-language examples. Keep project-specific roles, languages, paths, permissions and additional writing routes in the consumer project's `AGENTS.md`; do not rewrite vendored prompts for a consumer project.
 
-Matt-derived packages retain their original action defaults and skill calls. Specified project settings guide the twelve adapted packages; unspecified settings retain upstream defaults. Verify required helpers in the target client and report blocked steps. Installation is not permission, and a project pointer alone is not evidence of runtime compatibility.
+Matt-derived packages retain their original skill calls and action defaults except where the source ledger records a local change. Specified project settings apply to the project-aware packages. Verify required helpers in the target client and report blocked steps. Installation is not permission, and a project pointer alone is not evidence of runtime compatibility.
 
 Root `AGENTS.md` remains the project instruction entrypoint. Consumer-project memory defaults to `.docs/CONTEXT.md` and `.docs/LESSONS.md`; only their shared directory is configurable. This repository's `docs/` is human-facing documentation. Maintaining the kit does not mean running its setup against itself or creating consumer artifacts.
 

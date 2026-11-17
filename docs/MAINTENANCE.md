@@ -26,8 +26,8 @@ A prompt change is a behavior change, even when only Markdown changes. A success
 
 The setup skill's references describe contracts for consumer projects; they are not this repository's own rules. Editing a workflow prompt does not mean running that workflow here.
 
-The [source policy](UPSTREAM.md#current-package-policy) distinguishes exact copies from twelve paragraph-only adaptations.
-Compare complete file sets against the pinned source. For adapted packages, remove only the agreed project-instructions paragraph before byte comparison.
+The [source policy](UPSTREAM.md#current-package-policy) distinguishes exact copies, paragraph-only adaptations and the scoped pre-commit review adaptations.
+Compare complete file sets against the pinned source. Account only for the changes recorded in the source policy.
 Preserve original skill calls and check dependency closure. Included helpers still need installation in the consumer's client; setup does not patch package prompts.
 Broader local packages remain separately maintained. The former bundled implementation cycle is absent.
 Packages without bundled licenses need the root third-party notice alongside their exports.
@@ -87,6 +87,7 @@ There is no permanent test runner or CI here; pick the checks that fit the chang
 | Requirements and planning | Read-only analyst source; existing tickets; task-only plan without a spec or tickets; existing plan revision; non-default task-artifact paths; blocked plan write; saved artifact versus chat-only draft; executor input compatibility; forbidden tracker change |
 | Testing and implementation | Auto/manual TDD; representative tests; current-session/subagent/separate-session execution; unavailable capabilities |
 | Review and followup | Comparison-base rule; committed versus working-tree endpoint; pre-commit coverage; auto/manual review; report versus fix-and-rereview; correction scope and cycle limits; user acceptance; required unavailable helper |
+| Scoped review snapshot | Staged, unstaged and nonignored untracked task files; tracked deletion; unrelated staged work excluded; real index unchanged; snapshot stable after later edits |
 | PR/MR delivery | Text-only request; unclear base branch; failed hook; existing draft; pending CI; no merge permission |
 | Memory or maintenance | Unconfirmed lesson; conflict with current rules; two writers at once; recoverable artifact removal; non-default memory folder |
 | Workflow advice | Question before setup; missing package; manual-only skill missing from automatic discovery; home structure versus workflow procedures versus task plan; advice without execution or repository inventory |

@@ -5,28 +5,47 @@ description: "Review the changes since a fixed point (commit, branch, tag, or me
 
 Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
 
-Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
+Review two axes against one pinned Git diff:
 
 - **Standards**: does the code conform to this repo's documented coding standards?
 - **Spec**: does the code faithfully implement the originating issue / spec?
 
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings. Start every sub-agent with a fresh context window.
 
-The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
+Use the task or specification supplied by the caller. If a required tracker source is unavailable, report the missing access.
 
 ## Process
 
-### 1. Pin the fixed point
+### 1. Pin the comparison
 
-Whatever the user said is the fixed point (a commit SHA, branch name, tag, `main`, `HEAD~5`, etc.). If they didn't specify one, ask for it.
+Use the project or caller's explicit scope, base and endpoint when supplied. Otherwise:
 
-Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
+- **Pre-commit or work in progress:** review a working-tree snapshot of the intended files. Use the caller's starting commit as the base, or use the current `HEAD` if the request supplies no base.
+- **Branch, PR or committed range:** pin the base and head to commit SHAs. Use `git diff <base>...<head>` and `git log <base>..<head> --oneline`. Report any uncommitted work as outside that review. Ask for the fixed point only if neither the request nor project rules identify it.
 
-Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here, not inside two parallel sub-agents.
+For a working-tree snapshot, pin the current `HEAD` to a commit SHA. From the repository root, pass that SHA and the exact repository-relative file paths to this command. Include intended staged, unstaged and nonignored untracked changes. Pass files, not whole directories. If the scope is unclear, confirm it first. If a file mixes task and unrelated edits, or the worktree differs from the intended partial commit, obtain an approved tree of the intended content or report the scope gap.
+
+```sh
+sh -eu -c '
+    head=$1
+    shift
+    test "$#" -gt 0
+    tmp=$(mktemp -d "${TMPDIR:-/tmp}/code-review.XXXXXX")
+    trap '\''rm -f "$tmp/index" "$tmp/index.lock"; rmdir "$tmp"'\'' EXIT
+    export GIT_INDEX_FILE="$tmp/index"
+    git read-tree "$head"
+    git --literal-pathspecs add -A -- "$@"
+    git write-tree
+' review-snapshot "$head" path/to/first-file path/to/second-file
+```
+
+The command takes the final file contents, not separate staged and unstaged copies of one file. It does not stage changes in the real index or create a commit. Record the base SHA, snapshot tree SHA and exact file paths. Use `git --literal-pathspecs diff <base> <snapshot-tree> -- <paths>` with those paths. Use a commit list only for committed history, not for the snapshot itself.
+
+Confirm the base and endpoint resolve and that the scoped diff is nonempty. If a required path is outside the snapshot or cannot be captured, report the coverage gap. Do not replace a required pre-commit review with a committed-only diff or make a commit just to run review.
 
 ### 2. Identify the spec source
 
-Look for the originating spec, in this order:
+If the caller did not supply the originating task or spec, look for it in this order:
 
 1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched via the workflow in the tracker doc.
 2. A path the user passed as an argument.
@@ -59,23 +78,25 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 ### 4. Spawn both sub-agents in parallel
 
-Issue both sub-agent calls together, in the foreground, and aggregate the reports they return.
+Issue both sub-agent calls together, in the foreground, and aggregate their reports. Give both the same pinned diff. Both reviewers must read surrounding files from the pinned endpoint, for example with `git show <endpoint>:<path>`, not from a changing worktree.
 
 **Standards sub-agent prompt** should include:
 
-- The full diff command and commit list.
+- The full pinned diff command and any applicable commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
 - The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
 
 **Spec sub-agent prompt** should include:
 
-- The diff command and commit list.
+- The same pinned diff command and any applicable commit list.
 - The path or fetched contents of the spec.
 - The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
 ### 5. Aggregate
+
+Report the pinned comparison and any uncovered scope.
 
 Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 

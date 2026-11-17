@@ -50,11 +50,12 @@ The [package](../skills/home-repo-init/SKILL.md) and [source ledger](UPSTREAM.md
 | --- | --- | --- | --- |
 | [tdd](../skills/tdd/SKILL.md) | Agent or manual | Test-first red–green cycles | One test and minimal implementation at a time; conditional `codebase-design` call |
 | [codebase-design](../skills/codebase-design/SKILL.md) | Agent or manual | Reason about module interfaces, depth and testability | Shared design vocabulary and supporting methods; conditional helper for TDD |
-| [implement](../skills/implement/SKILL.md) | Manual | Implement a task | Calls TDD where possible, reviews and commits to the current branch |
-| [implement-spec](../skills/implement-spec/SKILL.md) | Manual | Implement a ticket graph | Integration branch, ticket worktrees, TDD, review and upstream delivery/cleanup |
-| [code-review](../skills/code-review/SKILL.md) | Agent or manual | Review a committed diff against a fixed point | Parallel Standards and Spec review agents; no bundled local acceptance cycle |
+| [implement](../skills/implement/SKILL.md) | Manual | Implement a task | Calls TDD where possible and defaults to reviewing a scoped working-tree snapshot before an authorized commit |
+| [implement-spec](../skills/implement-spec/SKILL.md) | Manual | Implement a ticket graph | Integration branch, ticket worktrees, TDD, committed review after ticket merges and upstream delivery/cleanup |
+| [code-review](../skills/code-review/SKILL.md) | Agent or manual | Review a pinned working-tree snapshot or an explicit committed branch, PR or commit | Standards and Spec reviewers compare the same pinned changes against a fixed base |
 
-These skills add a project-instructions paragraph to their upstream procedures. Specified project settings apply; other settings retain upstream defaults. Original dependencies remain. They do not contain the former local independent-test-author or three-round acceptance cycle.
+The working-tree endpoint includes intended staged, unstaged and nonignored untracked changes within the task's file scope. It leaves the real Git index unchanged.
+Explicit project settings apply. The bundled procedures do not include the former local independent-test-author or three-round acceptance cycle.
 
 ## 4. Retrospective
 
@@ -94,7 +95,7 @@ See [project setup rules](../skills/setup-workflow/references/AGENTS.md) and the
 
 ## Dependencies
 
-The fourteen M1-derived Matt packages retain original procedures, dependencies and layout. Twelve add only the [project-instructions paragraph](UPSTREAM.md#current-package-policy).
+The [source ledger](UPSTREAM.md#current-package-policy) records the M1 baselines and local adaptations, including the changes to `code-review` and `implement`.
 The [setup catalog](../skills/setup-workflow/references/catalog.md#dependencies) records their calls. All fixed helper dependencies are included in the kit.
 They must still be installed in the target client. Wayfinder can require additional skills named in a map's Notes. Installation does not establish runtime readiness.
 

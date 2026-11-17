@@ -34,9 +34,8 @@ Ask the applicable unanswered questions separately:
 
 If the user chooses fixes and another review, agree correction scope, a cycle limit and stop conditions, including disputed requirements or unavailable checks. Report-only review does not authorize corrections. Use the project's own procedure when these options do not fit.
 
-Check that the selected procedure covers that scope at the checkpoint. The bundled `code-review` compares `<base>...HEAD`, which excludes uncommitted work; `implement` calls it before committing.
-For pre-commit review, agree an explicit project procedure that covers the intended staged, unstaged and untracked changes, or select a compatible reviewer.
-Otherwise, leave the route blocked. Setup does not authorize a commit merely to make review runnable.
+The bundled `implement` requests a scoped working-tree snapshot for its pre-commit review by default. The bundled `code-review` can capture intended staged, unstaged and nonignored untracked changes. Branch and PR review use a committed comparison unless the agreed procedure selects a different endpoint.
+If a project selects another reviewer or requires different coverage, confirm that its procedure can review the intended files at that checkpoint. If not, report the gap and leave the affected route blocked. Setup does not authorize a commit merely to make review runnable.
 
 ## Outline
 

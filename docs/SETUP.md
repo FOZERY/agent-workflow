@@ -122,7 +122,11 @@ The user decides whether to accept the work. Review procedure selection is prose
 TDD remains a test–implementation cycle, not a separate bulk test-writing phase.
 If a setting is omitted, the skill's default applies. Explicit `manual` is a different choice.
 Setup records settings in `AGENTS.md`; it adds no runtime flag parser or thread-creation service.
-Setup also [matches review coverage to its checkpoint](../skills/setup-workflow/references/AGENTS.md#review-coverage). A review that compares only commits cannot verify uncommitted implementation changes.
+Setup [matches review coverage to its checkpoint](../skills/setup-workflow/references/AGENTS.md#review-coverage). By default, `implement` uses bundled `code-review` before committing.
+The reviewers use the same pinned Git tree for the task's file paths. It captures intended staged, unstaged and nonignored untracked changes without including unrelated work.
+Use the committed endpoint for an explicit branch, PR or commit review. It does not cover uncommitted changes.
+Explicit project settings take precedence. Require a custom reviewer only if the bundled procedure cannot cover the chosen policy or approved scope. If the required procedure cannot cover the intended changes, report the gap.
+Neither setup nor review grants operational permissions, including permission to delegate or commit.
 
 ### Task plans without specifications or tickets
 
@@ -201,7 +205,7 @@ A leading dot does not make files private. Agree whether they are tracked, liste
 
 You review two plans: changes to the rules and supporting files, and the skill installation. You can approve either one alone. A compatible installed skill is reused; a user-wide upgrade affects other projects and needs its own agreement.
 
-Our `setup-workflow` can install alone. Twelve Matt-derived packages add only the project-instructions paragraph; their original procedures and calls remain.
+Our `setup-workflow` can install alone. The [source ledger](UPSTREAM.md#current-package-policy) records local prompt adaptations, including the bundled pre-commit review.
 Check the [catalog](SKILLS.md#dependencies) before calling a route ready. Required missing helpers or conflicting mandatory steps remain explicit blockers.
 Some prompts retain the original `/setup-matt-pocock-skills` command. Our setup is not an installed alias.
 The kit includes `research`, `domain-modeling`, `prototype` and `codebase-design` for the relevant workflow branches. Setup proposes required missing deployments with the selected callers; it does not silently install them.
