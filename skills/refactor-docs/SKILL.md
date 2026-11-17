@@ -19,7 +19,7 @@ Do not silently install packages or change session-wide instructions.
 
 Read project instructions and the requested documents before proposing changes. Identify the reader, purpose, authoritative sources, required format, language, editable scope and approval restrictions. Reuse project conventions and existing terminology. Ask only about unresolved choices that materially affect the edit; an explicit request to edit named documents needs no repeated permission for that same scope.
 
-For ADRs, specifications and READMEs, read the applicable sections of [document-type rules](references/document-types.md). Keep an original version available for comparison. Identify each document's substantive claims, requirements, decisions, rationale, alternatives, limitations, examples and open questions, including their scope and source links.
+For ADRs, specifications, READMEs and project memory, read the applicable sections of [document-type rules](references/document-types.md). Keep an original version available for comparison. Identify each document's substantive claims, requirements, decisions, rationale, alternatives, limitations, examples and open questions, including their scope and source links.
 
 Treat commands, code, paths, identifiers, API names, errors, dates, quantities and units as protected technical content. Preserve negation, conditions, exceptions, defaults, ordering, approval gates and normative strength such as MUST versus SHOULD. For ambiguous or contradictory content, consult available authoritative sources; leave unresolved meaning intact and ask the owner rather than inventing a resolution.
 

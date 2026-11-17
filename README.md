@@ -3,6 +3,7 @@
 Workflow skills for coding agents, based on [Matt Pocock's skills](https://github.com/mattpocock/skills), with project setup and writing tools.
 Twelve Matt packages add only a project-instructions paragraph; `grill-with-docs` and `writing-for-agents` remain exact copies.
 The kit includes their fixed helper dependencies. These are prompts, not permission enforcement; check client installations and project permissions before execution.
+For optional companion utilities and external skills, see [Additional tools](#additional-tools).
 
 ## How it works
 
@@ -57,6 +58,49 @@ Scope choice, OMP and setup details are in [SETUP.md](docs/SETUP.md).
 ```
 
 It recommends a skill and stops; it does not start the work.
+
+## Additional tools
+
+These companion tools and skills are optional. They are not additional workflow stages, and setup does not install or activate them automatically.
+Install only what you need, with the intended client and scope. External packages follow their own releases and installation requirements.
+
+### Web & UI
+
+| Tool or skill | Use it for | Install |
+| --- | --- | --- |
+| [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) | Modern CSS, browser APIs, accessibility and web performance guidance | `npx modern-web-guidance@latest install` |
+| [learn-taste by Emil Kowalski](https://github.com/emilkowalski/skills/blob/main/skills/learn-taste/SKILL.md) | Turn recurring UI corrections into design rules with their reasons | `npx skills@latest add emilkowalski/skills --skill learn-taste` |
+
+Run `learn-taste` at the end of a design session. For example, in Claude Code:
+
+```text
+/learn-taste Also review my last three sessions. I keep correcting the same UI mistakes.
+```
+
+Earlier sessions require readable transcripts. The skill proposes changes to `DESIGN.md`, project skills or checks, then waits for approval before writing.
+
+### Tooling
+
+| Tool | Use it for | Install |
+| --- | --- | --- |
+| [agent-desktop](https://github.com/vercel-labs/agent-desktop) | Operate native desktop apps through OS accessibility APIs | `npm install -g agent-desktop` |
+| [agent-browser by Vercel Labs](https://github.com/vercel-labs/agent-browser) | Drive a browser from the CLI for UI checks and interactive pages | `npm install -g agent-browser`, then `agent-browser install` |
+
+The npm commands above install the CLIs globally. Follow the linked projects' platform and permission setup before use.
+Installing a CLI does not authorize actions in desktop apps or authenticated websites.
+
+### Research & documentation
+
+This kit already includes `research` as a Wayfinder dependency. Reuse that copy when using the workflow.
+The upstream installation below is an alternative for independent use; avoid two same-named copies in one client.
+
+| Skill | Use it for | Install |
+| --- | --- | --- |
+| [research by Matt Pocock](https://github.com/mattpocock/skills/blob/main/skills/engineering/research/SKILL.md) | Delegate a primary-source investigation and produce a cited Markdown report | `npx skills@latest add mattpocock/skills --skill research` |
+| [find-docs by Context7](https://github.com/upstash/context7/blob/master/skills/find-docs/SKILL.md) | Fetch current library and API documentation through the Context7 CLI, without an MCP server | `npx skills@latest add upstash/context7 --skill find-docs` |
+
+`research` needs background-agent support and permission to write its report. `find-docs` uses `npx ctx7@latest` for documentation queries.
+Context7 also provides a separate [CLI/MCP setup guide](https://github.com/upstash/context7/blob/master/docs/clients/cli.mdx).
 
 ## Documentation
 

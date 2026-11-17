@@ -50,7 +50,7 @@ The agent reads existing rules and examples, then asks about missing decisions.
 | Working agreement | Autonomy, human checkpoints, delegation, concurrent work and external-write permissions |
 | Selected skills | Project-specific settings, additional skills, coding practices and reading pointers |
 | Testing | Test types, representative tests, command sources and infrastructure constraints |
-| Review | Requirement and standards sources, preferred procedure, scope and permitted corrections |
+| Review | Requirement and standards sources, preferred procedure, comparison-base rule, endpoint, review checkpoint and permitted corrections |
 | Git and delivery | Commit checkpoints and convention; separate push, PR/MR, merge and deployment permissions |
 | Writing and memory | Languages, writing routes, context and lessons, update authority and visibility |
 
@@ -69,6 +69,7 @@ The user decides whether to accept the work. Review procedure selection is prose
 TDD remains a test–implementation cycle, not a separate bulk test-writing phase.
 If a setting is omitted, the skill's default applies. Explicit `manual` is a different choice.
 Setup records settings in `AGENTS.md`; it adds no runtime flag parser or thread-creation service.
+Setup also [matches review coverage to its checkpoint](../skills/setup-workflow/references/AGENTS.md#review-coverage). A review that compares only commits cannot verify uncommitted implementation changes.
 
 ### Writing routes
 
@@ -80,7 +81,7 @@ The three writing packages work independently. Setup can assign them these proje
 | Artifacts, including docs, ADRs, specs, tickets, context and lessons | `asd-ste100` | Before drafting or editing the artifact |
 | Rules, including skills, `AGENTS.md` and procedural references | `writing-for-agents` | Before drafting or editing rules |
 
-The artifact skill contains concise principles and before/after examples. It does not bundle the standard or its dictionary.
+The artifact skill contains concise principles and before/after examples. Routine writing needs no standard, dictionary or research retrieval. The sources reference serves package maintenance and explicit provenance or full-conformance requests.
 ASD-STE100 is English. Non-English artifacts retain the required language and use an adaptation.
 Full conformance needs the official standard and a terminology review; a short sentence or successful install is not proof.
 The [writing contract](../skills/setup-workflow/references/writing.md) covers client loading, scope and helper instructions.

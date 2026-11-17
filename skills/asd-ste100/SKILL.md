@@ -14,10 +14,10 @@ Use this skill for documentation, ADRs, specifications, tickets, reports, descri
 It applies whether a person or an agent reads the artifact, including an artifact draft returned in chat.
 This package works on its own. The task and project instructions determine where this style applies.
 
-ASD-STE100 is controlled English. This skill uses an **STE-based project profile**, not a claim of full conformance.
+ASD-STE100 is controlled English. This skill is a self-contained **STE-based writing profile**, not a claim of full conformance.
 For a required non-English artifact, keep its language and adapt the clarity principles.
-For full conformance, check the official Issue 9 rules, dictionary and applicable technical terms.
-Report a missing source or review instead of claiming compliance. See [research and sources](references/sources.md).
+For routine writing, use the principles and examples below without retrieving the standard, dictionary or research material. Consult the artifact's own sources for its facts.
+Read [research and sources](references/sources.md) only when maintaining this package or answering an explicit request for provenance or a full-conformance review.
 
 ## Principles
 
@@ -47,7 +47,7 @@ A space-only counter can flag a sentence for review. It cannot establish conform
 
 ## Replace ambiguity with an observable fact
 
-These original examples illustrate the project profile. They are not dictionary-verified conformance examples.
+These original examples illustrate the writing profile.
 Example thresholds and decisions do not supply requirements for the current project.
 
 | Instead of | Write | What changed |
@@ -56,7 +56,7 @@ Example thresholds and decisions do not supply requirements for the current proj
 | Delete the backup if the restore check passed. | If the restore check passed, delete the backup. | The reader sees the prerequisite first. |
 | If a job fails three times, the worker must perform a transition of its state to `failed`. | If a job fails three times, the worker must set the job state to `failed`. | The verb names the required action. |
 | The migration has been completed on `abc123`, although the row-count check has not been run. | The migration completed on `abc123`. The row-count check was not run. | The event and verification gap have separate sentences. |
-| Our proposed decision is to leverage Redis as the cache, but no performance measurement is available. | Status: Proposed. Redis is an option for the cache. No performance measurement is available. | The proposal and evidence limit remain explicit. |
+| Our proposed decision is to leverage Redis as the cache, but no performance measurement is available. | Status: Proposed. Use Redis as the cache. No performance measurement is available. | The proposal and evidence limit remain explicit. |
 | If configuration validation fails, make an error notification. | If the configuration is not valid, show the error. | The condition and action replace noun-heavy wording. |
 
 ## Preserve the artifact's role

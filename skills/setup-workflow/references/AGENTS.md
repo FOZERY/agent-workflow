@@ -23,6 +23,13 @@ Check actual capabilities and dependencies before calling a route usable. Report
 For `fix-and-rereview`, agree correction scope, a cycle limit and stop conditions for disputed requirements or unavailable checks.
 The user accepts the work. Review procedure or skill choice is ordinary prose; there is no `review.skill` or `review.required` flag.
 
+## Review coverage
+
+Agree how to select the comparison base, the endpoint (committed revision or working tree), included/excluded changes and the checkpoint relative to commits.
+Check that the selected procedure covers that scope at the checkpoint. The bundled `code-review` compares `<base>...HEAD`, which excludes uncommitted work; `implement` calls it before committing.
+For pre-commit review, agree an explicit project procedure that covers the intended staged, unstaged and untracked changes, or select a compatible reviewer.
+Otherwise, leave the route blocked. Setup does not authorize a commit merely to make review runnable.
+
 ## Outline
 
 Replace angle-bracket fields with agreed rules. Include only selected settings and add reading triggers to practice links.
@@ -119,7 +126,7 @@ followup: <report | fix-and-rereview>
 
 <Agreed review procedure, including another skill if selected.>
 <Before review, read these standards, practices, examples and requirement sources.>
-<Review scope and evidence requirements.>
+<Comparison-base rule, endpoint, included/excluded changes, checkpoint relative to commits and evidence requirements.>
 <For fix-and-rereview: correction authority, cycle limit and stop conditions.>
 
 ### retro

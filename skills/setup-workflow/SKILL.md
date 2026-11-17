@@ -45,7 +45,7 @@ Read the selected prompts before proposing settings. Establish the sources, outp
 
 For `tdd`, ask: "How do we work with tests here? Which test types and existing examples should guide us? What infrastructure or mocking constraints apply?" Inspect test commands rather than asking the user to transcribe them. Keep the red–green method; do not introduce independent test authorship.
 
-For `code-review`, ask which requirements, coding practices and examples guide review. Discuss the review procedure freely, including another skill if the user prefers. Record that choice as prose, not a package-name flag.
+For review, ask which requirements, coding practices and examples guide it. Discuss the procedure freely, including another skill if the user prefers. Agree [review coverage and its checkpoint](references/AGENTS.md#review-coverage); record the procedure as prose, not a package-name flag.
 
 For implementation routes, agree automatic or manual TDD and review, where each runs, and whether review only reports or leads to fixes and another review. Use the setting meanings in [the AGENTS.md reference](references/AGENTS.md#automation-settings). The user decides whether to accept the work.
 
@@ -57,7 +57,7 @@ For planning routes, agree tracker operations, specification/ticket formats and 
 
 For another tracker, derive the procedure from its agreed sources and access method. Keep readiness vocabulary required by selected skills; setup does not configure incident triage. Read [domain documents](references/domain.md) only when glossary or ADR conventions need configuration.
 
-Check skill dependencies and client capabilities against proposed settings. A required helper may be absent, and a mandatory operation may be forbidden. Identify the blocked step rather than silently substituting another procedure. A separate-session choice requires either client support or a user-started handoff; setup does not promise thread creation.
+Check skill dependencies, client capabilities and implementation-to-review handoffs against proposed settings. A required helper may be absent, a comparison may exclude the intended changes, or a mandatory operation may be forbidden. Identify the blocked step rather than silently substituting another procedure. A separate-session choice requires either client support or a user-started handoff; setup does not promise thread creation.
 
 ### User additions
 
@@ -97,6 +97,7 @@ Walk through only relevant cases:
 - No project setting: use the skill's default. Explicit `manual`: no automatic launch by implementation.
 - TDD uses the agreed tests and examples without adding a separate test-author procedure.
 - Review reports only, or fixes and re-reviews within the agreed authority and cycle limit; user acceptance remains separate.
+- The selected comparison covers the intended changes at the review checkpoint; a committed-only diff cannot verify uncommitted work.
 - A requested helper, source or separate session is unavailable: identify the blocked step or agreed handoff.
 - An extra skill or coding-practice pointer is needed: the intended reader, including a delegated worker, can reach it.
 - A required action conflicts with project permissions: report it without inventing a substitute or bypass.

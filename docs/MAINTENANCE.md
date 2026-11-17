@@ -76,11 +76,11 @@ There is no permanent test runner or CI here; pick the checks that fit the chang
 | Setup or deployment | Existing project instructions; targeted rerun; declined installation; missing dependency; same-named global and project copies; unsupported client |
 | Requirements and planning | Read-only analyst source; existing tickets; non-default artifact paths; forbidden tracker change |
 | Testing and implementation | Auto/manual TDD; representative tests; current-session/subagent/separate-session execution; unavailable capabilities |
-| Review and followup | Auto/manual review; report versus fix-and-rereview; correction scope and cycle limits; user acceptance; required unavailable helper |
+| Review and followup | Comparison-base rule; committed versus working-tree endpoint; pre-commit coverage; auto/manual review; report versus fix-and-rereview; correction scope and cycle limits; user acceptance; required unavailable helper |
 | PR/MR delivery | Text-only request; unclear base branch; failed hook; existing draft; pending CI; no merge permission |
 | Memory or maintenance | Unconfirmed lesson; conflict with current rules; two writers at once; recoverable artifact removal; non-default memory folder |
 | Workflow advice | Question before setup; missing package; manual-only skill missing from automatic discovery; advice without execution |
-| Writing routes | First-prompt conversation; an artifact draft in chat; context and lessons versus rules; mixed documents; non-English artifacts; missing or declined writing packages; a helper without inherited instructions |
+| Writing routes | First-prompt conversation; routine STE-based writing without external STE sources; explicit provenance/conformance request; an artifact draft in chat; context and lessons versus rules; mixed documents; non-English artifacts; missing or declined writing packages; a helper without inherited instructions; an authorized next action versus a missing user decision |
 | Per-skill settings | No project rules; omitted versus manual setting; additional skill or coding-practice pointer; targeted rerun preserving unrelated sections |
 
 ## Export and release

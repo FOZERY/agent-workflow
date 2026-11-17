@@ -205,3 +205,12 @@ Restored complete M1 packages for `domain-modeling`, `prototype` and `codebase-d
 Restored the original TDD and Wayfinder helper calls, reversing the preceding dependency adaptation. Their project paragraphs remain.
 The kit now includes the fixed helper dependencies of these procedures. Setup can configure each helper in its named project section.
 `grill-with-docs` remains unchanged and can use the restored domain helper. Other removed packages and global installations were not restored.
+
+### 2026-11-17: clarify local writing and review configuration
+
+Kept routine `asd-ste100` writing self-contained. Its source reference now has an explicit maintenance, provenance or conformance-review trigger.
+Corrected the Redis example to preserve a proposed decision rather than weaken it to an option.
+Limited `human-text` questions to missing user decisions or permissions. Already authorized work can continue.
+Added project memory to the `refactor-docs` reference trigger.
+Corrected `ask-workflow` guidance about pre-commit review. Setup now agrees the comparison-base rule, endpoint and checkpoint, then checks caller/reviewer compatibility.
+Matt-derived package prompts remain unchanged. An incompatible review route needs an explicit project procedure or a compatible reviewer; setup does not commit work to bypass the gap.

@@ -34,6 +34,7 @@ The kit includes all fixed helper dependencies; check [the required client insta
 Setup reads the selected skills before promising a configured route.
 It discusses automatic or manual TDD/review, execution location and reporting versus authorized fixes with another review.
 Test practices and review sources come from the project. The user accepts the work; acceptance is not a flag.
+It [matches review coverage to the implementation checkpoint](skills/setup-workflow/references/AGENTS.md#review-coverage), including whether the intended changes are committed or in the working tree.
 
 Setup does not rewrite installed packages. An unavailable helper or conflicting mandatory step must be reported.
 Settings are prompt instructions, not an execution engine. Delegated workers need the applicable rules and readable source pointers.

@@ -53,7 +53,7 @@ The app decides the interface; this skill decides the words.
 | the answer as a statement | a question with its own answer: "Why? Because…" |
 | the one property that matters, with a number | triplets for rhythm: "fast, convenient and reliable" |
 | start with the result | an opening that announces: "Let's dive in", "Below I describe" |
-| stop after the last fact; a step you can do goes into the closing block | a closing recap or a vague offer: "In summary…", "If you need, I can…" |
+| stop after the last fact; put a required user decision in the closing block | a closing recap or a vague offer: "In summary…", "If you need, I can…" |
 | delete them | hedges and fillers: "basically", "it's worth noting", "it's important to understand" |
 | bold only on labels the reader scans for | bold on random words, emoji as decoration |
 
@@ -70,7 +70,7 @@ The app decides the interface; this skill decides the words.
 
 ## The closing block
 
-**You found a problem or a next step you can do yourself: offer it as a question («Исправить?», «Сделать?», "Shall I fix it?"), never as advice to the reader. That is a decision, so the text ends with the block.**
+Ask only when a missing user decision or permission blocks the next action. Continue work already authorized by the task and applicable instructions; this writing style adds no approval gates.
 
 When the reader must decide or do something, end the text with one block. It holds every decision and next step: an answer to give, a command to send, a session to start; the rest of the text holds none of these.
 Write a command or a prompt in a code block, ready to copy. Files worth opening go in a short list just before the block, a reason on each line.
@@ -106,6 +106,6 @@ Read the text as the reader, sentence by sentence, and rewrite each sentence tha
 2. Does it carry a fact the reader needs? Delete it if they lose nothing without it.
 3. Can it be read two ways? Rewrite until one reading remains.
 4. Are numbers and negations the same as in the source?
-5. Did you find something you can fix or do? Then the block offers it.
+5. If the next action needs a user decision or permission, does the closing block ask for it?
 
 Then apply the language file's own questions. Done when every sentence passes every question.

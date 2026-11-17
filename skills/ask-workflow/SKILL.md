@@ -37,13 +37,15 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 | Synthesize agreed requirements, then decompose work if needed | `to-spec`, `to-tickets` |
 | Run original test-first red–green cycles | `tdd` |
 | Implement one agreed task, or coordinate a specification/task graph | `implement`, `implement-spec` |
-| Review current changes independently, including before a commit | `code-review` |
+| Review committed changes since a fixed point | `code-review` |
 | Prepare or publish a PR/MR | Follow project delivery rules and permissions |
 | Inspect session evidence for agent-environment improvements | `retro` |
 | Write conversational replies; write artifacts; write reusable agent rules | `human-text`; `asd-ste100`; `writing-for-agents`, respectively |
 | Refactor existing artifacts; retire stale artifacts | `refactor-docs`; `cleanup`, respectively |
 
 Recommend only the relevant next step and explain its input, expected result and outstanding human decision. Existing analyst-owned requirements may go directly to implementation; they need not pass through spec/ticket authoring. Routine fact lookup does not require a deep research report. A ready-for-human-review task needs the person's review, not another skill merely to keep the agent busy.
+
+For pre-commit review, confirm that the selected procedure covers the intended staged, unstaged and untracked changes. This kit's `code-review` defaults to `<base>...HEAD`, which excludes uncommitted work. Use an explicit compatible project procedure or report the coverage gap; advice does not authorize a commit to make review runnable.
 
 Twelve Matt-derived skills add only the project-instructions paragraph; their original calls and action defaults remain. The kit includes the fixed helper dependencies, but the target client must have them installed. Read the actual prompt before advising. The former local separate test-author and three-round acceptance cycle are absent.
 

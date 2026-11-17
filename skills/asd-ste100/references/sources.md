@@ -3,6 +3,8 @@
 Research date: 2026-11-17.
 Scope: artifact writing for software projects, including records read by people and agents.
 
+This file records provenance. [SKILL.md](../SKILL.md) contains the complete routine writing profile.
+
 ## Primary sources
 
 | Source | Verified use in this package |
