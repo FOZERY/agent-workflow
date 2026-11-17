@@ -35,6 +35,8 @@ Otherwise, leave the route blocked. Setup does not authorize a commit merely to 
 Replace angle-bracket fields with agreed rules. Include only selected settings and add reading triggers to practice links.
 Render each chosen automation setting with its operational meaning in the generated contract; readers must not need this setup reference to interpret it.
 Use [writing routes](writing.md) for the approved style pointers and [project artifacts](project-artifacts.md) for memory details.
+For optional diagrams, use [diagram configuration](diagrams.md). Include the `excalidraw-diagram` section only when selected, and retain diagram pointers only in applicable selected skill sections. Resolve its package pointer, delegation route and output rules from agreed settings; do not add diagram flags.
+For a multi-repository home, preserve its navigation owner and include the conditional Related repositories section. Omit it for a single-repository setup.
 
 ```markdown
 # <Project name>
@@ -49,9 +51,14 @@ Keep its remaining procedure unchanged.
 If a required step cannot satisfy applicable constraints, report the conflict.
 
 ## Sources and artifacts
-<Authoritative requirements, tracker, specification, ticket and research locations.>
+<Authoritative requirements, tracker, specification, ticket, implementation-plan and research locations.>
 <Decision maps, glossary and ADR sources where used.>
 <Artifact owners, formats, visibility and existing operation procedures.>
+
+## Related repositories
+<Home or repository-index pointer, with each repository's purpose and agreed portable location.>
+<Before child work, read its applicable instructions; explicit shared-rule and skill loading for child-start sessions and workers.>
+<Ownership and access rules for cross-repository task artifacts; cloning and worktree permissions remain separate.>
 
 ## Working agreement
 <Task start rules, autonomy and human checkpoints.>
@@ -67,16 +74,23 @@ The user decides whether to accept the work.
 
 ## Skills
 
+### home-repo-init
+<Approved inventory roots, home membership and shared-material ownership when this skill is selected.>
+<Migration boundaries and required approval; existing child code, instructions and installed skills retain their owners.>
+
 ### grilling
 <Project discussion context and decision boundaries, if needed.>
+For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### grill-with-docs
 <Documents to consult and their authority.>
 <Where to propose or record agreed terms and decisions; who approves changes.>
+For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### domain-modeling
 <Authoritative glossary and ADR locations, formats and domain contexts.>
 <Approval and write rules for resolved terms and consequential decisions.>
+For domain relationships or decision alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### research
 <Permitted sources, evidence expectations and report destination.>
@@ -85,13 +99,21 @@ The user decides whether to accept the work.
 ### wayfinder
 <Map, child-ticket and dependency representation.>
 <Claim and resolution procedures; experiment, branch and publication constraints.>
+For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### prototype
 <Permitted experiment surfaces, data and environment boundaries.>
 <Artifact location, viewing method and capture/integration permissions.>
+For a supporting sketch, use [excalidraw-diagram](#excalidraw-diagram); it does not replace the runnable prototype.
+
+### to-plan
+<Task-linked plan location, naming, visibility, approval and revision rules.>
+<Receiving executor and the instructions that let it consume the plan plus its source task.>
+For interactions or architecture worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### to-spec
 <Requirement sources, specification format, destination and publication procedure.>
+For interactions or architecture worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### to-tickets
 <Ticket format, granularity, dependency representation and destination.>
@@ -100,6 +122,18 @@ The user decides whether to accept the work.
 ### codebase-design
 <Existing interface conventions, architecture constraints and relevant ADRs.>
 <Testability examples and permissions for exploring alternative designs.>
+For interface boundaries worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
+
+### excalidraw-diagram
+<Readable installed package entrypoint; designated delegation tool, including Orca if selected.>
+<Permitted task-artifact destination, naming, visibility and revision rules; approved libraries and rendering permissions.>
+Diagrams are optional. Offer one when it would clarify a design question; a declined offer leaves the discussion unchanged.
+Package selection is not consent to draw. An explicit request for the diagram counts as consent.
+After consent, use the linked package's procedure to assign generation and visual checking to a separate subagent.
+Only that worker reads generation references and library JSON. Keep the coordinator's brief and the returned paths, check result and caveats compact.
+Check worker access, output paths and rendering permissions before dispatch. Report missing prerequisites as diagram-only blockers; continue in text without inline drawing.
+Save editable `.excalidraw` and PNG files with the parent artifact under the configured paths.
+Decisions and contracts remain authoritative in text. A diagram neither replaces a runnable prototype nor approves the design.
 
 ### tdd
 trigger: <auto | manual>
@@ -110,6 +144,7 @@ execution: <current-session | subagent | separate-session>
 
 ### implement
 <Expected task inputs and implementation boundaries.>
+<If plan-based execution is selected: read the approved plan and source task as implementation input. Recheck relevant code before editing.>
 Use the TDD and review settings in this document.
 <Checkpoints before returning the result to the user.>
 

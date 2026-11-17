@@ -5,7 +5,7 @@
 Each name links to the skill's prompt, which defines its exact behavior. This is the kit's catalog, not a list of what is installed on your machine.
 
 The catalog groups task skills into four phases: setup, task exploration, implementation and retrospective.
-Use only the phases the task needs. Writing skills form a separate group and can apply in any phase.
+Use only the phases the task needs. Writing and diagram support form separate groups, not additional phases.
 
 Invocation modes:
 
@@ -18,10 +18,15 @@ No mode grants permission for what the skill does.
 
 | Skill | Invocation | Use it for | Result |
 | --- | --- | --- | --- |
+| [home-repo-init](../skills/home-repo-init/SKILL.md) | Manual | Establish or revise a navigation and shared-material home for multiple repositories | Read-only inventory and proposed changes; approved home structure without moving child code |
 | [setup-workflow](../skills/setup-workflow/SKILL.md) | Manual | Discuss project practices, per-skill settings and additional user requirements | Approved `AGENTS.md`, project memory and separately approved installation |
 | [ask-workflow](../skills/ask-workflow/SKILL.md) | Manual | Explain the workflow, compare skills, choose the next step | Advice only; runs nothing and needs no other skill |
 
 `ask-workflow` can also explain the next step during any other phase.
+
+`home-repo-init` is optional and standalone. Initialize the home first, then use `setup-workflow` if its workflow procedures need configuration.
+Use `to-plan` for an individual task plan, not home structure. Home navigation preserves child instructions and requires verified access from each session or worker.
+The [package](../skills/home-repo-init/SKILL.md) and [source ledger](UPSTREAM.md) record the AI Hero article as conceptual inspiration.
 
 ## 2. Task exploration
 
@@ -33,10 +38,11 @@ No mode grants permission for what the skill does.
 | [research](../skills/research/SKILL.md) | Agent or manual | Primary-source investigation, including wayfinder research tickets | A fresh background agent writes a cited Markdown report |
 | [prototype](../skills/prototype/SKILL.md) | Agent or manual | Answer a design question through a throwaway logic or UI prototype | A concrete experiment and recorded decision; helper for Wayfinder prototype tickets |
 | [wayfinder](../skills/wayfinder/SKILL.md) | Manual | Explore a large effort through decision tickets | Original map, tracker, grilling/domain-modeling, research and prototype procedures |
+| [to-plan](../skills/to-plan/SKILL.md) | Manual | Plan an existing task without creating a spec or tickets | One saved task-linked Markdown plan with work packages, dependencies and checks; no implementation |
 | [to-spec](../skills/to-spec/SKILL.md) | Manual | Synthesize the agreed discussion | Confirmed test seams and a specification published to the tracker |
 | [to-tickets](../skills/to-tickets/SKILL.md) | Manual | Split work into vertical slices | Approved dependency-ordered tickets using upstream publication conventions |
 
-`wayfinder` tickets ask questions; implementation tickets describe work. A ready spec from an analyst skips `to-spec` and `to-tickets`.
+`wayfinder` tickets ask questions; implementation tickets describe work. A ready task can skip spec/ticket authoring and use `to-plan` when planning is useful, or go directly to execution. Configure an executor to read the plan and its source task; `implement-spec` still requires its specification and ticket graph.
 
 ## 3. Implementation
 
@@ -73,6 +79,19 @@ These skills guide how text is written, independently of the current task phase.
 | [writing-for-agents](../skills/writing-for-agents/SKILL.md) | Agent or manual | Write documents that agents consume | Exact upstream writing guidance and sibling `SKILL-MECHANICS.md` |
 | [human-text](../skills/human-text/SKILL.md) | Agent or manual | Clear, natural replies, explanations and prose for people | A standalone writing style; project instructions decide its scope and startup loading |
 
+## Diagram support
+
+| Skill | Invocation | Use it for | Result |
+| --- | --- | --- | --- |
+| [excalidraw-diagram](../skills/excalidraw-diagram/SKILL.md) | Agent or manual | Offer a useful design diagram; delegate drawing only after user consent | Editable `.excalidraw` source and PNG preview beside the parent artifact, with visual-check results and caveats |
+
+This optional package includes four [libraries](../skills/excalidraw-diagram/references/libraries.md). It is not an external skill prerequisite.
+Selection or installation does not authorize drawing. An explicit diagram request counts as consent.
+An approved request uses a separate drawing subagent; declined requests continue without diagram work.
+Unavailable delegation, required assets or render permission block only this branch. There is no same-context generation fallback.
+Decisions and contracts remain in text; a diagram does not replace a prototype or imply user acceptance.
+See [project setup rules](../skills/setup-workflow/references/AGENTS.md) and the package prompt for permissions, renderer prerequisites and the compact worker handoff.
+
 ## Dependencies
 
 The fourteen M1-derived Matt packages retain original procedures, dependencies and layout. Twelve add only the [project-instructions paragraph](UPSTREAM.md#current-package-policy).
@@ -80,4 +99,5 @@ The [setup catalog](../skills/setup-workflow/references/catalog.md#dependencies)
 They must still be installed in the target client. Wayfinder can require additional skills named in a map's Notes. Installation does not establish runtime readiness.
 
 Our setup and local writing packages remain separately installable. Setup records approved project combinations and permissions without modifying the original prompts.
+`home-repo-init` requires no other skill or specific orchestration tool. Its optional handoff to `setup-workflow` is a user choice, not a dependency call.
 Original packages without a bundled license require the applicable root notice alongside an export.

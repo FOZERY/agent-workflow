@@ -39,6 +39,48 @@ Take the agent identifier from the installer's [supported-agent list](https://gi
 
 Run `/setup-workflow`, or `$setup-workflow` in Codex. Reload skills first if your client needs it. A package's `agents/openai.yaml` is client metadata, not a separate agent.
 
+## Optional home for multiple repositories
+
+A home repository provides navigation and approved shared materials for work across repositories.
+[`home-repo-init`](../skills/home-repo-init/SKILL.md) is a standalone, manual setup-stage option. It is not a prerequisite for this workflow.
+The [package](../skills/home-repo-init/SKILL.md) and [source ledger](UPSTREAM.md) describe its inspiration from AI Hero's “The Home Repo Pattern.”
+Install it by selecting `--skill home-repo-init` in the command above, with the intended client and scope.
+Invoke `/home-repo-init`, or `$home-repo-init` in Codex. Installation alone does not start it.
+
+Initialize or revise the home first. Then optionally invoke `setup-workflow` to configure its procedures, permissions and selected packages.
+Use `to-plan` for a specific task's implementation plan. Home initialization does not create empty workflow memory files.
+Maintaining this kit does not initialize a home or authorize global skill installation.
+
+The skill inventories only authorized, bounded roots and stays read-only until you approve a plan.
+It asks missing decisions in dependency order, rather than asking every possible question:
+
+| Decision | What must be clear |
+| --- | --- |
+| Search and selection | Authorized roots and member repositories; the agent inspects worktrees, submodules and dirty state |
+| Home and audience | New or existing location, personal or team use and intended audience; the agent verifies remote visibility where possible |
+| Clients and readers | Intended clients and session starts; the agent checks actual loading behavior and worker access |
+| Shared material | Ownership, authority, exact copies versus divergent variants, and explicit approval for any copy or migration |
+| Paths and artifacts | Portable repository pointers, nested-path tracking boundaries and the location of cross-repository task artifacts |
+| Optional operations | Separate approval for cleanup, clones, local branches, commits, remote creation or publication |
+
+The default is pointers and reuse. Child code, history, remotes, trackers and repository-specific rules stay where they are.
+Existing documents remain authoritative until an approved migration. Published packages stay installed by default.
+Scope and duplicate relationships are separate classifications. A newer timestamp or commit does not establish authority.
+Secrets remain unread and unstored. Remote pointers omit embedded credentials.
+Provider metadata can establish visibility. A remote URL alone cannot.
+
+Review the source, destination, action, authority, integrity check, readers, branch and recovery method for every proposed change.
+Also review the home `AGENTS.md` and client loading pointers.
+Home instructions require reading child instructions before work. They do not claim universal precedence over child rules.
+A home pointer does not prove that a child-start session or worker can load shared instructions or discover skills.
+Verify those readers' actual paths and installation scope before claiming the route is ready.
+
+Repository pointers do not authorize clones, pulls or submodules.
+A missing clone needs approval for its source and destination.
+Cleanup needs separate approval after the destination and all consumers are verified. Use recoverable removal and preserve dirty changes.
+Git commits, remote creation and pushes are not automatic.
+Reruns propose only deltas and preserve unrelated content in an existing home.
+
 ## What setup asks about
 
 The [setup prompt](../skills/setup-workflow/SKILL.md) guides a free conversation, not a fixed questionnaire.
@@ -49,6 +91,8 @@ The agent reads existing rules and examples, then asks about missing decisions.
 | Project and sources | Purpose, working scope, authoritative requirements, tracker and artifact locations |
 | Working agreement | Autonomy, human checkpoints, delegation, concurrent work and external-write permissions |
 | Selected skills | Project-specific settings, additional skills, coding practices and reading pointers |
+| Implementation plans | Task-linked location, naming, visibility, approval, revisions and receiving executor; no mandatory spec or tickets |
+| Optional diagrams | Whether to select `excalidraw-diagram`; delegation, task-artifact paths, libraries and rendering permissions |
 | Testing | Test types, representative tests, command sources and infrastructure constraints |
 | Review | Requirement and standards sources, preferred procedure, comparison-base rule, endpoint, review checkpoint and permitted corrections |
 | Git and delivery | Commit checkpoints and convention; separate push, PR/MR, merge and deployment permissions |
@@ -70,6 +114,34 @@ TDD remains a test–implementation cycle, not a separate bulk test-writing phas
 If a setting is omitted, the skill's default applies. Explicit `manual` is a different choice.
 Setup records settings in `AGENTS.md`; it adds no runtime flag parser or thread-creation service.
 Setup also [matches review coverage to its checkpoint](../skills/setup-workflow/references/AGENTS.md#review-coverage). A review that compares only commits cannot verify uncommitted implementation changes.
+
+### Task plans without specifications or tickets
+
+Select `to-plan` for an existing task that needs an implementation approach and ordered work.
+It saves one Markdown artifact with that task's other records, using the project's location and permissions.
+Setup agrees who can approve or revise it and how the chosen executor receives the plan and source task.
+The skill's [storage defaults](../skills/to-plan/SKILL.md#1-establish-the-task-and-destination) apply when the project has no convention.
+
+Plan-based execution is a project-configured route, not a new input automatically accepted by every original skill.
+`implement-spec` still needs a specification and ticket graph. Planning alone starts no implementation.
+
+### Optional design diagrams
+
+Select bundled `excalidraw-diagram` if diagrams would help your design discussions.
+Setup adds one project policy and links relevant skill sections to it. It leaves the reusable upstream prompts unchanged.
+The [diagram interview](../skills/setup-workflow/references/diagrams.md) covers relationships, alternatives, interfaces and interaction architecture.
+A prototype sketch supports the runnable experiment; it does not replace it.
+
+Package approval is separate from consent to each diagram. The agent offers a diagram when useful, and you can decline.
+An explicit diagram request counts as consent. Generation always runs in a separate subagent, keeping drawing details out of the design discussion.
+Without that capability, the agent reports the diagram blocker and continues in text; it does not draw inline.
+
+Setup checks worker access, artifact paths, renderer dependencies, browser availability and required network permissions.
+The worker saves an editable `.excalidraw` file and PNG preview beside the parent artifact, using configured paths.
+It returns paths, visual-check results and caveats. Text remains authoritative for decisions.
+
+The package includes four libraries and a provenance notice. Some upstream material has no stated license; do not assume all files are MIT-licensed.
+Approve any installation changes separately. Setup does not silently replace a same-named upstream global installation.
 
 ### Writing routes
 
@@ -105,10 +177,11 @@ AGENTS.md
 | `LESSONS.md` | Confirmed lessons and preferences by topic, with date, source, scope and status | Guesses or hidden mandatory rules |
 | Glossary and ADRs | Domain terms; important decisions with alternatives and trade-offs | Passing preferences or routine detail |
 | Specs and tickets | Required behavior and work, in their own source | Copies of analyst-owned Jira or Confluence records |
+| Implementation plan | Task source, approach, ordered work packages, dependencies and checks | A duplicate spec, tracker tickets or an execution permission |
 
 Only the memory folder can change; the file names stay fixed and `AGENTS.md` stays at the root. In this kit repository, `docs/` is documentation for people; `.docs/` is the memory folder in your project.
 
-Setup keeps existing documents and client wrappers. A file with an old name is renamed only through an agreed migration. Setup reuses existing runbooks and creates supporting documents only where they help; it does not create empty specs, ADRs or trackers.
+Setup keeps existing documents and client wrappers. A file with an old name is renamed only through an agreed migration. Setup reuses existing runbooks and creates supporting documents only where they help; it does not create empty plans, specs, ADRs or trackers.
 
 The [reference AGENTS.md structure](../skills/setup-workflow/references/AGENTS.md) contains shared rules and named skill sections.
 Setup fills applicable sections from agreed facts and adds sections or practice pointers for user additions. It grants no default permissions.

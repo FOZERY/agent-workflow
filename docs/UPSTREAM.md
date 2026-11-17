@@ -29,6 +29,8 @@ Historical records below describe earlier versions; this policy defines the curr
 | K1 | [KirillSachkov/agent-kit `3b5e37249118aff3d3dfb547977939145524d525`](https://github.com/KirillSachkov/agent-kit/tree/3b5e37249118aff3d3dfb547977939145524d525) | Setup/project-aware adaptation reference and plain-writing import baseline |
 | K2 | [KirillSachkov/agent-kit `c66fb95e097380806262888dac95f9c63048aae3`](https://github.com/KirillSachkov/agent-kit/tree/c66fb95e097380806262888dac95f9c63048aae3) | Workflow-guide reference consulted for ask-workflow; not a new baseline for other packages |
 | H1 | [humanlayer/skills `bba9d13ab34f0a87f1cc33df4dd196372393ddfc`](https://github.com/humanlayer/skills/tree/bba9d13ab34f0a87f1cc33df4dd196372393ddfc) | Verified show-me/license reference; the exact revision copied by Matt is not stated |
+| E1 | [coleam00/excalidraw-diagram-skill `8646fcc9f74f38539c6cdb4c969723336a96ddcd`](https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd) | Imported diagram generation reference and renderer; no declared upstream license |
+| E2 | [excalidraw/excalidraw-libraries `297a349eaff859e678f78d4dbc8e68df5fce42e5`](https://github.com/excalidraw/excalidraw-libraries/tree/297a349eaff859e678f78d4dbc8e68df5fce42e5) | Verified source for four owner-supplied component libraries, with bundled MIT notice |
 
 Current upstream branches: [Matt](https://github.com/mattpocock/skills), [Kirill](https://github.com/KirillSachkov/agent-kit), [HumanLayer](https://github.com/humanlayer/skills). Pin a candidate to a commit before comparing and follow the [update procedure](MAINTENANCE.md#track-upstream-without-overwriting-local-policy); a newer HEAD alone is no reason to change this ledger.
 
@@ -56,7 +58,10 @@ Current upstream branches: [Matt](https://github.com/mattpocock/skills), [Kirill
 | [ask-workflow](../skills/ask-workflow/SKILL.md) | Locally authored; [ask-matt](https://github.com/mattpocock/skills/blob/5863806dd4e15c63174bee4e7515a4256792ecfa/skills/engineering/ask-matt/SKILL.md) and [Kirill ask](https://github.com/KirillSachkov/agent-kit/blob/c66fb95e097380806262888dac95f9c63048aae3/skills/engineering/ask/SKILL.md) informed its advisory role | M1/K2 references only |
 | [cleanup](../skills/cleanup/SKILL.md) | Locally authored artifact-maintenance procedure | No imported package baseline |
 | [refactor-docs](../skills/refactor-docs/SKILL.md) | Locally authored, self-contained document-editing procedure | No imported package baseline |
+| [to-plan](../skills/to-plan/SKILL.md) | Locally authored task-linked implementation-planning procedure | No imported package baseline |
 | [asd-ste100](../skills/asd-ste100/SKILL.md) | Original instructions and software examples, informed by official ASD-STE100 sources | Issue 9, 2025-01-15, consulted; no standard or dictionary bundled |
+| [excalidraw-diagram](../skills/excalidraw-diagram/SKILL.md) | Local consent/delegation entrypoint; retained [generation prompt and renderer](https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd) and [credited component libraries](../skills/excalidraw-diagram/references/libraries.md#provenance) | E1, E2; mixed rights, see package notice |
+| [home-repo-init](../skills/home-repo-init/SKILL.md) | Original instructions informed by AI Hero's [The Home Repo Pattern](https://www.aihero.dev/the-home-repo-pattern) | Conceptual article reference, updated 2026-11-12; no imported prompt or code |
 
 The fourteen M1-derived packages retain upstream supporting-file locations, metadata and literal setup invocation names. Original `/setup-matt-pocock-skills` references were not rewritten to `/setup-workflow`.
 
@@ -214,3 +219,44 @@ Limited `human-text` questions to missing user decisions or permissions. Already
 Added project memory to the `refactor-docs` reference trigger.
 Corrected `ask-workflow` guidance about pre-commit review. Setup now agrees the comparison-base rule, endpoint and checkpoint, then checks caller/reviewer compatibility.
 Matt-derived package prompts remain unchanged. An incompatible review route needs an explicit project procedure or a compatible reviewer; setup does not commit work to bypass the gap.
+
+### 2026-11-17: add lightweight task implementation plans
+
+Added the standalone, manually invoked `to-plan` package with bundled MIT terms and client metadata.
+It saves one Markdown plan with the task's artifacts, reuses project storage and permission rules, and needs neither a specification nor tickets.
+Setup configures plan storage, approval, revisions and the receiving executor. Advice and catalogs expose the optional route without changing Matt's prompts.
+The design uses the concise-plan and checkable-handoff principles compared in [OpenAI's historical create-plan](https://github.com/openai/skills/blob/aac2078f9f293e5335f5efe33148f40d75b56389/skills/.experimental/create-plan/SKILL.md), [HumanLayer's outline documentation](https://docs.humanlayer.com/reference/skills-workflows#structure-outline) and [Superpowers writing-plans](https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md).
+These are conceptual references, not imported packages or runtime dependencies. No upstream templates or code were copied, and no upstream baseline advanced.
+
+### 2026-11-18: clarify multi-service plan ownership
+
+Multi-service plans keep one shared artifact with service/repository responsibility boundaries, provider/consumer contracts, shared-schema ownership, integration order and cross-service checks. Executor roles propose a work split without launching agents. A usable handoff verifies access from the participating repositories or worktrees.
+
+### Optional delegated design diagrams
+
+Added `excalidraw-diagram` as an optional design helper, not a workflow phase.
+The coordinator offers a relevant diagram and waits for consent; only a separate worker generates and visually checks it.
+The worker returns artifact paths, a short check result and unresolved questions. Declined or blocked diagrams do not block the original discussion.
+
+The E1 `SKILL.md` is retained unchanged as `references/generation.md`, and its README as `references/upstream-README.md`.
+The six original reference/renderer files retain their bytes and paths. A new short entrypoint owns consent, delegation and project storage.
+Four owner-supplied `.excalidrawlib` files byte-match E2. Their credits and MIT notice ship in the package.
+E1 has no declared license. Inclusion does not grant redistribution rights; see [the package notice](../skills/excalidraw-diagram/NOTICE.md).
+
+Setup connects selected design skills through the generated project contract; Matt-derived prompts and baselines remain unchanged.
+The local `to-plan` now permits an explicitly approved diagram-only subagent while preserving its prohibition on starting implementation.
+The upstream global installation is not replaced by this repository change.
+
+### Multi-repository home initialization
+
+Added the standalone, manually invoked `home-repo-init` skill, informed by [The Home Repo Pattern](https://www.aihero.dev/the-home-repo-pattern).
+The article's inspected metadata reports an update at `2026-11-12T10:30:12.788Z`. This is a conceptual source, not a copied skill or an imported baseline.
+The new prompt and examples are original; no article prompt or third-party implementation is bundled.
+
+The skill inventories approved roots, agrees home membership and shared-material ownership, then previews changes before writing.
+Unlike the article's setup prompt, it does not scan the whole home directory by default or select a canonical variant solely by recency.
+Installed packages stay installed by default. Child cleanup, cloning, local Git actions and publication require their applicable approval.
+Navigation does not establish instruction inheritance or skill discovery in child sessions; verification covers those readers separately.
+
+Home structure is distinct from workflow configuration and task planning. Setup can configure an existing home without absorbing child policies.
+No Matt-derived prompt or accepted source baseline changed.

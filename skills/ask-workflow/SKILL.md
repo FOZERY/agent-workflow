@@ -25,6 +25,7 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 
 | Need | Candidate |
 | --- | --- |
+| Establish or revise a navigation and shared-material home for several repositories | Optional manual `home-repo-init` |
 | Configure or revise project procedures, permissions, artifact locations or selected packages | `setup-workflow` |
 | Challenge an idea, clarify the desired outcome and uncover overlooked questions | `grilling` |
 | Explore questions while developing domain terms and decision records | `grill-with-docs` |
@@ -34,6 +35,8 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 | Reason about module boundaries, investigate architecture or evaluate an incoming issue | Follow the project procedure and inspect relevant evidence |
 | Run a bounded experiment to answer a design question | `prototype`, also used by prototype tickets in `wayfinder` |
 | Design a module interface or choose a test seam | `codebase-design` |
+| Explain a design question with an optional editable diagram | Bundled `excalidraw-diagram`, after consent and through a separate drawing subagent |
+| Plan an existing task for implementation without creating a spec or tickets | `to-plan` |
 | Synthesize agreed requirements, then decompose work if needed | `to-spec`, `to-tickets` |
 | Run original test-first red–green cycles | `tdd` |
 | Implement one agreed task, or coordinate a specification/task graph | `implement`, `implement-spec` |
@@ -44,6 +47,18 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 | Refactor existing artifacts; retire stale artifacts | `refactor-docs`; `cleanup`, respectively |
 
 Recommend only the relevant next step and explain its input, expected result and outstanding human decision. Existing analyst-owned requirements may go directly to implementation; they need not pass through spec/ticket authoring. Routine fact lookup does not require a deep research report. A ready-for-human-review task needs the person's review, not another skill merely to keep the agent busy.
+
+A ready task can go through `to-plan` when its implementation needs planning. The plan is a saved task artifact; spec and ticket authoring remain optional. Hand it to an executor whose project instructions accept the plan plus source task. `implement-spec` still expects a spec and ticket graph; do not treat the plan as that graph.
+
+For a multi-repository home, recommend `home-repo-init` for structure, navigation and approved shared materials.
+Recommend `setup-workflow` afterward only if workflow procedures need configuration. `to-plan` remains task planning, not home initialization.
+Explain that the home preserves child rules and needs verified instruction and skill access from child-start sessions and workers.
+An existing home needs only proposed deltas. A missing local repository needs clone permission, not an automatic clone from a pointer.
+Read the available package for detailed scope and approval rules; do not inventory repositories or execute this manual skill as part of advice.
+
+For design diagrams, recommend `excalidraw-diagram` only when a visual explanation would help. It is optional support, not a required phase. Selection or installation is not generation consent; an explicit diagram request is consent. Explain that approval permits a separate drawing subagent with a narrow brief, while refusal continues without diagram work. This advice-only skill does not dispatch that subagent, even when consent exists.
+
+Point to the package prompt and project setup rules for the drawing route. Keep generation references and library JSON out of advice context. The worker returns editable `.excalidraw` and PNG paths, visual-check results and caveats. Missing delegation, required assets or render permission blocks only the diagram branch, with no same-context fallback. Keep ADR decisions and contracts in authoritative text; diagrams do not replace prototypes, plan approval or user acceptance.
 
 For pre-commit review, confirm that the selected procedure covers the intended staged, unstaged and untracked changes. This kit's `code-review` defaults to `<base>...HEAD`, which excludes uncommitted work. Use an explicit compatible project procedure or report the coverage gap; advice does not authorize a commit to make review runnable.
 

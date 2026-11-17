@@ -19,10 +19,22 @@ ASD owns the standard and its registered trademark. This repository does not bun
 The MIT terms for this repository do not license the standard itself.
 This skill is not endorsed, certified or approved by ASD or the STEMG.
 
+## Excalidraw diagrams and component libraries
+
+The `excalidraw-diagram` package retains generation guidance and renderer files from [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd).
+The pinned revision has no declared license. These files are not covered by this repository's MIT grant.
+Obtain redistribution permission from the rights holder before publishing them or a distribution that includes them.
+The [package notice](skills/excalidraw-diagram/NOTICE.md) identifies the imported files and the separately licensed original integration material.
+
+Four owner-supplied component collections byte-match [Excalidraw Libraries](https://github.com/excalidraw/excalidraw-libraries/tree/297a349eaff859e678f78d4dbc8e68df5fce42e5):
+Sticky Notes by ferminrp, Software Logos by drwnio.polyrand.net, System Design Components by Rohan Pithadiya, and Software Architecture by Youri Tjang.
+Their [source map](skills/excalidraw-diagram/references/libraries.md#provenance) and [Excalidraw MIT notice](skills/excalidraw-diagram/assets/libraries/LICENSE) ship with the package.
+Keep those credits and terms with the files. Software logos remain subject to their owners' trademark rights.
+
 
 ## MIT notices and terms
 
-The applicable notices are combined below with the full shared MIT terms. Each notice applies to the material identified above.
+The Matt Pocock, Kirill Sachkov and HumanLayer notices use the shared MIT terms below. Other material retains the separate terms identified above.
 
 ```text
 MIT License
@@ -55,3 +67,5 @@ SOFTWARE.
 Keep `LICENSE` and this document with every distribution of the repository. When you export or install single skills, include the applicable copyright notices, full license terms and inherited credits with the copied files. One shared notice can cover several packages when its scope is clear, but it must actually ship with them.
 
 Packages with bundled license notices must retain them. The fourteen M1-derived Matt packages listed in `docs/UPSTREAM.md` have no package-local license, including the twelve with the project-settings paragraph. Include this notice alongside their installs and exports to preserve Matt's MIT terms. Root legal files remain required for whole-repository distribution.
+
+Including notices does not grant missing permissions. The unlicensed Excalidraw generation material requires a separate rights decision before redistribution.

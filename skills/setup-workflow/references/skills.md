@@ -14,6 +14,8 @@ Use the owner's selection to determine which conditional workflow interviews app
 
 Offer `ask-workflow` as an optional guide for workflow questions and next-step advice. It can be installed on its own before or after setup, has no required skill dependencies and recommends procedures without executing them. Selecting it does not select the rest of the catalog.
 
+Offer bundled `excalidraw-diagram` only when visual design support is relevant. Use [diagram configuration](diagrams.md) for its conditional interview and readiness checks. Selecting it does not grant per-diagram consent or select other packages.
+
 Keep three decisions distinct:
 
 - **Selected for this project:** the owner's chosen procedures and any separately approved dependencies.
@@ -43,6 +45,8 @@ For this catalog, use `FOZERY/agent-workflow` as the default source unless anoth
 Resolve a published revision or an approved local checkout before planning installation. Start from the source the bootstrap used: the `setup-workflow` entry in the installer lock file, `skills-lock.json` in the project or `~/.agents/.skill-lock.json` for a user-wide install, records its `source`. Install the remaining packages from that same revision. If the lock names no usable source or the remote is empty, report that and ask for the local checkout path. Installing skills does not authorize publishing the repository.
 
 For each approved package, identify the source, version, compatibility and complete references. Preserve provenance and notices. Ask before substituting a same-named package from another source; never treat an upstream package as interchangeable merely because its name matches.
+
+For `excalidraw-diagram`, preserve its full references, renderer, four bundled libraries and provenance notice. Some upstream material has no stated license; the repository's MIT license does not cover it automatically. Review the package notice before redistribution. A same-named upstream global installation is not the bundled workflow adaptation and must not be silently replaced.
 
 If a package is missing or incompatible, explain the affected project route and the decision needed. Continue unrelated work without fabricating installation or readiness.
 
@@ -107,6 +111,8 @@ On partial failure, report each successful, failed and unattempted operation. Do
 ## Verify deployment
 
 Inspect the requested package files, bundled references, notices, lock entries and client discovery. Repeat the [same-name check](#check-same-name-copies). Distinguish present, discoverable and tested by invocation. Check additional project prerequisites only for a route that requires them. Explain reload requirements; do not launch another agent or mutating workflow merely to test discovery.
+
+For selected diagrams, also check worker-visible sources/assets, the configured artifact destination and renderer/browser/network prerequisites through [diagram configuration](diagrams.md). Package discovery alone does not establish that a separate worker can generate and inspect a preview.
 
 Report which requested skills are ready for the agreed use, which are installed but not yet discovery-verified, and which are unavailable or incompatible. The installer lock files are the deployment record; keep no second copy of their data.
 

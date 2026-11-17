@@ -17,6 +17,8 @@ Inspect the working scope: existing instructions and client loading, product doc
 
 For initial setup or changes to instruction ownership or memory, read [project artifacts](references/project-artifacts.md). Preserve existing instructions, client wrappers and records. In a company repository with restricted shared files, agree an allowed local loading mechanism.
 
+For a project spanning repositories, identify whether this setup targets the coordinating home repo or one child. Follow [home-repo boundaries](references/project-artifacts.md#multi-repository-homes) and preserve existing navigation. If a home must first be created or reorganized, recommend a separate user invocation of `home-repo-init`; do not perform that migration as workflow configuration.
+
 On a rerun, show current settings, known package availability and unresolved gaps, then ask what the user wants to change. Limit subsequent reading, questions, edits and verification to that change and its dependencies. An overview-only request ends without writes.
 
 **Done when:** the working scope, instruction owner, existing settings and requested change are clear. Report inaccessible sources as gaps.
@@ -49,7 +51,11 @@ For review, ask which requirements, coding practices and examples guide it. Disc
 
 For implementation routes, agree automatic or manual TDD and review, where each runs, and whether review only reports or leads to fixes and another review. Use the setting meanings in [the AGENTS.md reference](references/AGENTS.md#automation-settings). The user decides whether to accept the work.
 
-For planning routes, agree tracker operations, specification/ticket formats and decision-map handling. Use only the selected tracker seed when no adequate project procedure exists:
+For `to-plan`, agree the task-linked plan location, naming, visibility, approval and revision rules. Keep plans with the task's other artifacts where permitted, without requiring a spec or tickets. Agree the receiving executor and its input contract: plan plus source task, not a replacement specification or ticket graph. Configure that route in project instructions; leave installed skill prompts unchanged.
+
+For visual design support, offer the optional bundled `excalidraw-diagram` package. If selected or its settings change, read [diagram configuration](references/diagrams.md). Agree one project policy and link applicable skill sections to it; package approval is not consent to generate a diagram.
+
+For tracker-backed planning routes, agree tracker operations, specification/ticket formats and decision-map handling. Use only the selected tracker seed when no adequate project procedure exists:
 
 - [GitHub](references/issue-tracker-github.md)
 - [GitLab](references/issue-tracker-gitlab.md)
@@ -81,7 +87,7 @@ Show the proposed configuration edits, loading pointers, visibility changes and 
 
 Re-read target files for intervening changes and merge only approved edits. On initial setup, create or reuse root `AGENTS.md`, `CONTEXT.md` and `LESSONS.md` according to the artifact contract. Seed memory from the actual discussion. On reruns, preserve unrelated settings and history.
 
-Apply approved loading and visibility changes. Create no empty future specs, tickets, glossaries or ADRs. Moves and storage migrations require their own agreement.
+Apply approved loading and visibility changes. Create no empty future plans, specs, tickets, glossaries or ADRs. Moves and storage migrations require their own agreement.
 
 If installation was approved, follow the deployment reference. Reuse compatible packages, preserve notices and report partial failures. Finalize writing activation pointers only when their targets are readable. Leave reusable package prompts unchanged.
 
@@ -94,12 +100,15 @@ Check local pointers, configured artifact paths, client loading where observable
 Walk through only relevant cases:
 
 - Initial setup versus a targeted rerun; unrelated settings and installations stay intact.
+- A home repo coordinates several children: preserve their instruction ownership and verify shared pointers from each intended session or worker.
 - No project setting: use the skill's default. Explicit `manual`: no automatic launch by implementation.
 - TDD uses the agreed tests and examples without adding a separate test-author procedure.
 - Review reports only, or fixes and re-reviews within the agreed authority and cycle limit; user acceptance remains separate.
 - The selected comparison covers the intended changes at the review checkpoint; a committed-only diff cannot verify uncommitted work.
 - A requested helper, source or separate session is unavailable: identify the blocked step or agreed handoff.
 - An extra skill or coding-practice pointer is needed: the intended reader, including a delegated worker, can reach it.
+- A task needs only an implementation plan: its artifact stays with that task, and the chosen executor can consume it without a new spec or tickets.
+- Optional diagrams: selection alone starts nothing; declined offers produce no diagram writes or dispatch. Consent uses a separate worker with readable sources/assets and a permitted output/rendering path; missing capability blocks only the diagram.
 - A required action conflicts with project permissions: report it without inventing a substitute or bypass.
 
 For memory or writing changes, also use the verification guidance in their references. Distinguish a static walkthrough from live execution. Obtain approval before launching a client or substantive helper as a probe.

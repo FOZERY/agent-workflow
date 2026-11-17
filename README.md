@@ -1,35 +1,45 @@
 # agent-workflow
 
 Workflow skills for coding agents, based on [Matt Pocock's skills](https://github.com/mattpocock/skills), with project setup and writing tools.
-Twelve Matt packages add only a project-instructions paragraph; `grill-with-docs` and `writing-for-agents` remain exact copies.
-The kit includes their fixed helper dependencies. These are prompts, not permission enforcement; check client installations and project permissions before execution.
-For optional companion utilities and external skills, see [Additional tools](#additional-tools).
+Packages keep upstream behavior except for [documented adaptations](docs/UPSTREAM.md). The kit includes their fixed skill dependencies.
+Project instructions define paths, practices and automation; these prompts do not enforce permissions.
 
 ## How it works
 
-1. Install the packages you need and check their prerequisites.
-2. Use `grilling` directly for an interview, or our `setup-workflow` to configure project rules in `AGENTS.md`.
-3. Use configured project settings where specified and the skill's defaults elsewhere. Check prerequisites and required actions before running it.
+```mermaid
+flowchart TB
+    subgraph Workflow["Task workflow: four phases"]
+        direction LR
+        Setup["1. Setup<br/>setup-workflow"] -.-> Explore["2. Explore and plan<br/>choose the needed skills"]
+        Explore --> Build["3. Implement and verify<br/>task, plan or ticket graph"]
+        Ready["Ready task"] --> Build
+        Build -. "optional" .-> Retro["4. Retrospective<br/>retro"]
+    end
+    Shared["Across all phases, not extra steps<br/>AGENTS.md: project rules<br/>CONTEXT.md: recent work<br/>LESSONS.md: confirmed experience<br/>human-text / asd-ste100 / writing-for-agents"] -. "read or apply when triggered" .-> Workflow
+```
 
-Setup records shared rules and named skill sections in `AGENTS.md`. TDD and review can be automatic or manual.
-Review can report findings or lead to authorized fixes and another review. The user decides whether to accept the work.
+Setup runs initially or when project rules change. A ready task can skip exploration and planning; retrospective is optional.
+Project rules select automatic or manual TDD/review and permitted actions. The user accepts the result.
+See [FLOW.md](FLOW.md#route-map) for skill choices, handoffs and worked examples. Revisit earlier decisions when new evidence changes the approach.
 
 ## Install
 
-You need Node.js 22.20+ and a local copy of this repository. Install either writing skill on its own:
+You need Node.js 22.20+ and a local copy of this repository. Install selected skills independently:
 
 ```bash
 npx skills@1.9.0 add ~/projects/agent-workflow --skill human-text --agent codex
 npx skills@1.9.0 add ~/projects/agent-workflow --skill asd-ste100 --agent codex
 ```
 
-The installer can select any catalog package, including `setup-workflow`. Some original skills need additional packages at execution time.
+Replace `--skill` with any name in the [catalog](docs/SKILLS.md). Check its required helpers before use.
 Use `--agent claude-code` for Claude Code. Add `--global` only for an intended user-wide installation.
 
-To configure the project, install and run `/setup-workflow` (`$setup-workflow` in Codex). It:
+For work across several repositories, optionally run [`home-repo-init`](skills/home-repo-init/SKILL.md) to agree a home for navigation and shared materials. It preserves child code and rules, previews changes, and waits for approval. Then use `setup-workflow` if that home needs workflow procedures. Use `to-plan` for individual task plans.
+
+For project configuration, install and run `/setup-workflow` (`$setup-workflow` in Codex). It:
 
 1. Reads existing instructions, documentation, scripts and CI.
-2. Discusses missing decisions: test practices, automation, permissions, artifact locations and any additional skills or coding guidance.
+2. Discusses test practices, automation, permissions, artifact locations and additional guidance.
 3. Shows the draft rules and, separately, the list of skills to install.
 4. After approval, writes the project rules and installs only the approved packages.
 
@@ -41,17 +51,16 @@ AGENTS.md          project rules for the agent
 .docs/LESSONS.md   confirmed lessons
 ```
 
-You can choose another folder instead of `.docs/`; the file names stay fixed. Jira, Confluence and other existing sources stay the source of truth. Run setup again to see the current settings and change some of them; the rest stays as it was.
+You can change the `.docs/` directory; the file names stay fixed. Existing systems such as Jira or Confluence remain authoritative.
+Rerun setup to change selected settings and preserve the rest.
+Setup records skill-specific rules and writing triggers in `AGENTS.md`; it does not rewrite installed skills.
 
-The project can assign conversation to `human-text`, artifacts to `asd-ste100` and reusable rules to `writing-for-agents`.
-Setup records approved triggers and additional requirements in `AGENTS.md`; it does not modify the reusable skill prompts.
-
-Preserve bundled licenses. For packages without one, copy the applicable [third-party notice](THIRD_PARTY_NOTICES.md#distribution) alongside installation or export.
-Scope choice, OMP and setup details are in [SETUP.md](docs/SETUP.md).
+Keep bundled licenses. For kit packages without one, include the applicable [third-party notice](THIRD_PARTY_NOTICES.md#distribution) with installation or export.
+See [SETUP.md](docs/SETUP.md) for client configuration and installation scope.
 
 ## Which skill to use
 
-[The skill catalog](docs/SKILLS.md) lists every skill and what it produces. If you are unsure, install `ask-workflow` and ask it:
+The [catalog](docs/SKILLS.md) lists skills, outputs and prerequisites. For a recommendation, install and invoke `ask-workflow`:
 
 ```text
 /ask-workflow I have an approved task from Jira. What should I use next?
@@ -59,10 +68,35 @@ Scope choice, OMP and setup details are in [SETUP.md](docs/SETUP.md).
 
 It recommends a skill and stops; it does not start the work.
 
+For a clear task that needs a saved implementation plan, use [`to-plan`](skills/to-plan/SKILL.md).
+It saves the plan with the task's artifacts. Specifications and tickets are optional; execution is a separate handoff to the project-selected agent.
+
+### Optional design diagrams
+
+The bundled [`excalidraw-diagram`](skills/excalidraw-diagram/SKILL.md) can illustrate a design question. It is not a required phase.
+When a diagram would help, the agent offers it. Package selection is not consent to generate one.
+After your approval, a separate drawing subagent receives a narrow brief. An explicit diagram request already supplies consent.
+If you decline, discussion continues without drawing. Missing capabilities or permissions block only the diagram branch; the coordinator does not draw instead.
+
+The worker saves editable `.excalidraw` source and a PNG preview beside the task, ADR, specification or plan, under configured paths.
+Decisions and contracts remain in their authoritative text. A diagram does not replace a runnable prototype.
+See the [package](skills/excalidraw-diagram/SKILL.md) for generation and renderer requirements, and [setup rules](skills/setup-workflow/references/AGENTS.md) for project integration.
+Four libraries are bundled: `post-it`, `drwnio`, `system-design` and `software-architecture`.
+The [library guide](skills/excalidraw-diagram/references/libraries.md) records their sources and usage. [Excalidraw Libraries](https://libraries.excalidraw.com/) provides other downloadable `.excalidrawlib` collections.
+
 ## Additional tools
 
-These companion tools and skills are optional. They are not additional workflow stages, and setup does not install or activate them automatically.
-Install only what you need, with the intended client and scope. External packages follow their own releases and installation requirements.
+These optional tools are separate from the bundled workflow. Setup does not install or activate them automatically.
+Choose the client and installation scope explicitly. Follow each external package's setup and permission requirements.
+
+### Agent workspace
+
+| Tool | Use it for | Install |
+| --- | --- | --- |
+| [Orca](https://orca.dev/) ([source](https://github.com/stablyai/orca)) | Run coding agents in separate worktrees, with chat, terminals, diffs and a browser | [Download Orca](https://orca.dev/download) |
+| [Excalidraw for Orca](https://orca.dev/plugins/stablyai/orca-plugins/orca-excalidraw) | Draw and edit `.excalidraw`, `.excalidraw.svg` and `.excalidraw.png` files in the editor | Orca **Settings → Plugins → Excalidraw → Install** |
+
+The bundled diagram skill creates files; the Orca plugin lets you edit them. Neither requires the other.
 
 ### Web & UI
 
@@ -71,7 +105,7 @@ Install only what you need, with the intended client and scope. External package
 | [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) | Modern CSS, browser APIs, accessibility and web performance guidance | `npx modern-web-guidance@latest install` |
 | [learn-taste by Emil Kowalski](https://github.com/emilkowalski/skills/blob/main/skills/learn-taste/SKILL.md) | Turn recurring UI corrections into design rules with their reasons | `npx skills@latest add emilkowalski/skills --skill learn-taste` |
 
-Run `learn-taste` at the end of a design session. For example, in Claude Code:
+At the end of a design session, for example in Claude Code:
 
 ```text
 /learn-taste Also review my last three sessions. I keep correcting the same UI mistakes.
@@ -86,13 +120,11 @@ Earlier sessions require readable transcripts. The skill proposes changes to `DE
 | [agent-desktop](https://github.com/vercel-labs/agent-desktop) | Operate native desktop apps through OS accessibility APIs | `npm install -g agent-desktop` |
 | [agent-browser by Vercel Labs](https://github.com/vercel-labs/agent-browser) | Drive a browser from the CLI for UI checks and interactive pages | `npm install -g agent-browser`, then `agent-browser install` |
 
-The npm commands above install the CLIs globally. Follow the linked projects' platform and permission setup before use.
-Installing a CLI does not authorize actions in desktop apps or authenticated websites.
+These commands install the CLIs globally. Installation does not authorize desktop or authenticated website actions.
 
 ### Research & documentation
 
-This kit already includes `research` as a Wayfinder dependency. Reuse that copy when using the workflow.
-The upstream installation below is an alternative for independent use; avoid two same-named copies in one client.
+`research` is already bundled for Wayfinder. The upstream command below is for standalone use; avoid duplicate copies in one client.
 
 | Skill | Use it for | Install |
 | --- | --- | --- |
@@ -115,6 +147,7 @@ Context7 also provides a separate [CLI/MCP setup guide](https://github.com/upsta
 
 ## Status and license
 
-Package metadata and discovery were checked in isolated test projects. A full run from setup to PR has not been tested, and clients may behave differently. The repository installs no hooks, background updates or services.
+Package metadata and discovery were checked in isolated test projects. A full setup-to-PR run has not been tested.
+Client behavior can differ. The kit installs no hooks, background updates or services.
 
-Original contributions are [MIT-licensed](LICENSE). Third-party material keeps its [copyright notices and MIT terms](THIRD_PARTY_NOTICES.md). Read [UPSTREAM.md](docs/UPSTREAM.md) before redistributing or updating the adapted skills.
+Original contributions are [MIT-licensed](LICENSE). Third-party material retains its [notices and rights](THIRD_PARTY_NOTICES.md), including the Excalidraw package's unresolved redistribution permission. Read [UPSTREAM.md](docs/UPSTREAM.md) before redistributing or updating imported material.

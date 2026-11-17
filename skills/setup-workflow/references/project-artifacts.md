@@ -17,6 +17,8 @@ Reuse existing `CONTEXT.md` and `LESSONS.md` at the selected directory only when
 
 Root `AGENTS.md` holds the configured workflow contract, using the semantic sections in the setup skill's draft step. Keep mandatory permissions visible there or link applicable existing procedures. Context and lessons are memory, not additional policy owners. Use the selected agent-documentation directory for new supporting detail when useful, without automatically moving established sources.
 
+Implementation plans are task artifacts, not project memory. When `to-plan` is selected, agree its task-linked location, naming, visibility, approval and receiving executor. Keep a plan with the task's existing artifacts where permitted; use the skill's default only when no project convention exists. A remote requirement remains authoritative and can be linked from a local plan without being copied.
+
 Establish how each selected client loads root `AGENTS.md`:
 
 | Client | How root `AGENTS.md` loads |
@@ -38,6 +40,24 @@ Put the memory pointers below in root `AGENTS.md` with concrete repository-root-
 These are task-boundary or decision triggers, not instructions to reload every document on every turn.
 
 Configure approved writing routes and startup triggers through [the writing contract](writing.md). These are rules of the consumer project's `AGENTS.md`, not dependencies embedded in reusable skills. Additional packages do not grant file or global-instruction permissions.
+
+## Multi-repository homes
+
+A home repo coordinates related repositories; it does not absorb their code, history, trackers or repository-specific rules.
+Use `home-repo-init` for an explicitly requested home creation or material migration. Workflow setup preserves its existing navigation and ownership.
+
+For a home, configure only the common procedures and sources agreed for its scope. Child test commands, exceptions and domain records stay with their owners.
+Before work in a child, read its applicable instructions. Resolve conflicting common and local procedures explicitly; the home is not a blanket override.
+
+Agree where cross-repository task artifacts live and who writes them. A shared plan can link child tasks and contracts without copying their authoritative requirements.
+Keep home memory about coordinated work; retain each child's local memory and history unless a separate migration is approved.
+
+Verify access and loading from the home, each selected child-start session and delegated workers.
+A navigation pointer does not make a sibling home's instructions or skills load automatically. Use explicit supported pointers or deployments where needed.
+Use portable paths for team layouts and keep machine-specific locations in approved local configuration.
+Treat missing repositories as navigation gaps. A clone source is not permission to clone, pull, create worktrees or publish.
+
+Preserve related-repository pointers when drafting the contract. Configure only the requested scope; do not create empty consumer artifacts in every child.
 
 ## CONTEXT.md: recent conversation continuity
 
@@ -69,6 +89,7 @@ When the owner says "remember this", classify the content and scope. Clarify onl
 | Mandatory workflow, workspace, permission or repository rule | Root `AGENTS.md` or the applicable existing procedure |
 | Consequential technical decision with meaningful alternatives and trade-offs | The approved ADR location, using the project's decision/approval process |
 | Required product behavior or work to perform | The authoritative specification or task tracker |
+| Implementation approach, ordered work and checks for an existing task | The task's implementation plan in its configured artifact location |
 
 A retrospective produces candidates, not automatically accepted rules. Save approved outcomes to the appropriate destination, and leave unresolved proposals in context. Prefer a deterministic check for a mechanically detectable mistake where authorized; memory is not a substitute for that check.
 
@@ -76,7 +97,7 @@ Agree who writes each artifact and when. With concurrent agents, default to one 
 
 ## Initial creation and reconfiguration
 
-After approval, create or update root `AGENTS.md` and necessary client integration. Create or reuse `CONTEXT.md` and `LESSONS.md` in the selected directory under effective project writing rules. Seed context with the actual discussion and remaining questions. Populate lessons only with confirmed durable items; if none exist, state that none are confirmed. Agree Git visibility for each file. Proposed package integrations are not prerequisites of standalone setup.
+After approval, create or update root `AGENTS.md` and necessary client integration. Create or reuse `CONTEXT.md` and `LESSONS.md` in the selected directory under effective project writing rules. Seed context with the actual discussion and remaining questions. Populate lessons only with confirmed durable items; if none exist, state that none are confirmed. Agree Git visibility for each file. Proposed package integrations are not prerequisites of standalone setup. Configure task-artifact paths without creating empty future plans, specifications or tickets.
 
 Check that every intended reader can reach the referenced artifacts. Use an allowed local loading pointer for a local-only setup rather than publishing a shared pointer to private files.
 

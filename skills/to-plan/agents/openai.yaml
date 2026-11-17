@@ -1,0 +1,5 @@
+interface:
+  display_name: "To Plan"
+  short_description: "Save a lightweight implementation plan for an existing task"
+policy:
+  allow_implicit_invocation: false

@@ -10,6 +10,8 @@ A prompt change is a behavior change, even when only Markdown changes. A success
 | --- | --- |
 | `skills/<name>/SKILL.md` | Invocation metadata, the ordered procedure, action limits and completion criteria |
 | `skills/<name>/references/` | Conditional guidance, templates and shared supporting procedures |
+| `skills/excalidraw-diagram/` | Optional diagram procedure, worker-only generation guidance, renderer and bundled libraries with provenance |
+| `skills/home-repo-init/` | Optional manual home inventory, navigation, sharing decisions and approved changes; no workflow-policy or task-planning replacement |
 | `skills/<name>/agents/openai.yaml` | Optional client-facing name, description and invocation policy |
 | `FLOW.md` | How the skills connect, phase boundaries and the implementation review loop |
 | `skills/setup-workflow/references/catalog.md` | Package selection groups and optional project combinations |
@@ -74,12 +76,21 @@ There is no permanent test runner or CI here; pick the checks that fit the chang
 | Change | Cases to consider |
 | --- | --- |
 | Setup or deployment | Existing project instructions; targeted rerun; declined installation; missing dependency; same-named global and project copies; unsupported client |
-| Requirements and planning | Read-only analyst source; existing tickets; non-default artifact paths; forbidden tracker change |
+| Home inventory | Bounded authorized roots; existing home with delta-only rerun; `.git` files, worktrees and submodules deduplicated by repository identity; path collisions |
+| Home visibility | Personal versus team audience; private repository names and documents; unknown provider visibility; remote credentials sanitized; secrets unread |
+| Home material | Shared scope versus duplicate relationships; exact copies versus divergent variants; ownership conflicts; no newest-timestamp winner; installed packages retained |
+| Home change approval | Read-only proposal; explicit copy or migration authority; dirty child preserved; approved local branch/worktree where needed; no cleanup approval means no removal |
+| Home paths and Git | Portable paths; child nested inside home with explicit tracking boundaries; missing repository without clone permission; no implicit submodule, pull, commit, remote creation or push |
+| Home reader access | Child instructions before work; no universal home override; child-start session and delegated worker access to shared instructions, task artifacts and complete skill packages; no assumed sibling discovery |
+| Home cleanup | Destination integrity and every consumer verified before separately approved recoverable removal; legal notices retained; existing documents authoritative until approved migration |
+| Requirements and planning | Read-only analyst source; existing tickets; task-only plan without a spec or tickets; existing plan revision; non-default task-artifact paths; blocked plan write; saved artifact versus chat-only draft; executor input compatibility; forbidden tracker change |
 | Testing and implementation | Auto/manual TDD; representative tests; current-session/subagent/separate-session execution; unavailable capabilities |
 | Review and followup | Comparison-base rule; committed versus working-tree endpoint; pre-commit coverage; auto/manual review; report versus fix-and-rereview; correction scope and cycle limits; user acceptance; required unavailable helper |
 | PR/MR delivery | Text-only request; unclear base branch; failed hook; existing draft; pending CI; no merge permission |
 | Memory or maintenance | Unconfirmed lesson; conflict with current rules; two writers at once; recoverable artifact removal; non-default memory folder |
-| Workflow advice | Question before setup; missing package; manual-only skill missing from automatic discovery; advice without execution |
+| Workflow advice | Question before setup; missing package; manual-only skill missing from automatic discovery; home structure versus workflow procedures versus task plan; advice without execution or repository inventory |
+| Optional design diagrams | Useful offer versus unnecessary phase; selected package without generation consent; yes or explicit request launches a separate drawing worker; no means no dispatch or diagram writes; unavailable agent, skill, assets or render permission blocks only drawing; no same-context fallback |
+| Diagram context and artifacts | Coordinator reads only the short entrypoint and sends facts/status, pointers, question/audience, paths and allowed libraries; only worker loads generation guidance/library JSON; compact return contains paths, visual checks and caveats; configured parent-artifact paths; drawing consent versus design acceptance or implementation permission |
 | Writing routes | First-prompt conversation; routine STE-based writing without external STE sources; explicit provenance/conformance request; an artifact draft in chat; context and lessons versus rules; mixed documents; non-English artifacts; missing or declined writing packages; a helper without inherited instructions; an authorized next action versus a missing user decision |
 | Per-skill settings | No project rules; omitted versus manual setting; additional skill or coding-practice pointer; targeted rerun preserving unrelated sections |
 

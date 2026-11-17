@@ -8,18 +8,31 @@ Discuss only relevant groups. Use a native choice tool when useful, without forc
 
 | Group | Packages |
 | --- | --- |
-| Setup and guidance | `setup-workflow`, `ask-workflow` |
-| Task exploration | `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-spec`, `to-tickets` |
+| Setup and guidance | `home-repo-init`, `setup-workflow`, `ask-workflow` |
+| Task exploration | `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
+| Optional visual support | `excalidraw-diagram` |
 | Implementation | `implement`, `implement-spec`, `tdd`, `codebase-design`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup`, `refactor-docs` |
 
 Group membership is not a dependency. Create project-specific sections only for selected skills that need settings.
+`to-plan` saves one task-linked implementation plan. It requires neither a specification nor tracker tickets and has no fixed skill dependencies.
+For execution, agree a receiver that accepts the plan plus its source task. `implement-spec` still requires its specification and ticket graph.
+
+`home-repo-init` creates or revises a multi-repository home: navigation, approved shared material and client entrypoints.
+It is standalone and manually invoked. `setup-workflow` can configure that home's procedures afterward, but neither skill requires or invokes the other.
+Task planning remains separate; use `to-plan` only when a task needs an implementation plan.
 
 ## Writing choices
 
 `human-text`, `asd-ste100` and `writing-for-agents` are separate writing packages.
 The [writing contract](writing.md) proposes their use for conversation, artifacts and reusable rules in the consumer project's `AGENTS.md`.
 `setup-workflow` itself needs none of them and can be installed alone.
+
+## Diagram choice
+
+`excalidraw-diagram` is a bundled optional package, not a required helper of the original skills.
+Use [diagram configuration](diagrams.md) for relationships and alternatives, interfaces, interaction architecture or a supporting prototype sketch.
+Project skill sections link to one `excalidraw-diagram` policy. Selecting the package does not authorize individual diagrams or require setup to install it.
 
 ## Dependencies
 

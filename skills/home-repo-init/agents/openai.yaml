@@ -1,0 +1,5 @@
+interface:
+  display_name: "Home Repo Init"
+  short_description: "Set up an approved home for navigation across repositories"
+policy:
+  allow_implicit_invocation: false
