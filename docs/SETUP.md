@@ -83,26 +83,35 @@ Reruns propose only deltas and preserve unrelated content in an existing home.
 
 ## What setup asks about
 
-The [setup prompt](../skills/setup-workflow/SKILL.md) guides a free conversation, not a fixed questionnaire.
-The agent reads existing rules and examples, then asks about missing decisions.
+The [setup prompt](../skills/setup-workflow/SKILL.md) asks only about applicable decisions that existing rules do not settle.
+It gives each decision with known options its own question. You can describe a different procedure or link to its source.
+For example, local commits can be allowed after checks while pushes still need your approval and merges stay with a human.
 
 | Topic | What gets decided |
 | --- | --- |
 | Project and sources | Purpose, working scope, authoritative requirements, tracker and artifact locations |
-| Working agreement | Autonomy, human checkpoints, delegation, concurrent work and external-write permissions |
-| Selected skills | Project-specific settings, additional skills, coding practices and reading pointers |
+| Working agreement | Mandatory company and project rules, autonomy, human checkpoints, delegation, concurrent work and external-write permissions |
+| Selected skills and tools | Skill settings, additional tools and MCP integrations, permitted actions, project practices and reading pointers |
 | Implementation plans | Task-linked location, naming, visibility, approval, revisions and receiving executor; no mandatory spec or tickets |
 | Optional diagrams | Whether to select `excalidraw-diagram`; delegation, task-artifact paths, libraries and rendering permissions |
 | Testing | Test types, representative tests, command sources and infrastructure constraints |
 | Review | Requirement and standards sources, preferred procedure, comparison-base rule, endpoint, review checkpoint and permitted corrections |
-| Git and delivery | Commit checkpoints and convention; separate push, PR/MR, merge and deployment permissions |
+| Git and delivery | Separate permissions for commit, push, opening or updating a PR/MR, merge, deployment and branch cleanup |
 | Writing and memory | Languages, writing routes, context and lessons, update authority and visibility |
 
 You can add requirements outside these topics. Setup puts them in the relevant shared or skill-specific section.
 It checks selected packages and capabilities without launching a live agent merely to prove availability.
 
+Give Setup links to policies, runbooks, project documentation or skills. If a rule is unwritten, describe what it applies to and what the agent must do.
+Setup lists changes to permissions and restrictions in its preview. A targeted rerun preserves unrelated rules and permissions.
+If mandatory rules conflict and the applicable authority cannot resolve the conflict, Setup blocks that action without changing unrelated work.
+For an extra tool or MCP integration, name it and describe its purpose. Setup records its usage limits or reports it as a prerequisite, without connecting or granting access.
+
 ### Automation settings
 
+Setup asks separate questions about the trigger and execution location for each activity.
+It asks about the TDD trigger first, then its location, followed by the review trigger and its location.
+It asks only the applicable questions that remain unanswered.
 TDD and review each have `trigger` and `execution` settings.
 `trigger` selects automatic use during implementation or a separate manual invocation.
 `execution` selects the current session, a subagent or a separate session.

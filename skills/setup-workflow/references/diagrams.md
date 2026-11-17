@@ -5,14 +5,13 @@ Setup works without this package. Declining it leaves the other selected routes 
 
 ## Discuss only missing choices
 
-Ask: "Would optional diagrams help these design discussions? You can decline each offer. If selected, where may a separate diagram worker save and render them?"
-Reuse existing delegation, artifact and environment rules. Ask follow-up questions only for gaps:
+Once optional support is selected, settle the routes and the worker's operating boundaries separately. Reuse existing delegation, artifact and environment rules:
 
-- Which design questions benefit from diagrams? Select applicable routes from the table below, not a diagram after each workflow step.
-- Which project-designated tool can launch a separate subagent? Use Orca when selected; do not impose a fixed model.
-- Where do the parent task, ADR, spec or plan and its supporting files belong? Agree naming, visibility and revision authority.
-- Which bundled libraries may the worker use: `post-it`, `drwnio`, `system-design`, `software-architecture`? Reuse the package's library index rather than copying asset descriptions.
-- Which renderer dependencies, browser execution, downloads and network access are permitted? Installation, external transfer and diagram generation are distinct permissions.
+- **Routes.** Select the applicable routes from the table below. This makes diagrams an option for relevant design questions, not a diagram after each step.
+- **Worker.** Offer compatible separate-worker tools (use Orca when selected) or leave the diagram route unavailable. Do not impose a fixed model.
+- **Output.** Use the parent artifact's existing rules or agree a project-specific destination, naming, visibility and revision authority.
+- **Libraries.** When the selected routes need library assets, offer the allowed subset of `post-it`, `drwnio`, `system-design` and `software-architecture`, or no additional libraries. Refer to the package's library index for descriptions.
+- **Rendering.** Ask about a renderer dependency, browser execution, download or network access only if the selected route needs it and existing rules do not settle it. Present the specific unresolved operation for approval or leave it unavailable. External transfer is a separate permission.
 
 | Selected route | Useful visual question |
 | --- | --- |
@@ -21,8 +20,8 @@ Reuse existing delegation, artifact and environment rules. Ask follow-up questio
 | `to-spec`, `to-plan` | How do components interact, and what architecture supports the agreed behavior? |
 | `prototype` | Which supporting sketch clarifies the experiment without replacing its runnable output? |
 
-Package selection, bounded installation approval and consent to an individual diagram remain separate.
-An explicit diagram request supplies the last consent, not missing tool, download or publication permissions.
+Obtain bounded installation approval through the [deployment reference](skills.md#obtain-installation-approval). Neither selection nor installation supplies consent for any diagram.
+For each suggested diagram, offer to draw it or continue in text. An explicit diagram request supplies consent to draw that diagram, not missing tool, download or publication permissions.
 
 ## Establish readiness without drawing
 

@@ -76,6 +76,7 @@ There is no permanent test runner or CI here; pick the checks that fit the chang
 | Change | Cases to consider |
 | --- | --- |
 | Setup or deployment | Existing project instructions; targeted rerun; declined installation; missing dependency; same-named global and project copies; unsupported client |
+| Setup interview and policy | Independent choices; custom policy by link or prose; commit allowed but push needs approval and merge is human-only; tool discovered but write not authorized; conflicting mandatory rule blocks only its action; targeted rerun retains existing permissions |
 | Home inventory | Bounded authorized roots; existing home with delta-only rerun; `.git` files, worktrees and submodules deduplicated by repository identity; path collisions |
 | Home visibility | Personal versus team audience; private repository names and documents; unknown provider visibility; remote credentials sanitized; secrets unread |
 | Home material | Shared scope versus duplicate relationships; exact copies versus divergent variants; ownership conflicts; no newest-timestamp winner; installed packages retained |

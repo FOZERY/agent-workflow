@@ -6,7 +6,7 @@ Read when packages, clients, scope or deployment change. Setup itself works alon
 
 After discussing project purpose and task sources, follow [project writing configuration](writing.md). Then offer engineering packages from [the catalog](catalog.md) before conditional workflow interviews. Show purpose, installation status and recommendation. A group or joined option does not create a dependency.
 
-Ask which skills the project needs, including user-suggested packages. Use a native choice tool or a conversation as appropriate; the catalog groups are a guide, not a fixed questionnaire.
+Offer individual applicable skill names as a multi-select, plus no additional packages. Include user-suggested packages. Use catalog groups to organize choices, not as indivisible bundles.
 
 All package selections are optional. Do not preselect recommendations as decisions. The project can approve additional prerequisites for a configured route; explain those separately. Selecting no package means no installation, without removing existing skills or instructions.
 
@@ -14,13 +14,9 @@ Use the owner's selection to determine which conditional workflow interviews app
 
 Offer `ask-workflow` as an optional guide for workflow questions and next-step advice. It can be installed on its own before or after setup, has no required skill dependencies and recommends procedures without executing them. Selecting it does not select the rest of the catalog.
 
-Offer bundled `excalidraw-diagram` only when visual design support is relevant. Use [diagram configuration](diagrams.md) for its conditional interview and readiness checks. Selecting it does not grant per-diagram consent or select other packages.
+When visual design support is relevant, offer to select optional `excalidraw-diagram` support or continue without it. If selected, use [diagram configuration](diagrams.md) for the conditional interview and readiness checks.
 
-Keep three decisions distinct:
-
-- **Selected for this project:** the owner's chosen procedures and any separately approved dependencies.
-- **Installed and discoverable:** what is actually available to each selected client and scope.
-- **Authorized behavior:** what the project permits that procedure to do.
+Package selection identifies desired procedures and any separately approved dependencies. Check installation and discovery for each target client separately. Obtain approval for project instruction changes separately from deployment; neither grants operational permission.
 
 A globally installed skill can be unnecessary or unauthorized in this project. Disabling a workflow does not mean deleting a shared global skill. Installation neither invokes a skill nor grants its actions.
 
@@ -52,12 +48,14 @@ If a package is missing or incompatible, explain the affected project route and 
 
 ## Choose clients, scope and changes
 
-Ask only for unresolved client and scope choices. Reuse accepted deployment and activation decisions. Recommend scope by setting:
+For deployment, offer the applicable supported clients individually (Claude Code, Codex, OMP) and include any requested alternative with a documented method. Client discovery does not select a client.
+
+For each selected client and package, offer project or user-wide scope where supported. Recommend scope by setting:
 
 - **Personal machine:** install user-wide, so every project runs the same kit version. Each project's rules still come from its own `AGENTS.md`.
 - **Team repository:** install into the project and track the skill directories in Git, so every member runs the same version.
 
-Different skills may use different scopes when the owner asks. Inspect only authorized installation locations for the chosen clients and establish the supported installer or documented native method with exact destinations. Each client has its own paths, and detecting a client does not select it.
+Different skills may use different scopes when the owner asks. Inspect only authorized installation locations and establish the supported installer or documented native method with exact destinations.
 
 ### Check same-name copies
 
@@ -85,7 +83,7 @@ Prepare a bounded plan listing approved packages and reasons, reused copies, ver
 
 ## Obtain installation approval
 
-Present installation separately from the contract edits. Ask which parts the owner approves; one reply can explicitly approve both sets. Configuring a workflow or saving a desired skill list alone does not authorize installation. Conversely, an approved, bounded installation needs no repeated per-command confirmation unless its scope or effects change.
+Present installation separately from the contract edits. For each proposed set, offer approval as presented, approval of a named subset, or no approval; one reply can explicitly approve both sets. Configuring a workflow or saving a desired skill list alone does not authorize installation. Conversely, an approved, bounded installation needs no repeated per-command confirmation unless its scope or effects change.
 
 If the owner declines installation, save only approved configuration and report the missing skills and dependent workflows. Do not call desired packages installed. Installing a new tool, downloading an installer through `npx`, replacing an existing skill, updating a global copy or modifying client settings must be included in approval, not hidden prerequisites.
 

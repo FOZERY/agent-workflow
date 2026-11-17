@@ -19,7 +19,7 @@ No mode grants permission for what the skill does.
 | Skill | Invocation | Use it for | Result |
 | --- | --- | --- | --- |
 | [home-repo-init](../skills/home-repo-init/SKILL.md) | Manual | Establish or revise a navigation and shared-material home for multiple repositories | Read-only inventory and proposed changes; approved home structure without moving child code |
-| [setup-workflow](../skills/setup-workflow/SKILL.md) | Manual | Discuss project practices, per-skill settings and additional user requirements | Approved `AGENTS.md`, project memory and separately approved installation |
+| [setup-workflow](../skills/setup-workflow/SKILL.md) | Manual | Agree project rules, permissions, per-skill settings and tool prerequisites | Approved `AGENTS.md`, project memory and separately approved skill installation |
 | [ask-workflow](../skills/ask-workflow/SKILL.md) | Manual | Explain the workflow, compare skills, choose the next step | Advice only; runs nothing and needs no other skill |
 
 `ask-workflow` can also explain the next step during any other phase.

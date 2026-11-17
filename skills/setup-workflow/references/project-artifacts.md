@@ -68,7 +68,7 @@ Maintain a concise chronological sequence, oldest first, appending newer entries
 - Open questions, blockers and the next action or discussion, where relevant.
 - Pointers to authoritative tasks, decisions, lessons and evidence instead of copied transcripts or duplicate policy.
 
-Read it on session start/resumption and update at the agreed checkpoints, including before an approved handoff or context boundary. Agree the writer, update permission and retention during setup. Condense older material under the agreed policy while preserving unresolved items and source links. A summary records its creation time and covered period rather than inventing event timestamps. Context records what happened; it neither grants permissions nor proves the present code state.
+Read it on session start or resumption. Update at the agreed checkpoints, including before an approved handoff or context boundary, within the agreed write authority. Condense older material under the agreed retention policy while preserving unresolved items and source links. A summary records its creation time and covered period rather than inventing event timestamps. Context records what happened; it neither grants permissions nor proves the present code state.
 
 ## LESSONS.md: curated long-term project memory
 
@@ -93,11 +93,21 @@ When the owner says "remember this", classify the content and scope. Clarify onl
 
 A retrospective produces candidates, not automatically accepted rules. Save approved outcomes to the appropriate destination, and leave unresolved proposals in context. Prefer a deterministic check for a mechanically detectable mistake where authorized; memory is not a substitute for that check.
 
-Agree who writes each artifact and when. With concurrent agents, default to one coordinating writer for shared context and lessons; other agents send sourced findings to that writer. Agree whether routine context updates and recording already-confirmed lessons have standing permission, and what requires fresh approval. Memory configuration does not authorize global client-setting changes, external writes or broader filesystem access. Omit secrets and full private transcripts. Resolve material conflicts with the owner rather than silently replacing a rule with a remembered preference.
+Settle each applicable decision independently for `CONTEXT.md` and `LESSONS.md`:
+
+| Decision | Choices |
+| --- | --- |
+| Writer | The owner writes; the coordinating agent writes; or a designated maintainer writes. Name the maintainer if selected. |
+| Agent update authority | Standing permission for the agreed routine updates; fresh approval for each agent update; or no agent writes. For standing permission, specify what is covered and what still needs approval. Routine updates are recent context at agreed checkpoints or recording already-confirmed lessons, respectively. |
+| Git visibility | Track in the repository; keep untracked with a shared ignore rule; or keep untracked with a local-only exclusion. A visibility choice does not authorize a commit, publication or a tracking change to an existing file. |
+
+Agree each file's update checkpoints and retention in the project's own terms or by reference to its existing procedure.
+With concurrent agents, default to one coordinating writer for shared context and lessons within the agreed authority; other agents send sourced findings to that writer.
+Memory configuration does not authorize global client-setting changes, external writes or broader filesystem access. Omit secrets and full private transcripts. Resolve material conflicts with the owner rather than silently replacing a rule with a remembered preference.
 
 ## Initial creation and reconfiguration
 
-After approval, create or update root `AGENTS.md` and necessary client integration. Create or reuse `CONTEXT.md` and `LESSONS.md` in the selected directory under effective project writing rules. Seed context with the actual discussion and remaining questions. Populate lessons only with confirmed durable items; if none exist, state that none are confirmed. Agree Git visibility for each file. Proposed package integrations are not prerequisites of standalone setup. Configure task-artifact paths without creating empty future plans, specifications or tickets.
+After approval, create or update root `AGENTS.md` and necessary client integration. Create or reuse `CONTEXT.md` and `LESSONS.md` in the selected directory under effective project writing rules and the agreed Git visibility for each file. Seed context with the actual discussion and remaining questions. Populate lessons only with confirmed durable items; if none exist, state that none are confirmed. Proposed package integrations are not prerequisites of standalone setup. Configure task-artifact paths without creating empty future plans, specifications or tickets.
 
 Check that every intended reader can reach the referenced artifacts. Use an allowed local loading pointer for a local-only setup rather than publishing a shared pointer to private files.
 

@@ -1,6 +1,6 @@
 ---
 name: setup-workflow
-description: "Configure or revise a project's agent workflow, select its skills and install the approved packages."
+description: "Configure or revise a project's agent workflow, permissions, tool requirements and approved skill installation."
 argument-hint: "[project context or settings to change]"
 disable-model-invocation: true
 ---
@@ -25,15 +25,24 @@ On a rerun, show current settings, known package availability and unresolved gap
 
 ## 2. Discuss the project and selected skills
 
-Use a free conversation in small rounds. Recommend choices and explain consequences. Ask only about missing decisions; accept answers that cover several topics.
+Ask only the applicable questions that existing rules or explicit answers have not settled. Use small rounds.
+For a decision with known options, give a separate question or form control with the allowed choices. Explain their practical effects.
+When the choices do not fit, let the user describe their workflow or point to its source. Use open questions for project-specific details.
+Accept one reply that settles several questions. A recommendation, silence or an unanswered permission question does not grant permission.
 
 ### Shared rules
+
+Before proposing workflow choices, ask which company or project rules the setup must preserve. On a targeted rerun, ask only about gaps that affect the change.
+Accept links or paths to policies, runbooks, project instructions or skills. Accept a description in the user's own words when no written source exists.
+Read the relevant sources through approved access. Distinguish mandatory rules from preferences. Identify what each rule applies to and when the agent must check it.
+If rules conflict, follow the established authority. If the conflict remains unresolved, show both sources and block the affected action until the responsible owner resolves it.
+Do not use a preferred option or a skill default to override a mandatory rule.
 
 Establish:
 
 - Product purpose, working boundaries and authoritative requirements.
 - Artifact locations, owners, formats and tracked, ignored or local visibility. Preserve external sources without duplicate local records.
-- Autonomy and human checkpoints; distinguish read-only exploration from implementation delegation and external writes.
+- Autonomy and human checkpoints. Ask separately about read-only exploration and implementation delegation: within agreed limits, with separate approval, or not allowed for the agent. Confirm any applicable scope and checkpoints. For writes, use the action-specific delivery, tracker or tool rules.
 - Conversation, artifact and instruction languages. When configuring styles, read [writing routes](references/writing.md).
 - Context and lessons: shared directory, reading and update checkpoints, writer and approval scope. Follow the project-artifact contract.
 
@@ -47,15 +56,31 @@ Read the selected prompts before proposing settings. Establish the sources, outp
 
 For `tdd`, ask: "How do we work with tests here? Which test types and existing examples should guide us? What infrastructure or mocking constraints apply?" Inspect test commands rather than asking the user to transcribe them. Keep the red–green method; do not introduce independent test authorship.
 
-For review, ask which requirements, coding practices and examples guide it. Discuss the procedure freely, including another skill if the user prefers. Agree [review coverage and its checkpoint](references/AGENTS.md#review-coverage); record the procedure as prose, not a package-name flag.
+For review, ask which requirements, coding practices and examples guide it. Accept a project procedure or another review skill as the source. Record the procedure as prose, not a package-name flag.
 
-For implementation routes, agree automatic or manual TDD and review, where each runs, and whether review only reports or leads to fixes and another review. Use the setting meanings in [the AGENTS.md reference](references/AGENTS.md#automation-settings). The user decides whether to accept the work.
+For implementation routes, agree the trigger and execution location for TDD and review as separate decisions. Ask the applicable unanswered questions in this order:
 
-For `to-plan`, agree the task-linked plan location, naming, visibility, approval and revision rules. Keep plans with the task's other artifacts where permitted, without requiring a spec or tickets. Agree the receiving executor and its input contract: plan plus source task, not a replacement specification or ticket graph. Configure that route in project instructions; leave installed skill prompts unchanged.
+1. Should implementation start TDD automatically, or only on an explicit user request?
+2. Where should TDD run: in the current session, through a subagent, or in a separate thread/session?
+3. Should implementation start review automatically, or only on an explicit user request?
+4. Where should review run: in the current session, through a subagent, or in a separate thread/session?
+
+Ask about trigger and location separately, including when using a form. Agree which implementation routes each trigger covers.
+Then use the [review questions](references/AGENTS.md#review-coverage) for coverage, timing and followup. Use the [automation settings](references/AGENTS.md#automation-settings) for the meanings of the answers. The user decides whether to accept the work.
+
+For `to-plan`, agree the task-linked location and naming. Ask separately about visibility, plan approval and who can revise an approved plan.
+For visibility, offer only allowed choices: tracked in Git, ignored in the repository, or in an approved private location.
+For approval, ask whether a draft can be saved for review or approval is required before saving. Use the project's procedure for any other checkpoint.
+For revisions, distinguish edits within agreed limits, edits requiring approval, and edits by the plan owner only.
+Agree the receiving executor and the separate authorization to start implementation. Check that it can take the plan and source task without requiring a new spec or tickets.
+Keep plans with the task's other artifacts where permitted. Configure the handoff in project instructions without changing installed skill prompts.
 
 For visual design support, offer the optional bundled `excalidraw-diagram` package. If selected or its settings change, read [diagram configuration](references/diagrams.md). Agree one project policy and link applicable skill sections to it; package approval is not consent to generate a diagram.
 
-For tracker-backed planning routes, agree tracker operations, specification/ticket formats and decision-map handling. Use only the selected tracker seed when no adequate project procedure exists:
+For tracker-backed planning, ask which sources own the requirements and tickets. If `wayfinder` is selected, ask where its decision map belongs separately.
+For each needed tracker operation, distinguish allowed within a named scope, separate approval, and human-only. Ask only about operations the route needs.
+Include reading, creating, editing, commenting, labeling, assigning, linking, changing state and closing as applicable. A readiness label does not authorize starting work or publishing.
+Use only the selected tracker seed when no adequate project procedure exists:
 
 - [GitHub](references/issue-tracker-github.md)
 - [GitLab](references/issue-tracker-gitlab.md)
@@ -63,23 +88,27 @@ For tracker-backed planning routes, agree tracker operations, specification/tick
 
 For another tracker, derive the procedure from its agreed sources and access method. Keep readiness vocabulary required by selected skills; setup does not configure incident triage. Read [domain documents](references/domain.md) only when glossary or ADR conventions need configuration.
 
+### Additional skills and tools
+
+Before finalizing the selected routes, ask: "Do we need any other skills, tools or MCP integrations for this repository? Give a name, a link or a short description, or say none."
+For each addition, agree its purpose, when to use it and its allowed actions. Distinguish an available integration from one that needs setup. Ask which targets and data it can access when that is not already defined.
+Check whether the intended client and delegated workers can reach the skill, tool and relevant instructions. Do not request or record credentials.
+Record missing tools or MCP configuration as prerequisites for separately authorized work. Mentioning a tool does not authorize installing, connecting or using it.
+Ask for any remaining practices or examples not covered by the interview.
+
 Check skill dependencies, client capabilities and implementation-to-review handoffs against proposed settings. A required helper may be absent, a comparison may exclude the intended changes, or a mandatory operation may be forbidden. Identify the blocked step rather than silently substituting another procedure. A separate-session choice requires either client support or a user-started handoff; setup does not promise thread creation.
-
-### User additions
-
-Ask: "What other practices, skills, examples or constraints should this project use?"
-
-Record additions in the relevant shared or skill-specific section. Add a section for another selected skill when needed. Give each pointer a reading trigger. Preserve user intent and resolve contradictions before drafting affected rules.
 
 **Done when:** every applicable topic has an agreed answer, an authoritative source, or an explicit gap with its affected action. No unselected workflow is required merely to complete the interview.
 
 ## 3. Draft and approve
 
-Read [the AGENTS.md structure](references/AGENTS.md). Draft shared rules and sections for selected skills with project-specific settings. Fill agreed facts, omit inapplicable sections and leave unspecified settings at the skill's defaults. Use the project's effective writing rules.
+Read [the AGENTS.md structure](references/AGENTS.md). Draft shared rules and sections for selected skills with project-specific settings. Fill agreed facts and omit inapplicable sections. Use skill defaults only where they fit existing rules and permissions. Use the project's effective writing rules.
 
 Keep root instructions short. Link existing practices before proposing supporting files. Store detailed new procedures under the agreed agent-documentation directory only when needed. The setup references guide drafting; they are not the consumer project's runbooks.
+Record mandatory restrictions in the controlling shared or skill-specific section. Give each policy and tool pointer a trigger.
+If a policy is private, record only what the project's visibility rules permit. Verify that the intended reader can reach the authoritative rule.
 
-Show the proposed configuration edits, loading pointers, visibility changes and compatibility gaps. On a rerun, show what changes and what stays. Present installation as a separate bounded action set. Obtain approval for each requested set; neither authorizes subsequent implementation, publication or global changes.
+Preview the rule and pointer changes, visibility changes, and compatibility gaps. Call out new or changed permissions and mandatory restrictions. On a rerun, show which applicable permissions and restrictions stay unchanged. Present installation as a separate bounded action set. Obtain approval for each requested set. Neither set authorizes later implementation, publication or global changes.
 
 **Done when:** the owner has approved the affected rules and files, and separately any deployment. Unresolved conflicts block their affected actions, not unrelated setup work.
 
@@ -100,13 +129,15 @@ Check local pointers, configured artifact paths, client loading where observable
 Walk through only relevant cases:
 
 - Initial setup versus a targeted rerun; unrelated settings and installations stay intact.
+- A known option uses its own question. A custom policy supplied as prose or a link keeps its scope and approval conditions.
+- A project or company restriction conflicts with a skill default or proposed permission: preserve the rule and block the affected action if the conflict is unresolved.
 - A home repo coordinates several children: preserve their instruction ownership and verify shared pointers from each intended session or worker.
-- No project setting: use the skill's default. Explicit `manual`: no automatic launch by implementation.
+- No project setting: use the skill's default where permitted. Explicit `manual`: no automatic launch by implementation.
 - TDD uses the agreed tests and examples without adding a separate test-author procedure.
 - Review reports only, or fixes and re-reviews within the agreed authority and cycle limit; user acceptance remains separate.
 - The selected comparison covers the intended changes at the review checkpoint; a committed-only diff cannot verify uncommitted work.
 - A requested helper, source or separate session is unavailable: identify the blocked step or agreed handoff.
-- An extra skill or coding-practice pointer is needed: the intended reader, including a delegated worker, can reach it.
+- An added skill, tool, MCP integration or policy pointer is available to the intended reader, including delegated workers, or reported as a prerequisite. Availability is not permission to act.
 - A task needs only an implementation plan: its artifact stays with that task, and the chosen executor can consume it without a new spec or tickets.
 - Optional diagrams: selection alone starts nothing; declined offers produce no diagram writes or dispatch. Consent uses a separate worker with readable sources/assets and a permitted output/rendering path; missing capability blocks only the diagram.
 - A required action conflicts with project permissions: report it without inventing a substitute or bypass.

@@ -72,7 +72,8 @@ Home navigation preserves child rules and requires reading them before work.
 Verify instruction pointers and skill access for child-start sessions and delegated workers; a sibling home is not automatically loaded.
 See [home setup](docs/SETUP.md#optional-home-for-multiple-repositories) for scope, approval and access decisions.
 
-`setup-workflow` reads existing rules, discusses missing decisions and previews configuration separately from installation.
+`setup-workflow` reads existing rules and asks about unresolved decisions. It offers separate choices when the options are known and accepts project-specific procedures or source links.
+It records mandatory restrictions and tool permissions, including for MCP integrations. It previews rule changes separately from installation.
 Root `AGENTS.md` holds shared rules and sections for selected skills. User additions can name other skills, coding practices and examples.
 The [reference structure](skills/setup-workflow/references/AGENTS.md) defines that organization and the automation settings. It grants no permissions.
 Context and lessons share the selected directory, default `.docs/`.
@@ -225,7 +226,8 @@ The kit includes all fixed helper dependencies; check [the required client insta
 ## Project compatibility
 
 Setup reads the selected skills before promising a configured route.
-It discusses automatic or manual TDD/review, execution location and reporting versus authorized fixes with another review.
+For TDD and review, setup asks separately about automatic or manual launch and execution location, in that order for each activity.
+It also agrees the applicable implementation routes and reporting versus authorized fixes with another review.
 Test practices and review sources come from the project. The user accepts the work; acceptance is not a flag.
 It [matches review coverage to the implementation checkpoint](skills/setup-workflow/references/AGENTS.md#review-coverage), including whether the intended changes are committed or in the working tree.
 

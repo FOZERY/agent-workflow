@@ -6,7 +6,9 @@ Configure their approved use in that project's root `AGENTS.md`.
 
 ## Routes and language
 
-Propose this composition unless the project already has an authoritative writing policy:
+Settle language separately for conversation, artifact prose and reusable instructions. Where the project has no governing rule for an output, offer to follow an identified project convention or use a named language. For conversation, also offer to follow the user's language. If languages vary by audience or artifact, record the project's own routing rule.
+
+Preserve any authoritative writing policy already in effect. For each unresolved route, offer the proposed package below, an identified existing policy without a new package, or no additional style. The owner can choose different styles for different outputs.
 
 | Output | Proposed package | Project loading trigger |
 | --- | --- | --- |
@@ -17,23 +19,21 @@ Propose this composition unless the project already has an authoritative writing
 These are project requirements only after configuration approval.
 The packages remain usable alone; a package's general scope can be broader than its assigned role here.
 Classify mixed output by section purpose. An agent reading a document does not make that document an execution rule.
-Agree conversation, artifact and instruction languages. Preserve required formats, technical content and permissions.
+Preserve required formats, technical content and permissions.
 ASD-STE100 is English. Required non-English artifacts use an adaptation, not a claim of English conformance.
 
 ## Check selected packages
 
-For each approved route, run the [same-name check](skills.md#check-same-name-copies).
+For each selected writing package, run the [same-name check](skills.md#check-same-name-copies).
 Report complete references, scope, path and target-client discovery. Unknown access is not confirmed absence.
 Reuse compatible copies and effective triggers. A missing pointer does not require reinstalling the package.
-If a project-selected package is missing, obtain a bounded deployment decision or leave that route explicitly unavailable.
-Do not silently install it or block standalone setup and unrelated skills.
-An explicit decision to use no writing package is valid; preserve any higher-priority writing rules already in effect.
+If a project-selected package is missing, offer a separate choice to approve its [bounded deployment](skills.md#obtain-installation-approval) or leave the route unavailable. A missing package does not block standalone setup or unrelated skills.
 
 ## Instruction loading and approval
 
-For project activation, root `AGENTS.md` owns the pointers.
-Use an existing client import only when needed to reach that file.
-Global installation does not imply global activation; global instruction changes require separate approval.
+For each selected route, distinguish keeping an effective rule, adding a project pointer, and leaving the route inactive. Approval to install a package does not approve its activation.
+For project activation, root `AGENTS.md` owns the pointers. Use an existing client import only when needed to reach that file.
+If user-wide activation is requested, show that target separately for approval. Global installation does not imply global activation.
 Verify the effective source when global changes were explicitly selected:
 
 | Client | User-wide instruction source |

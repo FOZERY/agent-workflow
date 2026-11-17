@@ -20,12 +20,20 @@ TDD is a test–implementation cycle, not a complete test-writing phase before i
 Manual invocation remains available regardless of the automatic trigger.
 Execution settings do not grant delegation permission or erase nested requirements of the selected skill.
 Check actual capabilities and dependencies before calling a route usable. Report incompatible mandatory steps.
-For `fix-and-rereview`, agree correction scope, a cycle limit and stop conditions for disputed requirements or unavailable checks.
 The user accepts the work. Review procedure or skill choice is ordinary prose; there is no `review.skill` or `review.required` flag.
 
 ## Review coverage
 
-Agree how to select the comparison base, the endpoint (committed revision or working tree), included/excluded changes and the checkpoint relative to commits.
+Ask the applicable unanswered questions separately:
+
+1. When should review run relative to the commit: before, after, or at both checkpoints?
+2. At each checkpoint, what does it compare: committed revisions, or a base and the working tree?
+3. How is the base selected: the target branch, a named revision, or a project rule?
+4. Which changes are in or out of scope? For working-tree review, specify staged, unstaged and untracked changes.
+5. Should the reviewer report findings and wait, or may the agent make authorized corrections and request another review?
+
+If the user chooses fixes and another review, agree correction scope, a cycle limit and stop conditions, including disputed requirements or unavailable checks. Report-only review does not authorize corrections. Use the project's own procedure when these options do not fit.
+
 Check that the selected procedure covers that scope at the checkpoint. The bundled `code-review` compares `<base>...HEAD`, which excludes uncommitted work; `implement` calls it before committing.
 For pre-commit review, agree an explicit project procedure that covers the intended staged, unstaged and untracked changes, or select a compatible reviewer.
 Otherwise, leave the route blocked. Setup does not authorize a commit merely to make review runnable.
@@ -62,8 +70,10 @@ If a required step cannot satisfy applicable constraints, report the conflict.
 
 ## Working agreement
 <Task start rules, autonomy and human checkpoints.>
+<Mandatory project and company restrictions, their scope and when to check them. Link authoritative rules without copying private policy.>
 <Read-only exploration and implementation delegation permissions.>
 <Concurrent-work ownership, environment boundaries and external-write permissions.>
+<Shared tools and MCP integrations: purpose, reading or usage trigger, approved targets and data, allowed actions and any prerequisite. Put skill-specific tools under the owning skill.>
 The user decides whether to accept the work.
 <Pass applicable project rules and readable practice/skill pointers to delegated workers.>
 

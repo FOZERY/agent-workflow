@@ -1,5 +1,5 @@
 interface:
   display_name: "Setup Workflow"
-  short_description: "Configure project rules, skills and installation"
+  short_description: "Set workflow rules, permissions, tools and skill installation"
 policy:
   allow_implicit_invocation: false

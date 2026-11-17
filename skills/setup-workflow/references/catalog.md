@@ -15,6 +15,7 @@ Discuss only relevant groups. Use a native choice tool when useful, without forc
 | Retrospective and maintenance | `retro`, `cleanup`, `refactor-docs` |
 
 Group membership is not a dependency. Create project-specific sections only for selected skills that need settings.
+Ask about tools and MCP integrations separately from package selection. Record their authorized purpose and prerequisites in the project contract, not as kit dependencies.
 `to-plan` saves one task-linked implementation plan. It requires neither a specification nor tracker tickets and has no fixed skill dependencies.
 For execution, agree a receiver that accepts the plan plus its source task. `implement-spec` still requires its specification and ticket graph.
 
