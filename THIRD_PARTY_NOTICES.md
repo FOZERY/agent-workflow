@@ -1,6 +1,6 @@
 # Third-party notices
 
-Original contributions to this repository are covered by [LICENSE](LICENSE). The following notices apply to retained third-party material, including local adaptations. Source revisions and modification history are maintained separately in [docs/UPSTREAM.md](docs/UPSTREAM.md).
+Original contributions to this repository are covered by [LICENSE](LICENSE). The following notices apply to retained third-party material, including local adaptations.
 
 ## Scope and attribution
 
@@ -66,6 +66,6 @@ SOFTWARE.
 
 Keep `LICENSE` and this document with every distribution of the repository. When you export or install single skills, include the applicable copyright notices, full license terms and inherited credits with the copied files. One shared notice can cover several packages when its scope is clear, but it must actually ship with them.
 
-Packages with bundled license notices must retain them. The fourteen M1-derived Matt packages listed in `docs/UPSTREAM.md` have no package-local license, including the twelve with the project-settings paragraph. Include this notice alongside their installs and exports to preserve Matt's MIT terms. Root legal files remain required for whole-repository distribution.
+Packages with bundled license notices must retain them. For Matt Pocock's imported packages without a package-local notice, include this notice alongside their installs and exports to preserve Matt's MIT terms. Root legal files remain required for whole-repository distribution.
 
 Including notices does not grant missing permissions. The unlicensed Excalidraw generation material requires a separate rights decision before redistribution.
