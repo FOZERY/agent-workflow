@@ -86,6 +86,8 @@ Add `--global` only for a user-wide install.
 
 For other clients or installation scopes, see [skill deployment](skills/setup-workflow/references/skills.md).
 
+For an example of user-wide defaults, see the [global AGENTS.md reference](agents-files/AGENTS.reference.md). It is a snapshot, not a project instruction.
+
 ## Status and license
 
 Package metadata and discovery were checked in isolated projects. A full setup-to-PR run has not been tested.
