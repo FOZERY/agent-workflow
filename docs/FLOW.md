@@ -19,23 +19,22 @@ Check project permissions for tracker, branch, and delegation actions. If a requ
 
 ## Give the task to an executor
 
-| Input | Executor |
+| Situation | Executor |
 | --- | --- |
-| A task described by a spec or tickets | [`implement`](../skills/implement/SKILL.md) |
+| One assigned task, with code changes owned by the current session | [`implement`](../skills/implement/SKILL.md) |
 | An approved plan and its source task | An agent configured to read both. Approval of the plan does not start execution. |
-| A spec and its ticket graph | [`implement-spec`](../skills/implement-spec/SKILL.md). A plan alone is not enough. |
+| A large task that needs an architect to coordinate multiple implementers | [`implement-with-swarm`](../skills/implement-with-swarm/SKILL.md). Use the task sources you already have. |
 
 For example, if Jira task `APP-123` needs a plan, ask `/to-plan` to save it alongside the task artifacts and link the Jira requirements.
 Review the plan. Then give the executor the plan path, the Jira task, and a separate request to implement it.
 In Codex, use `$to-plan`.
 
-For work across services, use one plan. Give each worker readable project rules, its assignment, and the relevant shared contracts.
-Assign disjoint files for parallel work. Check the complete interaction after integration.
+For swarm work across repositories or with independent worktrees, prefer separate sessions. For disjoint changes in one repository, subagents may suffice. The architect recommends a mode before dispatch and verifies the combined result.
 
 ## Verify and accept
 
 Follow the project's settings for TDD and review. Manual means you start that activity separately.
-By default, `implement` reviews a snapshot of the task's changes before commit. `implement-spec` reviews the integration branch after merging the tickets.
+With `implement-with-swarm`, each worker runs `implement` for its assignment, including applicable tests and review. By default, reviewer subagents check the worker's scoped snapshot before commit. The architect verifies the combined result separately.
 See [review coverage and follow-up](../skills/setup-workflow/references/AGENTS.md#review-coverage) for scope, timing, and whether the agent can fix findings.
 
 Failed required checks or unresolved required findings block completion. Once all required checks and review pass, you decide whether to accept the result.

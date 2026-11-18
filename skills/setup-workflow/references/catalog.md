@@ -11,13 +11,15 @@ Discuss only relevant groups. Use a native choice tool when useful, without forc
 | Setup and guidance | `home-repo-init`, `setup-workflow`, `ask-workflow` |
 | Task exploration | `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
 | Optional visual support | `excalidraw-diagram` |
-| Implementation | `implement`, `implement-spec`, `tdd`, `codebase-design`, `code-review` |
+| Implementation | `implement`, `implement-with-swarm`, `tdd`, `codebase-design`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup`, `refactor-docs` |
 
 Group membership is not a dependency. Create project-specific sections only for selected skills that need settings.
 Ask about tools and MCP integrations separately from package selection. Record their authorized purpose and prerequisites in the project contract, not as kit dependencies.
 `to-plan` saves one task-linked implementation plan. It requires neither a specification nor tracker tickets and has no fixed skill dependencies.
-For execution, agree a receiver that accepts the plan plus its source task. `implement-spec` still requires its specification and ticket graph.
+For plan-based execution, agree on a receiver that accepts the plan and its source task.
+
+`implement-with-swarm` uses existing task sources. Make `implement` available to each worker and configure the worker modes and integration rules.
 
 `home-repo-init` creates or revises a multi-repository home: navigation, approved shared material and client entrypoints.
 It is standalone and manually invoked. `setup-workflow` can configure that home's procedures afterward, but neither skill requires or invokes the other.
@@ -37,7 +39,7 @@ Project skill sections link to one `excalidraw-diagram` policy. Selecting the pa
 
 ## Dependencies
 
-These are the original skill calls. All fixed helper packages are included in the kit; verify installation in the target client:
+These procedures require access to the listed packages. Verify availability in the target client and its worker sessions.
 
 | Caller | Calls and availability |
 | --- | --- |
@@ -45,7 +47,7 @@ These are the original skill calls. All fixed helper packages are included in th
 | `wayfinder` | `grilling` and `domain-modeling` for discussion; `research` and `prototype` for their ticket types; additional skills named in map Notes |
 | `tdd` | Conditional `codebase-design` call when the interface or seam is in question |
 | `implement` | `tdd` where possible and `code-review` |
-| `implement-spec` | Per-ticket `tdd` and integrated `code-review` |
+| `implement-with-swarm` | Explicit `implement` request per worker, or readable access to the same procedure for workers that cannot invoke manual skills |
 | `retro` | `writing-for-agents` |
 
 Other retained packages have no fixed inter-skill call in their own procedure. Project rules or task-specific map Notes can add prerequisites.

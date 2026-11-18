@@ -39,7 +39,8 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 | Plan an existing task for implementation without creating a spec or tickets | `to-plan` |
 | Synthesize agreed requirements, then decompose work if needed | `to-spec`, `to-tickets` |
 | Run original test-first red–green cycles | `tdd` |
-| Implement one agreed task, or coordinate a specification/task graph | `implement`, `implement-spec` |
+| Implement one agreed task in the current session | `implement` |
+| Coordinate workers on a large task while the main session acts as architect | `implement-with-swarm` |
 | Review scoped uncommitted changes or an explicit committed branch, PR or commit | `code-review` |
 | Prepare or publish a PR/MR | Follow project delivery rules and permissions |
 | Inspect session evidence for agent-environment improvements | `retro` |
@@ -48,7 +49,9 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 
 Recommend only the relevant next step and explain its input, expected result and outstanding human decision. Existing analyst-owned requirements may go directly to implementation; they need not pass through spec/ticket authoring. Routine fact lookup does not require a deep research report. A ready-for-human-review task needs the person's review, not another skill merely to keep the agent busy.
 
-A ready task can go through `to-plan` when its implementation needs planning. The plan is a saved task artifact; spec and ticket authoring remain optional. Hand it to an executor whose project instructions accept the plan plus source task. `implement-spec` still expects a spec and ticket graph; do not treat the plan as that graph.
+A ready task can go through `to-plan` when it needs a saved implementation plan. Hand the plan and source task to an executor that can read both.
+
+For `implement-with-swarm`, use existing task sources. No spec, ticket graph, or tracker is required. Recommend separate sessions for multiple repositories or worktree isolation. Consider subagents for disjoint changes in one repository if they can run `implement` and delegate required review.
 
 For a multi-repository home, recommend `home-repo-init` for structure, navigation and approved shared materials.
 Recommend `setup-workflow` afterward only if workflow procedures need configuration. `to-plan` remains task planning, not home initialization.

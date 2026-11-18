@@ -20,8 +20,8 @@ The kit does not run an automated pipeline or enforce permissions.
 | [`to-plan`](skills/to-plan/SKILL.md) | A clear task needs a saved implementation plan, without a new spec or tickets. |
 | [`to-spec`](skills/to-spec/SKILL.md) | You need to turn agreed requirements into a new specification. |
 | [`to-tickets`](skills/to-tickets/SKILL.md) | Work needs separately tracked tickets with explicit dependencies. |
-| [`implement`](skills/implement/SKILL.md) | One task from a spec or tickets is ready to build and check. |
-| [`implement-spec`](skills/implement-spec/SKILL.md) | A spec and its ticket graph need coordination across workers and worktrees. |
+| [`implement`](skills/implement/SKILL.md) | The current session should implement and verify one agreed task. |
+| [`implement-with-swarm`](skills/implement-with-swarm/SKILL.md) | The main session should act as architect and coordinate workers on a large task. |
 | [`tdd`](skills/tdd/SKILL.md) | You want to write a failing test, then make the smallest change that passes it. |
 | [`code-review`](skills/code-review/SKILL.md) | You want to check a diff against project standards and task requirements. |
 

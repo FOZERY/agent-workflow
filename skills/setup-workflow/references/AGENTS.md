@@ -157,11 +157,12 @@ execution: <current-session | subagent | separate-session>
 Use the TDD and review settings in this document.
 <Checkpoints before returning the result to the user.>
 
-### implement-spec
-<Authoritative specification and ticket graph.>
-<Branch, worktree, delegation and integration arrangements.>
-Use the TDD and review settings in this document.
-<Checkpoints before returning the integrated result to the user.>
+### implement-with-swarm
+<Task sources and architectural constraints, including shared contracts across repositories.>
+<Allowed session tool and subagent mode, approval for dispatch, and branch, worktree or workspace isolation rules.>
+<Integration owner, target branches and delivery procedure per repository.>
+<Worker access to implement and permission and capability to delegate its review.>
+<Worker TDD and review rules, combined verification, and acceptance checkpoints.>
 
 ### code-review
 trigger: <auto | manual>
