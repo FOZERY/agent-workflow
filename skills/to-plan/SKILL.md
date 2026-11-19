@@ -9,6 +9,7 @@ disable-model-invocation: true
 
 Produce one Markdown implementation plan for a task whose desired outcome is already understood. Work from a request, discussion, ticket or specification; no upstream artifact or other skill is required.
 Read applicable project instructions for sources, artifact locations, writing rules and workflow settings. Use the defaults below where the project specifies none.
+If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
 Planning permits investigation and the authorized plan write, not implementation, tracker mutations or implementation-agent launches. Follow project approval gates. The optional diagram branch below permits only separately approved drawing delegation.
 
 ## 1. Establish the task and destination

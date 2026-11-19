@@ -10,6 +10,8 @@ The main session is the **architect**. Own the design, work split, shared contra
 
 ## 1. Map the work
 
+If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
+
 Read the applicable project instructions and the user's task. Use the requirements already available: a brief, a plan, a spec, tickets, or a combination. This skill does not require a new spec, ticket graph, or issue tracker.
 
 Identify the repositories, shared interfaces, and acceptance checks. Split the work into assignments with one owner per change area. Record which assignments depend on other results and which can start independently. Resolve shared contracts before dependent workers edit against them.
@@ -25,7 +27,7 @@ Before dispatch, present the recommended mode, why it fits, the assignments, and
 
 ## 3. Dispatch and coordinate
 
-For each assignment, provide the repository, target branch or file boundaries, and links to readable project rules and task sources. Include shared contracts, dependencies, acceptance checks, and the expected handoff.
+For each assignment, provide the repository, target branch or file boundaries, and links to readable project rules and task sources. Include shared contracts, dependencies, acceptance checks, the seams to test, and the expected handoff.
 
 Every worker runs [`implement`](../implement/SKILL.md) for its assignment:
 
