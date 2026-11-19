@@ -67,7 +67,7 @@ Write the entry yourself. In the same reply, tell the user which entry you added
 ## Block
 
 ```markdown
-<!-- agent-workflow:core v1 -->
+<!-- agent-workflow:core v2 -->
 setup-workflow owns this section. To change it, run setup again.
 
 ### Workflow
@@ -75,6 +75,10 @@ A task moves through these phases. A ready task starts at Implement.
 The `## Skills` section tells each skill how to work in this project.
 
 <phases>
+
+### Questions
+When the user must decide or answer, ask through the harness's question tool, such as `AskUserQuestion` in Claude Code. Put all open questions of one round into one call. Give each question its options and the effect of each, and make it readable without the text above it.
+Ask in plain text only when the harness has no question tool, for example in a headless run.
 
 ### Session start
 Before your first reply in a session, read `<agent-docs>/CONTEXT.md` and `<agent-docs>/LESSONS.md`.

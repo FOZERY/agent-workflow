@@ -15,7 +15,8 @@ Setup writes project rules. With separate approval, it also installs skills. Set
 ## Rules for every step
 
 - **Ask.** Ask only what the project files and the user's answers do not already settle. Ask in small rounds.
-  For a choice with known options, ask a separate form question. Give the allowed options and the effect of each.
+  Ask through the harness's question tool, such as `AskUserQuestion` in Claude Code, with all questions of one round in one call. Use plain text only when the harness has no question tool.
+  For a choice with known options, ask a separate question in that tool. Give the allowed options and the effect of each.
   For project-specific details, ask an open question. If no option fits, let the user describe the workflow or point to its source.
   One answer can settle several questions.
 - **Permission.** Only an explicit "yes" from the user grants a permission. A recommendation, silence or an unanswered question grants nothing.
