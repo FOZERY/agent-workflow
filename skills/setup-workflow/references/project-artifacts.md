@@ -33,8 +33,7 @@ Put the memory pointers below in root `AGENTS.md` with concrete repository-root-
 
 | Reading trigger | Target and purpose |
 | --- | --- |
-| Starting or resuming a task session | Read `<agent-docs>/CONTEXT.md` to recover recent work, decisions, open questions and next actions; verify task/code state against current sources. |
-| Before recommending an approach or making a choice to which prior experience applies | Read relevant topics in `<agent-docs>/LESSONS.md`; inspect its topic headings first when relevance is unknown. |
+| Starting a session, resuming it or after a context compaction | Read all of `<agent-docs>/CONTEXT.md` and `<agent-docs>/LESSONS.md`. The [core rules](core-rules.md) block carries this rule; do not repeat it elsewhere. |
 | Before changing domain or architectural behavior | Follow the project's domain pointer to the relevant glossary and accepted ADRs, where those sources exist. |
 
 These are task-boundary or decision triggers, not instructions to reload every document on every turn.
@@ -68,7 +67,7 @@ Maintain a concise chronological sequence, oldest first, appending newer entries
 - Open questions, blockers and the next action or discussion, where relevant.
 - Pointers to authoritative tasks, decisions, lessons and evidence instead of copied transcripts or duplicate policy.
 
-Read it on session start or resumption. Update at the agreed checkpoints, including before an approved handoff or context boundary, within the agreed write authority. Condense older material under the agreed retention policy while preserving unresolved items and source links. A summary records its creation time and covered period rather than inventing event timestamps. Context records what happened; it neither grants permissions nor proves the present code state.
+Read it on session start, resumption and after a context compaction. Update at the agreed checkpoints, including before an approved handoff or context boundary, within the agreed write authority. Condense older material under the agreed retention policy while preserving unresolved items and source links. A summary records its creation time and covered period rather than inventing event timestamps. Context records what happened; it neither grants permissions nor proves the present code state.
 
 ## LESSONS.md: curated long-term project memory
 
@@ -98,7 +97,7 @@ Settle each applicable decision independently for `CONTEXT.md` and `LESSONS.md`:
 | Decision | Choices |
 | --- | --- |
 | Writer | The owner writes; the coordinating agent writes; or a designated maintainer writes. Name the maintainer if selected. |
-| Agent update authority | Standing permission for the agreed routine updates; fresh approval for each agent update; or no agent writes. For standing permission, specify what is covered and what still needs approval. Routine updates are recent context at agreed checkpoints or recording already-confirmed lessons, respectively. |
+| Agent update authority | Standing permission for the agreed routine updates; fresh approval for each agent update; or no agent writes. For standing permission, specify what is covered and what still needs approval. Routine updates are recent context at agreed checkpoints. For lessons, the agent writes confirmed entries, or chooses entries itself if the user picked the agent-decides lessons variant in [core rules](core-rules.md). |
 | Git visibility | Track in the repository; keep untracked with a shared ignore rule; or keep untracked with a local-only exclusion. A visibility choice does not authorize a commit, publication or a tracking change to an existing file. |
 
 Agree each file's update checkpoints and retention in the project's own terms or by reference to its existing procedure.

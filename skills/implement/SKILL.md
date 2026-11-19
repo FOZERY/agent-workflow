@@ -16,6 +16,8 @@ Before editing, record the starting commit as the default review base. Track the
 
 Write or update tests when the task requires them. Follow the project's testing procedure. Where TDD applies, use `tdd` at the agreed seams.
 
+If the project runs TDD or review in subagents, launch them from this session. If this session is itself a subagent, follow the nesting option in the project's `implement` section.
+
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
 Follow the project's review procedure and checkpoint if specified. Otherwise, run `code-review` before committing or handing off uncommitted changes. Delegate review of the scoped snapshot to its reviewer subagents. Pass the source task, review base, and task-owned file paths. If required review cannot run, report the blocker instead of substituting a self-check.

@@ -15,7 +15,7 @@ Planning permits investigation and the authorized plan write, not implementation
 
 Read the source task and relevant project instructions. Identify the desired outcome, exclusions, constraints and how success will be observed. Link authoritative requirements instead of recreating a specification.
 
-Reuse the task's configured artifact location and naming convention. Otherwise, save `plan.md` in its existing artifact directory, beside its specification or `issues/` directory when present. With no established location, use `.scratch/<task-slug>/plan.md`, using the task ID or a stable descriptive slug. A specification and tickets need not exist. Ask only when the task or destination is ambiguous.
+Reuse the task's configured artifact location and naming convention. Otherwise, save `plan.md` in its existing artifact directory, beside its specification or `issues/` directory when present. With no established location, use `.docs/<task-slug>/plan.md`, using the task ID or a stable descriptive slug. A specification and tickets need not exist. Ask only when the task or destination is ambiguous.
 
 Identify any existing plan before drafting. Revise the same plan when requested; preserve unrelated content and follow its ownership rules. Do not overwrite a different task's plan or create a competing record. If the required source or write location is unavailable, report the affected blocker rather than claiming a saved plan.
 

@@ -4,7 +4,7 @@ Use the task/spec/plan locations agreed in the project contract. Preserve an exi
 
 ## Layout and authority
 
-- If no project layout is specified, use `.scratch/<feature-slug>/`, with the specification at `spec.md`.
+- If no project layout is specified, use `<agent-docs>/<feature-slug>/` (default `.docs/<feature-slug>/`), with the specification at `spec.md`.
 - Put one implementation ticket in each `issues/<NN>-<slug>.md`, numbered from `01` in dependency order. A different agreed project layout must be explicit in its skill settings.
 - A selected `to-plan` route keeps its implementation plan in the same task directory under its agreed name. The skill owns the fallback path; a specification or `issues/` directory need not exist.
 - Use stable task IDs or paths for references; record discussion, status and dependency information in the accepted fields.

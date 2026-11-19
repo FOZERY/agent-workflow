@@ -3,7 +3,8 @@
 Read before drafting a project contract. This outline is not active policy or a set of default permissions.
 Fill applicable fields from the conversation. Omit unselected skill sections and unresolved template fields.
 Preserve existing headings and user additions; add a named section for another selected skill when needed.
-Keep common sources and permissions in shared sections. Skill sections hold only project-specific settings and differences.
+Keep common sources and permissions in shared sections.
+Write a section for every selected skill, also when it has no other project setting. Each section starts with a `Runs:` line: who starts the skill and in which phase. Then it gives the project settings that the skill uses.
 
 ## Automation settings
 
@@ -13,9 +14,13 @@ These are instructions interpreted by the agent, not runtime configuration flags
 | --- | --- | --- |
 | `tdd`, `code-review` | `trigger` | `auto`: implementation starts this activity at its applicable stage. `manual`: implementation leaves it to a separate user invocation. |
 | `tdd`, `code-review` | `execution` | `current-session`: run here. `subagent`: delegate through the client. `separate-session`: use a separate thread/session or prepare an agreed user-started handoff. |
-| `code-review` | `followup` | `report`: return findings and wait. `fix-and-rereview`: correct authorized findings and repeat review within the agreed cycle limit. |
+| `tdd` | `execution: subagent` | A subagent writes each failing test from the requirements and the interface only. It does not get the implementation plan. The current session writes the code that makes the test pass. |
+| `code-review` | `reviewer` | The agent, model and reasoning effort that review, for example a Claude subagent on a named model or Codex in a separate Orca session. |
+| `code-review` | `followup` | `report`: return findings and wait. `fix-and-rereview`: correct authorized findings and repeat review. |
+| `code-review` | `rounds` | The maximum number of fix-and-review rounds. Default: `3`. After the last round, the agent stops and asks the user. |
+| Workflow rules | `search` | `current-session`: search here. `subagent`: send bulk lookups to the named search agent and model. Recorded in the core block, not in a skill section. |
 
-Omitted settings retain the selected skill's defaults; omission does not mean `manual`.
+Setup asks every setting in this table for each selected skill. Record an answer for each one.
 TDD is a test–implementation cycle, not a complete test-writing phase before implementation.
 Manual invocation remains available regardless of the automatic trigger.
 Execution settings do not grant delegation permission or erase nested requirements of the selected skill.
@@ -32,7 +37,7 @@ Ask the applicable unanswered questions separately:
 4. Which changes are in or out of scope? For working-tree review, specify staged, unstaged and untracked changes.
 5. Should the reviewer report findings and wait, or may the agent make authorized corrections and request another review?
 
-If the user chooses fixes and another review, agree correction scope, a cycle limit and stop conditions, including disputed requirements or unavailable checks. Report-only review does not authorize corrections. Use the project's own procedure when these options do not fit.
+If the user chooses fixes and another review, agree correction scope, a round limit (default 3) and stop conditions, including disputed requirements or unavailable checks. Report-only review does not authorize corrections. Use the project's own procedure when these options do not fit.
 
 The bundled `implement` requests a scoped working-tree snapshot for its pre-commit review by default. The bundled `code-review` can capture intended staged, unstaged and nonignored untracked changes. Branch and PR review use a committed comparison unless the agreed procedure selects a different endpoint.
 If a project selects another reviewer or requires different coverage, confirm that its procedure can review the intended files at that checkpoint. If not, report the gap and leave the affected route blocked. Setup does not authorize a commit merely to make review runnable.
@@ -52,10 +57,13 @@ For a multi-repository home, preserve its navigation owner and include the condi
 <Product purpose, working scope and authoritative documentation pointers.>
 
 ## Project instructions
-The Skills sections define project-specific settings for the named skills.
-Use the skill's defaults for settings not specified here.
-Keep its remaining procedure unchanged.
+`## Workflow rules` is mandatory for every session and every skill.
+Each selected skill has a section under `## Skills`. Before you run a skill, read its section.
+The section wins over the skill's own defaults. Keep the rest of the skill's procedure unchanged.
 If a required step cannot satisfy applicable constraints, report the conflict.
+
+## Workflow rules
+<Copy the block from [core rules](core-rules.md) with its markers and fill its fields.>
 
 ## Sources and artifacts
 <Authoritative requirements, tracker, specification, ticket, implementation-plan and research locations.>
@@ -82,6 +90,10 @@ The user decides whether to accept the work.
 <writing-for-agents pointer for rules, if selected.>
 
 ## Skills
+
+Every section below starts with this line:
+
+`Runs: <manual: the user calls the skill | auto: <caller> calls it at <stage>>. Phase: <phase from Workflow rules>.`
 
 ### home-repo-init
 <Approved inventory roots, home membership and shared-material ownership when this skill is selected.>
@@ -155,24 +167,29 @@ execution: <current-session | subagent | separate-session>
 <Expected task inputs and implementation boundaries.>
 <If plan-based execution is selected: read the approved plan and source task as implementation input. Recheck relevant code before editing.>
 Use the TDD and review settings in this document.
+<Nesting: when implement runs as a worker subagent, whether it can launch its TDD and review subagents in this harness, and the option the user chose if it cannot.>
 <Checkpoints before returning the result to the user.>
 
 ### implement-with-swarm
 <Task sources and architectural constraints, including shared contracts across repositories.>
 <Allowed session tool and subagent mode, approval for dispatch, and branch, worktree or workspace isolation rules.>
 <Integration owner, target branches and delivery procedure per repository.>
-<Worker access to implement and permission and capability to delegate its review.>
+Start each worker with `/implement` (`$implement` in Codex) and its assignment. A worker subagent that cannot run a slash command reads `<path to implement/SKILL.md>` and follows it.
+<Worker mode: separate sessions or subagents.>
+<Nesting: harness, how deep subagents can launch subagents, and whether workers can launch their TDD and review subagents. If they cannot, the option the user chose.>
 <Worker TDD and review rules, combined verification, and acceptance checkpoints.>
 
 ### code-review
 trigger: <auto | manual>
 execution: <current-session | subagent | separate-session>
+reviewer: <agent, model and reasoning effort>
 followup: <report | fix-and-rereview>
+rounds: <number, default 3>
 
 <Agreed review procedure, including another skill if selected.>
 <Before review, read these standards, practices, examples and requirement sources.>
 <Comparison-base rule, endpoint, included/excluded changes, checkpoint relative to commits and evidence requirements.>
-<For fix-and-rereview: correction authority, cycle limit and stop conditions.>
+<For fix-and-rereview: correction authority and stop conditions.>
 
 ### retro
 <Session evidence and retrospective scope.>
@@ -185,9 +202,7 @@ followup: <report | fix-and-rereview>
 <Reading pointers to existing delivery procedures and templates.>
 
 ## Project memory
-At session start or resumption, read <agent-docs>/CONTEXT.md.
-Verify the current task and code against their authoritative sources.
-Before a decision that depends on prior experience, read relevant <agent-docs>/LESSONS.md topics.
+The Workflow rules section sets when to read and update memory.
 <Memory writer, update checkpoints, approval, retention and concurrent-writer coordination.>
 <CONTEXT.md records recent events, outcomes, open questions and source pointers.>
 <LESSONS.md records confirmed experience and preferences with source and scope.>

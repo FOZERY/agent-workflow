@@ -14,7 +14,7 @@ Discuss only relevant groups. Use a native choice tool when useful, without forc
 | Implementation | `implement`, `implement-with-swarm`, `tdd`, `codebase-design`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup`, `refactor-docs` |
 
-Group membership is not a dependency. Create project-specific sections only for selected skills that need settings.
+Group membership is not a dependency. Create a section in `AGENTS.md` for every selected skill.
 Ask about tools and MCP integrations separately from package selection. Record their authorized purpose and prerequisites in the project contract, not as kit dependencies.
 `to-plan` saves one task-linked implementation plan. It requires neither a specification nor tracker tickets and has no fixed skill dependencies.
 For plan-based execution, agree on a receiver that accepts the plan and its source task.
@@ -53,7 +53,6 @@ These procedures require access to the listed packages. Verify availability in t
 Other retained packages have no fixed inter-skill call in their own procedure. Project rules or task-specific map Notes can add prerequisites.
 The included `domain-modeling`, `prototype` and `codebase-design` helpers have no additional fixed skill calls. They are available individually as well as through their callers.
 Do not restore removed helpers, download substitutes or patch callers as an implicit setup step.
-Some prompts retain `/setup-matt-pocock-skills`; our `/setup-workflow` is not an installed alias.
 Read actual tracker publication, commit, worktree and branch-push requirements before agreeing a route.
 Project rules still own permission and additional writing choices. Installation grants neither.
 

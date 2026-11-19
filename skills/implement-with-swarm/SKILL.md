@@ -27,9 +27,14 @@ Before dispatch, present the recommended mode, why it fits, the assignments, and
 
 For each assignment, provide the repository, target branch or file boundaries, and links to readable project rules and task sources. Include shared contracts, dependencies, acceptance checks, and the expected handoff.
 
-Start each worker with an explicit [`implement`](../implement/SKILL.md) request for its assignment. If the client cannot invoke a manual skill in a worker, give the worker a readable copy or path to the same procedure and instruct it to follow it. Verify access to the procedure, task sources, and workspace before edits.
+Every worker runs [`implement`](../implement/SKILL.md) for its assignment:
 
-The worker owns its code, applicable tests, and review. It delegates review of its changes to its own reviewer subagents by default, subject to project rules. A self-check does not replace required independent review.
+- **Session worker:** send `/implement` (`$implement` in Codex) with the assignment as its first prompt.
+- **Subagent worker:** a subagent cannot run a slash command, and `implement` is user-invoked. Give it the path to `implement/SKILL.md` and tell it to read the file and follow it.
+
+Verify access to the procedure, task sources, and workspace before edits.
+
+The worker owns its code, applicable tests, and review. It runs TDD and review as the project's `implement` section says, including the nesting option recorded there. A self-check does not replace required independent review.
 
 Start independent assignments in parallel. Start dependent assignments once their prerequisites are available. Route contract changes through the architect and notify workers whose assignments depend on them.
 

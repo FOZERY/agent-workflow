@@ -45,6 +45,7 @@ Establish:
 - Autonomy and human checkpoints. Ask separately about read-only exploration and implementation delegation: within agreed limits, with separate approval, or not allowed for the agent. Confirm any applicable scope and checkpoints. For writes, use the action-specific delivery, tracker or tool rules.
 - Conversation, artifact and instruction languages. When configuring styles, read [writing routes](references/writing.md).
 - Context and lessons: shared directory, reading and update checkpoints, writer and approval scope. Follow the project-artifact contract.
+- Lessons: ask "When a disputed question is settled or you correct me, should I ask before I write a lesson, or write it myself and tell you?" Record the answer with the lessons variant from [core rules](references/core-rules.md).
 
 For Git workflows, read [delivery settings](references/delivery.md) only when those settings are missing or changing.
 
@@ -54,18 +55,32 @@ Use [the catalog](references/catalog.md) to discuss applicable skills, including
 
 Read the selected prompts before proposing settings. Establish the sources, output location, project practices and permitted operations each needs. Keep shared paths and permissions in one place; skill sections contain only their specific settings and differences.
 
-For `tdd`, ask: "How do we work with tests here? Which test types and existing examples should guide us? What infrastructure or mocking constraints apply?" Inspect test commands rather than asking the user to transcribe them. Keep the red–green method; do not introduce independent test authorship.
+For `tdd`, ask: "How do we work with tests here? Which test types and existing examples should guide us? What infrastructure or mocking constraints apply?" Inspect test commands rather than asking the user to transcribe them. Keep the red–green method. If TDD runs in a subagent, that subagent writes only the failing tests, from the requirements and the interface.
 
 For review, ask which requirements, coding practices and examples guide it. Accept a project procedure or another review skill as the source. Record the procedure as prose, not a package-name flag.
 
-For implementation routes, agree the trigger and execution location for TDD and review as separate decisions. Ask the applicable unanswered questions in this order:
+For implementation routes, ask every question below. Each question is required, also on an initial setup where the user gives no preference. Ask each one as a separate form question with its allowed choices:
 
-1. Should implementation start TDD automatically, or only on an explicit user request?
-2. Where should TDD run: in the current session, through a subagent, or in a separate thread/session?
-3. Should implementation start review automatically, or only on an explicit user request?
-4. Where should review run: in the current session, through a subagent, or in a separate thread/session?
+1. TDD trigger: does `implement` start TDD automatically, or only when the user asks?
+2. TDD location: the current session, a subagent that writes only the failing tests, or a separate session?
+3. Review trigger: does `implement` start review automatically, or only when the user asks?
+4. Review location: the current session, a subagent, or a separate session?
+5. Reviewer: which agent, model and reasoning effort review? List what the harness and Orca offer.
+6. Review follow-up: report findings and wait, or fix and review again?
+7. Review rounds: how many fix-and-review rounds before the agent stops and asks? Offer `3` as the default.
 
-Ask about trigger and location separately, including when using a form. Agree which implementation routes each trigger covers.
+Agree which implementation routes each trigger covers.
+
+If `implement-with-swarm` is selected, ask whether workers run as separate sessions or as subagents. Then check nesting:
+
+1. Find out which harness runs the workers and how deep subagents can launch subagents in it. Read the harness documentation. If it does not say, ask the user's approval for a short probe.
+2. A worker that runs `implement` with TDD or review in subagents needs one more level of subagents. If the harness cannot give that level, warn the user before you record the settings.
+3. Offer these options and record the user's choice in the `implement` and `implement-with-swarm` sections:
+   - Run workers as separate sessions, for example in Orca. Each worker session launches its own subagents.
+   - Keep subagent workers. Each worker runs TDD in its own context, and the architect launches the reviewers for each worker's result.
+   - Keep subagent workers. The user starts `/code-review` for each worker's result.
+
+Before you record an answer, check that the selected skill can run it. For example, `code-review` runs its two reviewers as subagents. If the harness cannot launch them from the selected location, show the gap and ask the user to choose another location.
 Then use the [review questions](references/AGENTS.md#review-coverage) for coverage, timing and followup. Use the [automation settings](references/AGENTS.md#automation-settings) for the meanings of the answers. The user decides whether to accept the work.
 
 For `to-plan`, agree the task-linked location and naming. Ask separately about visibility, plan approval and who can revise an approved plan.
@@ -88,6 +103,11 @@ Use only the selected tracker seed when no adequate project procedure exists:
 
 For another tracker, derive the procedure from its agreed sources and access method. Keep readiness vocabulary required by selected skills; setup does not configure incident triage. Read [domain documents](references/domain.md) only when glossary or ADR conventions need configuration.
 
+### Search
+
+Ask: "Should bulk searches across files, logs and the web run in the current session or in a subagent?"
+If the user chooses a subagent, list the search agents that the harness offers: user-defined agents, built-in search roles and the cheaper models. Ask which agent and model to use. Record the answer in the core block, using the subagent variant from [core rules](references/core-rules.md).
+
 ### Additional skills and tools
 
 Before finalizing the selected routes, ask: "Do we need any other skills, tools or MCP integrations for this repository? Give a name, a link or a short description, or say none."
@@ -102,7 +122,7 @@ Check skill dependencies, client capabilities and implementation-to-review hando
 
 ## 3. Draft and approve
 
-Read [the AGENTS.md structure](references/AGENTS.md). Draft shared rules and sections for selected skills with project-specific settings. Fill agreed facts and omit inapplicable sections. Use skill defaults only where they fit existing rules and permissions. Use the project's effective writing rules.
+Read [the AGENTS.md structure](references/AGENTS.md) and [core rules](references/core-rules.md). Put the core block in the `## Workflow rules` section with its fields filled. Build its phase list from the selected skills. Write a section under `## Skills` for every selected skill, starting with its `Runs:` line. Draft shared rules and sections for selected skills with project-specific settings. Fill agreed facts and omit inapplicable sections. Use skill defaults only where they fit existing rules and permissions. Use the project's effective writing rules.
 
 Keep root instructions short. Link existing practices before proposing supporting files. Store detailed new procedures under the agreed agent-documentation directory only when needed. The setup references guide drafting; they are not the consumer project's runbooks.
 Record mandatory restrictions in the controlling shared or skill-specific section. Give each policy and tool pointer a trigger.
@@ -114,7 +134,7 @@ Preview the rule and pointer changes, visibility changes, and compatibility gaps
 
 ## 4. Apply the agreed changes
 
-Re-read target files for intervening changes and merge only approved edits. On initial setup, create or reuse root `AGENTS.md`, `CONTEXT.md` and `LESSONS.md` according to the artifact contract. Seed memory from the actual discussion. On reruns, preserve unrelated settings and history.
+Re-read target files for intervening changes and merge only approved edits. On initial setup, create or reuse root `AGENTS.md`, `CONTEXT.md` and `LESSONS.md` according to the artifact contract. Seed memory from the actual discussion. On reruns, preserve unrelated settings and history. If the core block version in `AGENTS.md` differs from [core rules](references/core-rules.md), show the difference and replace only the block after approval.
 
 Apply approved loading and visibility changes. Create no empty future plans, specs, tickets, glossaries or ADRs. Moves and storage migrations require their own agreement.
 
@@ -124,7 +144,7 @@ If installation was approved, follow the deployment reference. Reuse compatible 
 
 ## 5. Verify and hand over
 
-Check local pointers, configured artifact paths, client loading where observable, and selected package discovery and prerequisites. Confirm that per-skill settings have one owner and user additions are represented. A project instruction is not an access-control mechanism or proof of model adherence.
+Check that `AGENTS.md` has the core block with all fields filled. Check local pointers, configured artifact paths, client loading where observable, and selected package discovery and prerequisites. Confirm that per-skill settings have one owner and user additions are represented. A project instruction is not an access-control mechanism or proof of model adherence.
 
 Walk through only relevant cases:
 
@@ -132,9 +152,9 @@ Walk through only relevant cases:
 - A known option uses its own question. A custom policy supplied as prose or a link keeps its scope and approval conditions.
 - A project or company restriction conflicts with a skill default or proposed permission: preserve the rule and block the affected action if the conflict is unresolved.
 - A home repo coordinates several children: preserve their instruction ownership and verify shared pointers from each intended session or worker.
-- No project setting: use the skill's default where permitted. Explicit `manual`: no automatic launch by implementation.
-- TDD uses the agreed tests and examples without adding a separate test-author procedure.
-- Review reports only, or fixes and re-reviews within the agreed authority and cycle limit; user acceptance remains separate.
+- Every automation setting has a recorded answer. Explicit `manual`: no automatic launch by implementation.
+- TDD uses the agreed tests and examples. With subagent TDD, the subagent writes only the failing tests.
+- Review reports only, or fixes and re-reviews within the agreed authority and round limit; user acceptance remains separate.
 - Default pre-commit review uses the intended working-tree snapshot. If a project selects a different reviewer or endpoint, check its coverage at the agreed checkpoint.
 - A requested helper, source or separate session is unavailable: identify the blocked step or agreed handoff.
 - An added skill, tool, MCP integration or policy pointer is available to the intended reader, including delegated workers, or reported as a prerequisite. Availability is not permission to act.
