@@ -56,10 +56,11 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 
 ### 2.2 Skills
 
-1. Use [the catalog](references/catalog.md) to agree the skills, including skills that the user suggests. For installation or a change of client or scope, read [deployment](references/skills.md).
-2. Before you propose settings for a selected skill, read its `SKILL.md`. Agree its sources, output location, project practices and allowed operations.
-3. Keep shared paths and permissions in one place in `AGENTS.md`. A skill section holds only the settings of that skill.
-4. For `to-plan`, `to-spec`, `to-tickets`, `wayfinder` and `excalidraw-diagram`, ask the questions in [skill questions](references/skill-questions.md).
+1. Offer the skills from [the catalog](references/catalog.md) as one multi-select: each skill is a separate option, plus "no other skills" and the skills that the user suggests. Offer no ready-made bundles. Show each skill's purpose and installation status, and leave every option unselected until the user selects it.
+2. For installation or a change of client or scope, read [deployment](references/skills.md).
+3. Before you propose settings for a selected skill, read its `SKILL.md`. Agree its sources, output location, project practices and allowed operations.
+4. Keep shared paths and permissions in one place in `AGENTS.md`. A skill section holds only the settings of that skill.
+5. For `to-plan`, `to-spec`, `to-tickets`, `wayfinder` and `excalidraw-diagram`, ask the questions in [skill questions](references/skill-questions.md).
 
 ### 2.3 Implementation, TDD and review
 
