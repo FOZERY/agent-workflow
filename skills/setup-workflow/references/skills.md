@@ -16,7 +16,8 @@ Rules for the selection:
 
 - Every skill is optional. No selection means no installation. Existing skills and instructions stay.
 - A route can need an extra skill that the project approves. Explain each such prerequisite separately.
-- Check installation and discovery for each client separately.
+- Check installation and discovery for each client separately, in its skill directories from the [same-name table](#check-same-name-copies). The skill list of your own session is not evidence: it hides user-invoked skills (`disable-model-invocation: true`).
+- If you cannot read a skill directory, report the skill as unknown and ask for read access. Report no skill as missing without reading its directory.
 - A global skill can be unneeded or not permitted in this project. To turn off a workflow, change `AGENTS.md`. Keep the shared global skill.
 - Installation runs no skill and grants no permission for its actions.
 

@@ -7,7 +7,7 @@ Read this file before you draft a project's `AGENTS.md`. The outline below is a 
 1. Fill the fields from the setup conversation. Omit the sections of unselected skills and every field without an agreed answer.
 2. Keep existing headings and the user's additions.
 3. Keep shared sources and permissions in the shared sections.
-4. Write a section for every selected skill, also when it has no other setting. Start it with the `Runs:` line: who starts the skill and in which phase. Then give the project settings of that skill.
+4. Write a section for every selected skill, also when it has no other setting. Start it with one line in this format: `Runs: <manual: the user calls the skill | auto: <caller> calls it at <stage>>. Phase: <phase>.` Then give the project settings of that skill. The format line itself does not go into `AGENTS.md`.
 5. For a selected skill that the outline does not list, add a section with its exact name.
 6. Write each automation setting together with its meaning, so that a reader of `AGENTS.md` does not need this file.
 7. Give each pointer to a practice or policy a trigger: when the agent reads it.
@@ -99,10 +99,6 @@ The user decides whether to accept the work.
 <writing-for-agents pointer for rules, if selected.>
 
 ## Skills
-
-Every section below starts with this line:
-
-`Runs: <manual: the user calls the skill | auto: <caller> calls it at <stage>>. Phase: <phase from Workflow rules>.`
 
 ### home-repo-init
 <Approved inventory roots, home membership and shared-material ownership when this skill is selected.>

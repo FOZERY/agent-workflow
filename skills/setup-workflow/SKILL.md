@@ -77,13 +77,14 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 4. Agree which implementation routes each trigger covers.
 5. Ask the [review coverage questions](references/AGENTS.md#review-coverage). Use the [automation settings](references/AGENTS.md#automation-settings) for the meaning of each answer.
 6. Before you record an answer, check that the skill can run it. For example, `code-review` runs its two reviewers as subagents. If the harness cannot launch them from the selected location, show the gap and ask the user to choose another location.
+7. Read the harness documentation in this setup before you state how deep subagents can launch subagents. Your memory of the harness is not a source. For Claude Code, read <https://code.claude.com/docs/en/sub-agents> and check `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` in the settings and the environment.
 
 TDD keeps the red-green loop. If TDD runs in a subagent, that subagent writes only the failing tests, from the requirements and the interface.
 
 If `implement-with-swarm` is selected:
 
 1. Ask whether workers run as separate sessions or as subagents.
-2. Find out which harness runs the workers and how many levels of subagents it supports. Read the harness documentation. If it does not say, ask the user's approval for a short probe.
+2. Find out which harness runs the workers and how many levels of subagents it supports. Read the harness documentation, as in step 7 above. If it does not say, ask the user's approval for a short probe.
 3. A subagent worker that runs TDD or review in subagents needs one more level. If the harness does not give that level, warn the user before you record the settings.
 4. Offer these options. Record the choice in the `implement` and `implement-with-swarm` sections.
    - Workers run as separate sessions, for example in Orca. Each worker session launches its own subagents.
