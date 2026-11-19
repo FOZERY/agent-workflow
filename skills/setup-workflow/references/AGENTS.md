@@ -1,54 +1,63 @@
-# Reference structure for generated AGENTS.md
+# Structure of the generated AGENTS.md
 
-Read before drafting a project contract. This outline is not active policy or a set of default permissions.
-Fill applicable fields from the conversation. Omit unselected skill sections and unresolved template fields.
-Preserve existing headings and user additions; add a named section for another selected skill when needed.
-Keep common sources and permissions in shared sections.
-Write a section for every selected skill, also when it has no other project setting. Each section starts with a `Runs:` line: who starts the skill and in which phase. Then it gives the project settings that the skill uses.
+Read this file before you draft a project's `AGENTS.md`. The outline below is a template. It is not active policy and grants no permissions.
+
+## Drafting rules
+
+1. Fill the fields from the setup conversation. Omit the sections of unselected skills and every field without an agreed answer.
+2. Keep existing headings and the user's additions.
+3. Keep shared sources and permissions in the shared sections.
+4. Write a section for every selected skill, also when it has no other setting. Start it with the `Runs:` line: who starts the skill and in which phase. Then give the project settings of that skill.
+5. For a selected skill that the outline does not list, add a section with its exact name.
+6. Write each automation setting together with its meaning, so that a reader of `AGENTS.md` does not need this file.
+7. Give each pointer to a practice or policy a trigger: when the agent reads it.
+8. For writing-style pointers, use [writing routes](writing.md). For memory, use [project artifacts](project-artifacts.md).
+9. For diagrams, use [diagram configuration](diagrams.md). Add the `excalidraw-diagram` section only when the user selected it. Add diagram pointers only to the sections of selected skills that use diagrams.
+10. For a multi-repository home, keep its navigation owner and add the `Related repositories` section. Omit that section for one repository.
+11. For an extra coding practice, link its source in the relevant skill section. Do not copy the guide.
+12. For an addition without an agreed answer, record the blocked action and its owner. Write no placeholder instruction.
 
 ## Automation settings
 
-These are instructions interpreted by the agent, not runtime configuration flags. Record agreed values under the owning skill:
+The agent reads these settings as instructions. They are not runtime flags. Setup asks every setting for each selected skill and records an answer for each one under the owning skill.
 
 | Section | Setting | Values and meaning |
 | --- | --- | --- |
-| `tdd`, `code-review` | `trigger` | `auto`: implementation starts this activity at its applicable stage. `manual`: implementation leaves it to a separate user invocation. |
-| `tdd`, `code-review` | `execution` | `current-session`: run here. `subagent`: delegate through the client. `separate-session`: use a separate thread/session or prepare an agreed user-started handoff. |
+| `tdd`, `code-review` | `trigger` | `auto`: `implement` starts the activity at its stage. `manual`: the user starts it. |
+| `tdd`, `code-review` | `execution` | `current-session`: run in this session. `subagent`: run in a subagent of the client. `separate-session`: run in a separate session, or prepare an agreed handoff that the user starts. |
 | `tdd` | `execution: subagent` | A subagent writes each failing test from the requirements and the interface only. It does not get the implementation plan. The current session writes the code that makes the test pass. |
-| `code-review` | `reviewer` | The agent, model and reasoning effort that review, for example a Claude subagent on a named model or Codex in a separate Orca session. |
-| `code-review` | `followup` | `report`: return findings and wait. `fix-and-rereview`: correct authorized findings and repeat review. |
-| `code-review` | `rounds` | The maximum number of fix-and-review rounds. Default: `3`. After the last round, the agent stops and asks the user. |
-| Workflow rules | `search` | `current-session`: search here. `subagent`: send bulk lookups to the named search agent and model. Recorded in the core block, not in a skill section. |
+| `code-review` | `reviewer` | The agent, model and reasoning effort that review. For example, a Claude subagent on a named model, or Codex in a separate Orca session. |
+| `code-review` | `followup` | `report`: return the findings and wait. `fix-and-rereview`: fix the authorized findings and review again. |
+| `code-review` | `rounds` | The maximum number of fix-and-review rounds, `3` by default. After the last round, the agent stops and asks the user. |
+| Workflow rules | `search` | `current-session`: search in this session. `subagent`: send bulk lookups to the named search agent and model. Setup records it in the core block, not in a skill section. |
 
-Setup asks every setting in this table for each selected skill. Record an answer for each one.
-TDD is a test–implementation cycle, not a complete test-writing phase before implementation.
-Manual invocation remains available regardless of the automatic trigger.
-Execution settings do not grant delegation permission or erase nested requirements of the selected skill.
-Check actual capabilities and dependencies before calling a route usable. Report incompatible mandatory steps.
-The user accepts the work. Review procedure or skill choice is ordinary prose; there is no `review.skill` or `review.required` flag.
+- TDD alternates one test and one implementation step. It is not a test-writing phase before implementation.
+- The user can always start `tdd` or `code-review` manually, whatever the trigger.
+- An execution setting does not grant delegation permission. The skill's own nested steps still apply.
+- Before you call a route usable, check the real capabilities and dependencies. Report each mandatory step that cannot run.
+- The user accepts the work.
+- Write the review procedure and the choice of review skill as prose. There is no `review.skill` or `review.required` flag.
 
 ## Review coverage
 
-Ask the applicable unanswered questions separately:
+Ask each question that is not answered yet, as a separate question:
 
-1. When should review run relative to the commit: before, after, or at both checkpoints?
-2. At each checkpoint, what does it compare: committed revisions, or a base and the working tree?
+1. When does review run: before the commit, after it, or at both points?
+2. At each point, what does it compare: commits, or a base and the working tree?
 3. How is the base selected: the target branch, a named revision, or a project rule?
-4. Which changes are in or out of scope? For working-tree review, specify staged, unstaged and untracked changes.
-5. Should the reviewer report findings and wait, or may the agent make authorized corrections and request another review?
+4. Which changes are in scope? For working-tree review, say which of staged, unstaged and untracked changes are included.
+5. Does the reviewer report and wait, or can the agent fix authorized findings and request another review?
 
-If the user chooses fixes and another review, agree correction scope, a round limit (default 3) and stop conditions, including disputed requirements or unavailable checks. Report-only review does not authorize corrections. Use the project's own procedure when these options do not fit.
+If the user selects fixes and another review, agree what the agent can fix, the round limit (`3` by default) and the stop conditions. Stop conditions include a disputed requirement and a check that cannot run.
+Report-only review gives no permission to fix. If these options do not fit, use the project's own procedure.
 
-The bundled `implement` requests a scoped working-tree snapshot for its pre-commit review by default. The bundled `code-review` can capture intended staged, unstaged and nonignored untracked changes. Branch and PR review use a committed comparison unless the agreed procedure selects a different endpoint.
-If a project selects another reviewer or requires different coverage, confirm that its procedure can review the intended files at that checkpoint. If not, report the gap and leave the affected route blocked. Setup does not authorize a commit merely to make review runnable.
+By default, `implement` asks for a working-tree snapshot of the task files for its pre-commit review. `code-review` captures the intended staged, unstaged and non-ignored untracked changes. Branch and PR review compare commits, unless the agreed procedure selects another endpoint.
+
+If the project selects another reviewer or other coverage, check that its procedure can review the intended files at that point. If it cannot, report the gap and keep the route blocked. Setup does not make a commit only so that review can run.
 
 ## Outline
 
-Replace angle-bracket fields with agreed rules. Include only selected settings and add reading triggers to practice links.
-Render each chosen automation setting with its operational meaning in the generated contract; readers must not need this setup reference to interpret it.
-Use [writing routes](writing.md) for the approved style pointers and [project artifacts](project-artifacts.md) for memory details.
-For optional diagrams, use [diagram configuration](diagrams.md). Include the `excalidraw-diagram` section only when selected, and retain diagram pointers only in applicable selected skill sections. Resolve its package pointer, delegation route and output rules from agreed settings; do not add diagram flags.
-For a multi-repository home, preserve its navigation owner and include the conditional Related repositories section. Omit it for a single-repository setup.
+Replace each angle-bracket field with the agreed rule.
 
 ```markdown
 # <Project name>
@@ -208,7 +217,3 @@ The Workflow rules section sets when to read and update memory.
 <LESSONS.md records confirmed experience and preferences with source and scope.>
 Neither file overrides requirements, accepted decisions or mandatory project rules.
 ```
-
-For another selected skill, add its exact name under `Skills`, project sources, settings and reading triggers.
-For an additional coding practice, link its authoritative source in the relevant skill section rather than copying the guide.
-Unresolved additions identify their blocked action and owner; they do not become placeholder instructions.

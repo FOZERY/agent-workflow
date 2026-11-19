@@ -148,20 +148,14 @@ Approval of the rules or the installation does not approve implementation, publi
 1. Check that `AGENTS.md` has the core block with all fields filled.
 2. Check local pointers, artifact paths, client loading where you can observe it, and skill discovery and prerequisites.
 3. Check that each setting has one owner section and that the user's additions are present.
-4. Walk through the cases that apply:
-   - A rerun keeps unrelated settings and installations.
-   - A custom policy given as prose or a link keeps its scope and approval conditions.
-   - A project restriction conflicts with a skill default or a proposed permission: the rule stays, and the affected action is blocked until the conflict is resolved.
-   - A home repository coordinates children: each child keeps its own instructions, and each session or worker can read the shared pointers.
-   - Every automation setting has an answer. With `manual`, `implement` launches nothing automatically.
-   - TDD uses the agreed tests and examples. With subagent TDD, the subagent writes only the failing tests.
-   - Review reports only, or fixes and reviews again within the agreed authority and round limit. The user accepts the work separately.
-   - Default pre-commit review uses the working-tree snapshot of the intended files. If the project selects another reviewer or endpoint, check its coverage at the agreed checkpoint.
-   - A needed helper, source or separate session is missing: the blocked step or the agreed handoff is recorded.
-   - Each added skill, tool, MCP integration and policy pointer is reachable by its reader, including delegated workers, or is recorded as a prerequisite. Availability does not grant permission to act.
-   - A plan-only task keeps its plan with the task, and the executor can use it without a new spec or tickets.
-   - Diagrams: selection alone starts nothing. A declined offer writes nothing and dispatches nothing. A missing capability blocks only the diagram.
-   - A required action conflicts with project permissions: it is reported, with no workaround.
+4. Check the cases that apply:
+   - **Rerun:** unrelated settings and installations stay as they were.
+   - **Conflict:** a project restriction wins over a skill default or a proposed permission, and the affected action is blocked.
+   - **Home repository:** each child keeps its own instructions, and each session and worker can read the shared pointers.
+   - **Automation:** every setting has an answer. With `manual`, `implement` launches nothing automatically.
+   - **Review coverage:** the pre-commit review covers the intended files at the agreed checkpoint, also with another reviewer or endpoint.
+   - **Reach:** each added skill, tool, MCP integration and policy pointer is reachable by its reader, including delegated workers, or is recorded as a prerequisite.
+   - **Gaps:** each missing helper, source or separate session is recorded with its blocked step or agreed handoff.
 5. For memory or writing changes, also use the checks in their references.
 6. Tell the user which checks were static and which ran live. Get approval before you launch a client or a helper as a probe.
 

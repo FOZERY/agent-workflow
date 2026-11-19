@@ -1,10 +1,12 @@
 # Core project artifacts
 
-Read on initial setup and when changing instruction ownership, project memory, its loading or retention. These three artifacts are part of repository preparation, independent of which optional skills are selected.
+Read this file on an initial setup and when you change the instruction owner, project memory, its loading or its retention.
+Every project has these three artifacts, whatever skills the user selects: the root `AGENTS.md`, `CONTEXT.md` and `LESSONS.md`.
 
-## Layout and instruction loading
+## Layout
 
-Choose one project agent-documentation directory, defaulting to `.docs/`. The owner may change the directory, but the workflow's memory filenames are fixed: `CONTEXT.md` and `LESSONS.md`, directly inside it. Root `AGENTS.md` stays at the repository root. The default layout is:
+The agent-documentation directory is `.docs/` by default. The owner can choose another directory.
+The memory filenames are fixed: `CONTEXT.md` and `LESSONS.md`, directly in that directory. `AGENTS.md` stays at the repository root.
 
 ```text
 AGENTS.md
@@ -13,101 +15,137 @@ AGENTS.md
   LESSONS.md
 ```
 
-Reuse existing `CONTEXT.md` and `LESSONS.md` at the selected directory only when their declared roles match this contract. For differently named records or conflicting contents, agree preservation and any migration before writing; they are source material, not alternative canonical filenames. Preserve accepted facts and existing policy, and never overwrite or rename records merely to fit the layout. If the required layout is forbidden, report that setup gap for an owner decision rather than silently choosing other filenames or creating competing memory stores.
+In this file, `<agent-docs>` means the selected directory. In `AGENTS.md`, write its real path from the repository root.
 
-Root `AGENTS.md` holds the configured workflow contract, using the semantic sections in the setup skill's draft step. Keep mandatory permissions visible there or link applicable existing procedures. Context and lessons are memory, not additional policy owners. Use the selected agent-documentation directory for new supporting detail when useful, without automatically moving established sources.
+Existing memory files:
 
-Implementation plans are task artifacts, not project memory. When `to-plan` is selected, agree its task-linked location, naming, visibility, approval and receiving executor. Keep a plan with the task's existing artifacts where permitted; use the skill's default only when no project convention exists. A remote requirement remains authoritative and can be linked from a local plan without being copied.
+1. If `CONTEXT.md` and `LESSONS.md` already exist in the selected directory and their roles match this file, reuse them.
+2. If memory records have other names or conflicting content, agree with the owner how to keep them and whether to migrate them before you write. Use them as source material. Keep their accepted facts and policy.
+3. Keep existing records as they are. Overwrite or rename a record only after the owner approves a migration.
+4. If the project forbids the required layout, report the gap to the owner. Create no other memory files in its place.
 
-Establish how each selected client loads root `AGENTS.md`:
+## AGENTS.md
 
-| Client | How root `AGENTS.md` loads |
+`AGENTS.md` holds the workflow contract. Use the sections from [the AGENTS.md structure](AGENTS.md).
+
+- Keep mandatory permissions in `AGENTS.md`, or link the existing procedures that hold them.
+- `CONTEXT.md` and `LESSONS.md` are memory. They hold no policy.
+- Put new detailed procedures in the agent-documentation directory when the project needs them. Leave established sources where they are; a move needs approval.
+
+Implementation plans are task artifacts, not memory. For `to-plan`, use the questions in [skill questions](skill-questions.md#to-plan). Keep a plan with the other artifacts of its task. A remote requirement stays authoritative: link it from the plan and do not copy it.
+
+## Client loading
+
+Find out how each selected client loads the root `AGENTS.md`:
+
+| Client | How it loads `AGENTS.md` |
 | --- | --- |
 | Codex | Natively. |
-| Claude Code | Natively from v2.1.277, but only when no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` exists in the working directory or above. When one exists, or the session cannot read `AGENTS.md`, add the line `@AGENTS.md` to the project's `CLAUDE.md`. See [Claude Code memory](https://code.claude.com/docs/en/memory). |
-| OMP | Natively in the main session. Task subagents do not receive it; see [writing instruction loading](writing.md#instruction-loading-and-approval). |
+| Claude Code | Natively from v2.1.277, but only when no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` exists in the working directory or above it. If one exists, or the session cannot read `AGENTS.md`, add the line `@AGENTS.md` to the project's `CLAUDE.md`. See [Claude Code memory](https://code.claude.com/docs/en/memory). |
+| OMP | Natively in the main session. Task subagents do not get it; see [instruction loading](writing.md#instruction-loading-and-approval). |
 
-Preserve existing client wrappers and add only the import or pointer the table requires. If another file already owns shared instructions, resolve ownership with the owner before changing it; do not duplicate policies or silently move them. If shared instructions cannot change, agree an allowed local mechanism and report the limitation. Preview client integration edits separately from installation effects and label loading unverified where it cannot be observed.
+1. Keep existing client wrappers. Add only the import or pointer that the table requires.
+2. If another file already owns the shared instructions, agree the owner with the user before you change it. Keep each policy in one place.
+3. If the shared instructions cannot change, agree an allowed local mechanism and report the limitation.
+4. Show client loading edits separately from installation. If you cannot observe that loading works, mark it as not verified.
 
-Put the memory pointers below in root `AGENTS.md` with concrete repository-root-relative paths. In this reference, `<agent-docs>` means the selected directory, not a literal output path. Substitute its actual name; retain the two fixed filenames.
+## Reading triggers
 
-| Reading trigger | Target and purpose |
-| --- | --- |
-| Starting a session, resuming it or after a context compaction | Read all of `<agent-docs>/CONTEXT.md` and `<agent-docs>/LESSONS.md`. The [core rules](core-rules.md) block carries this rule; do not repeat it elsewhere. |
-| Before changing domain or architectural behavior | Follow the project's domain pointer to the relevant glossary and accepted ADRs, where those sources exist. |
+The [core rules](core-rules.md) block tells the agent when to read memory. Keep that rule only there.
 
-These are task-boundary or decision triggers, not instructions to reload every document on every turn.
+Add this pointer to `AGENTS.md` where the project has domain sources: before a change to domain or architectural behavior, read the relevant glossary and accepted ADRs.
 
-Configure approved writing routes and startup triggers through [the writing contract](writing.md). These are rules of the consumer project's `AGENTS.md`, not dependencies embedded in reusable skills. Additional packages do not grant file or global-instruction permissions.
+Configure writing styles and their startup pointers through [writing routes](writing.md). These are rules in the project's `AGENTS.md`; reusable skills do not depend on them. A selected skill grants no file or global-instruction permissions.
 
 ## Multi-repository homes
 
-A home repo coordinates related repositories; it does not absorb their code, history, trackers or repository-specific rules.
-Use `home-repo-init` for an explicitly requested home creation or material migration. Workflow setup preserves its existing navigation and ownership.
+A home repository coordinates related repositories. Their code, history, trackers and repository rules stay in the child repositories.
 
-For a home, configure only the common procedures and sources agreed for its scope. Child test commands, exceptions and domain records stay with their owners.
-Before work in a child, read its applicable instructions. Resolve conflicting common and local procedures explicitly; the home is not a blanket override.
+1. Use `home-repo-init` only when the user asks to create a home or migrate material. Setup keeps the existing navigation and ownership.
+2. In a home, configure only the shared procedures and sources agreed for its scope. Child test commands, exceptions and domain records stay with their owners.
+3. Before work in a child, the agent reads the child's instructions. If home and child procedures conflict, resolve it with the owner. The home does not override the child by default.
+4. Agree where cross-repository task artifacts live and who writes them. A shared plan links child tasks and contracts and does not copy their requirements.
+5. Home memory records coordinated work. Each child keeps its own memory and history unless the owner approves a migration.
+6. Check access and loading from the home, from each selected child session and from delegated workers. A navigation pointer does not load a sibling's instructions or skills. Add explicit pointers or deployments where needed.
+7. Use portable paths for team layouts. Keep machine-specific paths in approved local configuration.
+8. Record a missing repository as a navigation gap. A clone URL does not permit clone, pull, worktree creation or publication.
+9. Keep related-repository pointers in the contract. Configure only the requested scope. Create no empty artifacts in the children.
 
-Agree where cross-repository task artifacts live and who writes them. A shared plan can link child tasks and contracts without copying their authoritative requirements.
-Keep home memory about coordinated work; retain each child's local memory and history unless a separate migration is approved.
+## CONTEXT.md
 
-Verify access and loading from the home, each selected child-start session and delegated workers.
-A navigation pointer does not make a sibling home's instructions or skills load automatically. Use explicit supported pointers or deployments where needed.
-Use portable paths for team layouts and keep machine-specific locations in approved local configuration.
-Treat missing repositories as navigation gaps. A clone source is not permission to clone, pull, create worktrees or publish.
+`CONTEXT.md` keeps recent work between sessions. Write entries in time order, oldest first, and add new entries at the end. Each entry has:
 
-Preserve related-repository pointers when drafting the contract. Configure only the requested scope; do not create empty consumer artifacts in every child.
+- The actual date and time with time zone, and the task ID or link. If there is no task, a clear topic.
+- What was discussed or done, and the observed result. Keep done work apart from planned work, and decisions apart from proposals.
+- Open questions, blockers and the next action, where they exist.
+- Pointers to tasks, decisions, lessons and evidence. No copied transcripts or policy.
 
-## CONTEXT.md: recent conversation continuity
+Update the file at the agreed checkpoints and within the agreed write authority. The core rules add one checkpoint: before a handoff, a context boundary or the end of a task.
+Condense old entries by the agreed retention rule. Keep open items and source links. A summary records when it was written and which period it covers.
+`CONTEXT.md` records what happened. It grants no permissions and does not prove the current state of the code.
 
-Maintain a concise chronological sequence, oldest first, appending newer entries. Each entry records:
+## LESSONS.md
 
-- The actual date and time, including timezone, and task identifier/link when applicable; otherwise a clear discussion topic.
-- What was discussed or done and its observed outcome. Distinguish completed work from intended work, and confirmed decisions from proposals.
-- Open questions, blockers and the next action or discussion, where relevant.
-- Pointers to authoritative tasks, decisions, lessons and evidence instead of copied transcripts or duplicate policy.
+`LESSONS.md` keeps long-term project experience. Every session reads all of it, so keep it short.
 
-Read it on session start, resumption and after a context compaction. Update at the agreed checkpoints, including before an approved handoff or context boundary, within the agreed write authority. Condense older material under the agreed retention policy while preserving unresolved items and source links. A summary records its creation time and covered period rather than inventing event timestamps. Context records what happened; it neither grants permissions nor proves the present code state.
+1. Group entries by topic, not by session.
+2. Keep project preferences that the owner confirmed, durable agreements that are not mandatory procedures, and verified lessons worth reuse.
+3. Write a lesson in the cases listed in the core rules: the user settled a disputed question, the user corrected the agent, or a problem appeared a second time. Keep other guesses in `CONTEXT.md` for discussion.
+4. Each entry has its date, its source (task or owner confirmation), where it applies, and whether it is still current.
+5. Mark a superseded entry and point to its replacement, or remove it by the retention rule.
+6. Record preferences as the owner's preferences, not as general engineering facts.
+7. Record experience and reasons that the code and configuration do not show. Leave out facts that one look at the code gives.
+8. Keep general personal preferences in their global source. Do not copy them into each project.
+9. When a lesson becomes an ADR, a requirement or a mandatory rule, move its content there. Keep only a pointer in `LESSONS.md`.
+10. A new constraint on agent behavior goes into `AGENTS.md` or the relevant procedure after approval, not into `LESSONS.md`.
 
-## LESSONS.md: curated long-term project memory
+## Where content goes
 
-Organize by topic, not by session. Retain confirmed project-specific preferences, durable agreements that are not mandatory procedures, and verified practical lessons worth reusing. Each entry identifies its date, source/task or explicit owner confirmation, applicable scope/conditions, and whether it remains current. Label any retained superseded item and point to its replacement; otherwise prune obsolete material under the agreed retention policy.
+When the owner says "remember this", decide the destination from the content. Ask only if the destination, scope or permission is unclear.
 
-Use these entries to inform choices within current requirements and mandatory project rules. New behavior constraints belong in the workflow contract or the applicable procedure after its required approval. Keep general personal preferences in their existing global source rather than copying them into every project. Cache unwritten experience and rationale, not facts cheaply discoverable from configuration or current code.
-
-Record accepted preferences as the owner's preferences, not universal engineering facts. Keep unconfirmed guesses and tentative lessons in recent context for discussion instead of promoting them to durable memory. When a record becomes an ADR, requirement or mandatory rule, its authoritative content moves to that source; retain only a useful pointer in lessons.
-
-## Routing and update authority
-
-When the owner says "remember this", classify the content and scope. Clarify only a genuinely ambiguous destination, applicability or authorization:
-
-| Content | Authoritative destination |
+| Content | Destination |
 | --- | --- |
-| Recent discussion, unfinished thought or next action | `<agent-docs>/CONTEXT.md` |
+| Recent discussion, unfinished thought, next action | `<agent-docs>/CONTEXT.md` |
 | Confirmed project preference or verified reusable experience | `<agent-docs>/LESSONS.md` |
-| Mandatory workflow, workspace, permission or repository rule | Root `AGENTS.md` or the applicable existing procedure |
-| Consequential technical decision with meaningful alternatives and trade-offs | The approved ADR location, using the project's decision/approval process |
-| Required product behavior or work to perform | The authoritative specification or task tracker |
-| Implementation approach, ordered work and checks for an existing task | The task's implementation plan in its configured artifact location |
+| Mandatory workflow, workspace, permission or repository rule | Root `AGENTS.md` or the existing procedure |
+| Technical decision with real alternatives and trade-offs | The approved ADR location, through the project's decision process |
+| Required product behavior or work to do | The specification or task tracker |
+| Approach, ordered work and checks for an existing task | The task's implementation plan |
 
-A retrospective produces candidates, not automatically accepted rules. Save approved outcomes to the appropriate destination, and leave unresolved proposals in context. Prefer a deterministic check for a mechanically detectable mistake where authorized; memory is not a substitute for that check.
+A retrospective gives proposals, not accepted rules. Save approved outcomes to their destination. Keep open proposals in `CONTEXT.md`.
+If a mistake can be detected mechanically, prefer an automatic check where permitted. Memory does not replace that check.
 
-Settle each applicable decision independently for `CONTEXT.md` and `LESSONS.md`:
+## Memory decisions
 
-| Decision | Choices |
+Agree each decision separately for `CONTEXT.md` and for `LESSONS.md`:
+
+| Decision | Options |
 | --- | --- |
-| Writer | The owner writes; the coordinating agent writes; or a designated maintainer writes. Name the maintainer if selected. |
-| Agent update authority | Standing permission for the agreed routine updates; fresh approval for each agent update; or no agent writes. For standing permission, specify what is covered and what still needs approval. Routine updates are recent context at agreed checkpoints. For lessons, the agent writes confirmed entries, or chooses entries itself if the user picked the agent-decides lessons variant in [core rules](core-rules.md). |
-| Git visibility | Track in the repository; keep untracked with a shared ignore rule; or keep untracked with a local-only exclusion. A visibility choice does not authorize a commit, publication or a tracking change to an existing file. |
+| Writer | The owner, the coordinating agent, or a named maintainer. |
+| Agent update authority | Standing permission for agreed routine updates, approval for each update, or no agent writes. For standing permission, record what it covers and what still needs approval. For lessons, this is the lessons variant in [core rules](core-rules.md): the agent asks first, or the agent writes and tells the user. |
+| Git visibility | Tracked; untracked with a shared ignore rule; or untracked with a local-only exclusion. This choice does not permit a commit, publication or a tracking change to an existing file. |
 
-Agree each file's update checkpoints and retention in the project's own terms or by reference to its existing procedure.
-With concurrent agents, default to one coordinating writer for shared context and lessons within the agreed authority; other agents send sourced findings to that writer.
-Memory configuration does not authorize global client-setting changes, external writes or broader filesystem access. Omit secrets and full private transcripts. Resolve material conflicts with the owner rather than silently replacing a rule with a remembered preference.
+1. Agree the update checkpoints and the retention rule for each file, in the project's terms or by a link to its procedure.
+2. With several agents at the same time, one coordinating agent writes the memory. The other agents send it their findings with sources.
+3. Memory settings do not permit global client changes, external writes or wider file access.
+4. Keep secrets and full private transcripts out of memory.
+5. If a remembered preference conflicts with a rule, resolve it with the owner. The rule stays until the owner decides.
 
-## Initial creation and reconfiguration
+## Initial setup and reruns
 
-After approval, create or update root `AGENTS.md` and necessary client integration. Create or reuse `CONTEXT.md` and `LESSONS.md` in the selected directory under effective project writing rules and the agreed Git visibility for each file. Seed context with the actual discussion and remaining questions. Populate lessons only with confirmed durable items; if none exist, state that none are confirmed. Proposed package integrations are not prerequisites of standalone setup. Configure task-artifact paths without creating empty future plans, specifications or tickets.
+Initial setup, after approval:
 
-Check that every intended reader can reach the referenced artifacts. Use an allowed local loading pointer for a local-only setup rather than publishing a shared pointer to private files.
+1. Create or update the root `AGENTS.md` and the needed client loading.
+2. Create or reuse `CONTEXT.md` and `LESSONS.md` in the selected directory. Follow the project's writing rules and the agreed Git visibility of each file.
+3. Fill `CONTEXT.md` from the actual setup discussion and its open questions.
+4. Fill `LESSONS.md` only with confirmed durable items. If there are none, write that no lessons are confirmed yet.
+5. Configure the task artifact paths. Create plans, specifications and tickets only when a task needs them.
+6. Check that every intended reader can open the referenced artifacts. For a local-only setup, use an allowed local pointer. Keep pointers to private files out of shared files.
 
-On reruns, preserve existing chronology and accepted lessons. Show the configured directory, missing files and loading/ownership gaps before asking what to change. A directory change is a migration requiring approval for affected paths and pointers; preserve history and resolve destination collisions first. File renaming is not a configuration option. Unapproved migration, conflicting ownership or forbidden writes block only the affected actions; report them without resetting history or creating duplicate stores.
+Rerun:
+
+1. Keep the existing history and accepted lessons.
+2. Show the configured directory, missing files and loading or ownership gaps. Then ask what to change.
+3. A directory change is a migration. Get approval for the affected paths and pointers, keep the history and resolve name collisions first.
+4. The memory filenames stay fixed.
+5. An unapproved migration, an ownership conflict or a forbidden write blocks only its own action. Report it. Keep the history and create no second memory store.
