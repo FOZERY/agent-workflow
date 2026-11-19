@@ -1,39 +1,65 @@
 # Delivery settings
 
-Read when configuring or changing Git and delivery behavior. Check project instructions, contribution rules, branch protections, delivery procedures, hooks, templates and ownership rules first. Cite the source for each settled rule. Show proposed changes, unchanged rules and any conflicting sources. Leave the affected action blocked until its conflict is resolved.
+Read this file when you configure or change Git and delivery behavior.
+
+1. First read the project instructions, contribution rules, branch protection, delivery procedures, hooks, templates and ownership rules.
+2. For each rule that these sources settle, cite the source.
+3. Show proposed changes, unchanged rules and conflicting sources.
+4. Keep an action blocked until its conflict is resolved.
 
 ## Permissions
 
-Ask one question per unresolved action. Use only the applicable questions in each round:
+Ask one question for each open action. Ask only the questions that apply:
 
-- **Commit:** May the agent create commits? Identify the permitted repositories, branches and changes.
-- **Push:** May the agent push? Identify the permitted remotes and branches.
-- **Open PR/MR:** May the agent open a pull or merge request? Identify the repository and source and target branch rules.
-- **Update PR/MR:** May the agent update an existing pull or merge request? Identify eligible requests and permitted updates.
-- **Merge:** May the agent merge a pull or merge request? Identify the permitted targets and required approvals.
-- **Deploy:** May the agent deploy? Identify how to select the release or revision and which environments are permitted.
-- **Branch cleanup:** May the agent clean up branches? Distinguish local and remote branches. Identify eligible branches and required retention or deletion approvals.
+| Action | Question | Also identify |
+| --- | --- | --- |
+| Commit | Can the agent create commits? | Repositories, branches and changes |
+| Push | Can the agent push? | Remotes and branches |
+| Open PR/MR | Can the agent open a pull or merge request? | Repository, source and target branch rules |
+| Update PR/MR | Can the agent update an existing request? | Which requests and which updates |
+| Merge | Can the agent merge a request? | Targets and required approvals |
+| Deploy | Can the agent deploy? | How to select the release or revision, and which environments |
+| Branch cleanup | Can the agent clean up branches? | Local or remote, which branches, and the retention or deletion approvals |
 
-For each question, name the action and offer its compatible options in the form or in chat:
+For each question, offer these options:
 
-- **Allowed under a standing rule:** The agent may do this only within explicit scope and conditions. Cite the rule or state the proposed conditions for approval.
-- **Approval each time:** The agent asks the authorized approver before each instance of this action.
-- **Human only:** The designated human role performs this action.
-- **Other:** Describe the policy in your own words or link its authoritative source.
+- **Allowed by a standing rule:** the agent does the action within an explicit scope and conditions. Cite the rule, or state the proposed conditions for approval.
+- **Approval each time:** the agent asks the approver before each action.
+- **Human only:** a named human role does the action.
+- **Other:** the user describes the policy or links its source.
 
-Record the actor and permission separately from the checkpoint. For each permitted action, record its scope, target-selection rule, conditions and checkpoint. Do not guess future targets. Permission for one action does not cover another. Task acceptance, passing checks, setup approval and installation do not grant delivery permission. If permission is unresolved, do not perform the action.
+Record for each permitted action:
+
+1. The actor and the permission.
+2. The scope, the rule that selects targets, and the conditions.
+3. The checkpoint, recorded separately from the permission.
+
+Rules for permissions:
+
+- Record only targets that the rule selects. Guess no future targets.
+- Permission for one action does not cover another.
+- Task acceptance, passed checks, setup approval and installation grant no delivery permission.
+- If a permission is open, the agent does not do the action.
 
 ## Timing and safeguards
 
-Ask about timing only where it remains open. For example: “When may authorized commits begin?” Offer compatible checkpoints, such as agreed milestones during implementation, after required checks and review pass, or after the user accepts the result. These are examples, not defaults. If none fits, ask for a custom checkpoint or source. Confirm whether intermediate commits are allowed if that is still open.
+1. If timing is open, ask, for example: "When can authorized commits begin?" Offer the checkpoints that fit: at agreed milestones during implementation, after the required checks and review pass, or after the user accepts the result. These are examples, not defaults.
+2. If no checkpoint fits, ask for a custom checkpoint or its source.
+3. If it is still open, ask whether intermediate commits are allowed.
 
-- **Commits:** Reuse rules for message language, convention, grouping and signing. Link accepted examples when useful.
-- **Checks:** Keep existing checks, hooks and branch protections. Record what to do when a check or hook fails or is unavailable. Neither condition authorizes a bypass.
-- **PR/MR content:** Keep the authoritative template, title and body requirements, evidence, task links and permitted closing keywords. Commit and PR-title conventions can differ.
-- **Participants:** Use existing ownership and reviewer rules. Ask how to resolve missing ownership and whether the agent may propose or apply metadata.
+Agree the safeguards that apply:
 
-Record the concise agreement under Git and delivery in root `AGENTS.md`. Add action-specific reading pointers to existing procedures. Create a supporting project document only when the agreed detail needs one.
+- **Commits:** reuse the rules for message language, convention, grouping and signing. Link accepted examples when they help.
+- **Checks:** keep existing checks, hooks and branch protection. Record what the agent does when a check or hook fails or is unavailable. Neither case permits a bypass.
+- **PR/MR content:** keep the template, the title and body rules, the evidence, task links and permitted closing keywords. Commit and PR title conventions can differ.
+- **Participants:** use existing ownership and reviewer rules. Ask what to do when ownership is missing, and whether the agent can propose or set metadata.
 
-Keep unrelated work and secrets out of commits. Preserve the client's approved selective-commit mechanism. Compare selected skills' commit, tracker and working-copy steps with these rules. Report each required action that the agreed rules do not permit.
+## Record the agreement
 
-**Done when:** each applicable action has a sourced rule or an explicit gap. Each permitted action has an actor, scope, target-selection rule and checkpoint. Unresolved permission, targets or checks have a stop condition. Setup has performed none of these actions.
+1. Record a short agreement in `## Git and delivery` of the root `AGENTS.md`.
+2. Add a reading pointer to each existing procedure, with its action as the trigger.
+3. Create a separate project document only when the agreed detail needs one.
+4. Keep unrelated work and secrets out of commits. Keep the client's approved way to commit selected changes.
+5. Compare the commit, tracker and working-copy steps of the selected skills with these rules. Report each required step that the rules do not permit.
+
+**Done when:** each applicable action has a sourced rule or a recorded gap. Each permitted action has an actor, a scope, a target rule and a checkpoint. Each open permission, target or check has a stop condition. Setup did none of these actions itself.

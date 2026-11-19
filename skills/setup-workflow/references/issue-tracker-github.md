@@ -1,54 +1,57 @@
 # Issue tracker: GitHub
 
-Use the GitHub repository and approved access method declared by the project. Requirements and implementation tickets may share GitHub Issues or have different authoritative sources; follow their individual contracts. An external spec does not need a duplicate issue body.
+Use the GitHub repository and the access method that the project declares.
+Requirements and implementation tickets can both live in GitHub Issues, or have different sources. Follow the agreement for each one. An external spec needs no copy in an issue body.
 
 ## Target and permissions
 
-Resolve the exact repository before every write; pass that target explicitly when the client could otherwise select an upstream repository or another clone. A remote is a discovery hint, not authorization. Existing MCP access may be the project's approved interface instead of `gh`.
+1. Before every write, find the exact repository. Pass it explicitly when the client could select an upstream repository or another clone. A remote helps you find the repository; it does not permit a write.
+2. If the project uses an approved MCP access, use it instead of `gh`.
+3. Keep each permission explicit: read, create, edit, comment, label, assign, link, change state, close. The commands below are a reference, not permissions.
+4. In a read-only workflow, give the findings and the proposed actions to a human.
+5. Missing access, an unsupported operation or an unclear target blocks that action.
 
-Keep the project's read/create/edit/comment/label/assign/link/transition/close permissions explicit. The operations below are a vocabulary and CLI reference, not grants. A read-only workflow produces findings and proposed actions for a human. Missing access, unsupported operations and unclear targets block the affected action.
+## Operations with gh
 
-## Operations when using gh
+Check that the installed CLI supports each option. Use the agreed repository.
 
-Verify the installed CLI's support and use the agreed repository target:
+- **Read:** `gh issue view <number> --json number,title,body,labels,comments,assignees,state`.
+- **Find work:** `gh issue list --state open --json number,title,body,labels,assignees`, with the approved filters. Query other states when the procedure needs them.
+- **Create:** `gh issue create --title "..." --body "..."`. Use the agreed issue type or template and a safe multiline body.
+- **Edit or comment:** `gh issue edit` or `gh issue comment <number> --body "..."`, only for the approved fields and actions.
+- **Label:** `gh issue edit <number> --add-label "..."` or `--remove-label "..."`. Use the project's label mapping. Creating a missing label is a separate operation.
+- **Assign:** `gh issue edit <number> --add-assignee <login>`, when the project permits claims.
+- **Close:** if permitted, post the required explanation, then run `gh issue close <number>`. An approved recommendation does not permit either write.
 
-- **Read**: `gh issue view <number> --json number,title,body,labels,comments,assignees,state`.
-- **Find work**: `gh issue list --state open --json number,title,body,labels,assignees`, with project-approved filters; query other states when the procedure requires them.
-- **Create**: `gh issue create --title "..." --body "..."`; use the agreed issue type/template and a safe multiline body.
-- **Edit or comment**: `gh issue edit` or `gh issue comment <number> --body "..."`, only for the approved fields/action.
-- **Label**: `gh issue edit <number> --add-label "..."` or `--remove-label "..."`; use the project role mapping. Creating a missing label is a separate operation.
-- **Assign**: `gh issue edit <number> --add-assignee <login>` when the project permits a claim/assignment.
-- **Close**: post the required explanation if authorized, then `gh issue close <number>`. An approved recommendation alone does not authorize either mutation.
-
-GitHub issues and PRs share a number space. Resolve an ambiguous reference to its actual type before using issue or PR operations.
+Issues and PRs in GitHub share one number space. If a reference is ambiguous, find its real type before you use issue or PR operations.
 
 ## Relationships and blocking
 
-Prefer the project's native sub-issues and dependencies when supported. GitHub CLI 2.94+ provides `gh issue create --parent <parent>` and `gh issue edit <parent> --add-sub-issue <child>`; dependency options include `--blocked-by` on create and `--add-blocked-by` on edit. Verify availability rather than upgrading the CLI implicitly.
-
-For an approved API implementation, sub-issue and dependency writes require the relevant issue database ID, not its display number or node ID. Use the documented endpoint for the deployed service/client instead of guessing a request. If native relationships are unavailable, agree a visible body/task-list convention with the owner before relying on it.
-
-A dependency is satisfied only when its blocking work meets the project's completion rule. A linked issue or existing fix ticket does not prove that the affected system is fixed.
+1. Prefer the native sub-issues and dependencies when the project supports them. GitHub CLI 2.94+ has `gh issue create --parent <parent>` and `gh issue edit <parent> --add-sub-issue <child>`. For dependencies, it has `--blocked-by` on create and `--add-blocked-by` on edit. Check that they exist; upgrade the CLI only with approval.
+2. Through the API, sub-issue and dependency writes need the issue's database ID, not its number or node ID. Use the documented endpoint for the deployed service and client. Guess no request.
+3. If native relationships are not available, agree a visible body or task-list convention with the owner before you rely on it.
+4. A dependency is satisfied only when the blocking work meets the project's completion rule. A linked issue or a fix ticket does not prove that the system is fixed.
 
 ## Readiness
 
-Record the readiness vocabulary required by selected planning skills. Their default is `ready-for-agent`; agree a project equivalent when needed. Readiness does not authorize implementation or publication.
+Record the readiness labels that the selected planning skills need. Their default is `ready-for-agent`; agree a project equivalent if needed. A readiness label does not permit implementation or publication.
 
-## Publishing and fetching
+## Publish and fetch
 
-When an enabled skill says to publish a spec or ticket, create/update a GitHub issue only if GitHub is that artifact's agreed source and the specific mutation is authorized. Otherwise prepare a proposal for its owner or stop the dependent action; do not create a local duplicate to evade the restriction.
-
-When a skill says to fetch a ticket, read its full relevant content and discussion. Use the project's entry/readiness rules, not a label's name alone, to decide what may happen next.
+1. When a skill says "publish" a spec or ticket, create or update a GitHub issue only if GitHub is the agreed home of that artifact and the user permitted that write.
+2. Otherwise, prepare a proposal for the owner or stop the dependent action. Create no local copy to get around the restriction.
+3. When a skill says "fetch" a ticket, read its full relevant content and discussion.
+4. Decide the next step by the project's entry and readiness rules, not by a label name alone.
 
 ## Wayfinding, when enabled
 
-These operations apply only if the project locates its decision map in GitHub. Using GitHub for implementation tasks does not require storing maps there. With read-only access, inspect sources and return proposed map updates to the authorized owner.
+These operations apply only if the project keeps its decision map in GitHub. Implementation tickets in GitHub do not require the map there. With read-only access, inspect the sources and return proposed map updates to the owner.
 
-- **Map**: one issue holding the destination, notes and decision index, using the agreed map label/type. It indexes answers rather than duplicating them.
-- **Children**: decision issues for research, prototype, grilling or task work, related to the map through native sub-issues or the agreed fallback. Link assets instead of pasting full documents.
-- **Blocking**: native dependencies or the accepted explicit convention.
-- **Frontier**: open, unblocked, unclaimed children in the agreed order; inspect blockers and ownership, not just a label query.
-- **Claim**: the project's approved assignment/claim operation before work, if authorized; otherwise a human claims it.
-- **Resolve**: record the answer, apply the permitted completion transition and add a short linked pointer to the map. If any required write is forbidden, the dependent step stays human-owned or unavailable.
+- **Map:** one issue with the destination, notes and decision index, with the agreed map label or type. It indexes the answers and does not copy them.
+- **Children:** decision issues for research, prototype, grilling or task work, linked to the map through native sub-issues or the agreed fallback. Link assets; paste no full documents.
+- **Blocking:** native dependencies or the agreed explicit convention.
+- **Frontier:** open, unblocked, unclaimed children in the agreed order. Check blockers and ownership, not only a label query.
+- **Claim:** before work, the approved assignment or claim operation, if permitted. Otherwise a human claims the child.
+- **Resolve:** record the answer, apply the permitted completion state and add a short linked pointer to the map. If a required write is forbidden, a human does that step, or it stays unavailable.
 
-Create neither missing labels nor maps merely because this guide is present. The configured workflow and permissions determine whether these operations apply.
+This guide creates no labels and no maps. The configured workflow and permissions decide whether these operations apply.

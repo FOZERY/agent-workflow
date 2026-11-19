@@ -42,7 +42,7 @@ Find out how each selected client loads the root `AGENTS.md`:
 | --- | --- |
 | Codex | Natively. |
 | Claude Code | Natively from v2.1.277, but only when no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` exists in the working directory or above it. If one exists, or the session cannot read `AGENTS.md`, add the line `@AGENTS.md` to the project's `CLAUDE.md`. See [Claude Code memory](https://code.claude.com/docs/en/memory). |
-| OMP | Natively in the main session. Task subagents do not get it; see [instruction loading](writing.md#instruction-loading-and-approval). |
+| OMP | Natively in the main session. Task subagents do not get it; see [instruction loading](writing.md#instruction-loading). |
 
 1. Keep existing client wrappers. Add only the import or pointer that the table requires.
 2. If another file already owns the shared instructions, agree the owner with the user before you change it. Keep each policy in one place.

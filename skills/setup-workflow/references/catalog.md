@@ -1,12 +1,12 @@
-# Package catalog and project composition
+# Skill catalog and project composition
 
-Read when selecting packages or configuring their project settings. Check the actual skill calls and [deployment status](skills.md#check-same-name-copies) before declaring a route usable.
+Read this file when you select skills or configure their project settings. Before you call a route usable, check the real skill calls and the [installation status](skills.md#check-same-name-copies).
 
 ## Selectable skills
 
-Discuss only relevant groups. Use a native choice tool when useful, without forcing a fixed questionnaire. Each package is optional; include user-suggested skills and check their actual source and procedure.
+Discuss only the relevant groups. Use the client's choice tool when it helps. Every skill is optional. Add the skills that the user suggests, and check their real source and procedure.
 
-| Group | Packages |
+| Group | Skills |
 | --- | --- |
 | Setup and guidance | `home-repo-init`, `setup-workflow`, `ask-workflow` |
 | Task exploration | `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
@@ -14,46 +14,37 @@ Discuss only relevant groups. Use a native choice tool when useful, without forc
 | Implementation | `implement`, `implement-with-swarm`, `tdd`, `codebase-design`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup`, `refactor-docs` |
 
-Group membership is not a dependency. Create a section in `AGENTS.md` for every selected skill.
-Ask about tools and MCP integrations separately from package selection. Record their authorized purpose and prerequisites in the project contract, not as kit dependencies.
-`to-plan` saves one task-linked implementation plan. It requires neither a specification nor tracker tickets and has no fixed skill dependencies.
-For plan-based execution, agree on a receiver that accepts the plan and its source task.
+- A group is not a dependency.
+- Create a section in `AGENTS.md` for every selected skill.
+- Ask about tools and MCP integrations separately from the skills. Record their approved purpose and prerequisites in `AGENTS.md`, not as kit dependencies.
+- `to-plan` saves one implementation plan with its task. It needs no spec, no tickets and no other skill. For plan-based work, agree an executor that takes the plan and its source task.
+- `implement-with-swarm` uses the existing task sources. Make `implement` available to each worker. Configure the worker mode and the integration rules.
+- `home-repo-init` creates or revises a multi-repository home: navigation, approved shared material and client entry points. The user runs it manually and separately. `setup-workflow` can configure the home's procedures later. Neither skill calls the other.
 
-`implement-with-swarm` uses existing task sources. Make `implement` available to each worker and configure the worker modes and integration rules.
+## Writing skills
 
-`home-repo-init` creates or revises a multi-repository home: navigation, approved shared material and client entrypoints.
-It is standalone and manually invoked. `setup-workflow` can configure that home's procedures afterward, but neither skill requires or invokes the other.
-Task planning remains separate; use `to-plan` only when a task needs an implementation plan.
+`human-text`, `asd-ste100` and `writing-for-agents` are separate writing skills. [Writing routes](writing.md) proposes them for conversation, artifacts and reusable rules in the project's `AGENTS.md`. `setup-workflow` needs none of them.
 
-## Writing choices
+## Diagrams
 
-`human-text`, `asd-ste100` and `writing-for-agents` are separate writing packages.
-The [writing contract](writing.md) proposes their use for conversation, artifacts and reusable rules in the consumer project's `AGENTS.md`.
-`setup-workflow` itself needs none of them and can be installed alone.
-
-## Diagram choice
-
-`excalidraw-diagram` is a bundled optional package, not a required helper of the original skills.
-Use [diagram configuration](diagrams.md) for relationships and alternatives, interfaces, interaction architecture or a supporting prototype sketch.
-Project skill sections link to one `excalidraw-diagram` policy. Selecting the package does not authorize individual diagrams or require setup to install it.
+`excalidraw-diagram` is an optional bundled skill. The original skills do not need it. Use [diagram configuration](diagrams.md) for relationships and alternatives, interfaces, interaction architecture or a prototype sketch. Skill sections link to one diagram policy. Selection of the skill is not consent to draw, and setup does not have to install it.
 
 ## Dependencies
 
-These procedures require access to the listed packages. Verify availability in the target client and its worker sessions.
+These skills call the listed skills. Check that the client and its worker sessions have them.
 
-| Caller | Calls and availability |
+| Caller | Calls |
 | --- | --- |
 | `grill-with-docs` | `grilling` and `domain-modeling` |
-| `wayfinder` | `grilling` and `domain-modeling` for discussion; `research` and `prototype` for their ticket types; additional skills named in map Notes |
-| `tdd` | Conditional `codebase-design` call when the interface or seam is in question |
-| `implement` | `tdd` where possible and `code-review` |
-| `implement-with-swarm` | Explicit `implement` request per worker, or readable access to the same procedure for workers that cannot invoke manual skills |
+| `wayfinder` | `grilling` and `domain-modeling` for discussion; `research` and `prototype` for their ticket types; skills named in the map Notes |
+| `tdd` | `codebase-design`, only when the interface or seam is in question |
+| `implement` | `tdd` where it applies, and `code-review` |
+| `implement-with-swarm` | `implement` in each worker: `/implement` in a session worker, the `SKILL.md` path in a subagent worker |
 | `retro` | `writing-for-agents` |
 
-Other retained packages have no fixed inter-skill call in their own procedure. Project rules or task-specific map Notes can add prerequisites.
-The included `domain-modeling`, `prototype` and `codebase-design` helpers have no additional fixed skill calls. They are available individually as well as through their callers.
-Do not restore removed helpers, download substitutes or patch callers as an implicit setup step.
-Read actual tracker publication, commit, worktree and branch-push requirements before agreeing a route.
-Project rules still own permission and additional writing choices. Installation grants neither.
-
-If an installed or source version of a package differs from this kit's, read its actual skill calls instead of relying on this table.
+1. The other skills have no fixed calls. Project rules or map Notes can add prerequisites.
+2. `domain-modeling`, `prototype` and `codebase-design` call no other skills. Each one also works alone.
+3. Restore no removed helper, download no substitute and patch no caller as a hidden setup step.
+4. Before you agree a route, read its real requirements for tracker publication, commits, worktrees and branch pushes.
+5. Project rules own permissions and writing choices. Installation grants neither.
+6. If an installed or source version of a skill differs from the kit's version, read its real calls instead of this table.

@@ -1,117 +1,115 @@
 # Skill selection and installation
 
-Read when packages, clients, scope or deployment change. Setup itself works alone. Original Matt packages can be installed individually but retain their runtime prerequisites; inspect the actual calls and [catalog](catalog.md#dependencies) before declaring readiness.
+Read this file when the selected skills, clients, scope or installation change.
+`setup-workflow` works alone. Each Matt-derived skill can be installed alone, but it keeps its runtime prerequisites. Before you call a route ready, read the skill's real calls and the [catalog dependencies](catalog.md#dependencies).
 
-## Choose the workflow, not just packages
+## Select the skills
 
-After discussing project purpose and task sources, follow [project writing configuration](writing.md). Then offer engineering packages from [the catalog](catalog.md) before conditional workflow interviews. Show purpose, installation status and recommendation. A group or joined option does not create a dependency.
+1. After the project purpose and task sources are agreed, configure writing through [writing routes](writing.md).
+2. Offer the skills from [the catalog](catalog.md) as one multi-select, before the skill-specific questions. Add a "no other skills" option and the skills that the user suggests.
+3. For each skill, show its purpose, its installation status and your recommendation. Leave every option unselected until the user selects it. Catalog groups organize the list; they are not bundles.
+4. Offer `ask-workflow` as an optional guide for workflow questions. It installs alone, before or after setup, and runs no procedures. Its selection selects no other skill.
+5. If visual design support is relevant, offer `excalidraw-diagram`. If the user selects it, use [diagram configuration](diagrams.md).
+6. Use the selection to decide which skill-specific questions apply. If a later answer makes a selected skill unsuitable, return to the selection before final approval.
 
-Offer individual applicable skill names as a multi-select, plus no additional packages. Include user-suggested packages. Use catalog groups to organize choices, not as indivisible bundles.
+Rules for the selection:
 
-All package selections are optional. Do not preselect recommendations as decisions. The project can approve additional prerequisites for a configured route; explain those separately. Selecting no package means no installation, without removing existing skills or instructions.
+- Every skill is optional. No selection means no installation. Existing skills and instructions stay.
+- A route can need an extra skill that the project approves. Explain each such prerequisite separately.
+- Check installation and discovery for each client separately.
+- A global skill can be unneeded or not permitted in this project. To turn off a workflow, change `AGENTS.md`. Keep the shared global skill.
+- Installation runs no skill and grants no permission for its actions.
 
-Use the owner's selection to determine which conditional workflow interviews apply. Revisit the selection before final approval only if later interview answers change its suitability.
+## Packages and project rules
 
-Offer `ask-workflow` as an optional guide for workflow questions and next-step advice. It can be installed on its own before or after setup, has no required skill dependencies and recommends procedures without executing them. Selecting it does not select the rest of the catalog.
+1. The Matt-derived skills keep their original calls: `wayfinder` calls `domain-modeling` and `prototype`, `tdd` calls `codebase-design`. The kit has these helper skills, but the client must have them installed too.
+2. Check the original prerequisites of each skill and the extra requirements of the approved `AGENTS.md`.
+3. If a prerequisite is missing, ask the user to approve a source and installation, or record the route as unavailable.
+4. Record roles, paths, languages, writing routes and extra skills in `AGENTS.md` or in project files that it links.
+5. Keep installed skill files unchanged. Restore no removed helper and replace no required procedure during setup. Changes to a skill are separate kit maintenance.
 
-When visual design support is relevant, offer to select optional `excalidraw-diagram` support or continue without it. If selected, use [diagram configuration](diagrams.md) for the conditional interview and readiness checks.
+## Package source
 
-Package selection identifies desired procedures and any separately approved dependencies. Check installation and discovery for each target client separately. Obtain approval for project instruction changes separately from deployment; neither grants operational permission.
+1. [The catalog](catalog.md) lists the skills of this kit version. Before you plan, check that each selected skill exists in the source. An old setup summary does not prove that a skill exists.
+2. The default source is `FOZERY/agent-workflow`, unless the user agreed another source.
+3. For the first install, only `setup-workflow` is needed. Install another skill only when the user selected it or the approved `AGENTS.md` requires it. Credits to original sources are not install targets.
+4. Find the source that installed `setup-workflow`. Read its `source` in the installer lock file: `skills-lock.json` in the project, or `~/.agents/.skill-lock.json` for a user-wide install. Install the other skills from the same revision.
+5. If the lock file names no usable source, or the remote is empty, tell the user and ask for the path to a local checkout.
+6. For each approved skill, record its source, version, compatibility and full reference files. Keep its provenance and notices.
+7. If another source has a skill with the same name, ask the user before you use it. A same name does not make two skills the same.
+8. For `excalidraw-diagram`, keep all references, the renderer, the four bundled libraries and the provenance notice. Some upstream material has no stated license, and the kit's MIT license does not cover it. Read the notice before redistribution. A same-named upstream global copy is a different skill; replace it only with the user's approval.
+9. If a skill is missing or not compatible, tell the user which route it affects and what decision is needed. Continue the unrelated work.
 
-A globally installed skill can be unnecessary or unauthorized in this project. Disabling a workflow does not mean deleting a shared global skill. Installation neither invokes a skill nor grants its actions.
+Installing skills does not permit publishing the repository.
 
-## Separate packages from project requirements
+## Clients and scope
 
-The project-aware Matt packages retain their original skill calls, including `domain-modeling` and `prototype` in Wayfinder and `codebase-design` in TDD. This kit supplies those helpers, but the target client still needs them installed. The bundled `implement` and `code-review` default to a scoped working-tree snapshot at the pre-commit checkpoint.
-
-Check both original prerequisites and extra requirements of the approved project contract.
-If a prerequisite is absent, obtain a bounded source/install decision or leave the affected route unavailable.
-Do not silently restore removed helpers, replace required procedures or modify package prompts during setup.
-
-Record roles, paths, language, writing routes and additional skills in root `AGENTS.md` or its project-owned references.
-Do not rewrite installed reusable prompts for each project. Package maintenance is a separate change.
-Installation neither invokes a skill nor authorizes global instruction edits.
-
-## Establish the package source
-
-The [kit catalog](catalog.md) lists the packages of this setup's kit version. Confirm that each selected package exists in the installation source before planning; an old setup summary is not evidence of availability.
-
-For this catalog, use `FOZERY/agent-workflow` as the default source unless another was agreed. Bootstrap needs only `setup-workflow`. Install other packages only when individually selected or explicitly required by the approved project contract. Original-source credits are not installation targets.
-
-Resolve a published revision or an approved local checkout before planning installation. Start from the source the bootstrap used: the `setup-workflow` entry in the installer lock file, `skills-lock.json` in the project or `~/.agents/.skill-lock.json` for a user-wide install, records its `source`. Install the remaining packages from that same revision. If the lock names no usable source or the remote is empty, report that and ask for the local checkout path. Installing skills does not authorize publishing the repository.
-
-For each approved package, identify the source, version, compatibility and complete references. Preserve provenance and notices. Ask before substituting a same-named package from another source; never treat an upstream package as interchangeable merely because its name matches.
-
-For `excalidraw-diagram`, preserve its full references, renderer, four bundled libraries and provenance notice. Some upstream material has no stated license; the repository's MIT license does not cover it automatically. Review the package notice before redistribution. A same-named upstream global installation is not the bundled workflow adaptation and must not be silently replaced.
-
-If a package is missing or incompatible, explain the affected project route and the decision needed. Continue unrelated work without fabricating installation or readiness.
-
-## Choose clients, scope and changes
-
-For deployment, offer the applicable supported clients individually (Claude Code, Codex, OMP) and include any requested alternative with a documented method. Client discovery does not select a client.
-
-For each selected client and package, offer project or user-wide scope where supported. Recommend scope by setting:
-
-- **Personal machine:** install user-wide, so every project runs the same kit version. Each project's rules still come from its own `AGENTS.md`.
-- **Team repository:** install into the project and track the skill directories in Git, so every member runs the same version.
-
-Different skills may use different scopes when the owner asks. Inspect only authorized installation locations and establish the supported installer or documented native method with exact destinations.
+1. Offer each supported client as a separate option: Claude Code, Codex, OMP. Add a client that the user asks for if it has a documented install method. A client found on the machine is not selected until the user selects it.
+2. For each client and skill, offer project or user-wide scope where the client supports it. Recommend by situation:
+   - **Personal machine:** user-wide. Every project runs the same kit version. Each project's rules still come from its own `AGENTS.md`.
+   - **Team repository:** project scope, with the skill directories tracked in Git. Every member runs the same version.
+3. If the owner asks, different skills can use different scopes.
+4. Inspect only the install locations that the user permitted. Find the supported installer or the documented native method and the exact destination paths.
 
 ### Check same-name copies
 
-A same-named copy from another source can shadow a selected package or violate the approved project procedure. Check each selected name for each target client in both scopes; a collision does not make an unrelated skill a package dependency.
+A copy with the same name from another source can hide a selected skill or break the approved procedure. Check each selected name, for each client, in both scopes. A name collision does not make an unrelated skill a dependency.
 
 | Client | Project skills | User-wide skills | Same name in both scopes |
 | --- | --- | --- | --- |
-| Claude Code | `.claude/skills/` | `~/.claude/skills/` | The user-wide copy runs; a project copy cannot override it. |
-| Codex | `.agents/skills/` | `~/.agents/skills/`, `~/.codex/skills/` | Both load, and `$name` becomes ambiguous and does not resolve by name. |
-| OMP | `.omp/skills/` | `~/.omp/agent/skills/` | Unverified; read the current OMP skill documentation before relying on precedence. |
+| Claude Code | `.claude/skills/` | `~/.claude/skills/` | The user-wide copy runs. A project copy cannot override it. |
+| Codex | `.agents/skills/` | `~/.agents/skills/`, `~/.codex/skills/` | Both load, and `$name` is ambiguous. It does not resolve by name. |
+| OMP | `.omp/skills/` | `~/.omp/agent/skills/` | Not verified. Read the current OMP skill documentation before you rely on precedence. |
 
-Claude Code also has a bundled `code-review`. An installed selected copy replaces `/code-review`, while `/review` keeps the client's bundled behavior. Inspect the effective version when an original implementation calls review; there is no longer a self-contained local reviewer fallback.
+Claude Code also has a bundled `code-review`. An installed copy of the kit's skill replaces `/code-review`. `/review` keeps the client's bundled behavior. When an original skill calls review, check which version is active. There is no local fallback reviewer.
 
-Identify each copy's origin through the `source` of its installer lock entry, its symlink target, or a content comparison with this kit's package. A copy counts as the kit's when its source is this kit or its content matches the kit package. Keep a matching kit copy instead of reinstalling it.
+1. Find the origin of each copy: the `source` in its lock entry, its symlink target, or a content comparison with the kit's skill.
+2. A copy belongs to the kit when its source is this kit or its content matches the kit's skill. Keep such a copy; do not reinstall it.
+3. If another copy hides or collides with a kit skill, show its path, origin and effect. Let the owner choose:
+   - Replace the user-wide copy with the kit's copy. This changes every project that uses it. Move the old copy to a recoverable location.
+   - Move the kit installation to user-wide scope.
+   - Keep the other copy and record the dependent route as unavailable.
+4. Install exactly one copy of each name for each client.
+5. In a team repository, record in `AGENTS.md` which skill names a personal install would hide, so that members can check their machines.
 
-When another copy shadows or collides with a kit package, show its path, origin and effect, and let the owner choose:
+## Install plan and approval
 
-- Replace the user-wide copy with the kit's. This changes every project that uses it; move the old copy to a recoverable location.
-- Move the kit installation to user-wide scope.
-- Keep the other copy and record the dependent route as unavailable.
+1. Prepare a bounded plan. List the approved skills and why, reused copies, versions, clients, scopes, paths, the install method (install, copy or link), runtime and network effects, lock files and bundled notices.
+2. Show the skill combinations that the project requires and the instruction pointers as a separate part.
+3. Show the installation separately from the `AGENTS.md` edits. For each set, offer three answers: approve as shown, approve a named subset, or do not approve. One reply can approve both sets explicitly.
+4. Include in the plan every action that needs approval: a new tool, an `npx` download, a replaced skill, an updated global copy, changed client settings.
 
-Install exactly one copy per name for each client. In a team repository, record in the contract which skill names a personal install would shadow, so members can check their own machines.
+- A configured workflow or a saved list of wanted skills does not approve installation.
+- An approved bounded plan needs no confirmation for each command, unless its scope or effects change.
+- If the owner declines installation, save only the approved configuration. Report the missing skills and the workflows that depend on them. Call no skill installed that is not installed.
 
-Prepare a bounded plan listing approved packages and reasons, reused copies, versions, clients, scopes, paths, install/copy/link method, runtime, network effects, lock files and bundled notices. Show project-required combinations and instruction pointers separately. Availability of a package does not authorize editing instructions.
+## Run the approved plan
 
-## Obtain installation approval
+1. Run only the approved installation. Skills install independently. If one install fails, continue the other approved installs.
+2. Copy complete skill directories in their original layout. Keep the bundled notices. For a skill without a license file, add the root third-party notice next to it.
+3. Use `npx skills` for the clients that it supports. The reviewed release is `skills@1.9.0`; it needs Node.js 22.20 or newer. Use the approved version. See its [command reference](https://github.com/vercel-labs/skills/blob/50894c1d98bc45ca1ab127213e59d6525065b5e7/docs/commands.md) and [supported-agent paths](https://github.com/vercel-labs/skills/blob/50894c1d98bc45ca1ab127213e59d6525065b5e7/docs/agents.md). The kit repository is the source; the kit has no npm package.
+4. Build `npx skills@1.9.0 add` with the agreed source, the exact approved `--skill` names and the selected `--agent` clients. The installer does not know the project's selection. Each skill can install alone:
 
-Present installation separately from the contract edits. For each proposed set, offer approval as presented, approval of a named subset, or no approval; one reply can explicitly approve both sets. Configuring a workflow or saving a desired skill list alone does not authorize installation. Conversely, an approved, bounded installation needs no repeated per-command confirmation unless its scope or effects change.
+   ```bash
+   npx skills@1.9.0 add FOZERY/agent-workflow --skill human-text --agent codex
+   npx skills@1.9.0 add FOZERY/agent-workflow --skill asd-ste100 --agent codex
+   ```
 
-If the owner declines installation, save only approved configuration and report the missing skills and dependent workflows. Do not call desired packages installed. Installing a new tool, downloading an installer through `npx`, replacing an existing skill, updating a global copy or modifying client settings must be included in approval, not hidden prerequisites.
+5. Use `--global` only for approved global destinations. Use `--copy` only when that method is agreed. Use `--yes` only after the user approved the exact plan. Name each skill and client explicitly; use no all-skills or all-agents selector.
+6. Include lock files, canonical copies and symlinks in the approved write set.
+7. For a client that `npx skills` does not support, agree a documented install method. Guess no agent name.
+8. Download and run a CLI only within the approved tool and download scope.
+9. On a partial failure, report each operation as done, failed or not tried. Keep working installs and unrelated changes. Claim no rollback without approval. A failed install blocks only the procedures that depend on it.
 
-## Execute the approved plan
+## Verify the installation
 
-After configuration, execute only the approved deployment. Packages can install independently. If a configured route has project prerequisites, verify those before calling that route ready; continue unrelated approved installs after a failure.
+1. Inspect the skill files, bundled references, notices, lock entries and client discovery.
+2. Repeat the [same-name check](#check-same-name-copies).
+3. Report each skill as present, discoverable, or tested by invocation. Check extra project prerequisites only for routes that need them.
+4. Tell the user if the client needs a reload. Launch no other agent or changing workflow only to test discovery.
+5. For diagrams, also check through [diagram configuration](diagrams.md) that a worker can read the sources and assets, write to the artifact destination, and reach the renderer, browser and network it needs. Discovery alone does not prove that a worker can make and check a preview.
+6. Report which skills are ready for the agreed use, which are installed but not verified, and which are unavailable or not compatible.
 
-Copy complete package directories in their original layout. Preserve bundled notices where present. For packages without a license file, include the root third-party notice alongside them as part of the approved install or export.
+The installer lock files are the install record. Keep no second copy of their data.
 
-Use `npx skills` for clients it supports. The reviewed npm release is `skills@1.9.0`, requiring Node.js 22.20 or newer; use the approved version and consult its [command reference](https://github.com/vercel-labs/skills/blob/50894c1d98bc45ca1ab127213e59d6525065b5e7/docs/commands.md) and [supported-agent paths](https://github.com/vercel-labs/skills/blob/50894c1d98bc45ca1ab127213e59d6525065b5e7/docs/agents.md). Our skill repository is its source; a separate npm package for this kit is not required.
-
-Build `npx skills@1.9.0 add` with the agreed source, exact approved `--skill` names and selected `--agent` clients. The installer does not infer project composition. For example, either package can install alone:
-
-```bash
-npx skills@1.9.0 add FOZERY/agent-workflow --skill human-text --agent codex
-npx skills@1.9.0 add FOZERY/agent-workflow --skill asd-ste100 --agent codex
-```
-
-Use `--global` only for approved global destinations and `--copy` when that installation method was agreed. Non-interactive `--yes` is acceptable only after the exact plan is approved. Avoid all-skills/all-agents selectors. Account for lock files, canonical copies and symlinks in the approved write set. For an unsupported client, agree a documented installation method instead of guessing a compatible agent name. Do not download or execute a CLI outside the approved tool/download scope.
-
-On partial failure, report each successful, failed and unattempted operation. Do not delete working installs, undo unrelated changes or claim rollback without authorization. A blocked install blocks its dependent procedures, not unrelated local work.
-
-## Verify deployment
-
-Inspect the requested package files, bundled references, notices, lock entries and client discovery. Repeat the [same-name check](#check-same-name-copies). Distinguish present, discoverable and tested by invocation. Check additional project prerequisites only for a route that requires them. Explain reload requirements; do not launch another agent or mutating workflow merely to test discovery.
-
-For selected diagrams, also check worker-visible sources/assets, the configured artifact destination and renderer/browser/network prerequisites through [diagram configuration](diagrams.md). Package discovery alone does not establish that a separate worker can generate and inspect a preview.
-
-Report which requested skills are ready for the agreed use, which are installed but not yet discovery-verified, and which are unavailable or incompatible. The installer lock files are the deployment record; keep no second copy of their data.
-
-**Done when:** each approved package has an observed installation/discovery result or precise blocker; configured project routes are checked separately. Unchanged installations are preserved, no unselected package was added, and installation granted no operational permission.
+**Done when:** each approved skill has an observed install and discovery result or a precise blocker, and the project routes are checked separately. Unchanged installations stay, no unselected skill was added, and installation granted no permission to act.
