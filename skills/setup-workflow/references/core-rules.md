@@ -67,11 +67,12 @@ Write the entry yourself. In the same reply, tell the user which entry you added
 ## Block
 
 ```markdown
-<!-- agent-workflow:core v4 -->
+<!-- agent-workflow:core v5 -->
 setup-workflow owns this section. To change it, run setup again.
 
 ### Workflow
 A task moves through these phases. A ready task starts at Implement.
+When you begin to change code for a task, start the `implement` skill first. A trivial edit, such as a typo, does not need it.
 The `## Skills` section tells each skill how to work in this project.
 
 <phases>
