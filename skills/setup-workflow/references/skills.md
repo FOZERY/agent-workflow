@@ -1,7 +1,7 @@
 # Skill selection and installation
 
 Read this file when the selected skills, clients, scope or installation change.
-`setup-workflow` works alone. Each Matt-derived skill can be installed alone, but it keeps its runtime prerequisites. Before you call a route ready, read the skill's real calls and the [catalog dependencies](catalog.md#dependencies).
+`setup-workflow` works alone, except that writing `AGENTS.md` needs `asd-ste100` and `writing-for-agents`. Each Matt-derived skill can be installed alone, but it keeps its runtime prerequisites. Before you call a route ready, read the skill's real calls and the [catalog dependencies](catalog.md#dependencies).
 
 ## Select the skills
 
@@ -33,7 +33,7 @@ Rules for the selection:
 
 1. [The catalog](catalog.md) lists the skills of this kit version. Before you plan, check that each selected skill exists in the source. An old setup summary does not prove that a skill exists.
 2. The default source is `FOZERY/agent-workflow`, unless the user agreed another source.
-3. For the first install, only `setup-workflow` is needed. Install another skill only when the user selected it or the approved `AGENTS.md` requires it. Credits to original sources are not install targets.
+3. For the first install, `setup-workflow` is needed, and `asd-ste100` and `writing-for-agents` before setup writes `AGENTS.md`. Install another skill only when the user selected it or the approved `AGENTS.md` requires it. Credits to original sources are not install targets.
 4. Find the source that installed `setup-workflow`. Read its `source` in the installer lock file: `skills-lock.json` in the project, or `~/.agents/.skill-lock.json` for a user-wide install. Install the other skills from the same revision.
 5. If the lock file names no usable source, or the remote is empty, tell the user and ask for the path to a local checkout.
 6. For each approved skill, record its source, version, compatibility and full reference files. Keep its provenance and notices.
@@ -63,6 +63,8 @@ A copy with the same name from another source can hide a selected skill or break
 | OMP | `.omp/skills/` | `~/.omp/agent/skills/` | Not verified. Read the current OMP skill documentation before you rely on precedence. |
 
 Claude Code also has a bundled `code-review`. An installed copy of the kit's skill replaces `/code-review`. `/review` keeps the client's bundled behavior. When an original skill calls review, check which version is active. There is no local fallback reviewer.
+
+Claude Code also has a bundled `simplify`. An installed copy of the kit's skill replaces `/simplify`. When `implement` calls `simplify`, check which version is active.
 
 1. Find the origin of each copy: the `source` in its lock entry, its symlink target, or a content comparison with the kit's skill.
 2. A copy belongs to the kit when its source is this kit or its content matches the kit's skill. Keep such a copy; do not reinstall it.

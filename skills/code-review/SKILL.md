@@ -12,7 +12,7 @@ Review two axes against one pinned Git diff:
 - **Standards**: does the code conform to this repo's documented coding standards?
 - **Spec**: does the code faithfully implement the originating issue / spec?
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings. Start every sub-agent with a fresh context window.
+Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings. Start every sub-agent with a fresh context window. Launch them from the session that runs this skill, with the agent, model and reasoning effort of the `reviewer` setting in the project's `code-review` section. If that session cannot launch sub-agents, report the blocker.
 
 Use the task or specification supplied by the caller. If a required tracker source is unavailable, report the missing access.
 

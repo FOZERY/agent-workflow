@@ -22,8 +22,9 @@ The kit does not run an automated pipeline or enforce permissions.
 | [`to-tickets`](skills/to-tickets/SKILL.md) | Work needs separately tracked tickets with explicit dependencies. |
 | [`implement`](skills/implement/SKILL.md) | The current session should implement and verify one agreed task. |
 | [`implement-with-swarm`](skills/implement-with-swarm/SKILL.md) | The main session should act as architect and coordinate workers on a large task. |
-| [`tdd`](skills/tdd/SKILL.md) | You want to write a failing test, then make the smallest change that passes it. |
+| [`tdd`](skills/tdd/SKILL.md) | You want to write a failing test, then make the smallest change that passes it, or audit existing tests. |
 | [`code-review`](skills/code-review/SKILL.md) | You want to check a diff against project standards and task requirements. |
+| [`simplify`](skills/simplify/SKILL.md) | You want changed code made simpler and clearer, and needless guards, fallbacks and abstractions removed. |
 
 ## Workflow
 
@@ -82,6 +83,7 @@ npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-workflow --agent co
 
 In Codex, run `$setup-workflow`. For Claude Code, install with `--agent claude-code`, then run `/setup-workflow`.
 To install a different skill, replace `setup-workflow` in the install command with its name.
+Setup writes `AGENTS.md` by the rules of `asd-ste100` and `writing-for-agents`. If they are missing, setup offers to install them.
 Add `--global` only for a user-wide install.
 
 For other clients or installation scopes, see [skill deployment](skills/setup-workflow/references/skills.md).
