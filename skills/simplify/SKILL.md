@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: "Simplify code changed in the current task and roll back overengineering. Use after implementation and before review, or when the user asks to simplify, tidy or trim recent changes."
+description: "Simplify code changed in the current task and roll back overengineering. Use when the user asks to simplify, tidy or trim recent changes, or when another skill calls it."
 ---
 
 Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
