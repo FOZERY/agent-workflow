@@ -24,7 +24,7 @@ Link each skill name to its section under `## Skills` in the project's `AGENTS.m
 1. **Setup.** `setup-workflow` configures this file. `home-repo-init` creates a multi-repository home.
 2. **Clarify.** `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`, `codebase-design`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
-4. **Implement.** `implement` for one session, `implement-with-swarm` for an architect with workers. `tdd` runs inside implementation.
+4. **Implement.** `implement` for one session, `implement-with-swarm` for an architect with workers. `tdd` and `simplify` run inside implementation.
 5. **Review.** `code-review`.
 6. **Accept.** The user accepts the work. Commit, push and other delivery follow `## Git and delivery`.
 7. **Improve.** `retro`, `cleanup`, `refactor-docs`.
@@ -67,7 +67,7 @@ Write the entry yourself. In the same reply, tell the user which entry you added
 ## Block
 
 ```markdown
-<!-- agent-workflow:core v2 -->
+<!-- agent-workflow:core v4 -->
 setup-workflow owns this section. To change it, run setup again.
 
 ### Workflow
@@ -75,6 +75,15 @@ A task moves through these phases. A ready task starts at Implement.
 The `## Skills` section tells each skill how to work in this project.
 
 <phases>
+
+### Skill settings
+A skill section under `## Skills` can set these values:
+- `trigger`: `auto` means `implement` starts the skill at its stage. `manual` means the user starts it.
+- `execution`: where the skill runs. Values: `current-session`, `subagent` or `separate-session`. A separate session is a new session, or a handoff that the user starts. This value grants no permission to delegate. For `code-review`, it sets where the procedure runs. Its two reviewers are always subagents of that session.
+- `skill`: the installed path of the skill's `SKILL.md`, for each client. A subagent that runs the skill reads this file.
+- `reviewer`: the agent, model and reasoning effort of the `code-review` reviewers.
+- `followup`: `report` means return the findings and wait. `fix-and-rereview` means fix the authorized findings and review again.
+- `rounds`: the limit for `fix-and-rereview`. See Review rounds.
 
 ### Questions
 When the user must decide or answer, ask through the harness's question tool, such as `AskUserQuestion` in Claude Code. Put all open questions of one round into one call. Give each question its options and the effect of each, and make it readable without the text above it.
@@ -90,6 +99,7 @@ Check their facts against the current code and task sources before you act on th
 
 ### Delegated workers
 Give each subagent or worker the path to this file, the task sources and the skill paths it must follow.
+To run a skill in a subagent, give it the path to that skill's `SKILL.md` from the skill's section under `## Skills`. Tell it to read the file in full and follow it. Pass the inputs the skill needs, such as the scope, the base and the task sources. Do not summarize the skill in the brief.
 Some harnesses do not load `AGENTS.md` into subagents.
 A subagent launches its own subagents only where `## Skills` says the harness supports it.
 
@@ -99,6 +109,10 @@ Continue the steps that do not depend on it.
 
 ### Done
 Say that work is done only after you run the agreed checks. Give their actual result.
+
+### Editing this file
+Before you write or edit this file, read the installed `asd-ste100` and `writing-for-agents` skills unless they are already in context. Apply both.
+Keep this file under 300 lines. Put project details in `<agent-docs>/project/` and link them with a trigger.
 
 ### Review rounds
 If review follow-up allows fixes, fix findings and review again for at most <review-rounds> rounds. After the last round, stop and ask the user.

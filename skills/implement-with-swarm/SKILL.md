@@ -36,7 +36,7 @@ Every worker runs [`implement`](../implement/SKILL.md) for its assignment:
 
 Verify access to the procedure, task sources, and workspace before edits.
 
-The worker owns its code, applicable tests, and review. It runs TDD and review as the project's `implement` section says, including the nesting option recorded there. A self-check does not replace required independent review.
+The worker owns its code, applicable tests, and review. It runs TDD, simplify and review as the project's `implement` section says, including the nesting option recorded there. A self-check does not replace required independent review.
 
 Start independent assignments in parallel. Start dependent assignments once their prerequisites are available. Route contract changes through the architect and notify workers whose assignments depend on them.
 

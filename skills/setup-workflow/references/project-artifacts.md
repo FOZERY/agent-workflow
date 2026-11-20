@@ -13,6 +13,7 @@ AGENTS.md
 .docs/
   CONTEXT.md
   LESSONS.md
+  project/        long project rules, see the AGENTS.md structure
 ```
 
 In this file, `<agent-docs>` means the selected directory. In `AGENTS.md`, write its real path from the repository root.
@@ -30,7 +31,7 @@ Existing memory files:
 
 - Keep mandatory permissions in `AGENTS.md`, or link the existing procedures that hold them.
 - `CONTEXT.md` and `LESSONS.md` are memory. They hold no policy.
-- Put new detailed procedures in the agent-documentation directory when the project needs them. Leave established sources where they are; a move needs approval.
+- Put detailed project rules in `<agent-docs>/project/`, as [the AGENTS.md structure](AGENTS.md#project-files) describes. Leave established sources where they are. A move needs approval.
 
 Implementation plans are task artifacts, not memory. For `to-plan`, use the questions in [skill questions](skill-questions.md#to-plan). Keep a plan with the other artifacts of its task. A remote requirement stays authoritative: link it from the plan and do not copy it.
 

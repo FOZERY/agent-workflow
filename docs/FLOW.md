@@ -33,7 +33,7 @@ For swarm work across repositories or with independent worktrees, prefer separat
 
 ## Verify and accept
 
-Follow the project's settings for TDD and review. Manual means you start that activity separately.
+Follow the project's settings for TDD, simplify and review. Manual means you start that activity separately. With `auto`, `implement` runs `simplify` before review, so review sees the final code.
 With `implement-with-swarm`, each worker runs `implement` for its assignment, including applicable tests and review. By default, reviewer subagents check the worker's scoped snapshot before commit. The architect verifies the combined result separately.
 See [review coverage and follow-up](../skills/setup-workflow/references/AGENTS.md#review-coverage) for scope, timing, and whether the agent can fix findings.
 

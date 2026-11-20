@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
+description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", wants integration tests, or wants to audit or prune existing tests.
 ---
 
 Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
@@ -33,6 +33,12 @@ When the shape of that interface is itself in question (how deep the module is, 
 
 - **Implementation-coupled**: mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
 - **Tautological**: the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth: a known-good literal, a worked example, the spec.
+- **Exercise without a claim**: the test runs lines, copies identities or lists exports, so coverage rises but no credible defect can be detected. The tell: the assertions still pass on broken behavior.
+- **The harness does the job**: a mock implements the behavior the test claims to prove, a fixture supplies the acknowledgement or ordering that production must create, or a persistence check reads a store that the real path never writes. One identical fake for different dependency APIs hides their differences.
+- **The wrong cause goes red**: a negative case fails on a different guard, or never reaches the intended branch. Check the failing condition, not only that something rejected the input.
+- **Declaration posing as behavior**: source greps, import lists, capability flags and call-shape checks certify the declaration while the user path is broken. Test the behavior that the declaration promises.
+- **One proof repeated**: private helper tests, per-provider replays of shared logic and several layers that run the same regression scenario all protect one contract. Keep distinct transport and lifecycle risks, not copies of one scenario.
+- **Tests keeping code alive**: a helper or production escape hatch exists only because tests call it. Test the real entry point and remove the hook, not replace it with another test-only abstraction.
 - **Horizontal slicing**: writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead: one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
 
 ## Rules of the loop
@@ -40,3 +46,11 @@ When the shape of that interface is itself in question (how deep the module is, 
 - **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
 - **One slice at a time.** One seam, one test, one minimal implementation per cycle.
 - **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.
+
+## Auditing existing tests
+
+To audit or prune existing tests, read [audit.md](audit.md). Use the anti-patterns above as investigation prompts, not as automatic removal rules.
+
+## In a subagent
+
+When the project runs TDD in a subagent, the launching session passes the requirements, the interface and the confirmed seams. The subagent writes the failing test for one seam, runs it, and returns the test path and the red result. It gets no implementation plan. The launching session writes the code that makes the test pass.

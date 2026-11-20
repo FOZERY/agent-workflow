@@ -63,33 +63,36 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 4. Keep shared paths and permissions in one place in `AGENTS.md`. A skill section holds only the settings of that skill.
 5. For `to-plan`, `to-spec`, `to-tickets`, `wayfinder` and `excalidraw-diagram`, ask the questions in [skill questions](references/skill-questions.md).
 
-### 2.3 Implementation, TDD and review
+### 2.3 Implementation, TDD, simplify and review
 
 1. For `tdd`, ask: "How do we work with tests here? Which test types and existing examples should guide us? What infrastructure or mocking constraints apply?" Find the test commands yourself.
 2. For review, ask which requirements, coding practices and examples guide it. Accept a project procedure or another review skill. Record the procedure as prose.
 3. Ask each question below as a separate form question with its options. Every question is required, also when the user has no preference.
    1. TDD trigger: does `implement` start TDD automatically, or only when the user asks?
    2. TDD location: the current session, a subagent that writes only the failing tests, or a separate session?
-   3. Review trigger: does `implement` start review automatically, or only when the user asks?
-   4. Review location: the current session, a subagent, or a separate session?
-   5. Reviewer: which agent, model and reasoning effort? List what the harness and Orca offer.
-   6. Review follow-up: report findings and wait, or fix and review again?
-   7. Review rounds: how many fix-and-review rounds before the agent stops and asks? Offer `3` as the default.
+   3. Simplify trigger: does `implement` start `simplify` automatically after the implementation, or only when the user asks?
+   4. Simplify location: a subagent (recommended), the current session, or a separate session?
+   5. Review trigger: does `implement` start review automatically, or only when the user asks?
+   6. Review location: where does the `code-review` procedure run: the current session, a subagent, or a separate session? Its reviewers are subagents of that session either way.
+   7. Reviewer: which agent, model and reasoning effort? List what the harness and Orca offer.
+   8. Review follow-up: report findings and wait, or fix and review again?
+   9. Review rounds: how many fix-and-review rounds before the agent stops and asks? Offer `3` as the default.
 4. Agree which implementation routes each trigger covers.
 5. Ask the [review coverage questions](references/AGENTS.md#review-coverage). Use the [automation settings](references/AGENTS.md#automation-settings) for the meaning of each answer.
-6. Before you record an answer, check that the skill can run it. For example, `code-review` runs its two reviewers as subagents. If the harness cannot launch them from the selected location, show the gap and ask the user to choose another location.
-7. Read the harness documentation in this setup before you state how deep subagents can launch subagents. Your memory of the harness is not a source. For Claude Code, read <https://code.claude.com/docs/en/sub-agents> and check `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` in the settings and the environment.
+6. Before you record an answer, check that the skill can run it. For example, `code-review` runs its two reviewers as subagents of the session that runs it. If the harness cannot launch them from the selected location, for example because a subagent has no level left for them, show the gap and ask the user to choose another location.
+7. Record the installed `SKILL.md` path of `tdd`, `simplify` and `code-review` for each client in their `skill` setting. A subagent that runs a skill reads that file, so check that the path exists.
+8. Read the harness documentation in this setup before you state how deep subagents can launch subagents. Your memory of the harness is not a source. For Claude Code, read <https://code.claude.com/docs/en/sub-agents> and check `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` in the settings and the environment.
 
 TDD keeps the red-green loop. If TDD runs in a subagent, that subagent writes only the failing tests, from the requirements and the interface.
 
 If `implement-with-swarm` is selected:
 
 1. Ask whether workers run as separate sessions or as subagents.
-2. Find out which harness runs the workers and how many levels of subagents it supports. Read the harness documentation, as in step 7 above. If it does not say, ask the user's approval for a short probe.
-3. A subagent worker that runs TDD or review in subagents needs one more level. If the harness does not give that level, warn the user before you record the settings.
+2. Find out which harness runs the workers and how many levels of subagents it supports. Read the harness documentation, as in step 8 above. If it does not say, ask the user's approval for a short probe.
+3. A subagent worker that runs TDD, simplify or review in subagents needs one more level. If the harness does not give that level, warn the user before you record the settings.
 4. Offer these options. Record the choice in the `implement` and `implement-with-swarm` sections.
    - Workers run as separate sessions, for example in Orca. Each worker session launches its own subagents.
-   - Workers stay subagents and run TDD in their own context. The architect launches the reviewers for each worker's result.
+   - Workers stay subagents and run TDD and simplify in their own context. The architect launches the reviewers for each worker's result.
    - Workers stay subagents. The user starts `/code-review` for each worker's result.
 
 ### 2.4 Search
@@ -121,14 +124,14 @@ Record each gap with its blocked step.
 
 ## 3. Draft and get approval
 
-1. Read [the AGENTS.md structure](references/AGENTS.md) and [core rules](references/core-rules.md).
+1. Read [the AGENTS.md structure](references/AGENTS.md) and [core rules](references/core-rules.md). Read the installed `asd-ste100` and `writing-for-agents` skills and apply both to every file that you draft. If one is missing, stop this step, tell the user and offer its [bounded installation](references/skills.md#install-plan-and-approval). Continue the unrelated work.
 2. Put the core block in `## Workflow rules` and fill its fields. Build its phase list from the selected skills.
 3. Write a section under `## Skills` for every selected skill. Start each section with its `Runs:` line.
 4. Write the shared sections with the agreed facts. Omit the sections that do not apply. Use a skill default only where it fits the project rules and permissions. Follow the project's writing rules.
-5. Keep `AGENTS.md` short. Link existing practices. Write a new detailed procedure under the agent-documentation directory only when the project needs it. The setup references are drafting guides, not project runbooks.
+5. Keep `AGENTS.md` under 300 lines. Move each procedure, standard and long fact set to a file under `<agent-docs>/project/` and link it with a trigger. Link existing practices instead of copying them. The setup references are drafting guides, not project runbooks.
 6. Put each mandatory restriction in the section that controls its action. Give each policy and tool pointer a trigger: when the agent reads it.
 7. For a private policy, record only what the visibility rules permit. Check that the intended reader can open the authoritative rule.
-8. Show a preview: changed rules and pointers, changed visibility and compatibility gaps. Mark new or changed permissions and mandatory restrictions. On a rerun, also list the permissions and restrictions that stay the same.
+8. Show a preview: the line count of `AGENTS.md`, the project files that you will create, changed rules and pointers, changed visibility and compatibility gaps. Mark new or changed permissions and mandatory restrictions. On a rerun, also list the permissions and restrictions that stay the same.
 9. Show the installation as a separate set of actions. Get approval for each set.
 
 Approval of the rules or the installation does not approve implementation, publication or global changes.
@@ -138,7 +141,7 @@ Approval of the rules or the installation does not approve implementation, publi
 ## 4. Apply the changes
 
 1. Read the target files again and merge only the approved edits.
-2. On an initial setup, create or reuse the root `AGENTS.md`, `CONTEXT.md` and `LESSONS.md` as [project artifacts](references/project-artifacts.md) describes. Fill memory from the actual discussion.
+2. On an initial setup, create or reuse the root `AGENTS.md`, `CONTEXT.md` and `LESSONS.md` as [project artifacts](references/project-artifacts.md) describes. Fill memory from the actual discussion. Create the approved files under `<agent-docs>/project/`.
 3. On a rerun, keep unrelated settings and history. If the core block version in `AGENTS.md` differs from [core rules](references/core-rules.md), show the difference. After approval, replace only the block.
 4. Apply the approved loading and visibility changes. Create plans, specs, tickets, glossaries and ADRs only when a task needs them. A move or a storage migration needs its own approval.
 5. If the user approved installation, follow [deployment](references/skills.md). Reuse compatible skills, keep license notices and report partial failures.
@@ -148,7 +151,7 @@ Approval of the rules or the installation does not approve implementation, publi
 
 ## 5. Verify and hand over
 
-1. Check that `AGENTS.md` has the core block with all fields filled.
+1. Check that `AGENTS.md` has the core block with all fields filled, stays under 300 lines, and gives every pointer a trigger.
 2. Check local pointers, artifact paths, client loading where you can observe it, and skill discovery and prerequisites.
 3. Check that each setting has one owner section and that the user's additions are present.
 4. Check the cases that apply:

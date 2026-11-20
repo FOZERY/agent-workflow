@@ -1,7 +1,7 @@
 # Project writing contract
 
 Read this file when you configure writing routes, languages, clients or instruction loading.
-The writing skills are independent. Setup runs without them and keeps their files unchanged.
+The writing skills are independent. Setup keeps their files unchanged. Setup needs `asd-ste100` and `writing-for-agents` only to write `AGENTS.md` and the project files: it applies both to them whatever route the owner selects here.
 Record their approved use in the project's root `AGENTS.md`.
 
 ## Routes and languages

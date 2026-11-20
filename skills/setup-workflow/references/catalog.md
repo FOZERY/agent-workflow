@@ -11,7 +11,7 @@ Discuss only the relevant groups. Use the client's choice tool when it helps. Ev
 | Setup and guidance | `home-repo-init`, `setup-workflow`, `ask-workflow` |
 | Task exploration | `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
 | Optional visual support | `excalidraw-diagram` |
-| Implementation | `implement`, `implement-with-swarm`, `tdd`, `codebase-design`, `code-review` |
+| Implementation | `implement`, `implement-with-swarm`, `tdd`, `codebase-design`, `simplify`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup`, `refactor-docs` |
 
 - A group is not a dependency.
@@ -23,7 +23,7 @@ Discuss only the relevant groups. Use the client's choice tool when it helps. Ev
 
 ## Writing skills
 
-`human-text`, `asd-ste100` and `writing-for-agents` are separate writing skills. [Writing routes](writing.md) proposes them for conversation, artifacts and reusable rules in the project's `AGENTS.md`. `setup-workflow` needs none of them.
+`human-text`, `asd-ste100` and `writing-for-agents` are separate writing skills. [Writing routes](writing.md) proposes them for conversation, artifacts and reusable rules in the project's `AGENTS.md`. `setup-workflow` needs `asd-ste100` and `writing-for-agents` to write `AGENTS.md`. `human-text` stays optional.
 
 ## Diagrams
 
@@ -38,7 +38,7 @@ These skills call the listed skills. Check that the client and its worker sessio
 | `grill-with-docs` | `grilling` and `domain-modeling` |
 | `wayfinder` | `grilling` and `domain-modeling` for discussion; `research` and `prototype` for their ticket types; skills named in the map Notes |
 | `tdd` | `codebase-design`, only when the interface or seam is in question |
-| `implement` | `tdd` where it applies, and `code-review` |
+| `implement` | `tdd` where it applies, `simplify` when its trigger is `auto`, and `code-review` |
 | `implement-with-swarm` | `implement` in each worker: `/implement` in a session worker, the `SKILL.md` path in a subagent worker |
 | `retro` | `writing-for-agents` |
 
