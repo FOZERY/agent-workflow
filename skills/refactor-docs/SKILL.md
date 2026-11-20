@@ -1,6 +1,7 @@
 ---
 name: refactor-docs
-description: Refactor existing documentation and factual memory for clarity and structure while preserving technical meaning. Use for ADRs, specifications, READMEs, guides, CONTEXT.md and LESSONS.md.
+description: Refactor existing documentation and factual memory for clarity and structure while preserving technical meaning.
+disable-model-invocation: true
 ---
 
 # Refactor docs

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Refactor Docs"
+  short_description: "Clarify docs and memory without changing their meaning"
+policy:
+  allow_implicit_invocation: false
