@@ -32,7 +32,7 @@ For each assignment, provide the repository, target branch or file boundaries, a
 Every worker runs [`implement`](../implement/SKILL.md) for its assignment:
 
 - **Session worker:** send `/implement` (`$implement` in Codex) with the assignment as its first prompt.
-- **Subagent worker:** a subagent cannot run a slash command, and `implement` is user-invoked. Give it the path to `implement/SKILL.md` and tell it to read the file and follow it.
+- **Subagent worker:** a subagent cannot run a slash command. Give it the path to `implement/SKILL.md` and tell it to read the file and follow it.
 
 Verify access to the procedure, task sources, and workspace before edits.
 

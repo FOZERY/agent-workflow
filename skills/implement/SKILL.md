@@ -1,7 +1,6 @@
 ---
 name: implement
-description: "Implement one agreed task in the current session."
-disable-model-invocation: true
+description: "Implement one agreed task in the current session. Use when the user asks you to implement or fix something and the change is more than a trivial edit, or when an approved plan, spec or ticket is ready."
 ---
 
 Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
@@ -10,7 +9,7 @@ If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the u
 
 Implement the assigned work from the user's task description and any supplied plan, spec, or tickets.
 
-The current session owns the code changes and may use reviewers or other helpers under project rules. If the user wants the main session to coordinate separate implementers as architect, recommend `implement-with-swarm`.
+The current session owns the code changes and may use reviewers or other helpers under project rules. If the user wants the main session to coordinate separate implementers as architect, recommend `implement-with-swarm`. If this session is already the architect of an `implement-with-swarm` run, do not use this skill. The workers use it.
 
 If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
 
