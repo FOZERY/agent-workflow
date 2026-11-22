@@ -12,7 +12,9 @@ Review two axes against one pinned Git diff:
 - **Standards**: does the code conform to this repo's documented coding standards?
 - **Spec**: does the code faithfully implement the originating issue / spec?
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings. Start every sub-agent with a fresh context window. Launch them from the session that runs this skill, with the agent, model and reasoning effort of the `reviewer` setting in the project's `code-review` section. If that session cannot launch sub-agents, report the blocker.
+Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings. Start every sub-agent with a fresh context window. Launch them from the session that runs this skill. The Standards sub-agent uses the agent of the `standards-reviewer` setting, and the Spec sub-agent uses the `spec-reviewer` setting, both in the project's `code-review` section. If that session cannot launch sub-agents, report the blocker.
+
+The caller can ask for one axis only. In `implement`, the worker asks for Standards and the orchestrator asks for Spec. Run only the requested axis and skip the steps that only the other axis needs. Without a request, run both.
 
 Use the task or specification supplied by the caller. If a required tracker source is unavailable, report the missing access.
 
@@ -78,9 +80,9 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 - **Middle Man**: a class or function that mostly just delegates onward. → cut it, call the real target direct.
 - **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
-### 4. Spawn both sub-agents in parallel
+### 4. Spawn the sub-agents in parallel
 
-Issue both sub-agent calls together, in the foreground, and aggregate their reports. Give both the same pinned diff. Both reviewers must read surrounding files from the pinned endpoint, for example with `git show <endpoint>:<path>`, not from a changing worktree.
+Issue the requested sub-agent calls together, in the foreground, and aggregate their reports. Give both the same pinned diff. Both reviewers must read surrounding files from the pinned endpoint, for example with `git show <endpoint>:<path>`, not from a changing worktree.
 
 **Standards sub-agent prompt** should include:
 
@@ -100,7 +102,7 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 Report the pinned comparison and any uncovered scope.
 
-Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+Present the reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. If only one axis ran, say which axis did not run and who runs it. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 
 End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
 

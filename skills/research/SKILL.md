@@ -7,7 +7,7 @@ Read applicable project instructions before starting. Use their sources, artifac
 
 If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
 
-Spin up a **background agent** to do the research, so you keep working while it reads. Start it with a fresh context window.
+Spin up a **background agent** to do the research, so you keep working while it reads. Start it with a fresh context window. If you already run as a subagent, or the harness cannot start one, do the research yourself.
 
 Its job:
 

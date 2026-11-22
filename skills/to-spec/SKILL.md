@@ -8,7 +8,7 @@ Read applicable project instructions before starting. Use their sources, artifac
 
 If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
 
-This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
+This skill takes the current conversation context, or a `wayfinder` map that the user passes, and the codebase understanding, and produces a spec. Run no requirements interview: synthesize what you already know. The only questions are the seam check in step 2 and the draft approval in step 3.
 
 The issue tracker and triage label vocabulary should have been provided to you. If not, tell the user to run `/setup-workflow`.
 
@@ -20,7 +20,7 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+3. Write the spec using the template below. Show the draft to the user. After the user approves it, publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
 
 <spec-template>
 

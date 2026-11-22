@@ -77,7 +77,7 @@ There is one stream lead session for each work stream. The project agent adds a 
 
 ### Workers
 
-Workers are subagents or separate sessions that run the `implement` skill.
+The stream lead runs the `implement` skill as its orchestrator. Workers are subagents or separate sessions that follow `implement/WORKER.md`.
 
 ## State
 

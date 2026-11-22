@@ -10,7 +10,7 @@ Read this file before you draft a project's `AGENTS.md`. The outline below is a 
 4. Fill the fields from the setup conversation. Omit the sections of unselected skills and every field without an agreed answer.
 5. Keep existing headings and the user's additions.
 6. Keep shared sources and permissions in the shared sections.
-7. Write a section for every selected skill, also when it has no other setting. Start it with one line in this format: `Runs: <manual: the user calls the skill | auto: <caller> calls it at <stage>>. Phase: <phase>.` Then give the values of its settings and at most five lines of project facts. Move a longer procedure to a project file and point to it. The format line itself does not go into `AGENTS.md`.
+7. Write a section for every selected skill, also when it has no other setting. If the skill has no `trigger` setting, start the section with one filled line in this format: `Runs: <manual: the user calls the skill | auto: <caller> calls it at <stage>>. Phase: <phase from the phase list, or "any" for a skill outside it>.` Then give the values of its settings and at most five lines of project facts. Move a longer procedure to a project file and point to it.
 8. For a selected skill that the outline does not list, add a section with its exact name.
 9. Write the value of a setting only. Its meaning stays in `### Skill settings` of the core block.
 10. Give each pointer a trigger: "Read X when Y."
@@ -41,8 +41,10 @@ The agent reads these settings as instructions. They are not runtime flags. The 
 
 | Section | Settings |
 | --- | --- |
-| `tdd`, `simplify-codebase` | `trigger`, `execution`, `skill` |
-| `code-review` | `trigger`, `execution`, `skill`, `reviewer`, `followup`, `rounds` |
+| `implement` | `worker` |
+| `tdd` | `trigger`, `execution`, `skill` |
+| `simplify-codebase` | `trigger`, `execution`, `skill`, `finder` |
+| `code-review` | `trigger`, `skill`, `standards-reviewer`, `spec-reviewer`, `followup`, `rounds` |
 | Workflow rules | `search`, recorded in the core block and not in a skill section |
 
 - TDD alternates one test and one implementation step. It is not a test-writing phase before implementation.
@@ -184,25 +186,21 @@ skill: <installed path of tdd/SKILL.md per client>
 Test types, seams, infrastructure and mocking limits: read `<agent-docs>/project/testing.md` when you write a test.
 
 ### implement
+worker: <agent, model and reasoning effort for workers>
+
 <Expected task inputs and implementation boundaries.>
 <If plan-based execution is selected: read the approved plan and source task as implementation input. Recheck relevant code before editing.>
 Use the TDD, simplify and review settings in this document.
-<Nesting: when implement runs as a worker subagent, whether it can launch its TDD, simplify and review subagents in this harness, and the option the user chose if it cannot.>
-<Checkpoints before returning the result to the user.>
-
-### implement-with-swarm
-<Task sources and architectural constraints, including shared contracts across repositories.>
-<Allowed session tool and subagent mode, approval for dispatch, and branch, worktree or workspace isolation rules.>
+Workers read `<installed path of implement/WORKER.md per client>`.
+<Session tool for workers, approval for dispatch, and branch, worktree or workspace isolation rules.>
 <Integration owner, target branches and delivery procedure per repository.>
-Start each worker with `/implement` (`$implement` in Codex) and its assignment. A worker subagent that cannot run a slash command reads `<path to implement/SKILL.md>` and follows it.
-<Worker mode: separate sessions or subagents.>
-<Nesting: harness, how deep subagents can launch subagents, and whether workers can launch their TDD, simplify and review subagents. If they cannot, the option the user chose.>
-<Worker TDD, simplify and review rules, combined verification, and acceptance checkpoints.>
+<Checkpoints before returning the result to the user.>
 
 ### simplify-codebase
 trigger: <auto | manual>
 execution: <current-session | subagent | separate-session>
 skill: <installed path of simplify-codebase/SKILL.md per client>
+finder: <agent, model and reasoning effort for the simplification finder>
 
 Coding standards and code that simplify-codebase must leave alone: read `<agent-docs>/project/standards.md` before simplifying.
 <Who consumes the code: published interfaces, released versions, stored data, and which input is untrusted. Compatibility or migration code that must stay.>
@@ -210,9 +208,9 @@ Coding standards and code that simplify-codebase must leave alone: read `<agent-
 
 ### code-review
 trigger: <auto | manual>
-execution: <current-session | subagent | separate-session>
 skill: <installed path of code-review/SKILL.md per client>
-reviewer: <agent, model and reasoning effort>
+standards-reviewer: <agent, model and reasoning effort for the Standards axis>
+spec-reviewer: <agent, model and reasoning effort for the Spec axis>
 followup: <report | fix-and-rereview>
 rounds: <number, default 3>
 

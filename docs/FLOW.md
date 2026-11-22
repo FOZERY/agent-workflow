@@ -21,20 +21,20 @@ Check project permissions for tracker, branch, and delegation actions. If a requ
 
 | Situation | Executor |
 | --- | --- |
-| One assigned task, with code changes owned by the current session | [`implement`](../skills/implement/SKILL.md) |
-| An approved plan and its source task | An agent configured to read both. Approval of the plan does not start execution. |
-| A large task that needs an architect to coordinate multiple implementers | [`implement-with-swarm`](../skills/implement-with-swarm/SKILL.md). Use the task sources you already have. |
+| An agreed task of any size | [`implement`](../skills/implement/SKILL.md). The session is the orchestrator. It writes small changes itself and gives larger ones to one or several workers. Use the task sources you already have. |
+| An approved plan and its source task | [`implement`](../skills/implement/SKILL.md) with the plan path and the source task. Approval of the plan does not start execution. |
 
 For example, if Jira task `APP-123` needs a plan, ask `/to-plan` to save it alongside the task artifacts and link the Jira requirements.
 Review the plan. Then give the executor the plan path, the Jira task, and a separate request to implement it.
 In Codex, use `$to-plan`.
 
-For swarm work across repositories or with independent worktrees, prefer separate sessions. For disjoint changes in one repository, subagents may suffice. The architect recommends a mode before dispatch and verifies the combined result.
+Each worker runs in a separate session with its own thread. The orchestrator recommends the size and the mode, and you confirm them before any work starts.
 
 ## Verify and accept
 
-Follow the project's settings for TDD, simplify and review. Manual means you start that activity separately. With `auto`, `implement` runs `simplify-codebase` before review, so review sees the final code.
-With `implement-with-swarm`, each worker runs `implement` for its assignment, including applicable tests and review. By default, reviewer subagents check the worker's scoped snapshot before commit. The architect verifies the combined result separately.
+Follow the project's settings for TDD, simplify and review. Manual means you start that activity separately. With `auto`, the worker runs `simplify-codebase` before review, so review sees the final code. A subagent finds the simplifications, and the worker applies them.
+Before any work starts, `implement` lists the mode and the steps for the task and asks you to confirm them. You can turn off a step for a simple task.
+Each worker checks the Standards axis of `code-review` on its own changes. The orchestrator then checks the Spec axis once, against the task, and sends findings back to the same worker.
 See [review coverage and follow-up](../skills/setup-workflow/references/AGENTS.md#review-coverage) for scope, timing, and whether the agent can fix findings.
 
 Failed required checks or unresolved required findings block completion. Once all required checks and review pass, you decide whether to accept the result.

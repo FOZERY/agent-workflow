@@ -11,14 +11,14 @@ Discuss only the relevant groups. Use the client's choice tool when it helps. Ev
 | Setup and guidance | `home-repo-init`, `setup-workflow`, `ask-workflow` |
 | Task exploration | `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
 | Optional visual support | `excalidraw-diagram` |
-| Implementation | `implement`, `implement-with-swarm`, `tdd`, `codebase-design`, `simplify-codebase`, `code-review` |
+| Implementation | `implement`, `tdd`, `codebase-design`, `simplify-codebase`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup`, `refactor-codebase`, `refactor-docs` |
 
 - A group is not a dependency.
 - Create a section in `AGENTS.md` for every selected skill.
 - Ask about tools and MCP integrations separately from the skills. Record their approved purpose and prerequisites in `AGENTS.md`, not as kit dependencies.
 - `to-plan` saves one implementation plan with its task. It needs no spec, no tickets and no other skill. For plan-based work, agree an executor that takes the plan and its source task.
-- `implement-with-swarm` uses the existing task sources. Make `implement` available to each worker. Configure the worker mode and the integration rules.
+- `implement` uses the existing task sources. Its workers read `implement/WORKER.md`, so make that file readable from each worker. Configure the worker mode and the integration rules.
 - `home-repo-init` creates or revises a multi-repository home: navigation, approved shared material and client entry points. The user runs it manually and separately. `setup-workflow` can configure the home's procedures later. Neither skill calls the other.
 
 ## Writing skills
@@ -38,8 +38,7 @@ These skills call the listed skills. Check that the client and its worker sessio
 | `grill-with-docs` | `grilling` and `domain-modeling` |
 | `wayfinder` | `grilling` and `domain-modeling` for discussion; `research` and `prototype` for their ticket types; skills named in the map Notes |
 | `tdd` | `codebase-design`, only when the interface or seam is in question |
-| `implement` | `tdd` where it applies, `simplify-codebase` when its trigger is `auto`, and `code-review` |
-| `implement-with-swarm` | `implement` in each worker: `/implement` in a session worker, the `SKILL.md` path in a subagent worker |
+| `implement` | `tdd` where it applies, `simplify-codebase` when its trigger is `auto`, and `code-review`: the Standards axis in each worker, the Spec axis in the orchestrator |
 | `refactor-codebase` | `codebase-design`, `grilling`, `simplify-codebase` and `implement`; `domain-modeling` where the project selected it |
 | `retro` | `writing-for-agents` |
 

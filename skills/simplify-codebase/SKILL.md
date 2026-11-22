@@ -14,6 +14,15 @@ Make the code that this task changed easier to read and cheaper to own. Choose c
 
 A restructure keeps the behavior identical: same outputs, same errors, same public interfaces. A rollback changes only the behavior of the code that it removes.
 
+## Roles
+
+The work has two roles:
+
+- **Finder.** Reads the scoped code and lists findings: steps 1 to 5 and the findings part of step 7. The finder does not edit files.
+- **Author.** The session that wrote the code. It applies the findings: step 6 and the rest of step 7.
+
+If you run in a subagent or a separate session, you are the finder only. Return the findings to the caller. If you run in the session that wrote the code, you take both roles.
+
 ## Principles
 
 1. **Preserve behavior.** Before each change, ask three questions. Does the code give the same output for every input? Does it give the same errors? Does it keep the same side effects in the same order? If an answer is unclear, do not make the change.
@@ -26,7 +35,7 @@ A restructure keeps the behavior identical: same outputs, same errors, same publ
 
 ### 1. Pin the scope
 
-Use the paths and the starting commit from the caller. Otherwise use the files that you changed in this session. Read each file in full. Read the diff of its changed lines. If the caller names whole files as the scope, for example `refactor-codebase`, all code in those files is in scope. Otherwise touch code outside the diff only when the user asks for a wider scope.
+Use the paths and the starting commit from the caller. Otherwise use the files that you changed in this session. If there are none, use the uncommitted changes against `HEAD`. Read each file in full. Read the diff of its changed lines. If the caller names whole files as the scope, for example `refactor-codebase`, all code in those files is in scope. Otherwise touch code outside the diff only when the user asks for a wider scope.
 
 If the scope is empty, report that and stop.
 
@@ -56,7 +65,7 @@ Stop in these cases. Report "No changes required" for the first case. Report the
 
 ### 4. Restructure
 
-Look for these signals in the scoped code.
+Look for these signals in the scoped code. Record each match as a finding: the file and lines, the signal and the proposed change.
 
 | Signal | Fix |
 | --- | --- |
@@ -247,16 +256,16 @@ Keep these always:
 
 Sort each candidate by size:
 
-- **Small.** It sits inside the diff, nothing else depends on it, and no test names it. Remove it now.
-- **Larger.** It spans several files, or a test covers it. It can also be a public interface, a config value, a migration or a compatibility path. Do not edit it. List it as a proposal with the evidence and the smallest safe deletion. The user confirms it.
+- **Small.** It sits inside the diff, nothing else depends on it, and no test names it. Record it as a finding for the author.
+- **Larger.** It spans several files, or a test covers it. It can also be a public interface, a config value, a migration or a compatibility path. Nobody edits it in this run. List it as a proposal with the evidence and the smallest safe deletion. The user confirms it.
 
-If you run in a subagent, you cannot confirm with the user. Apply the small rollbacks. Return the larger ones as proposals.
+A subagent cannot confirm with the user. Return the small rollbacks as findings and the larger ones as proposals.
 
 A test that covers only code that you rolled back goes with that code, after the user confirms the rollback. A test that is weak for another reason is a review finding. See the anti-patterns in `tdd`.
 
-### 6. Verify
+### 6. Apply and verify
 
-Apply one change at a time. After each change, run the typecheck of the project and the tests that cover the file. If a check fails, revert that change. Keep the original code.
+The author does this step. Apply the findings one at a time. Before each one, check it against the principles. Skip a finding that is wrong, and record why. After each change, run the typecheck of the project and the tests that cover the file. If a check fails, revert that change. Keep the original code.
 
 If the checks cannot run, report which ones and why. Do not claim that the behavior is unchanged without them.
 
@@ -270,7 +279,9 @@ If the result is harder to read than the original, revert it. Not every attempt 
 
 ### 7. Report
 
-Report one line per file: what you changed. List the proposals separately. Mention what you left alone only when the choice affects the reader. Leave the changes uncommitted unless the caller or the project rules say otherwise.
+The finder returns one line per finding: the file and lines, the signal or pattern, the proposed change, and whether it is a restructure or a rollback. It lists the proposals separately.
+
+The author reports one line per file: what it changed, and which findings it skipped and why. It passes the proposals to the user. Mention what you left alone only when the choice affects the reader. Leave the changes uncommitted unless the caller or the project rules say otherwise.
 
 ## Red flags
 
@@ -286,9 +297,17 @@ Stop and revert if one of these happens:
 
 ## Done when
 
+Finder:
+
+- No file was edited.
+- Every finding names the file, the lines, the signal or pattern and the proposed change.
+- Every rollback has a named reason. Every larger candidate is a proposal.
+
+Author:
+
+- Every finding is applied or skipped with a reason.
 - The typecheck and the covering tests pass. No test was edited.
 - Every change is a separate step that you can review.
 - The diff has no unrelated edits and no unused imports or dead code that your change left.
 - The result follows the project conventions.
-- Every rollback has a named reason. Every larger candidate is a proposal.
 - No error handling was removed from input that the system does not control.

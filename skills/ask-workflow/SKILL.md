@@ -39,20 +39,20 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 | Plan an existing task for implementation without creating a spec or tickets | `to-plan` |
 | Synthesize agreed requirements, then decompose work if needed | `to-spec`, `to-tickets` |
 | Run original test-first red–green cycles; audit or prune existing tests | `tdd` |
-| Implement one agreed task in the current session | `implement` |
-| Coordinate workers on a large task while the main session acts as architect | `implement-with-swarm` |
+| Implement an agreed task: the session orchestrates, writes small changes itself and gives larger ones to workers | `implement` |
 | Simplify changed code and roll back needless guards, fallbacks and abstractions | `simplify-codebase` |
 | Review scoped uncommitted changes or an explicit committed branch, PR or commit | `code-review` |
 | Prepare or publish a PR/MR | Follow project delivery rules and permissions |
 | Inspect session evidence for agent-environment improvements | `retro` |
 | Write conversational replies; write artifacts; write reusable agent rules | `human-text`; `asd-ste100`; `writing-for-agents`, respectively |
 | Refactor existing artifacts; retire stale artifacts | `refactor-docs`; `cleanup`, respectively |
+| Find structural problems after a stage of work and rewrite one with the behavior kept | Manual `refactor-codebase` |
 
 Recommend only the relevant next step and explain its input, expected result and outstanding human decision. Existing analyst-owned requirements may go directly to implementation; they need not pass through spec/ticket authoring. Routine fact lookup does not require a deep research report. A ready-for-human-review task needs the person's review, not another skill merely to keep the agent busy.
 
 A ready task can go through `to-plan` when it needs a saved implementation plan. Hand the plan and source task to an executor that can read both.
 
-For `implement-with-swarm`, use existing task sources. No spec, ticket graph, or tracker is required. Recommend separate sessions for multiple repositories or worktree isolation. Consider subagents for disjoint changes in one repository if they can run `implement` and delegate required review.
+For `implement`, use existing task sources. No spec, ticket graph, or tracker is required. The orchestrator recommends a size and a mode, and the user confirms them. Each worker runs in a separate session and follows `implement/WORKER.md`.
 
 For a multi-repository home, recommend `home-repo-init` for structure, navigation and approved shared materials.
 Recommend `setup-workflow` afterward only if workflow procedures need configuration. `to-plan` remains task planning, not home initialization.
@@ -64,11 +64,11 @@ For design diagrams, recommend `excalidraw-diagram` only when a visual explanati
 
 Point to the package prompt and project setup rules for the drawing route. Keep generation references and library JSON out of advice context. The worker returns editable `.excalidraw` and PNG paths, visual-check results and caveats. Missing delegation, required assets or render permission blocks only the diagram branch, with no same-context fallback. Keep ADR decisions and contracts in authoritative text; diagrams do not replace prototypes, plan approval or user acceptance.
 
-For pre-commit review, explain the bundled `implement` default: it sends the task's file paths and review base to `code-review`. Both reviewers use the same pinned working-tree snapshot. It includes intended staged, unstaged and nonignored untracked changes within those paths. For explicit branch, PR or commit review, recommend the committed endpoint.
+For pre-commit review, explain the bundled `implement` default: each worker sends its file paths and review base to `code-review` for the Standards axis, and the orchestrator runs the Spec axis once against the task. Each reviewer uses a pinned working-tree snapshot. It includes intended staged, unstaged and nonignored untracked changes within those paths. For explicit branch, PR or commit review, recommend the committed endpoint.
 
 Apply explicit project settings first. Recommend a custom reviewer only if the bundled procedure cannot cover the chosen policy or approved scope. If the required procedure cannot cover the intended changes, report the gap. A separate manual invocation remains manual. Neither review nor setup grants permission to delegate, commit or publish.
 
-The kit includes the fixed helper dependencies, but the target client must have them installed. Read the actual prompt before advising. The former local separate test-author and three-round acceptance cycle are absent.
+The kit includes the fixed helper dependencies, but the target client must have them installed. Read the actual prompt before advising.
 
 If the candidate or its required dependencies are missing, explain that gap and the setup/install decision instead of treating it as runnable. Naming several related skills does not require installing them all. Reuse configured artifact locations and distinguish recent `CONTEXT.md`, durable `LESSONS.md`, mandatory project rules and authoritative requirements/ADRs.
 

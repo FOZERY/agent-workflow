@@ -40,13 +40,13 @@ Record the current `HEAD` as the starting commit.
 
 ### 3. Simplify
 
-Run `simplify-codebase` in a subagent with a fresh context. Give it the path from the `skill` setting of the project's `simplify-codebase` section and the files in scope as whole-file scope. Wait for its report and do not edit the files meanwhile. Run the typecheck and the covering tests again.
+Run `simplify-codebase` in a subagent with a fresh context. Give it the path from the `skill` setting of the project's `simplify-codebase` section and the files in scope as whole-file scope. The subagent only finds simplifications and returns them. Wait for its findings and do not edit the files meanwhile. Apply the findings yourself by step 6 of `simplify-codebase`. Run the typecheck and the covering tests again.
 
-If subagents are unavailable, run `simplify-codebase` in this session.
+If subagents are unavailable, run `simplify-codebase` in this session. If the project has no `simplify-codebase` section, skip this step and say so.
 
-Carry the larger rollbacks from its report into step 4 as candidates.
+Carry its proposals into step 4 as candidates.
 
-**Done when:** `simplify-codebase` has reported, the checks pass, and its proposals are listed.
+**Done when:** every finding is applied or skipped with a reason, the checks pass, and the proposals are listed.
 
 ### 4. Scan
 
@@ -99,7 +99,7 @@ If tests do not reach the candidate through its interface, say so. The rewrite t
 
 ### 7. Rewrite
 
-Run `implement` in this session with that task. The behavior stays the same. Tests that passed before still pass, except the tests of replaced shallow modules, which go away with them. Write new tests at the interface of the deepened module.
+Run `implement` in this session with that task. Give it the starting commit from step 2 as the review base, so the simplifications from step 3 count as part of the task. The behavior stays the same. Tests that passed before still pass, except the tests of replaced shallow modules, which go away with them. Write new tests at the interface of the deepened module.
 
 **Done when:** `implement` has finished with its required checks and review.
 

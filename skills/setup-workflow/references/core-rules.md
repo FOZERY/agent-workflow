@@ -10,22 +10,21 @@ These rules are mandatory. They live only in `AGENTS.md`; skills and other proje
 2. Replace each angle-bracket field with the value agreed in setup:
    - `<agent-docs>`: the agent-documentation directory, `.docs` by default.
    - `<phases>`: the phase list below, with only the selected skills. Remove a phase that has no selected skill, except Setup and Accept.
-   - `<search>`: one of the two search variants below.
+   - `<search>`: one of the two search variants below, with the agreed agent and model in its own field.
    - `<lessons>`: one of the two lessons variants below.
-   - `<review-rounds>`: the agreed review round limit, `3` by default.
 3. Keep all other text as written. To change a rule for every project, edit this file and increase the version in the marker.
 4. On a rerun, compare the marker version in `AGENTS.md` with this file. If they differ, show the difference and replace only the block. Keep the user's text outside the markers.
 
 ### Phase list
 
-Link each skill name to its section under `## Skills` in the project's `AGENTS.md`.
+Link each skill name that has a section under `## Skills` in the project's `AGENTS.md` to that section.
 
 ```markdown
 1. **Setup.** `setup-workflow` configures this file. `home-repo-init` creates a multi-repository home.
 2. **Clarify.** `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`, `codebase-design`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
-4. **Implement.** `implement` for one session, `implement-with-swarm` for an architect with workers. `tdd` and `simplify-codebase` run inside implementation.
-5. **Review.** `code-review`.
+4. **Implement.** `implement`: the session is the orchestrator. It writes small changes itself and gives larger ones to workers. `tdd` and `simplify-codebase` run inside implementation.
+5. **Review.** `code-review`: the worker checks the Standards axis, the orchestrator checks the Spec axis.
 6. **Accept.** The user accepts the work. Commit, push and other delivery follow `## Git and delivery`.
 7. **Improve.** `retro`, `cleanup`, `refactor-codebase`, `refactor-docs`.
 ```
@@ -67,12 +66,12 @@ Write the entry yourself. In the same reply, tell the user which entry you added
 ## Block
 
 ```markdown
-<!-- agent-workflow:core v5 -->
+<!-- agent-workflow:core v6 -->
 setup-workflow owns this section. To change it, run setup again.
 
 ### Workflow
 A task moves through these phases. A ready task starts at Implement.
-When you begin to change code for a task, start the `implement` skill first. A trivial edit, such as a typo, does not need it.
+If `## Skills` has an `implement` section, start the `implement` skill first when you begin to change code for a task. A trivial edit, such as a typo, does not need it.
 The `## Skills` section tells each skill how to work in this project.
 
 <phases>
@@ -80,9 +79,11 @@ The `## Skills` section tells each skill how to work in this project.
 ### Skill settings
 A skill section under `## Skills` can set these values:
 - `trigger`: `auto` means `implement` starts the skill at its stage. `manual` means the user starts it.
-- `execution`: where the skill runs. Values: `current-session`, `subagent` or `separate-session`. A separate session is a new session, or a handoff that the user starts. This value grants no permission to delegate. For `code-review`, it sets where the procedure runs. Its two reviewers are always subagents of that session.
+- `execution`: where the skill runs. Values: `current-session`, `subagent` or `separate-session`. A separate session is a new session, or a handoff that the user starts. This value grants no permission to delegate.
 - `skill`: the installed path of the skill's `SKILL.md`, for each client. A subagent that runs the skill reads this file.
-- `reviewer`: the agent, model and reasoning effort of the `code-review` reviewers.
+- `worker`: the agent, model and reasoning effort of the `implement` workers.
+- `finder`: the agent, model and reasoning effort of the `simplify-codebase` finder.
+- `standards-reviewer`, `spec-reviewer`: the agent, model and reasoning effort of each `code-review` axis.
 - `followup`: `report` means return the findings and wait. `fix-and-rereview` means fix the authorized findings and review again.
 - `rounds`: the limit for `fix-and-rereview`. See Review rounds.
 
@@ -116,7 +117,7 @@ Before you write or edit this file, read the installed `asd-ste100` and `writing
 Keep this file under 300 lines. Put project details in `<agent-docs>/project/` and link them with a trigger.
 
 ### Review rounds
-If review follow-up allows fixes, fix findings and review again for at most <review-rounds> rounds. After the last round, stop and ask the user.
+If review follow-up allows fixes, fix findings and review again, up to the `rounds` value of the `code-review` section. After the last round, stop and ask the user. A worker reports its open findings to the orchestrator, and the orchestrator asks the user.
 
 ### Session end
 Before a handoff, a context boundary or the end of a task, update `<agent-docs>/CONTEXT.md` within the agreed update authority: what changed, what is open, what comes next.

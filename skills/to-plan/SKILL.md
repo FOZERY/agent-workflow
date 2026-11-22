@@ -14,7 +14,7 @@ Planning permits investigation and the authorized plan write, not implementation
 
 ## 1. Establish the task and destination
 
-Read the source task and relevant project instructions. Identify the desired outcome, exclusions, constraints and how success will be observed. Link authoritative requirements instead of recreating a specification.
+Read the source task and relevant project instructions. A `wayfinder` map can be the source task: read its Destination and Decisions-so-far. Identify the desired outcome, exclusions, constraints and how success will be observed. Link authoritative requirements instead of recreating a specification.
 
 Reuse the task's configured artifact location and naming convention. Otherwise, save `plan.md` in its existing artifact directory, beside its specification or `issues/` directory when present. With no established location, use `.docs/<task-slug>/plan.md`, using the task ID or a stable descriptive slug. A specification and tickets need not exist. Ask only when the task or destination is ambiguous.
 
