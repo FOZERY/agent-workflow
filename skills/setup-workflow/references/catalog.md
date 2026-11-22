@@ -11,8 +11,8 @@ Discuss only the relevant groups. Use the client's choice tool when it helps. Ev
 | Setup and guidance | `home-repo-init`, `setup-workflow`, `ask-workflow` |
 | Task exploration | `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
 | Optional visual support | `excalidraw-diagram` |
-| Implementation | `implement`, `implement-with-swarm`, `tdd`, `codebase-design`, `simplify`, `code-review` |
-| Retrospective and maintenance | `retro`, `cleanup`, `refactor-docs` |
+| Implementation | `implement`, `implement-with-swarm`, `tdd`, `codebase-design`, `simplify-codebase`, `code-review` |
+| Retrospective and maintenance | `retro`, `cleanup`, `refactor-codebase`, `refactor-docs` |
 
 - A group is not a dependency.
 - Create a section in `AGENTS.md` for every selected skill.
@@ -38,8 +38,9 @@ These skills call the listed skills. Check that the client and its worker sessio
 | `grill-with-docs` | `grilling` and `domain-modeling` |
 | `wayfinder` | `grilling` and `domain-modeling` for discussion; `research` and `prototype` for their ticket types; skills named in the map Notes |
 | `tdd` | `codebase-design`, only when the interface or seam is in question |
-| `implement` | `tdd` where it applies, `simplify` when its trigger is `auto`, and `code-review` |
+| `implement` | `tdd` where it applies, `simplify-codebase` when its trigger is `auto`, and `code-review` |
 | `implement-with-swarm` | `implement` in each worker: `/implement` in a session worker, the `SKILL.md` path in a subagent worker |
+| `refactor-codebase` | `codebase-design`, `grilling`, `simplify-codebase` and `implement`; `domain-modeling` where the project selected it |
 | `retro` | `writing-for-agents` |
 
 1. The other skills have no fixed calls. Project rules or map Notes can add prerequisites.

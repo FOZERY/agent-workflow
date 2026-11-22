@@ -1,0 +1,5 @@
+interface:
+  display_name: "Refactor Codebase"
+  short_description: "Find structural problems after a stage of work and rewrite one"
+policy:
+  allow_implicit_invocation: false

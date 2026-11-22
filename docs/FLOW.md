@@ -33,13 +33,15 @@ For swarm work across repositories or with independent worktrees, prefer separat
 
 ## Verify and accept
 
-Follow the project's settings for TDD, simplify and review. Manual means you start that activity separately. With `auto`, `implement` runs `simplify` before review, so review sees the final code.
+Follow the project's settings for TDD, simplify and review. Manual means you start that activity separately. With `auto`, `implement` runs `simplify-codebase` before review, so review sees the final code.
 With `implement-with-swarm`, each worker runs `implement` for its assignment, including applicable tests and review. By default, reviewer subagents check the worker's scoped snapshot before commit. The architect verifies the combined result separately.
 See [review coverage and follow-up](../skills/setup-workflow/references/AGENTS.md#review-coverage) for scope, timing, and whether the agent can fix findings.
 
 Failed required checks or unresolved required findings block completion. Once all required checks and review pass, you decide whether to accept the result.
 You can stop after acceptance. Commit, push, opening a PR/MR, merge, and deployment follow the project's permissions.
 If the session exposed a recurring problem, [`retro`](../skills/retro/SKILL.md) proposes a change. You decide whether it becomes a rule or a lesson.
+
+After a stage of work, such as several tasks or an epic, you can start [`refactor-codebase`](../skills/refactor-codebase/SKILL.md) by hand. It finds structural problems in the code of that stage, and you pick one. It then rewrites that one through `implement` with the behavior kept. `implement` never starts it.
 
 ## Keep project rules and task artifacts separate
 

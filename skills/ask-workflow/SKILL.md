@@ -41,7 +41,7 @@ Use this map to locate candidate skills, not as a required sequence or a substit
 | Run original test-first red–green cycles; audit or prune existing tests | `tdd` |
 | Implement one agreed task in the current session | `implement` |
 | Coordinate workers on a large task while the main session acts as architect | `implement-with-swarm` |
-| Simplify changed code and roll back needless guards, fallbacks and abstractions | `simplify` |
+| Simplify changed code and roll back needless guards, fallbacks and abstractions | `simplify-codebase` |
 | Review scoped uncommitted changes or an explicit committed branch, PR or commit | `code-review` |
 | Prepare or publish a PR/MR | Follow project delivery rules and permissions |
 | Inspect session evidence for agent-environment improvements | `retro` |

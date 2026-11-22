@@ -70,7 +70,7 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 3. Ask each question below as a separate form question with its options. Every question is required, also when the user has no preference.
    1. TDD trigger: does `implement` start TDD automatically, or only when the user asks?
    2. TDD location: the current session, a subagent that writes only the failing tests, or a separate session?
-   3. Simplify trigger: does `implement` start `simplify` automatically after the implementation, or only when the user asks?
+   3. Simplify trigger: does `implement` start `simplify-codebase` automatically after the implementation, or only when the user asks?
    4. Simplify location: a subagent (recommended), the current session, or a separate session?
    5. Review trigger: does `implement` start review automatically, or only when the user asks?
    6. Review location: where does the `code-review` procedure run: the current session, a subagent, or a separate session? Its reviewers are subagents of that session either way.
@@ -80,7 +80,7 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 4. Agree which implementation routes each trigger covers.
 5. Ask the [review coverage questions](references/AGENTS.md#review-coverage). Use the [automation settings](references/AGENTS.md#automation-settings) for the meaning of each answer.
 6. Before you record an answer, check that the skill can run it. For example, `code-review` runs its two reviewers as subagents of the session that runs it. If the harness cannot launch them from the selected location, for example because a subagent has no level left for them, show the gap and ask the user to choose another location.
-7. Record the installed `SKILL.md` path of `tdd`, `simplify` and `code-review` for each client in their `skill` setting. A subagent that runs a skill reads that file, so check that the path exists.
+7. Record the installed `SKILL.md` path of `tdd`, `simplify-codebase` and `code-review` for each client in their `skill` setting. A subagent that runs a skill reads that file, so check that the path exists.
 8. Read the harness documentation in this setup before you state how deep subagents can launch subagents. Your memory of the harness is not a source. For Claude Code, read <https://code.claude.com/docs/en/sub-agents> and check `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` in the settings and the environment.
 
 TDD keeps the red-green loop. If TDD runs in a subagent, that subagent writes only the failing tests, from the requirements and the interface.

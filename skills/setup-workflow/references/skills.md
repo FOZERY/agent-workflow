@@ -64,7 +64,7 @@ A copy with the same name from another source can hide a selected skill or break
 
 Claude Code also has a bundled `code-review`. An installed copy of the kit's skill replaces `/code-review`. `/review` keeps the client's bundled behavior. When an original skill calls review, check which version is active. There is no local fallback reviewer.
 
-Claude Code also has a bundled `simplify`. An installed copy of the kit's skill replaces `/simplify`. When `implement` calls `simplify`, check which version is active.
+Claude Code also has a bundled `simplify`. The kit's `simplify-codebase` has another name, so the two do not collide. `implement` calls `simplify-codebase`.
 
 1. Find the origin of each copy: the `source` in its lock entry, its symlink target, or a content comparison with the kit's skill.
 2. A copy belongs to the kit when its source is this kit or its content matches the kit's skill. Keep such a copy; do not reinstall it.

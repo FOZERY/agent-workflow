@@ -1,5 +1,5 @@
 ---
-name: simplify
+name: simplify-codebase
 description: "Simplify code changed in the current task and roll back overengineering. Use when the user asks to simplify, tidy or trim recent changes, or when another skill calls it."
 ---
 
@@ -20,13 +20,13 @@ A restructure keeps the behavior identical: same outputs, same errors, same publ
 2. **Follow the project.** Make the code more consistent with the codebase. Do not impose outside preferences. A change that breaks the project style is churn.
 3. **Prefer clarity.** Write explicit code when the compact form makes the reader stop and think.
 4. **Stay balanced.** Do not inline a helper that gives a concept its name. Do not merge unrelated logic. Do not remove an abstraction that exists for testing or extension. Fewer lines is not the goal.
-5. **Stay in scope.** Change only the code in the diff of this task. Changes outside the diff add noise and risk.
+5. **Stay in scope.** Change only the code in the diff of this task, or in the whole files that the caller names as the scope. Changes outside that scope add noise and risk.
 
 ## Process
 
 ### 1. Pin the scope
 
-Use the paths and the starting commit from the caller. Otherwise use the files that you changed in this session. Read each file in full. Read the diff of its changed lines. Touch code outside the diff only when the user asks for a wider scope.
+Use the paths and the starting commit from the caller. Otherwise use the files that you changed in this session. Read each file in full. Read the diff of its changed lines. If the caller names whole files as the scope, for example `refactor-codebase`, all code in those files is in scope. Otherwise touch code outside the diff only when the user asks for a wider scope.
 
 If the scope is empty, report that and stop.
 

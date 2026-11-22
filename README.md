@@ -24,7 +24,7 @@ The kit does not run an automated pipeline or enforce permissions.
 | [`implement-with-swarm`](skills/implement-with-swarm/SKILL.md) | The main session should act as architect and coordinate workers on a large task. |
 | [`tdd`](skills/tdd/SKILL.md) | You want to write a failing test, then make the smallest change that passes it, or audit existing tests. |
 | [`code-review`](skills/code-review/SKILL.md) | You want to check a diff against project standards and task requirements. |
-| [`simplify`](skills/simplify/SKILL.md) | You want changed code made simpler and clearer, and needless guards, fallbacks and abstractions removed. |
+| [`simplify-codebase`](skills/simplify-codebase/SKILL.md) | You want changed code made simpler and clearer, and needless guards, fallbacks and abstractions removed. |
 
 ## Workflow
 
@@ -58,6 +58,7 @@ Use the [workflow guide](docs/FLOW.md#route-map) to choose a route and hand the 
 | [`codebase-design`](skills/codebase-design/SKILL.md) | You need to design a module interface or make it easier to test. |
 | [`excalidraw-diagram`](skills/excalidraw-diagram/SKILL.md) | A visual would clarify a design. After you consent, a separate worker creates an editable diagram and a PNG preview. |
 | [`retro`](skills/retro/SKILL.md) | You want the agent to propose improvements based on what happened in a session. |
+| [`refactor-codebase`](skills/refactor-codebase/SKILL.md) | A stage of work is done, and you want to find structural problems in the code and rewrite one with the behavior kept. |
 | [`refactor-docs`](skills/refactor-docs/SKILL.md) | Existing docs need clearer wording or structure without a change in meaning. |
 | [`cleanup`](skills/cleanup/SKILL.md) | You want to review stale artifacts and approve which ones to remove recoverably. |
 | [`human-text`](skills/human-text/SKILL.md) | You want clear replies and explanations for people. |

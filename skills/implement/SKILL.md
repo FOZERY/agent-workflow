@@ -21,11 +21,11 @@ If the project runs TDD, simplify or review in subagents, launch them from this 
 
 Run typechecking regularly and single test files regularly.
 
-When the implementation is complete and its tests pass, run `simplify` if the project's `simplify` section sets `trigger: auto`. If the project has no `simplify` section or sets `trigger: manual`, skip this step.
+When the implementation is complete and its tests pass, run `simplify-codebase` if the project's `simplify-codebase` section sets `trigger: auto`. If the project has no `simplify-codebase` section or sets `trigger: manual`, skip this step.
 
-Run `simplify` in a subagent with a fresh context, unless the section sets another `execution`. Pass the starting commit and the task-owned file paths as its inputs. Wait for its report and do not edit those files meanwhile. Run it before review, so that review sees the final code.
+Run `simplify-codebase` in a subagent with a fresh context, unless the section sets another `execution`. Pass the starting commit and the task-owned file paths as its inputs. Wait for its report and do not edit those files meanwhile. Run it before review, so that review sees the final code.
 
-Run the full test suite once at the end, after `simplify` when it ran.
+Run the full test suite once at the end, after `simplify-codebase` when it ran.
 
 Follow the project's review procedure and checkpoint if specified. Otherwise, run `code-review` before committing or handing off uncommitted changes. Delegate review of the scoped snapshot to its reviewer subagents. Pass the source task, review base, and task-owned file paths. If required review cannot run, report the blocker instead of substituting a self-check.
 

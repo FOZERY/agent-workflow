@@ -41,12 +41,12 @@ The agent reads these settings as instructions. They are not runtime flags. The 
 
 | Section | Settings |
 | --- | --- |
-| `tdd`, `simplify` | `trigger`, `execution`, `skill` |
+| `tdd`, `simplify-codebase` | `trigger`, `execution`, `skill` |
 | `code-review` | `trigger`, `execution`, `skill`, `reviewer`, `followup`, `rounds` |
 | Workflow rules | `search`, recorded in the core block and not in a skill section |
 
 - TDD alternates one test and one implementation step. It is not a test-writing phase before implementation.
-- The user can always start `tdd`, `simplify` or `code-review` manually, whatever the trigger.
+- The user can always start `tdd`, `simplify-codebase` or `code-review` manually, whatever the trigger.
 - An execution setting does not grant delegation permission. The skill's own nested steps still apply.
 - Before you call a route usable, check the real capabilities and dependencies. Report each mandatory step that cannot run.
 - The user accepts the work.
@@ -199,12 +199,12 @@ Start each worker with `/implement` (`$implement` in Codex) and its assignment. 
 <Nesting: harness, how deep subagents can launch subagents, and whether workers can launch their TDD, simplify and review subagents. If they cannot, the option the user chose.>
 <Worker TDD, simplify and review rules, combined verification, and acceptance checkpoints.>
 
-### simplify
+### simplify-codebase
 trigger: <auto | manual>
 execution: <current-session | subagent | separate-session>
-skill: <installed path of simplify/SKILL.md per client>
+skill: <installed path of simplify-codebase/SKILL.md per client>
 
-Coding standards and code that simplify must leave alone: read `<agent-docs>/project/standards.md` before simplifying.
+Coding standards and code that simplify-codebase must leave alone: read `<agent-docs>/project/standards.md` before simplifying.
 <Who consumes the code: published interfaces, released versions, stored data, and which input is untrusted. Compatibility or migration code that must stay.>
 <Checks to run after the edits.>
 

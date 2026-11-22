@@ -24,10 +24,10 @@ Link each skill name to its section under `## Skills` in the project's `AGENTS.m
 1. **Setup.** `setup-workflow` configures this file. `home-repo-init` creates a multi-repository home.
 2. **Clarify.** `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`, `codebase-design`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
-4. **Implement.** `implement` for one session, `implement-with-swarm` for an architect with workers. `tdd` and `simplify` run inside implementation.
+4. **Implement.** `implement` for one session, `implement-with-swarm` for an architect with workers. `tdd` and `simplify-codebase` run inside implementation.
 5. **Review.** `code-review`.
 6. **Accept.** The user accepts the work. Commit, push and other delivery follow `## Git and delivery`.
-7. **Improve.** `retro`, `cleanup`, `refactor-docs`.
+7. **Improve.** `retro`, `cleanup`, `refactor-codebase`, `refactor-docs`.
 ```
 
 ### Search variants
