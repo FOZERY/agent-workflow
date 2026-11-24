@@ -75,10 +75,10 @@ Setup does not install or activate these tools automatically.
 
 ## Install
 
-With Node.js 22.20+ and a local checkout of this kit, run this from your project:
+Use Node.js 22.20 or later. From your project directory, install `setup-workflow` from GitHub:
 
 ```bash
-npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-workflow --agent codex
+npx skills@1.9.0 add FOZERY/agent-workflow --skill setup-workflow --agent codex
 ```
 
 In Codex, run `$setup-workflow`. For Claude Code, install with `--agent claude-code`, then run `/setup-workflow`.

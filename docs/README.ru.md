@@ -74,10 +74,10 @@ flowchart TB
 
 ## Установка
 
-Нужны Node.js 22.20+ и локальная копия этого набора. Выполни команду из каталога своего проекта:
+Нужен Node.js 22.20 или новее. Из каталога своего проекта установи `setup-workflow` с GitHub:
 
 ```bash
-npx skills@1.9.0 add ~/projects/agent-workflow --skill setup-workflow --agent codex
+npx skills@1.9.0 add FOZERY/agent-workflow --skill setup-workflow --agent codex
 ```
 
 В Codex запусти `$setup-workflow`. Для Claude Code установи с `--agent claude-code`, затем запусти `/setup-workflow`.
