@@ -13,7 +13,7 @@ These rules are mandatory. They live only in `AGENTS.md`; skills and other proje
    - `<search>`: one of the two search variants below, with the agreed agent and model in its own field.
    - `<lessons>`: one of the two lessons variants below.
 3. Keep all other text as written. To change a rule for every project, edit this file and increase the version in the marker.
-4. On a rerun, compare the marker version in `AGENTS.md` with this file. If they differ, show the difference and replace only the block. Keep the user's text outside the markers.
+4. On a rerun, compare the marker version in `AGENTS.md` with this file. If they differ, show the difference. After approval, replace only the block. Keep the user's text outside the markers.
 
 ### Phase list
 
@@ -21,7 +21,7 @@ Link each skill name that has a section under `## Skills` in the project's `AGEN
 
 ```markdown
 1. **Setup.** `setup-workflow` configures this file. `home-repo-init` creates a multi-repository home.
-2. **Clarify.** `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`, `codebase-design`.
+2. **Clarify.** `investigate`, `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
 4. **Implement.** `implement`: the session is the orchestrator. It writes small changes itself and gives larger ones to workers. `tdd` and `simplify-codebase` run inside implementation.
 5. **Review.** `code-review`: the worker checks the Standards axis, the orchestrator checks the Spec axis.

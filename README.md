@@ -15,6 +15,7 @@ The kit does not run an automated pipeline or enforce permissions.
 | Skill | Use it when |
 | --- | --- |
 | [`setup-workflow`](skills/setup-workflow/SKILL.md) | You want to agree on project rules, checks, permissions, and which skills to install. |
+| [`investigate`](skills/investigate/SKILL.md) | A task arrived, and you want it studied first: where it came from, how the code works, a facts file and a plain explanation. |
 | [`grilling`](skills/grilling/SKILL.md) | You need to find risks and unresolved decisions in an idea or plan. |
 | [`wayfinder`](skills/wayfinder/SKILL.md) | A large effort has open questions that need separate decision tickets. |
 | [`to-plan`](skills/to-plan/SKILL.md) | A clear task needs a saved implementation plan, without a new spec or tickets. |
@@ -54,7 +55,6 @@ Use the [workflow guide](docs/FLOW.md#route-map) to choose a route and hand the 
 | [`domain-modeling`](skills/domain-modeling/SKILL.md) | You need to agree domain terms or record an architectural decision. |
 | [`research`](skills/research/SKILL.md) | A question needs a cited report based on primary sources. |
 | [`prototype`](skills/prototype/SKILL.md) | You need a throwaway experiment to choose a UI or test a state model. |
-| [`codebase-design`](skills/codebase-design/SKILL.md) | You need to design a module interface or make it easier to test. |
 | [`excalidraw-diagram`](skills/excalidraw-diagram/SKILL.md) | A visual would clarify a design. After you consent, a separate worker creates an editable diagram and a PNG preview. |
 | [`retro`](skills/retro/SKILL.md) | You want the agent to propose improvements based on what happened in a session. |
 | [`refactor-codebase`](skills/refactor-codebase/SKILL.md) | A stage of work is done, and you want to find structural problems in the code and rewrite one with the behavior kept. |

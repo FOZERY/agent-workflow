@@ -1,47 +1,27 @@
 # Skill selection and installation
 
 Read this file when the selected skills, clients, scope or installation change.
-`setup-workflow` works alone, except that writing `AGENTS.md` needs `asd-ste100` and `writing-for-agents`. Each Matt-derived skill can be installed alone, but it keeps its runtime prerequisites. Before you call a route ready, read the skill's real calls and the [catalog dependencies](catalog.md#dependencies).
+Each Matt-derived skill can be installed alone, but it keeps its runtime prerequisites from the [catalog dependencies](catalog.md#dependencies).
 
-## Select the skills
-
-1. After the project purpose and task sources are agreed, configure writing through [writing routes](writing.md).
-2. Offer the skills from [the catalog](catalog.md) as one multi-select, before the skill-specific questions. Add a "no other skills" option and the skills that the user suggests.
-3. For each skill, show its purpose, its installation status and your recommendation. Leave every option unselected until the user selects it. Catalog groups organize the list; they are not bundles.
-4. Offer `ask-workflow` as an optional guide for workflow questions. It installs alone, before or after setup, and runs no procedures. Its selection selects no other skill.
-5. If visual design support is relevant, offer `excalidraw-diagram`. If the user selects it, use [diagram configuration](diagrams.md).
-6. Use the selection to decide which skill-specific questions apply. If a later answer makes a selected skill unsuitable, return to the selection before final approval.
-
-Rules for the selection:
+## Check installation status
 
 - Every skill is optional. No selection means no installation. Existing skills and instructions stay.
-- A route can need an extra skill that the project approves. Explain each such prerequisite separately.
 - Check installation and discovery for each client separately, in its skill directories from the [same-name table](#check-same-name-copies). The skill list of your own session is not evidence: it hides user-invoked skills (`disable-model-invocation: true`).
 - If you cannot read a skill directory, report the skill as unknown and ask for read access. Report no skill as missing without reading its directory.
 - A global skill can be unneeded or not permitted in this project. To turn off a workflow, change `AGENTS.md`. Keep the shared global skill.
-- Installation runs no skill and grants no permission for its actions.
-
-## Packages and project rules
-
-1. The Matt-derived skills keep their original calls: `wayfinder` calls `domain-modeling` and `prototype`, `tdd` calls `codebase-design`. The kit has these helper skills, but the client must have them installed too.
-2. Check the original prerequisites of each skill and the extra requirements of the approved `AGENTS.md`.
-3. If a prerequisite is missing, ask the user to approve a source and installation, or record the route as unavailable.
-4. Record roles, paths, languages, writing routes and extra skills in `AGENTS.md` or in project files that it links.
-5. Keep installed skill files unchanged. Restore no removed helper and replace no required procedure during setup. Changes to a skill are separate kit maintenance.
+- A route can need an extra skill that the project approves. Explain each such prerequisite separately.
+- If a prerequisite is missing, ask the user to approve a source and installation, or record the route as unavailable.
 
 ## Package source
 
 1. [The catalog](catalog.md) lists the skills of this kit version. Before you plan, check that each selected skill exists in the source. An old setup summary does not prove that a skill exists.
 2. The default source is `FOZERY/agent-workflow`, unless the user agreed another source.
-3. For the first install, `setup-workflow` is needed, and `asd-ste100` and `writing-for-agents` before setup writes `AGENTS.md`. Install another skill only when the user selected it or the approved `AGENTS.md` requires it. Credits to original sources are not install targets.
+3. For the first install, install `setup-workflow` and its [dependencies](catalog.md#dependencies) before setup writes `AGENTS.md`. Install another skill only when the user selected it or the approved `AGENTS.md` requires it. Credits to original sources are not install targets.
 4. Find the source that installed `setup-workflow`. Read its `source` in the installer lock file: `skills-lock.json` in the project, or `~/.agents/.skill-lock.json` for a user-wide install. Install the other skills from the same revision.
 5. If the lock file names no usable source, or the remote is empty, tell the user and ask for the path to a local checkout.
 6. For each approved skill, record its source, version, compatibility and full reference files. Keep its provenance and notices.
 7. If another source has a skill with the same name, ask the user before you use it. A same name does not make two skills the same.
-8. For `excalidraw-diagram`, keep all references, the renderer, the four bundled libraries and the provenance notice. Some upstream material has no stated license, and the kit's MIT license does not cover it. Read the notice before redistribution. A same-named upstream global copy is a different skill; replace it only with the user's approval.
-9. If a skill is missing or not compatible, tell the user which route it affects and what decision is needed. Continue the unrelated work.
-
-Installing skills does not permit publishing the repository.
+8. For `excalidraw-diagram`, keep all references, the renderer, the four bundled libraries and the provenance notice. Some upstream material has no stated license, and the kit's MIT license does not cover it. Read the notice before redistribution. A same-named upstream global copy is a different skill. Replace it only with the user's approval.
 
 ## Clients and scope
 
@@ -67,7 +47,7 @@ Claude Code also has a bundled `code-review`. An installed copy of the kit's ski
 Claude Code also has a bundled `simplify`. The kit's `simplify-codebase` has another name, so the two do not collide. `implement` calls `simplify-codebase`.
 
 1. Find the origin of each copy: the `source` in its lock entry, its symlink target, or a content comparison with the kit's skill.
-2. A copy belongs to the kit when its source is this kit or its content matches the kit's skill. Keep such a copy; do not reinstall it.
+2. A copy belongs to the kit when its source is this kit or its content matches the kit's skill. Keep such a copy and do not reinstall it.
 3. If another copy hides or collides with a kit skill, show its path, origin and effect. Let the owner choose:
    - Replace the user-wide copy with the kit's copy. This changes every project that uses it. Move the old copy to a recoverable location.
    - Move the kit installation to user-wide scope.
@@ -82,7 +62,6 @@ Claude Code also has a bundled `simplify`. The kit's `simplify-codebase` has ano
 3. Show the installation separately from the `AGENTS.md` edits. For each set, offer three answers: approve as shown, approve a named subset, or do not approve. One reply can approve both sets explicitly.
 4. Include in the plan every action that needs approval: a new tool, an `npx` download, a replaced skill, an updated global copy, changed client settings.
 
-- A configured workflow or a saved list of wanted skills does not approve installation.
 - An approved bounded plan needs no confirmation for each command, unless its scope or effects change.
 - If the owner declines installation, save only the approved configuration. Report the missing skills and the workflows that depend on them. Call no skill installed that is not installed.
 
@@ -115,4 +94,4 @@ Claude Code also has a bundled `simplify`. The kit's `simplify-codebase` has ano
 
 The installer lock files are the install record. Keep no second copy of their data.
 
-**Done when:** each approved skill has an observed install and discovery result or a precise blocker, and the project routes are checked separately. Unchanged installations stay, no unselected skill was added, and installation granted no permission to act.
+**Done when:** each approved skill has an observed install and discovery result or a precise blocker, and the project routes are checked separately. Unchanged installations stay, and no unselected skill was added.

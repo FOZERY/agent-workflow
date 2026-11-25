@@ -7,307 +7,140 @@ Read applicable project instructions before starting. Use their sources, artifac
 
 If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
 
-Make the code that this task changed easier to read and cheaper to own. Choose clarity over brevity. Use two kinds of change:
+# Simplify codebase
 
-- **Restructure.** Keep the behavior. Make the shape simpler: flatter flow, clearer names, less duplication.
-- **Roll back.** Remove code that solves a problem nobody has. This includes protective code for an edge case of an edge case, when the code costs far more complexity than the problem is worth. It also includes migrations and backward compatibility for a product with no users yet. Keep every check on input that the system does not control.
+Make the code that this task changed easier to read and cheaper to own. Choose clarity over brevity. Make two kinds of change:
 
-A restructure keeps the behavior identical: same outputs, same errors, same public interfaces. A rollback changes only the behavior of the code that it removes.
+- **Restructure.** Keep the behavior: the same outputs, errors and public interfaces. Make the shape simpler: flatter flow, clearer names, less duplication.
+- **Roll back.** Remove code that solves a problem nobody has: a guard for an edge case of an edge case, or a migration or compatibility path for a product without users. A rollback changes only the behavior of the code that it removes.
 
 ## Roles
 
-The work has two roles:
+- **Finder.** Does steps 1 to 5 and reports findings. The finder does not edit files.
+- **Author.** The session that wrote the code. It applies the findings in step 6.
 
-- **Finder.** Reads the scoped code and lists findings: steps 1 to 5 and the findings part of step 7. The finder does not edit files.
-- **Author.** The session that wrote the code. It applies the findings: step 6 and the rest of step 7.
-
-If you run in a subagent or a separate session, you are the finder only. Return the findings to the caller. If you run in the session that wrote the code, you take both roles.
+In a subagent or a separate session, you are the finder only. Return the findings to the caller. In the session that wrote the code, you take both roles.
 
 ## Principles
 
-1. **Preserve behavior.** Before each change, ask three questions. Does the code give the same output for every input? Does it give the same errors? Does it keep the same side effects in the same order? If an answer is unclear, do not make the change.
-2. **Follow the project.** Make the code more consistent with the codebase. Do not impose outside preferences. A change that breaks the project style is churn.
-3. **Prefer clarity.** Write explicit code when the compact form makes the reader stop and think.
-4. **Stay balanced.** Do not inline a helper that gives a concept its name. Do not merge unrelated logic. Do not remove an abstraction that exists for testing or extension. Fewer lines is not the goal.
-5. **Stay in scope.** Change only the code in the diff of this task, or in the whole files that the caller names as the scope. Changes outside that scope add noise and risk.
+1. **Keep the behavior.** Before each change, check: the same output for every input, the same errors, the same side effects in the same order. If an answer is unclear, skip the change.
+2. **Follow the project.** Make the code more like the rest of the codebase, not like an outside preference.
+3. **Prefer clarity.** Write explicit code when the compact form makes the reader stop.
+4. **Keep useful structure.** Keep a helper that names a concept, unrelated logic apart, and an abstraction that exists for tests or for a second use.
+5. **Stay in scope.** Change only the diff of this task, or the whole files that the caller names.
 
-## Process
+## 1. Find the scope
 
-### 1. Pin the scope
+1. Use the paths and the starting commit from the caller.
+2. Otherwise use the files that you changed in this session. If there are none, use the uncommitted changes against `HEAD`.
+3. Read each file in full and the diff of its changed lines.
 
-Use the paths and the starting commit from the caller. Otherwise use the files that you changed in this session. If there are none, use the uncommitted changes against `HEAD`. Read each file in full. Read the diff of its changed lines. If the caller names whole files as the scope, for example `refactor-codebase`, all code in those files is in scope. Otherwise touch code outside the diff only when the user asks for a wider scope.
+If the caller names whole files, for example `refactor-codebase`, all code in those files is in scope. Otherwise touch code outside the diff only when the user asks.
 
-If the scope is empty, report that and stop.
+If the scope is empty, or the diff changes only formatting, report that and stop.
 
-### 2. Read the standards
+## 2. Read the standards
 
-Read the documented coding standards of the project: `AGENTS.md`, `CODING_STANDARDS.md`, `CONTRIBUTING.md`, and the linter and formatter configs. A documented standard wins over every preference in this skill. If the project documents none, match the style of the surrounding code.
+1. Read the project's coding standards: `AGENTS.md`, the standards file that it points to, `CONTRIBUTING.md`, and the linter and formatter configs. A project standard wins over this skill. If there is none, match the surrounding code.
+2. Read what the project says about its consumers: published interfaces, released versions, stored data and untrusted input.
 
-Read what the project says about its consumers: published interfaces, released versions, stored data, and which input is untrusted.
+## 3. Check why the code exists
 
-### 3. Check the fence
-
-Do this before you change or remove anything. Answer these questions for the code:
+Before you propose a change, answer for the code that you would change:
 
 - What is its job?
 - What calls it, and what does it call?
 - Which test or requirement defines its behavior?
-- What do `git log` and `git blame` say about why it exists? The reason can be performance, a platform limit or history.
+- What do `git log` and `git blame` say about why it exists, for example performance, a platform limit or history?
 
 If you cannot answer, leave the code alone.
 
-Stop in these cases. Report "No changes required" for the first case. Report the reason for the others.
+Stop and report in these cases:
 
-- The code is already clear and nothing in it is unjustified.
+- The code is already clear. Report "No changes required".
 - You do not understand what the code does.
 - The code is performance-critical, and the simpler form is measurably slower.
 - The module will be rewritten soon.
 
-### 4. Restructure
+## 4. Find restructures
 
-Look for these signals in the scoped code. Record each match as a finding: the file and lines, the signal and the proposed change.
+Look for these signals and for others that make the code harder to read. Record each match as a finding: the file and lines, the signal and the proposed change.
 
 | Signal | Fix |
 | --- | --- |
 | Nesting of 3 or more levels | Use guard clauses and early returns, or extract a named function. |
-| Long function with several jobs | Split it into functions with descriptive names. |
-| Nested ternary operator or dense one-liner | Use an `if`/`else` chain, a `switch` or a lookup table. |
+| A long function with several jobs | Split it into functions with clear names. |
+| A nested ternary or a dense one-liner | Use `if`/`else`, a `switch` or a lookup table. |
 | Boolean flag parameters, such as `run(true, false)` | Use an options object or separate functions. |
 | The same condition in several places | Extract a named predicate. |
 | Generic names: `data`, `temp`, `item` | Name the value by its content. |
-| Abbreviations: `usr`, `cfg` | Use full words. Keep universal ones: `id`, `url`. |
-| A name that misleads, such as a `get` function that changes state | Rename it to match the behavior. |
+| Abbreviations: `usr`, `cfg` | Use full words. Keep `id` and `url`. |
+| A misleading name, such as a `get` function that changes state | Rename it to match the behavior. |
 | A comment that says what the code does | Delete it. Keep comments that say why. |
 | The same logic of 5 or more lines in several places | Extract one shared function. |
 | Dead branches, unused variables, commented-out code | Delete them after you confirm that they are dead. |
 | A redundant type assertion | Delete it. |
 
-#### Examples
+Leave prop drilling and similar design questions as a note in the report.
 
-The examples show the shape of a good change. The syntax can differ in your language. Apply a change only if it keeps the behavior.
+## 5. Find rollbacks
 
-**Clarity over cleverness.**
-
-```typescript
-// UNCLEAR: dense ternary chain
-const label = isNew ? 'New' : isUpdated ? 'Updated' : isArchived ? 'Archived' : 'Active';
-
-// CLEAR: readable mapping
-function getStatusLabel(item: Item): string {
-  if (item.isNew) return 'New';
-  if (item.isUpdated) return 'Updated';
-  if (item.isArchived) return 'Archived';
-  return 'Active';
-}
-```
-
-```typescript
-// UNCLEAR: chained reduce with inline logic
-const result = items.reduce((acc, item) => ({
-  ...acc,
-  [item.id]: { ...acc[item.id], count: (acc[item.id]?.count ?? 0) + 1 }
-}), {});
-
-// CLEAR: named intermediate step
-const countById = new Map<string, number>();
-for (const item of items) {
-  countById.set(item.id, (countById.get(item.id) ?? 0) + 1);
-}
-```
-
-**TypeScript and JavaScript.**
-
-```typescript
-// Unnecessary async wrapper
-// Before
-async function getUser(id: string): Promise<User> {
-  return await userService.findById(id);
-}
-// After. Check first that findById never throws before it returns a promise.
-function getUser(id: string): Promise<User> {
-  return userService.findById(id);
-}
-
-// Verbose conditional assignment
-// Before
-let displayName: string;
-if (user.nickname) {
-  displayName = user.nickname;
-} else {
-  displayName = user.fullName;
-}
-// After
-const displayName = user.nickname || user.fullName;
-
-// Manual array building
-// Before
-const activeUsers: User[] = [];
-for (const user of users) {
-  if (user.isActive) {
-    activeUsers.push(user);
-  }
-}
-// After
-const activeUsers = users.filter((user) => user.isActive);
-
-// Redundant boolean return
-// Before
-function isValid(input: string): boolean {
-  if (input.length > 0 && input.length < 100) {
-    return true;
-  }
-  return false;
-}
-// After
-function isValid(input: string): boolean {
-  return input.length > 0 && input.length < 100;
-}
-```
-
-**Python.**
-
-```python
-# Verbose dictionary building
-# Before
-result = {}
-for item in items:
-    result[item.id] = item.name
-# After
-result = {item.id: item.name for item in items}
-
-# Nested conditionals -> guard clauses
-# Before
-def process(data):
-    if data is not None:
-        if data.is_valid():
-            if data.has_permission():
-                return do_work(data)
-            else:
-                raise PermissionError("No permission")
-        else:
-            raise ValueError("Invalid data")
-    else:
-        raise TypeError("Data is None")
-# After
-def process(data):
-    if data is None:
-        raise TypeError("Data is None")
-    if not data.is_valid():
-        raise ValueError("Invalid data")
-    if not data.has_permission():
-        raise PermissionError("No permission")
-    return do_work(data)
-```
-
-**React and JSX.**
-
-```tsx
-// Verbose conditional rendering
-// Before
-function UserBadge({ user }: Props) {
-  if (user.isAdmin) {
-    return <Badge variant="admin">Admin</Badge>;
-  } else {
-    return <Badge variant="default">User</Badge>;
-  }
-}
-// After
-function UserBadge({ user }: Props) {
-  const variant = user.isAdmin ? 'admin' : 'default';
-  const label = user.isAdmin ? 'Admin' : 'User';
-  return <Badge variant={variant}>{label}</Badge>;
-}
-
-// Prop drilling through intermediate components
-// Context or composition can solve this better. This is a judgment call.
-// Flag it in the report. Do not refactor it by yourself.
-```
-
-### 5. Roll back
-
-Look at each guard, fallback, validation, wrapper, option, extension point, compatibility path and migration that the diff adds or touches. Ask which requirement, verified contract or consumer needs it. If you cannot name one from the task, the callers and the history, the code is a candidate.
-
-Compare each candidate with the patterns below. If the case looks more like the "Keep" example, keep the code. The examples show the shape. The syntax can differ.
+For each guard, fallback, validation, wrapper, option, extension point, compatibility path and migration that the diff adds or touches, name the requirement, contract or consumer that needs it. If you cannot name one from the task, the callers and the history, it is a candidate. Compare it with the table. If it looks more like "Keep", keep it.
 
 | Pattern | Roll back | Keep |
 | --- | --- | --- |
-| Validation inside trusted code | `if (id <= 0) throw` in an internal `getUser(id: number)`, called only by code that already checks `id` | The email check in the body of a public `/register` endpoint |
-| Handler for a failure that cannot happen | `try { JSON.stringify(internalConfig) } catch { return "{}" }` for an object that the code builds itself | `try` around `JSON.parse(userInput)`, a file read or a network call |
-| Fallback that hides a bug | `order.price ?? 0` when an order always has a price. A missing price becomes a free order. | A documented default for an optional setting |
-| Guard repeated per symptom | The same null check at four call sites, when one place produces the bad value. Fix that place. Propose this rollback. | A shared guard that restores a real contract |
-| Interface with one implementation | `UserRepository` plus one `PostgresUserRepository`. A factory and a strategy class for two `if` branches. | `Storage` with real `S3Storage` and `LocalStorage` implementations chosen by environment |
-| Helper for similar lines used once or twice | `formatTimestamp(date)` from three lines in two places | `validateOrderTotal(order)` with non-trivial logic, called from six modules |
-| Wrapper that only forwards | `isEmpty(list) { return list.length === 0 }`, or a function that calls a standard-library, platform or installed-dependency function with the same arguments | A thin adapter around a volatile external SDK that five modules use |
-| Extension point without a second use | A plugin registry with one plugin. An `options` parameter that no caller passes. A strategy for providers that exist only in the roadmap. | Stripe and Razorpay support when the task requires both |
-| Configuration for a constant | A `MAX_RETRY_COUNT` environment variable that no environment changes | `DATABASE_URL`, which differs between environments |
-| Compatibility shim with no consumers | `processOrder` kept as a deprecated alias of `executeOrder`, when no caller exists outside the diff and nothing was published. Check released versions and public exports first. | The alias of a public method that external callers use |
-| Migration or rollout for a change that needs none | A data migration when no stored shape changes. A 10%, 50%, 100% flag rollout for a refactor with no visible effect. | A migration for data that already exists in production |
-| Structure larger than the code | `types.ts`, `utils.ts`, `constants.ts` and `index.ts` for 80 lines. `class NotFoundError extends Error {}` that adds nothing. | A split of a 1500-line `service.ts` by responsibility |
+| Validation inside trusted code | `if (id <= 0) throw` in an internal function whose callers already check `id` | The email check in a public `/register` endpoint |
+| A handler for a failure that cannot happen | `try { JSON.stringify(internalConfig) } catch { return "{}" }` | `try` around `JSON.parse(userInput)`, a file read or a network call |
+| A fallback that hides a bug | `order.price ?? 0` when an order always has a price | A documented default for an optional setting |
+| The same guard at each symptom | One null check at four call sites, when one place makes the bad value. Fix that place. | A shared guard that restores a real contract |
+| An interface with one implementation | `UserRepository` with only `PostgresUserRepository`; a factory for two `if` branches | `Storage` with real `S3Storage` and `LocalStorage` |
+| A helper used once or twice | `formatTimestamp(date)` for three lines in two places | `validateOrderTotal(order)` with real logic, used in six modules |
+| A wrapper that only forwards | `isEmpty(list) { return list.length === 0 }` | A thin adapter around an unstable external SDK that five modules use |
+| An extension point without a second use | A plugin registry with one plugin; an `options` parameter that no caller passes | Two payment providers that the task requires |
+| Configuration for a constant | A `MAX_RETRY_COUNT` variable that no environment changes | `DATABASE_URL` |
+| A compatibility alias without consumers | A deprecated alias that nothing outside the diff calls and nothing published | The alias of a public method that external callers use |
+| A migration or rollout that the change does not need | A data migration when no stored shape changes | A migration for data that exists in production |
+| Structure larger than the code | `types.ts`, `utils.ts`, `constants.ts` and `index.ts` for 80 lines | A split of a 1500-line file by responsibility |
 
-Keep these always:
+Always keep:
 
-- Validation and encoding of input that the system does not control: HTTP requests, user files, third-party responses, environment, data written by other systems.
-- Authentication, authorization and other security checks.
-- Protection against data loss.
-- Accessibility basics.
-- Logging and error reporting that the project requires.
-- Comments that explain why.
-- Code that a requirement, a contract test or a named consumer needs.
+- validation and encoding of input that the system does not control;
+- authentication, authorization and other security checks;
+- protection against data loss;
+- accessibility basics;
+- logging and error reporting that the project requires;
+- comments that explain why;
+- code that a requirement, a contract test or a named consumer needs.
 
 Sort each candidate by size:
 
-- **Small.** It sits inside the diff, nothing else depends on it, and no test names it. Record it as a finding for the author.
-- **Larger.** It spans several files, or a test covers it. It can also be a public interface, a config value, a migration or a compatibility path. Nobody edits it in this run. List it as a proposal with the evidence and the smallest safe deletion. The user confirms it.
+- **Small:** inside the diff, nothing else depends on it, no test names it. Record it as a finding.
+- **Larger:** it spans several files, a test covers it, or it is a public interface, a config value, a migration or a compatibility path. Record it as a proposal with the evidence and the smallest safe deletion. The user decides.
 
-A subagent cannot confirm with the user. Return the small rollbacks as findings and the larger ones as proposals.
+A test that covers only rolled-back code goes with that code, after the user confirms the rollback.
 
-A test that covers only code that you rolled back goes with that code, after the user confirms the rollback. A test that is weak for another reason is a review finding. See the anti-patterns in `tdd`.
+## 6. Apply and check
 
-### 6. Apply and verify
+The author does this step.
 
-The author does this step. Apply the findings one at a time. Before each one, check it against the principles. Skip a finding that is wrong, and record why. After each change, run the typecheck of the project and the tests that cover the file. If a check fails, revert that change. Keep the original code.
+1. Apply the findings one at a time. Check each one against the principles first. Skip a wrong finding and record why.
+2. After each change, run the typecheck and the tests that cover the file. If a check fails, revert that change.
+3. If the checks cannot run, report which ones and why. Do not claim that the behavior is unchanged.
+4. Compare the result with the original. If it is harder to read, or adds a pattern that the codebase does not use, revert it.
 
-If the checks cannot run, report which ones and why. Do not claim that the behavior is unchanged without them.
+## 7. Report
 
-After all changes, compare the result with the original:
+- **Finder:** one line per finding: the file and lines, the signal or pattern, the proposed change, restructure or rollback. Then the proposals.
+- **Author:** one line per file: what changed, and which findings you skipped and why. Pass the proposals to the user.
 
-- Is the result easier to understand?
-- Does it add a pattern that the codebase does not use?
-- Is the diff clean and reviewable?
+Leave the changes uncommitted unless the caller or the project rules say otherwise.
 
-If the result is harder to read than the original, revert it. Not every attempt succeeds.
+## Stop and revert
 
-### 7. Report
+- A test needs an edit to pass. The change altered the behavior.
+- A rename follows your preference, not the project's convention.
+- Error handling was removed without a rollback reason.
+- You changed code that you do not fully understand, or code outside the scope without a request.
+- You made several changes at once and cannot tell which one broke a check.
 
-The finder returns one line per finding: the file and lines, the signal or pattern, the proposed change, and whether it is a restructure or a rollback. It lists the proposals separately.
-
-The author reports one line per file: what it changed, and which findings it skipped and why. It passes the proposals to the user. Mention what you left alone only when the choice affects the reader. Leave the changes uncommitted unless the caller or the project rules say otherwise.
-
-## Red flags
-
-Stop and revert if one of these happens:
-
-- A test needs an edit to pass. The change altered behavior.
-- The result is longer and harder to follow than the original.
-- A rename follows your preference, not the project convention.
-- Error handling was removed or weakened without a rollback with evidence.
-- You changed code that you do not fully understand.
-- You changed code outside the diff without a request.
-- You made many changes at once and cannot tell which one broke a check.
-
-## Done when
-
-Finder:
-
-- No file was edited.
-- Every finding names the file, the lines, the signal or pattern and the proposed change.
-- Every rollback has a named reason. Every larger candidate is a proposal.
-
-Author:
-
-- Every finding is applied or skipped with a reason.
-- The typecheck and the covering tests pass. No test was edited.
-- Every change is a separate step that you can review.
-- The diff has no unrelated edits and no unused imports or dead code that your change left.
-- The result follows the project conventions.
-- No error handling was removed from input that the system does not control.
+**Done when:** the finder edited no file and each finding names its place and change. The author applied or skipped each finding with a reason, the typecheck and the covering tests pass, and no test was edited.

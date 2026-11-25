@@ -1,0 +1,5 @@
+interface:
+  display_name: "Investigate"
+  short_description: "Study a task, save the facts and explain it in plain words"
+policy:
+  allow_implicit_invocation: false

@@ -1,6 +1,6 @@
 # Notice
 
-The code examples and the simplification signals in `SKILL.md` are adapted from `code-simplification` in [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills/tree/main/skills/code-simplification). That project uses the MIT license below. The `LICENSE` file in this folder is the Apache 2.0 text of the Anthropic `code-simplifier` agent that inspired the skill.
+The simplification signals in `SKILL.md` are adapted from `code-simplification` in [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills/tree/main/skills/code-simplification). That project uses the MIT license below. The `LICENSE` file in this folder is the Apache 2.0 text of the Anthropic `code-simplifier` agent that inspired the skill.
 
 ```text
 MIT License

@@ -1,33 +1,24 @@
 # Skill catalog and project composition
 
-Read this file when you select skills or configure their project settings. Before you call a route usable, check the real skill calls and the [installation status](skills.md#check-same-name-copies).
+Read this file when you select skills or configure their project settings.
 
 ## Selectable skills
 
-Discuss only the relevant groups. Use the client's choice tool when it helps. Every skill is optional. Add the skills that the user suggests, and check their real source and procedure.
+Every skill is optional. For a skill that the user suggests, check its real source and procedure. Groups organize the list. A group is not a bundle and not a dependency.
 
 | Group | Skills |
 | --- | --- |
 | Setup and guidance | `home-repo-init`, `setup-workflow`, `ask-workflow` |
-| Task exploration | `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
+| Task exploration | `investigate`, `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
 | Optional visual support | `excalidraw-diagram` |
-| Implementation | `implement`, `tdd`, `codebase-design`, `simplify-codebase`, `code-review` |
+| Implementation | `implement`, `tdd`, `simplify-codebase`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup`, `refactor-codebase`, `refactor-docs` |
 
-- A group is not a dependency.
-- Create a section in `AGENTS.md` for every selected skill.
-- Ask about tools and MCP integrations separately from the skills. Record their approved purpose and prerequisites in `AGENTS.md`, not as kit dependencies.
-- `to-plan` saves one implementation plan with its task. It needs no spec, no tickets and no other skill. For plan-based work, agree an executor that takes the plan and its source task.
-- `implement` uses the existing task sources. Its workers read `implement/WORKER.md`, so make that file readable from each worker. Configure the worker mode and the integration rules.
+- `ask-workflow` is an optional guide for workflow questions. It installs alone, before or after setup, and runs no procedures. Its selection selects no other skill.
 - `home-repo-init` creates or revises a multi-repository home: navigation, approved shared material and client entry points. The user runs it manually and separately. `setup-workflow` can configure the home's procedures later. Neither skill calls the other.
-
-## Writing skills
-
-`human-text`, `asd-ste100` and `writing-for-agents` are separate writing skills. [Writing routes](writing.md) proposes them for conversation, artifacts and reusable rules in the project's `AGENTS.md`. `setup-workflow` needs `asd-ste100` and `writing-for-agents` to write `AGENTS.md`. `human-text` stays optional.
-
-## Diagrams
-
-`excalidraw-diagram` is an optional bundled skill. The original skills do not need it. Use [diagram configuration](diagrams.md) for relationships and alternatives, interfaces, interaction architecture or a prototype sketch. Skill sections link to one diagram policy. Selection of the skill is not consent to draw, and setup does not have to install it.
+- `human-text`, `asd-ste100` and `writing-for-agents` are separate writing skills. Configure their project use through [writing routes](writing.md). `human-text` stays optional.
+- `excalidraw-diagram` is an optional bundled skill. No other skill needs it, and setup does not have to install it. Configure it through [diagram configuration](diagrams.md).
+- `to-plan` saves one implementation plan with its task. It needs no spec, no tickets and no other skill.
 
 ## Dependencies
 
@@ -35,16 +26,14 @@ These skills call the listed skills. Check that the client and its worker sessio
 
 | Caller | Calls |
 | --- | --- |
+| `setup-workflow` | `asd-ste100` and `writing-for-agents`, to write `AGENTS.md` and the project files |
 | `grill-with-docs` | `grilling` and `domain-modeling` |
 | `wayfinder` | `grilling` and `domain-modeling` for discussion; `research` and `prototype` for their ticket types; skills named in the map Notes |
-| `tdd` | `codebase-design`, only when the interface or seam is in question |
 | `implement` | `tdd` where it applies, `simplify-codebase` when its trigger is `auto`, and `code-review`: the Standards axis in each worker, the Spec axis in the orchestrator |
-| `refactor-codebase` | `codebase-design`, `grilling`, `simplify-codebase` and `implement`; `domain-modeling` where the project selected it |
+| `refactor-codebase` | `grilling`, `simplify-codebase` and `implement`; `domain-modeling` where the project selected it |
 | `retro` | `writing-for-agents` |
 
 1. The other skills have no fixed calls. Project rules or map Notes can add prerequisites.
-2. `domain-modeling`, `prototype` and `codebase-design` call no other skills. Each one also works alone.
-3. Restore no removed helper, download no substitute and patch no caller as a hidden setup step.
-4. Before you agree a route, read its real requirements for tracker publication, commits, worktrees and branch pushes.
-5. Project rules own permissions and writing choices. Installation grants neither.
-6. If an installed or source version of a skill differs from the kit's version, read its real calls instead of this table.
+2. `domain-modeling` and `prototype` call no other skills. Each one also works alone.
+3. Before you agree a route, read its real requirements for tracker publication, commits, worktrees and branch pushes.
+4. If an installed or source version of a skill differs from the kit's version, read its real calls instead of this table.

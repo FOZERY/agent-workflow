@@ -9,6 +9,7 @@ Start with the task you already have. Make only the decisions and artifacts the 
 | What you have | What to do next |
 | --- | --- |
 | A ready task with enough detail to start | Give the task to an authorized agent that can read it. Skip planning. |
+| A new task that you need to understand first | Use [`investigate`](../skills/investigate/SKILL.md). Subagents study the task history and the code. You get a facts file and a plain explanation, then discuss or plan. |
 | An idea with open decisions | Use [`grilling`](../skills/grilling/SKILL.md) to settle the outcome and scope. For a large effort, use [`wayfinder`](../skills/wayfinder/SKILL.md) to track open decisions, not implementation assignments. |
 | A clear task that needs a saved approach | Use [`to-plan`](../skills/to-plan/SKILL.md). It saves a Markdown plan with the task. It does not start implementation or require new specs or tickets. |
 | Agreed requirements that need a new spec | Use [`to-spec`](../skills/to-spec/SKILL.md) to publish it to the tracker. If the team already owns the requirements in Jira or another source, link to them instead. |

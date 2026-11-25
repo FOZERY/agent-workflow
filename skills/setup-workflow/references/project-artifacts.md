@@ -33,17 +33,19 @@ Existing memory files:
 - `CONTEXT.md` and `LESSONS.md` are memory. They hold no policy.
 - Put detailed project rules in `<agent-docs>/project/`, as [the AGENTS.md structure](AGENTS.md#project-files) describes. Leave established sources where they are. A move needs approval.
 
-Implementation plans are task artifacts, not memory. For `to-plan`, use the questions in [skill questions](skill-questions.md#to-plan). Keep a plan with the other artifacts of its task. A remote requirement stays authoritative: link it from the plan and do not copy it.
+Implementation plans are task artifacts, not memory. A remote requirement stays authoritative: link it from the plan and do not copy it. For `to-plan` settings, use [skill questions](skill-questions.md#to-plan).
 
 ## Client loading
 
-Find out how each selected client loads the root `AGENTS.md`:
+Find out how each selected client loads the root `AGENTS.md`. Use the user-wide column only when the user selected global changes in [writing routes](writing.md#instruction-loading).
 
-| Client | How it loads `AGENTS.md` |
-| --- | --- |
-| Codex | Natively. |
-| Claude Code | Natively from v2.1.277, but only when no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` exists in the working directory or above it. If one exists, or the session cannot read `AGENTS.md`, add the line `@AGENTS.md` to the project's `CLAUDE.md`. See [Claude Code memory](https://code.claude.com/docs/en/memory). |
-| OMP | Natively in the main session. Task subagents do not get it; see [instruction loading](writing.md#instruction-loading). |
+| Client | How it loads the project `AGENTS.md` | User-wide instruction source |
+| --- | --- | --- |
+| Codex | Natively. | The first non-empty `AGENTS.override.md` or `AGENTS.md` under the effective `CODEX_HOME`. See [instruction discovery](https://developers.openai.com/codex/guides/agents-md/). |
+| Claude Code | Natively from v2.1.277, but only when no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` exists in the working directory or above it. If one exists, or the session cannot read `AGENTS.md`, add the line `@AGENTS.md` to the project's `CLAUDE.md`. | The loaded user instructions, normally `~/.claude/CLAUDE.md`. Follow configured directories and imports. |
+| OMP | Natively in the main session. Task subagents do not get it. | The native agent-directory instructions, normally under `~/.omp/agent`. Follow profiles and `PI_CODING_AGENT_DIR`. Check client behavior before you rely on precedence. |
+
+For Claude Code, see [Claude Code memory](https://code.claude.com/docs/en/memory).
 
 1. Keep existing client wrappers. Add only the import or pointer that the table requires.
 2. If another file already owns the shared instructions, agree the owner with the user before you change it. Keep each policy in one place.
@@ -55,8 +57,6 @@ Find out how each selected client loads the root `AGENTS.md`:
 The [core rules](core-rules.md) block tells the agent when to read memory. Keep that rule only there.
 
 Add this pointer to `AGENTS.md` where the project has domain sources: before a change to domain or architectural behavior, read the relevant glossary and accepted ADRs.
-
-Configure writing styles and their startup pointers through [writing routes](writing.md). These are rules in the project's `AGENTS.md`; reusable skills do not depend on them. A selected skill grants no file or global-instruction permissions.
 
 ## Multi-repository homes
 

@@ -38,7 +38,7 @@ Rules for permissions:
 
 - Record only targets that the rule selects. Guess no future targets.
 - Permission for one action does not cover another.
-- Task acceptance, passed checks, setup approval and installation grant no delivery permission.
+- Task acceptance and passed checks grant no delivery permission.
 - If a permission is open, the agent does not do the action.
 
 ## Timing and safeguards

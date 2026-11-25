@@ -4,22 +4,20 @@ Read this file before you draft a project's `AGENTS.md`. The outline below is a 
 
 ## Drafting rules
 
-1. **Style.** Before you write or edit the `AGENTS.md`, read the installed `asd-ste100` and `writing-for-agents` skills and apply both. If one is missing, stop this step and offer its bounded installation.
-2. **Size.** Keep the file under 300 lines, including the core block. Put each procedure, standard, example list and long fact set in `<agent-docs>/project/` and link it. Show the line count in the preview.
-3. **Content.** The file holds five things: what the project is, its mandatory constraints and permissions, its main commands and tools, the workflow, and a table of pointers to details. The workflow is the core block and the skill sections. Everything else goes to a project file or stays in its existing source.
-4. Fill the fields from the setup conversation. Omit the sections of unselected skills and every field without an agreed answer.
-5. Keep existing headings and the user's additions.
-6. Keep shared sources and permissions in the shared sections.
-7. Write a section for every selected skill, also when it has no other setting. If the skill has no `trigger` setting, start the section with one filled line in this format: `Runs: <manual: the user calls the skill | auto: <caller> calls it at <stage>>. Phase: <phase from the phase list, or "any" for a skill outside it>.` Then give the values of its settings and at most five lines of project facts. Move a longer procedure to a project file and point to it.
-8. For a selected skill that the outline does not list, add a section with its exact name.
-9. Write the value of a setting only. Its meaning stays in `### Skill settings` of the core block.
-10. Give each pointer a trigger: "Read X when Y."
-11. List only the commands that an agent needs often, and name the file that holds the rest. Do not copy what the environment already holds, such as the full script list or config values.
-12. For writing-style pointers, use [writing routes](writing.md). For memory, use [project artifacts](project-artifacts.md).
-13. For diagrams, use [diagram configuration](diagrams.md). Add the `excalidraw-diagram` section only when the user selected it. Add diagram pointers only to the sections of selected skills that use diagrams.
-14. For a multi-repository home, keep its navigation owner and add the `Related repositories` section. Omit that section for one repository.
-15. For an extra coding practice, link its source in the relevant skill section. Do not copy the guide.
-16. For an addition without an agreed answer, record the blocked action and its owner. Write no placeholder instruction.
+1. **Size.** Keep the file under 300 lines, including the core block. Put each procedure, standard, example list and long fact set in `<agent-docs>/project/` and link it.
+2. **Content.** The file holds five things: what the project is, its mandatory constraints and permissions, its main commands and tools, the workflow, and a table of pointers to details. The workflow is the core block and the skill sections. Everything else goes to a project file or stays in its existing source.
+3. Fill the fields from the setup conversation. Omit the sections of unselected skills and every field without an agreed answer.
+4. Keep existing headings and the user's additions.
+5. Keep shared sources, paths and permissions in the shared sections. A skill section holds only the settings and facts of that skill.
+6. Write a section for every selected skill, also when it has no other setting. If the skill has no `trigger` setting, start the section with one filled line in this format: `Runs: <manual: the user calls the skill | auto: <caller> calls it at <stage>>. Phase: <phase from the phase list, or "any" for a skill outside it>.` The outline shows this line as `Runs: <runs>. Phase: <phase>.` Then give the values of its settings and at most five lines of project facts. Move a longer procedure to a project file and point to it.
+7. For a selected skill that the outline does not list, add a section with its exact name.
+8. Write the value of a setting only. Its meaning stays in `### Skill settings` of the core block.
+9. Give each pointer a trigger: "Read X when Y."
+10. List only the commands that an agent needs often, and name the file that holds the rest. Do not copy what the environment already holds, such as the full script list or config values.
+11. For writing-style pointers, use [writing routes](writing.md). For memory, use [project artifacts](project-artifacts.md). For diagrams, use [diagram configuration](diagrams.md).
+12. For a multi-repository home, keep its navigation owner and add the `Related repositories` section. Omit that section for one repository.
+13. For an extra coding practice, link its source in the relevant skill section. Do not copy the guide.
+14. For an addition without an agreed answer, record the blocked action and its owner. Write no placeholder instruction.
 
 ## Project files
 
@@ -33,11 +31,11 @@ Project rules that are too long for `AGENTS.md` go to `<agent-docs>/project/`. T
 | `delivery.md` | Commit convention, PR and deploy procedure, templates | You commit, push or open a PR. |
 | `review.md` | Review standards, comparison base, evidence rules | Before review. |
 
-Create a file only when the project has content for it. If an existing source holds the content, link it and do not copy it. Write each file by the same style rule as `AGENTS.md`.
+Create a file only when the project has content for it. If an existing source holds the content, link it and do not copy it.
 
 ## Automation settings
 
-The agent reads these settings as instructions. They are not runtime flags. The meaning of each setting lives in `### Skill settings` of the [core block](core-rules.md). Setup asks every setting for each selected skill and records only the value under the owning skill.
+The agent reads these settings as instructions, not as runtime flags. Their meanings live in `### Skill settings` of the [core block](core-rules.md#block). Each section holds these settings:
 
 | Section | Settings |
 | --- | --- |
@@ -47,24 +45,17 @@ The agent reads these settings as instructions. They are not runtime flags. The 
 | `code-review` | `trigger`, `skill`, `standards-reviewer`, `spec-reviewer`, `followup`, `rounds` |
 | Workflow rules | `search`, recorded in the core block and not in a skill section |
 
-- TDD alternates one test and one implementation step. It is not a test-writing phase before implementation.
-- The user can always start `tdd`, `simplify-codebase` or `code-review` manually, whatever the trigger.
-- An execution setting does not grant delegation permission. The skill's own nested steps still apply.
-- Before you call a route usable, check the real capabilities and dependencies. Report each mandatory step that cannot run.
-- The user accepts the work.
-- Write the review procedure and the choice of review skill as prose. There is no `review.skill` or `review.required` flag.
-
 ## Review coverage
 
-Ask each question that is not answered yet, as a separate question:
+Ask each question that is not answered yet:
 
 1. When does review run: before the commit, after it, or at both points?
 2. At each point, what does it compare: commits, or a base and the working tree?
 3. How is the base selected: the target branch, a named revision, or a project rule?
 4. Which changes are in scope? For working-tree review, say which of staged, unstaged and untracked changes are included.
-5. Does the reviewer report and wait, or can the agent fix authorized findings and request another review?
 
-If the user selects fixes and another review, agree what the agent can fix, the round limit (`3` by default) and the stop conditions. Stop conditions include a disputed requirement and a check that cannot run.
+The follow-up and the round limit are questions 7 and 8 in step 2.3 of [setup](../SKILL.md#23-implementation-tdd-simplify-and-review).
+For `fix-and-rereview`, also agree what the agent can fix and the stop conditions. Stop conditions include a disputed requirement and a check that cannot run.
 Report-only review gives no permission to fix. If these options do not fit, use the project's own procedure.
 
 By default, `implement` asks for a working-tree snapshot of the task files for its pre-commit review. `code-review` captures the intended staged, unstaged and non-ignored untracked changes. Branch and PR review compare commits, unless the agreed procedure selects another endpoint.
@@ -121,56 +112,69 @@ The section wins over the skill's own defaults. Keep the rest of the skill's pro
 If a required step cannot satisfy applicable constraints, report the conflict.
 
 ### home-repo-init
+Runs: <runs>. Phase: <phase>.
 <Approved inventory roots, home membership and shared-material ownership when this skill is selected.>
 <Migration boundaries and required approval; existing child code, instructions and installed skills retain their owners.>
 
+### investigate
+Runs: <runs>. Phase: <phase>.
+The agent only reads every source below.
+<Each source in the user's words, with the steps to open it.>
+<Whether the agent may read production.>
+<Facts file location, if not the default.>
+
 ### grilling
+Runs: <runs>. Phase: <phase>.
 <Project discussion context and decision boundaries, if needed.>
 For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### grill-with-docs
+Runs: <runs>. Phase: <phase>.
 <Documents to consult and their authority.>
 <Where to propose or record agreed terms and decisions; who approves changes.>
 For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### domain-modeling
+Runs: <runs>. Phase: <phase>.
 <Authoritative glossary and ADR locations, formats and domain contexts.>
 <Approval and write rules for resolved terms and consequential decisions.>
 For domain relationships or decision alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### research
+Runs: <runs>. Phase: <phase>.
 <Permitted sources, evidence expectations and report destination.>
 <Delegation preferences within the working agreement.>
 
 ### wayfinder
+Runs: <runs>. Phase: <phase>.
 <Map, child-ticket and dependency representation.>
 <Claim and resolution procedures; experiment, branch and publication constraints.>
 For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### prototype
+Runs: <runs>. Phase: <phase>.
 <Permitted experiment surfaces, data and environment boundaries.>
 <Artifact location, viewing method and capture/integration permissions.>
 For a supporting sketch, use [excalidraw-diagram](#excalidraw-diagram); it does not replace the runnable prototype.
 
 ### to-plan
+Runs: <runs>. Phase: <phase>.
 <Task-linked plan location, naming, visibility, approval and revision rules.>
 <Receiving executor and the instructions that let it consume the plan plus its source task.>
 For interactions or architecture worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### to-spec
+Runs: <runs>. Phase: <phase>.
 <Requirement sources, specification format, destination and publication procedure.>
 For interactions or architecture worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
 
 ### to-tickets
+Runs: <runs>. Phase: <phase>.
 <Ticket format, granularity, dependency representation and destination.>
 <Approval, readiness vocabulary and publication procedure.>
 
-### codebase-design
-<Existing interface conventions, architecture constraints and relevant ADRs.>
-<Testability examples and permissions for exploring alternative designs.>
-For interface boundaries worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
-
 ### excalidraw-diagram
+Runs: <runs>. Phase: <phase>.
 <Readable installed package entrypoint. Designated delegation tool, including Orca if selected.>
 <Task-artifact destination, naming, visibility and revision rules. Approved libraries and rendering permissions.>
 Draw only after the user consents. An explicit request for the diagram counts as consent. Package selection is not consent.
@@ -186,6 +190,7 @@ skill: <installed path of tdd/SKILL.md per client>
 Test types, seams, infrastructure and mocking limits: read `<agent-docs>/project/testing.md` when you write a test.
 
 ### implement
+Runs: <runs>. Phase: <phase>.
 worker: <agent, model and reasoning effort for workers>
 
 <Expected task inputs and implementation boundaries.>
@@ -219,6 +224,7 @@ Standards, comparison base, endpoint, scope, checkpoint and evidence rules: read
 <For fix-and-rereview: correction authority and stop conditions.>
 
 ### retro
+Runs: <runs>. Phase: <phase>.
 <Session evidence and retrospective scope.>
 <Where proposed improvements and approved outcomes belong.>
 <Who records approved outcomes and may change project instructions.>

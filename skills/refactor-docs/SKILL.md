@@ -1,47 +1,57 @@
 ---
 name: refactor-docs
-description: Refactor existing documentation and factual memory for clarity and structure while preserving technical meaning.
+description: Rewrite existing documentation and project memory for clarity and structure without changing what it says.
 disable-model-invocation: true
 ---
 
 # Refactor docs
 
-Edit the expression and organization of existing artifacts, not their decisions or requirements. This includes factual context and lesson entries. Reusable execution rules are outside this procedure; handle them as a separate, authorized change under the project contract. Classify mixed sections by purpose. File retirement and code refactoring are separate work.
+Rewrite the wording and the structure of existing documents, `CONTEXT.md` and `LESSONS.md`. Keep every decision, requirement and fact.
 
-## 1. Establish the writing rules
+Other work goes elsewhere:
+- a change to a decision, a requirement or a rule in `AGENTS.md` or a skill needs its own approved change;
+- removing files is `cleanup`;
+- code is `refactor-codebase`.
 
-Read applicable project instructions for language, style, document formats and required sources.
-This package works without another writing skill. If the project requires one, treat it as a project prerequisite and resolve missing access before affected edits.
-Do not silently install packages or change session-wide instructions.
+## 1. Find the writing rules
 
-**Done when:** the applicable writing rules are known and any required project source is readable.
+1. Read the project instructions for language, style, document format and required sources.
+2. If the project names a writing skill, use it. Otherwise use `asd-ste100` if it is installed, or the rules in step 3.
 
-## 2. Establish scope and preserve meaning
+**Done when:** you know the writing rules, and every required source is readable.
 
-Read project instructions and the requested documents before proposing changes. Identify the reader, purpose, authoritative sources, required format, language, editable scope and approval restrictions. Reuse project conventions and existing terminology. Ask only about unresolved choices that materially affect the edit; an explicit request to edit named documents needs no repeated permission for that same scope.
+## 2. Find what must stay
 
-For ADRs, specifications, READMEs and project memory, read the applicable sections of [document-type rules](references/document-types.md). Keep an original version available for comparison. Identify each document's substantive claims, requirements, decisions, rationale, alternatives, limitations, examples and open questions, including their scope and source links.
+1. Read the documents. Find the reader, the purpose, the sources, the format, the language and what you may edit.
+2. For an ADR, a spec, a README or project memory, read [the document-type rules](references/document-types.md).
+3. Keep a copy of the original for comparison.
+4. List each claim, requirement, decision, reason, alternative, limit, example and open question, with its scope and source link.
 
-Treat commands, code, paths, identifiers, API names, errors, dates, quantities and units as protected technical content. Preserve negation, conditions, exceptions, defaults, ordering, approval gates and normative strength such as MUST versus SHOULD. For ambiguous or contradictory content, consult available authoritative sources; leave unresolved meaning intact and ask the owner rather than inventing a resolution.
+Keep these exactly: commands, code, paths, identifiers, API names, error text, dates, numbers and units. Keep negations, conditions, exceptions, defaults, order, approval gates and the strength of each rule, for example MUST versus SHOULD.
 
-**Done when:** the target files, required structures and protected meanings are identified, and any ambiguity blocking a safe rewrite is resolved or excluded from the edit.
+If content is ambiguous or contradicts itself, check the source. If the source does not settle it, leave the text and ask the owner.
 
-## 3. Rewrite within that contract
+A request to edit named documents is permission to edit those documents.
 
-Write clear artifact prose in the project's format and language. Lead with the supported fact, name the actor and action, keep one idea per sentence and group related information. Replace filler, unsupported praise and repetition with supported content. Flag claims without evidence instead of inventing precision. Follow additional styles only when the task or project requires them.
+**Done when:** you have the files, their required structure and the list of what must stay, and each ambiguity is settled or left out of the edit.
 
-Remove wording or repetition only when no distinct fact, condition or reasoning is lost. Keep one authoritative explanation and a usable pointer where another reader needs it. Concision is not a word-count target: necessary caveats, counterexamples and trade-offs stay. Preserve deliberate terminology and document structure even when a general style preference suggests another form.
+## 3. Rewrite
 
-Keep conversational questions and closing conventions in the conversation unless the required document format calls for them. Prefer targeted edits. Preview moves, file splits, heading/anchor changes or altered document ownership when they exceed the authorized scope; include affected references in their approval. Leave unrelated files and concurrent edits untouched.
+- Start with the fact. Name who acts. Put one idea in each sentence. Group related facts.
+- Remove filler and repeats only when no fact, condition or reason goes with them. Keep caveats, counterexamples and trade-offs.
+- Mark a claim without evidence. Do not add precision that the source does not have.
+- Keep deliberate terms and the existing structure.
+- Prefer small, targeted edits. Leave unrelated files and other people's edits.
+- Before you move text between files, split a file, change a heading or anchor, or change who owns a document, show the change with its affected links and get approval.
+- Keep questions to the user in the chat, not in the document.
 
-**Done when:** every edited passage has a concrete clarity or structure improvement, and every protected meaning remains represented in its proper authoritative location.
+**Done when:** each edit makes the text clearer, and everything from the step 2 list is still in its proper place.
 
-## 4. Verify and report
+## 4. Check and report
 
-Compare the original and edited documents by meaning, not just length. Account for the substantive content identified in step 2, especially negations, normative requirements, values, prerequisites and permissions. Restore anything accidentally weakened, strengthened or omitted. Editorial cleanup must not turn a proposal into an accepted decision or a historical claim into a claim about the current system.
+1. Compare the original and the new text by meaning, not by length. Check the step 2 list item by item.
+2. Restore anything that you weakened, strengthened or dropped. A proposal stays a proposal. A past fact stays a past fact.
+3. Check changed headings, anchors, links, images and generated tables of contents. Run the project's documentation check if it has one.
+4. Report the edited files, structural changes, checks, and the claims or links that you could not verify.
 
-Check changed headings, internal anchors, links, image references and any generated table of contents. Run the project's narrow Markdown/documentation check when available. Distinguish editorial verification from technical fact-checking; report claims or external references you could not verify rather than calling them validated.
-
-Report the edited files, material structural changes, checks performed and unresolved questions. Keep the result in the existing documents; create a separate report only if requested or required by project policy. If the text already meets the requested standard, report that result without manufacturing edits.
-
-**Done when:** protected content is accounted for, the affected structure and references have been checked, and any remaining uncertainty is explicit.
+If the text already meets the standard, say so and make no edits.

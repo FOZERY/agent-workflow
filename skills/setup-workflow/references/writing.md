@@ -1,8 +1,8 @@
 # Project writing contract
 
 Read this file when you configure writing routes, languages, clients or instruction loading.
-The writing skills are independent. Setup keeps their files unchanged. Setup needs `asd-ste100` and `writing-for-agents` only to write `AGENTS.md` and the project files: it applies both to them whatever route the owner selects here.
-Record their approved use in the project's root `AGENTS.md`.
+The writing skills are independent. Setup's own use of `asd-ste100` and `writing-for-agents` in [step 3](../SKILL.md#3-draft-and-get-approval) does not depend on the routes selected here.
+Record the approved routes in the project's root `AGENTS.md`.
 
 ## Routes and languages
 
@@ -29,25 +29,17 @@ Record their approved use in the project's root `AGENTS.md`.
 1. For each selected writing skill, run the [same-name check](skills.md#check-same-name-copies).
 2. Report its reference files, scope, path and discovery in each client. If you cannot check access, report it as unknown, not as missing.
 3. Reuse a compatible copy and a trigger that already works. A missing pointer does not need a reinstall.
-4. If a selected skill is missing, offer two options: approve its [bounded installation](skills.md#install-plan-and-approval), or leave the route unavailable. A missing writing skill blocks neither setup nor unrelated skills.
+4. If a selected skill is missing, offer two options: approve its [bounded installation](skills.md#install-plan-and-approval), or leave the route unavailable. A missing writing skill blocks only its own route.
 
 ## Instruction loading
 
-For each selected route, choose one of three: keep an existing rule, add a project pointer, or leave the route off. Approval to install a skill does not turn it on.
+For each selected route, choose one of three: keep an existing rule, add a project pointer, or leave the route off. Installation does not turn a skill on, also when the install is global.
 
 1. The root `AGENTS.md` holds the project pointers. Use a client import only when the client needs it to reach that file.
-2. If the user asks for user-wide activation, show that target separately for approval. A global install does not turn the skill on globally.
-3. If the user selected global changes, check the effective source:
-
-| Client | User-wide instruction source |
-| --- | --- |
-| Claude Code | The loaded user instructions, normally `~/.claude/CLAUDE.md`. Follow configured directories and imports. See [memory documentation](https://code.claude.com/docs/en/memory). |
-| Codex | The first non-empty `AGENTS.override.md` or `AGENTS.md` under the effective `CODEX_HOME`. See [instruction discovery](https://developers.openai.com/codex/guides/agents-md/). |
-| OMP | The native agent-directory instructions, normally under `~/.omp/agent`. Follow profiles and `PI_CODING_AGENT_DIR`. Check client behavior before you rely on precedence. |
-
-4. OMP task subagents do not get `AGENTS.md`. When a subagent does not inherit instructions, put the project rules and readable skill paths in its brief.
-5. Route a helper's output by what it is: a helper that returns an artifact follows the artifact route.
-6. A native shared-rule file is an option only after the user approves its target and effects.
+2. If the user asks for user-wide activation, show that target separately for approval.
+3. If the user selected global changes, check the effective user-wide source in the [client table](project-artifacts.md#client-loading).
+4. Route a helper's output by what it is: a helper that returns an artifact follows the artifact route.
+5. A native shared-rule file is an option only after the user approves its target and effects.
 
 ## Pointer text
 
@@ -60,11 +52,10 @@ Translate the approved triggers into the instruction language. Keep the style de
 > Before writing or editing reusable rules, read the installed `writing-for-agents` skill unless already in context. Use it for skills, `AGENTS.md` and procedural references. For mixed documents, select the route by section purpose.
 
 1. In the preview, show the exact pointers, clients, profiles and project or global targets.
-2. Show the install sources and destinations as a separate part. Configuration does not approve installation.
-3. Write a new pointer only after the selected client can read its target.
-4. If installation fails or the user declines it, report the unavailable route and the pointer that you did not write. Keep unrelated instructions.
-5. Keep project paths, roles, languages and routing in `AGENTS.md`. Leave installed skill files unchanged.
-6. A new pointer cannot change the style of a reply that the session already gave. Tell the user if the client needs a reload or a new session. This setup installs no startup hook.
+2. Write a new pointer only after the selected client can read its target.
+3. If installation fails or the user declines it, report the unavailable route and the pointer that you did not write. Keep unrelated instructions.
+4. Keep project paths, roles, languages and routing in `AGENTS.md`.
+5. A new pointer cannot change the style of a reply that the session already gave. Tell the user if the client needs a reload or a new session. This setup installs no startup hook.
 
 ## Verify
 

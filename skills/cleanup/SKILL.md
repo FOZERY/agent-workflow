@@ -1,68 +1,75 @@
 ---
 name: cleanup
-description: Review obsolete project artifacts and perform an explicitly approved, recoverable cleanup.
+description: Review stale project artifacts and remove the approved ones recoverably.
 disable-model-invocation: true
 ---
 
 # Cleanup
 
-Maintain working artifacts: research notes, temporary plans, task notes, handoffs, reports and generated diagrams. Start with a read-only review. Invoking this skill requests that review, not blanket permission to delete files. Prose editing and document restructuring are separate work.
+Review working artifacts: research notes, temporary plans, task notes, handoffs, reports and generated diagrams. Start read-only. A request to run this skill is a request for a review, not a permission to delete. Leave text rewrites to `refactor-docs`.
 
-## 1. Establish the scope
+## 1. Find the scope
 
-Read the applicable project instructions and their artifact, ownership and retention pointers. Identify the repository/worktree, requested artifact locations, active work and allowed actions. Reuse the configured layout; inspect `.docs/` where present rather than assuming it is the only artifact root.
+1. Read the project instructions for artifact locations, owners and retention rules. If there are none, use `.docs/` and say so.
+2. List the artifact folders. Check `.docs/` and every other configured location.
+3. Resolve paths and symlinks.
+4. Leave these out: source code, dependencies, build caches, `.git`, worktrees, folders that tools manage, and external systems.
+5. Treat specs, tickets, instructions and legal records as sources, not as candidates.
 
-Resolve paths and symlinks before including them. Keep inspection and changes within the permitted scope. Source code, dependencies, build caches, Git metadata and external systems are outside this artifact-cleanup procedure. Existing specs, tickets, instructions and legal records are authoritative inputs, not disposable working notes.
+If the project has no retention rule, judge each candidate on its own. Propose a new retention rule separately.
 
-Use existing policy and the user's request to settle scope. Ask only about missing boundaries or permissions that affect the review. If retention is unspecified, assess individual candidates; propose any new retention rule separately instead of inventing an expiry period.
+**Done when:** you know the artifact folders, their owners and the retention rules, and you named what you cannot read.
 
-**Done when:** the artifact roots, ownership boundaries and applicable retention/approval rules are identified; inaccessible sources and unresolved boundaries are explicit.
+## 2. Check each candidate
 
-## 2. Establish each candidate's lifecycle
+1. Read the candidate. Find its purpose, task, owner, status, unique facts and any replacement.
+2. Check its status against current sources. Age, a finished task, a `deprecated` label or a similar file name is not a reason to remove it.
+3. Search for links to it: pointers, indexes, embeds and images. Write where you searched in the evidence column. No match in that scope does not prove that nobody outside uses it.
+4. Compare supposed duplicates by content and purpose, not by file name.
 
-Read candidate contents. Identify their purpose, associated task, current owner, status, unique information and any authoritative replacement. Verify status against available current sources. Age, a completed task, a `deprecated` label or a similar filename alone does not establish that a record can be discarded.
+Apply these rules by type:
 
-Trace incoming links, instruction pointers, indexes, embeds and image references within the accessible scope. Record where you searched; no matches in that scope do not prove that external readers have no references. For proposed moves, also account for outgoing relative links and companion assets. Compare supposed duplicates by content and purpose, not filenames.
+- **ADRs:** keep accepted and superseded ADRs with their replacement links. Follow the project's archive procedure if it has one.
+- **`CONTEXT.md`:** prune only under the agreed retention rule. Keep open questions, next actions, task links and dates. Show the exact entries before you prune.
+- **`LESSONS.md`:** keep current lessons at any age. Prune only an entry that is shown to be obsolete or a duplicate.
+- **Working artifacts:** remove one only after a verified replacement or an expired retention rule, and after its unique facts are kept somewhere.
+- **Someone else's work:** leave an active artifact of another agent or person in place. Untracked or ignored files are not disposable. Unknown owner or status means keep.
 
-Apply these distinctions:
+**Done when:** each proposed change has a reason with its source, its link impact and the place where its unique facts stay. Each uncertain candidate stays, with the missing evidence named.
 
-- **Decision history:** retain accepted and superseded ADRs and their replacement links. Supersession is history, not a deletion signal. Follow any explicit project archiving procedure while preserving the decision record.
-- **Recent context:** prune only under agreed retention. Preserve unresolved questions, next actions, task links and chronological timestamps. Preview the exact entries affected by partial pruning; do not invent event dates or silently summarize away open work.
-- **Long-term lessons:** retain current durable knowledge regardless of age. Prune only demonstrably obsolete or redundant entries under the project's policy, keeping useful replacement pointers.
-- **Working artifacts:** a verified replacement or expired project retention rule can support removal, but check unique findings, unresolved work and reference obligations first. Preserve unique information in place or in an approved archive; transferring it into another authoritative document needs an explicit plan.
-- **Concurrent work:** leave another agent's or person's active artifacts unchanged. Untracked or ignored does not mean disposable. Unknown ownership or task status stays unresolved rather than becoming evidence for removal.
+## 3. Show the plan and get approval
 
-**Done when:** every proposed change has a sourced reason, identified reference impact and knowledge-preservation outcome. Uncertain candidates remain unchanged with the missing evidence stated.
+Show the plan in the chat. Write a report file only if the user or the project asks for one.
 
-## 3. Present the plan and obtain approval
-
-Present the plan in the conversation; create a persistent report only if requested or required by project policy. For each proposed change show:
-
-| Path or exact entries | Action | Evidence and retained source | Reference repairs | Recovery location |
+| Path or entries | Action | Evidence and kept source | Link repairs | Recovery location |
 | --- | --- | --- | --- | --- |
 
-Choose keep, archive, move to Trash/quarantine, or prune specific entries. Explain important keep/blocked decisions as well. Expand directory proposals into their affected files so approval does not hide unrelated contents. Include any index, link or asset changes and any recovery copies in the same plan.
+1. List the candidates that you propose to change, and each kept candidate that the user could question. Use one action per row: keep, archive, move to Trash, or prune named entries. For a kept row, write `none` in the recovery column.
+2. Expand a folder into its files.
+3. Include every link repair and recovery copy in the plan.
+4. If the user asked only for a review, stop here. Otherwise ask the owner to approve the exact paths and actions.
 
-Ask the owner to approve the exact paths/entries and actions. Reuse explicit approval already covering that plan; review-only requests stop here. A generic request to clean the repository does not authorize the proposed deletion list, policy changes, external writes or publication.
+A general request such as "clean the repository" does not approve the list.
 
-**Done when:** the owner has selected an explicit change set, declined it, or received the requested review-only result. Proceed only with approved changes.
+**Done when:** the owner approved a change set, declined it, or got the review.
 
-## 4. Apply approved changes recoverably
+## 4. Apply the approved changes
 
-Before each change, check that the candidate and its ownership/reference assumptions still match the preview. If they changed, stop that action and refresh its plan; continue independent approved actions where safe. Preserve unrelated user edits.
+1. Before each change, check that the candidate, its owner and its links still match the plan. If not, skip that action and update its plan.
+2. Move files to the Trash or to an approved archive. Use destinations that cannot overwrite a file.
+3. Record each original path and destination as a restore map.
+4. Before you prune entries in place, save a recovery copy.
+5. Make only the link repairs in the plan.
 
-Use system Trash or an approved recoverable archive/quarantine, with collision-safe destinations. Record original paths and destinations before moving files and keep a usable restoration map. Git history alone is not a backup, particularly for untracked files. Permanent deletion is outside this skill.
+Git history is not a backup, especially for untracked files. This skill never deletes permanently. An archive, an ignore rule, shared memory or a remote record needs its own approval.
 
-For approved in-place pruning or link repairs, retain an approved recovery copy before editing. Preserve chronology, source links and retained facts. Apply only the minimum reference repairs in the approved plan; this is not a prose rewrite or a workflow-policy migration. If a required reference cannot be repaired within that authority, leave the affected artifact in place and report the blocker.
+**Done when:** each action has an observed result and a recovery path. If an action failed, report what was done and what was not.
 
-Keep recovery material outside active artifact discovery where the project permits, and preserve existing tracking/ignore choices. Creating archives, editing ignore rules, changing shared memory or mutating remote records requires the corresponding approval; cleanup does not grant those permissions.
+## 5. Check and report
 
-**Done when:** every attempted action has an observed result and a recovery path. On failure, report partial completion and leave unattempted files intact; do not claim rollback without performing it.
+1. Check that kept instructions, indexes, links and diagram assets still resolve.
+2. Run the project's documentation or link check if it has one.
+3. Check that each recovery copy has the original content.
+4. Report the changed paths, the kept and blocked candidates, the checks and the restore method.
 
-## 5. Verify and report
-
-Check that retained instructions, indexes, task/decision links and diagram assets still resolve within the inspected scope. Check moved documents' relative links and run the project's narrow documentation/link check when available. Confirm recovery copies contain the original content, kept files were preserved and no approved item is silently missing from the outcome.
-
-Report changed paths, retained/blocked candidates, checks performed, reference-check limits and the exact restoration method. Distinguish completed cleanup from recommendations and unverified external references. If nothing qualifies, report that result without manufacturing changes or a new report file.
-
-**Done when:** each approved action is accounted for, the affected references are verified or their limitation is explicit, and the owner can recover every changed artifact.
+If nothing qualifies, say so. Make no change and no report file.

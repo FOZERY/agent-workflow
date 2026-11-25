@@ -10,111 +10,100 @@ If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the u
 
 # Refactor codebase
 
-Find where the structure of the code makes it harder for people and agents to change, agree one fix with the user, then rewrite it with the behavior kept. The user runs this skill after a stage of work: several tasks, an epic. `implement` never starts it. `simplify-codebase` cleans the code of one task. This skill works on the structure across tasks.
+Find where the structure of the code makes it hard to change, agree one fix with the user, and rewrite it with the behavior kept. The user runs this skill after a stage of work, such as several tasks or an epic. `simplify-codebase` cleans the code of one task. This skill works on the structure across tasks.
 
-Call the Skill tool with "codebase-design" for the vocabulary: **module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**, and the deletion test. Use these terms exactly in every candidate. Do not write "component", "service", "API" or "boundary".
+Read [VOCABULARY.md](VOCABULARY.md) for the terms: module, interface, depth, seam, adapter, leverage, locality and the deletion test. Use these terms in every candidate.
 
-## Process
-
-### 1. Pin the scope and the rules
+## 1. Find the scope and the rules
 
 Choose the scope in this order:
 
-1. The module or pain point that the user names.
-2. The commit range that the user gives: a commit, tag or branch where the stage began.
-3. The hot spots of `git log`: the files that keep changing. If the changes are scattered, widen the scope.
+1. The module or problem that the user names.
+2. The commit range that the user gives: the commit, tag or branch where the stage began.
+3. The files that change most often in `git log`. If the changes are scattered, widen the scope.
 
-Read the project's rules before you look at the code: `AGENTS.md`, the coding standards, the architecture notes, the linter and formatter configs, `GLOSSARY.md` and the ADRs of the area. An ADR is a decision. Reopen it only when the friction that you find is real, and say so in the candidate.
+Read the project rules: `AGENTS.md`, the coding standards, the architecture notes, the linter and formatter configs, `GLOSSARY.md` and the ADRs of the area. Reopen an ADR only for a real problem, and say so in the candidate.
 
 If the scope is empty, report that and stop.
 
-**Done when:** the paths in scope, the range or hot spots behind them, and the rule sources are listed.
+**Done when:** you have the paths in scope, the range or files behind them, and the rule sources.
 
-### 2. Check the baseline
+## 2. Check the baseline
 
-Run the project's typecheck and the tests that cover the scope. If a check fails, stop and report. Do not refactor on red.
+1. Run the typecheck and the tests that cover the scope. If a check fails, report it and stop.
+2. Record the current `HEAD` as the starting commit.
 
-Record the current `HEAD` as the starting commit.
+## 3. Simplify
 
-**Done when:** the checks pass, and the starting commit is recorded.
+If the project has no `simplify-codebase` section, skip this step and say so.
 
-### 3. Simplify
+1. Start `simplify-codebase` in a subagent with a fresh context. Give it the path from the `skill` setting of the `simplify-codebase` section, and the files in scope as whole files. If subagents are not available, run it in this session.
+2. Wait for its findings. Leave the files unchanged meanwhile.
+3. Apply the findings yourself by step 6 of `simplify-codebase`.
+4. Run the typecheck and the covering tests again.
+5. Carry its proposals into step 4 as candidates.
 
-Run `simplify-codebase` in a subagent with a fresh context. Give it the path from the `skill` setting of the project's `simplify-codebase` section and the files in scope as whole-file scope. The subagent only finds simplifications and returns them. Wait for its findings and do not edit the files meanwhile. Apply the findings yourself by step 6 of `simplify-codebase`. Run the typecheck and the covering tests again.
+**Done when:** each finding is applied or skipped with a reason, and the checks pass.
 
-If subagents are unavailable, run `simplify-codebase` in this session. If the project has no `simplify-codebase` section, skip this step and say so.
+## 4. Scan
 
-Carry its proposals into step 4 as candidates.
+Give the scan to a subagent with a fresh context. If subagents are not available, scan in this session. Read the code in scope and note each problem through these views:
 
-**Done when:** every finding is applied or skipped with a reason, the checks pass, and the proposals are listed.
-
-### 4. Scan
-
-Delegate the scan to a subagent with a fresh context. If subagents are unavailable, scan in this session. Do not follow a fixed checklist. Read the code in scope and note where you meet friction through these lenses:
-
-- **Depth.** Understanding one concept needs many small modules. An interface is nearly as complex as its implementation. Pure functions were extracted only for testability, while the bugs sit in how callers use them. Modules leak across their seams. Behavior is hard to test through its interface.
+- **Depth.** One concept needs many small modules. An interface is nearly as complex as its implementation. Pure functions exist only for tests, while bugs sit in how callers use them. Modules leak across their seams. Behavior is hard to test through its interface.
 - **Project rules.** The code breaks the coding standards, the module boundaries in the architecture notes, the intent of the linter configs, or an ADR.
-- **Practices of the stack.** The code goes against the best practices of its language and framework, for the versions that the project declares.
-- **Performance.** The code does avoidable work, as judged by the practices of the stack.
+- **Practices of the stack.** The code goes against the practices of its language and framework, for the versions that the project uses.
+- **Performance.** The code does work that it could avoid.
 
-Apply the deletion test to every module that you suspect is shallow. A candidate needs a yes: deleting the module concentrates complexity.
+Apply the deletion test to each module that looks shallow. Keep the candidate only if deleting the module would concentrate complexity.
 
-Every candidate names the place in the code and the rule or practice that it breaks. Drop a finding that has neither. Mark a practice or performance finding `hypothesis` unless the code or a measurement confirms it.
+Each candidate names the place in the code and the rule or practice that it breaks. Drop a finding that has neither. Mark a practice or performance finding `hypothesis` until the code or a measurement confirms it.
 
 **Done when:** each candidate has its files, its problem, the rule or practice behind it, and whether tests reach the code through its interface.
 
-### 5. Present the candidates
+## 5. Show the candidates
 
-List the candidates in the chat, most valuable first. Give each candidate:
+List the candidates in the chat, most valuable first. For each one give:
 
 - **Files.**
-- **Problem.** In the glossary terms of `codebase-design` and the domain terms of the project.
-- **Solution.** In plain words. Do not propose an interface yet.
-- **Win.** In locality and leverage, and how the tests improve.
-- **Dependency category.** From [DEEPENING.md](../codebase-design/DEEPENING.md).
-- **Strength.** `Strong`, `Worth exploring` or `Speculative`.
-- **Tests.** Whether tests reach the code through its interface: yes or no.
-- **Basis.** The rule or practice, or `hypothesis`.
+- **Problem**, in the terms of [VOCABULARY.md](VOCABULARY.md) and the project's domain terms.
+- **Solution**, in plain words. Leave the interface for step 6.
+- **Win**, in locality and leverage, and how the tests improve.
+- **Dependency category**, from [DEEPENING.md](DEEPENING.md).
+- **Strength:** `Strong`, `Worth exploring` or `Speculative`.
+- **Tests:** do tests reach the code through its interface, yes or no.
+- **Basis:** the rule or practice, or `hypothesis`.
 
-End with the candidate that you would take first and why. Draw a diagram only where the project's diagram rules allow it and the user agrees.
+End with the candidate that you would take first, and why. Draw a diagram only if the project's diagram rules allow it and the user agrees.
 
-Ask the user through the harness's question tool which candidate to take, one at a time. Offer "none" as an option. If the user takes none, report and stop.
+Ask the user through the question tool which candidate to take. Offer "none". If the user takes none, report and stop.
 
-**Done when:** the user has chosen one candidate or none.
+**Done when:** the user chose one candidate or none.
 
-### 6. Grill the candidate
+## 6. Grill the candidate
 
-Call the Skill tool with "grilling" and walk the decision tree of the chosen candidate: the constraints, the dependencies, the shape of the deepened module, what sits behind the seam, which tests survive and which are replaced.
+1. Run the `grilling` skill on the chosen candidate: constraints, dependencies, the shape of the deepened module, what sits behind the seam, which tests stay and which are replaced.
+2. If the user wants alternative interfaces, use [DESIGN-IT-TWICE.md](DESIGN-IT-TWICE.md).
+3. If the project has `domain-modeling`, use it as decisions form. Add a new term to `GLOSSARY.md` when a deepened module takes its name. If the user rejects a candidate for a reason that a future scan needs, offer to record an ADR.
+4. If no tests reach the candidate through its interface, tell the user that the rewrite has no safety net. Get the user's confirmation through the question tool.
 
-If the user wants alternative interfaces, use the design-it-twice pattern in [DESIGN-IT-TWICE.md](../codebase-design/DESIGN-IT-TWICE.md).
+**Done when:** the decision is one task for `implement`: the files, the target interface, the tests to keep, delete or add, and the user's confirmation.
 
-If the project has `domain-modeling`, call the Skill tool with "domain-modeling" while the decisions form:
+## 7. Rewrite
 
-- Add a new domain term to `GLOSSARY.md` as soon as a deepened module takes its name.
-- If the user rejects a candidate for a reason that a future scan would need, offer to record an ADR. Skip reasons like "not now".
+Run `implement` in this session with that task. Give it the starting commit from step 2 as the review base, so that the simplifications from step 3 belong to the task.
 
-If tests do not reach the candidate through its interface, say so. The rewrite then runs without a safety net. Ask the user to confirm that risk through the question tool before step 7.
+The behavior stays the same. Tests that passed before still pass, except the tests of replaced shallow modules, which go with them. Write new tests at the interface of the deepened module.
 
-**Done when:** the decision is written as one task for `implement`: files, the target interface, the tests to keep, delete or add, and the user's confirmation.
+**Done when:** `implement` finished with its required checks and review.
 
-### 7. Rewrite
+## 8. Report and continue
 
-Run `implement` in this session with that task. Give it the starting commit from step 2 as the review base, so the simplifications from step 3 count as part of the task. The behavior stays the same. Tests that passed before still pass, except the tests of replaced shallow modules, which go away with them. Write new tests at the interface of the deepened module.
+1. Report what changed and what you left alone.
+2. Check that the rewrite did not change or remove the other candidates.
+3. Ask the user through the question tool whether to take the next candidate.
 
-**Done when:** `implement` has finished with its required checks and review.
+## Stop and tell the user
 
-### 8. Report and continue
-
-Report what changed and what you left alone. Ask the user through the question tool whether to take the next candidate. First check that the rewrite did not change or remove the other candidates.
-
-**Done when:** the user has answered.
-
-## Red flags
-
-Stop and tell the user if one of these happens:
-
-- The baseline is red.
 - A test needs an edit to pass. The change altered the behavior.
 - The rewrite reaches outside the files that the user agreed.
 - The candidate no longer passes the deletion test.
-- You cannot name the rule or practice behind a candidate.
