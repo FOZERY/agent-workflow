@@ -1,6 +1,6 @@
 ---
 name: asd-ste100
-description: "Write or edit technical artifacts in ASD-STE100 style: documentation, ADRs, specifications, tickets, reports, CONTEXT.md and LESSONS.md. Use for artifact prose for people or agents, including drafts returned in chat."
+description: "Write or edit technical artifacts in ASD-STE100 style: documentation, skills, AGENTS.md, READMEs, ADRs, specifications, tickets, reports, CONTEXT.md and LESSONS.md. Use for artifact prose for people or agents, including drafts returned in chat."
 ---
 
 # ASD-STE100 artifact writing
@@ -10,19 +10,18 @@ Keep the project's document format, language, technical meaning and approval rul
 
 ## Scope
 
-Use this skill for documentation, ADRs, specifications, tickets, reports, descriptions, `CONTEXT.md` and `LESSONS.md`.
-It applies whether a person or an agent reads the artifact, including an artifact draft returned in chat.
-This package works on its own. The task and project instructions determine where this style applies.
+This skill works on its own. The task and project instructions determine where it applies.
 
-ASD-STE100 is controlled English. This skill is a self-contained **STE-based writing profile**, not a claim of full conformance.
-For a required non-English artifact, keep its language and adapt the clarity principles.
-For routine writing, use the principles and examples below without retrieving the standard, dictionary or research material. Consult the artifact's own sources for its facts.
-Read [research and sources](references/sources.md) only when maintaining this package or answering an explicit request for provenance or a full-conformance review.
+ASD-STE100 is controlled English. This skill is a writing profile based on it, not a claim of full conformance.
+Before you write or edit an artifact in Russian, read [the Russian rules](references/ru.md).
+For an artifact in another language, keep its language and adapt the clarity principles.
+Use the principles and examples below. Do not look up the standard or its dictionary. Take the artifact's facts from its own sources.
 
 ## Principles
 
 - **One term, one concept.** Use the project's accepted terms. Define an unfamiliar term at first use.
-  A glossary does not make every word STE-approved. The official dictionary restricts meanings and parts of speech.
+  Use the words that developers say. Do not invent a term when a common word exists.
+- **Real names.** Write the actual command, file, flag, setting or symbol, not a description of it.
 - **One idea per sentence.** Keep descriptions to 25 words per sentence.
   Keep each paragraph on one topic, with no more than six sentences.
 - **One sequential action per step.** Keep procedural sentences to 20 words.
@@ -32,23 +31,30 @@ Read [research and sources](references/sources.md) only when maintaining this pa
   In descriptions, passive voice is an exception for an unknown actor. Do not invent the actor.
 - **Complete, simple sentences.** Keep necessary subjects, articles and connecting words.
   Expand contractions. Use periods instead of semicolons in prose.
+  Write `and` or `or` instead of a slash. Write the plural instead of `(s)`.
 - **Clear word relations.** Break ambiguous noun chains into explicit relations.
   The normal limit is three words. Preserve an established longer technical name and explain it where needed.
+  Put `only` and `not` next to the word that they change.
+  Make each `it`, `this`, `they` and `which` point to one obvious noun, not to a full sentence.
+  If `and` and `or` are in one sentence, show which parts each word joins, or split the sentence.
+- **Lists.** Use a numbered list for a sequence and a bulleted list for other items.
+  Introduce each list with a complete sentence. Give all items the same grammatical form.
 - **Literal language.** Replace figurative expressions and noun-heavy actions with the actual operation.
   Check an `-ing` form by its function: technical nouns and approved entries can be valid.
 - **Visible requirements and risks.** Keep required actions and limits out of informational notes.
   Put a risk notice before the hazardous action and state the consequence. Preserve the project's risk labels.
+- **No empty words.** Delete words that add no fact, condition or action.
 - **Meaning before brevity.** Preserve negation, quantifiers, exceptions, order, uncertainty, decision status and mandatory modal words.
   Keep code, commands, identifiers, paths, quotations, units and numbers intact. Rewrite the surrounding prose instead.
 
+If a rule makes a sentence worse, rewrite the sentence in a different way or keep it.
+
 Use American spelling unless a project directive requires another spelling.
-The official word count has exceptions for identifiers, numbers with units, quoted text, parentheses and other elements.
-A space-only counter can flag a sentence for review. It cannot establish conformance.
+Do not count code, identifiers, numbers with units or quoted text toward the word limits.
 
 ## Replace ambiguity with an observable fact
 
-These original examples illustrate the writing profile.
-Example thresholds and decisions do not supply requirements for the current project.
+The values and decisions in these examples do not set requirements for the current project.
 
 | Instead of | Write | What changed |
 | --- | --- | --- |
@@ -58,6 +64,14 @@ Example thresholds and decisions do not supply requirements for the current proj
 | The migration has been completed on `abc123`, although the row-count check has not been run. | The migration completed on `abc123`. The row-count check was not run. | The event and verification gap have separate sentences. |
 | Our proposed decision is to leverage Redis as the cache, but no performance measurement is available. | Status: Proposed. Use Redis as the cache. No performance measurement is available. | The proposal and evidence limit remain explicit. |
 | If configuration validation fails, make an error notification. | If the configuration is not valid, show the error. | The condition and action replace noun-heavy wording. |
+| Run the test command. | Run `pnpm test`. | The reader gets the real command. |
+| Check the leading word of the pointer. | Check that the skill description says when to use the skill. | A common phrase replaces an invented term. |
+| The worker only runs the tests after review. | The worker runs the tests only after review. | `only` limits the time, not the action. |
+| The orchestrator sends the brief to the worker. This can fail. | The orchestrator sends the brief to the worker. The dispatch can fail. | The subject names the thing that fails. |
+| Run lint and typecheck or tests. | Run lint. Then run typecheck or the tests. | Each sentence shows what `and` and `or` join. |
+| Commit/push the file(s). | Commit the files. Push only with permission. | Two actions get two sentences. The plural replaces `(s)`. |
+| Build the package, run the tests and then commit. | 1. Build the package.<br>2. Run the tests.<br>3. Commit. | A sequence becomes a numbered list. |
+| It is important to make sure that you run the tests. | Run the tests. | The empty words are gone. |
 
 ## Preserve the artifact's role
 
@@ -75,7 +89,5 @@ Read the whole artifact against its authoritative sources.
 Check meaning, sentence limits, consistent terms, required fields and local links.
 Keep unresolved facts explicit instead of inventing precision.
 Save only through the authorized writer and destination, or return an explicit unpublished proposal.
-State any requested but unverified conformance in the conversational handoff.
-Add a compliance label or separate review report only when the project requires one.
 
 **Done when:** the complete artifact preserves the agreed content, follows this profile and has a clear delivery and verification state.
