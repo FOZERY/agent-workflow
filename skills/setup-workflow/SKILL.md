@@ -55,6 +55,7 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
    - Memory: directory, reading and update checkpoints, writer and approval scope. Follow [project artifacts](references/project-artifacts.md).
    - Lessons: ask "When a disputed question is settled or you correct me, should I ask before I write a lesson, or write it myself and tell you?" Record the matching lessons variant from [core rules](references/core-rules.md).
 4. If Git settings are missing or change, read [delivery settings](references/delivery.md).
+5. Check whether `human-text` is installed for each selected client, in the project or user-wide. If it is not, recommend it for natural conversation with the user. Ask where to install it: user-wide or in the project. Install it only after approval, by the [install plan](references/skills.md#install-plan-and-approval), and configure its route in [writing routes](references/writing.md).
 
 ### 2.2 Skills
 

@@ -46,16 +46,36 @@ The app decides the interface; this skill decides the words.
 
 ## Machine habits to drop
 
-| Write | Instead of |
-|---|---|
-| say Y | "Not X, but Y" where nobody said X |
-| one full sentence with the fact | chopped fragments: "Fast. Reliable. Simple." |
-| the answer as a statement | a question with its own answer: "Why? Because…" |
-| the one property that matters, with a number | triplets for rhythm: "fast, convenient and reliable" |
-| start with the result | an opening that announces: "Let's dive in", "Below I describe" |
-| stop after the last fact; put a required user decision in the closing block | a closing recap or a vague offer: "In summary…", "If you need, I can…" |
-| delete them | hedges and fillers: "basically", "it's worth noting", "it's important to understand" |
-| bold only on labels the reader scans for | bold on random words, emoji as decoration |
+Each rule has a number. The Russian reference uses the same numbers.
+
+1. **Say the point.** Skip "not X, but Y" when nobody said X.
+   Not: "It is not just a check, it is a full analysis." Write: "The skill checks the standards and the task."
+2. **Write whole sentences.**
+   Not: "Fast. Reliable. Simple." Write: "The build takes 1 second."
+3. **State the answer.** Skip a question that you answer yourself.
+   Not: "Why? Because the cache is cold." Write: "The cache is cold."
+4. **Give the one property that matters, with a number.** Skip triplets for rhythm.
+   Not: "fast, convenient and reliable". Write: "Sync takes 2 seconds."
+5. **Start with the result.** Skip openings that announce.
+   Not: "Let's dive in." Write: "The bug is fixed. The cause was a stale cache."
+6. **Stop after the last fact.** Put a decision that the user must make in the closing block.
+   Not: "In summary, …", "If you need, I can …".
+7. **Delete hedges and fillers.**
+   Not: "Basically, it is worth noting that the test fails." Write: "The test fails."
+8. **Bold only labels that the reader scans for.** No emoji as decoration.
+   Not: "The **new** build is **much faster** 🚀". Write: "The new build is faster."
+9. **A bold lead-in adds a detail, not a repeat.**
+   Not: "**Speed:** the speed improved." Write: "**Speed:** builds take 1 second instead of 4."
+10. **Start with the answer.** Skip praise and agreement.
+    Not: "Great question! You're absolutely right." Write: "The flag is in `config.ts`."
+11. **Name the source, or delete the claim.**
+    Not: "Experts believe that retries help." Write: "The Redis docs recommend three retries."
+12. **End the sentence after the fact.** Skip a trailing phrase that adds nothing.
+    Not: "We added retries, ensuring reliability." Write: "We added three retries."
+13. **Use the concrete word.** Skip buzzwords and abstract metaphors.
+    Not: "the testing landscape", "a seamless experience". Write: "the tests", "no second login".
+14. **Delete a sentence that would fit any project.**
+    Not: "Quality is important to us."
 
 ## Forms, when they fit
 
