@@ -17,13 +17,30 @@ When exploring the codebase, read `GLOSSARY.md` (if it exists) so test names and
 
 Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification: "user can checkout with valid cart" tells you exactly what capability exists, and it survives refactors because it doesn't care about internal structure.
 
+Check each test against two edits. Break the behavior, for example return a wrong value or skip an effect: the test must fail. Change only the internals and keep every observable result: the test must pass. The red run before the code is the first edit. Judge the second by reading the test. Derive the expected value from the requirement. Assert the error type that callers branch on, not the message.
+
 See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
+
+## When the loop fits
+
+Use the loop for a behavior with an input and an observable output that an independent source pins down: business logic, a request and response contract, a transformation, validation.
+
+Write no new test when it would need broad harness setup, brittle mocks, slow end-to-end infrastructure, production-only state or large unrelated fixture churn. Write none when nothing independent says what the result must be, as with configuration, wiring and glue code. Use the closest executable check instead, such as a targeted script, a reproduction command or `verify`, and name it in your report.
+
+## Fixing a bug
+
+1. Write the test that would have caught the bug. It encodes the intended behavior, not the current code.
+2. Run it before you fix anything. It must fail for the reported reason. If it passes or fails for another reason, correct the test or the reproduction first.
+3. Make the smallest fix that passes it, and keep the nearby contracts.
+4. Run it again, and the other tests of that area if the project has them.
+
+If the bug is flaky, make the test deterministic. Land the focused regression test first. Add tests for related failures only after it.
 
 ## Seams: where tests go
 
 A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
 
-**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. Seams listed in an approved plan or in the orchestrator's assignment count as confirmed; confirm only seams you add. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
+**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. Seams listed in an approved plan, in the orchestrator's assignment or by the user for this task count as confirmed; confirm only seams you add. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
 
 Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
 
@@ -44,6 +61,12 @@ Ask: "What's the public interface, and which seams should we test?" Give each pr
 - **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
 - **One slice at a time.** One seam, one test, one minimal implementation per cycle.
 - **Refactoring is not part of the loop.** It belongs to `simplify-codebase` after the implementation, not the red → green implementation cycle.
+- **Tests follow the requirement.** Do not change a test to match a wrong implementation. Weaken an assertion only when the required behavior changed, and say why.
+- **Slow tests last.** Write browser and end-to-end tests after the behavior works at a faster seam. `verify` checks the running product.
+
+## Report
+
+For each new test, give the red output before the code and the green output after it. For each behavior that you checked without a new test, name the check and the reason.
 
 ## Auditing existing tests
 

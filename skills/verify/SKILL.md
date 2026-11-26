@@ -10,7 +10,7 @@ If the project's root `AGENTS.md` has no `agent-workflow:core` block, use this s
 
 # Verify
 
-Prove that a change works in the running product, not only in the tests. The `verify` section of the project's `AGENTS.md` says where and how to check. The task says what to check.
+Prove that a change works in the running product, not only in the tests.
 
 ## 1. Read the procedure
 
@@ -32,7 +32,7 @@ Prove that a change works in the running product, not only in the tests. The `ve
 
 1. Follow the procedure: start the app, deploy, connect to the namespace or load the test data.
 2. Check that you are in the right place: the cluster context, the namespace, the URL, the test account.
-3. Check that the environment runs the change, for example by the commit, the image tag or the build version. Without a build, check that the running code comes from the tree that the caller gave you, or from the working tree with the change. A check on an old build proves nothing.
+3. Check that the environment runs the change, for example by the commit, the image tag or the build version. Without a build, check that the running code comes from the tree that the caller gave you, or from the working tree with the change.
 
 Act only on the environments and accounts that the procedure names. If the check needs another one, ask the user. Use credentials only from the variables or the config that the procedure names.
 
@@ -43,7 +43,7 @@ Act only on the environments and accounts that the procedure names. If the check
 1. Drive each behavior on the real path: the UI through the browser tool, API requests, CLI commands, the test queries of the project.
 2. Capture the action and the result, not only the final screen. Check side effects too: rows, messages, files, jobs.
 3. Save the evidence where the procedure says. Default: `.verify/<date>-<time>/`. If Git does not ignore `.verify/`, ask the user before you add it to `.git/info/exclude`.
-4. If a check fails, check the environment first. If the environment is fine, record the failure as a finding. Do not weaken a check so that it passes.
+4. If a check fails, check the environment first. If the environment is fine, record the failure as a finding. Keep each check as it was confirmed. To change a check, get the user's approval.
 
 **Done when:** each behavior passed, failed with evidence, or is blocked with a reason.
 
