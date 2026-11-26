@@ -62,7 +62,7 @@ Add this pointer to `AGENTS.md` where the project has domain sources: before a c
 
 A home repository coordinates related repositories. Their code, history, trackers and repository rules stay in the child repositories.
 
-1. Use `home-repo-init` only when the user asks to create a home or migrate material. Setup keeps the existing navigation and ownership.
+1. Use `setup-home-repo` only when the user asks to create a home or migrate material. Setup keeps the existing navigation and ownership.
 2. In a home, configure only the shared procedures and sources agreed for its scope. Child test commands, exceptions and domain records stay with their owners.
 3. Before work in a child, the agent reads the child's instructions. If home and child procedures conflict, resolve it with the owner. The home does not override the child by default.
 4. Agree where cross-repository task artifacts live and who writes them. A shared plan links child tasks and contracts and does not copy their requirements.

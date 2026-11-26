@@ -1,7 +1,7 @@
 # Project writing contract
 
 Read this file when you configure writing routes, languages, clients or instruction loading.
-The writing skills are independent. Setup's own use of `asd-ste100` and `writing-for-agents` in [step 3](../SKILL.md#3-draft-and-get-approval) does not depend on the routes selected here.
+The writing skills are independent. Setup's own use of `writing-docs` and `writing-for-agents` in [step 3](../SKILL.md#3-draft-and-get-approval) does not depend on the routes selected here.
 Record the approved routes in the project's root `AGENTS.md`.
 
 ## Routes and languages
@@ -14,8 +14,8 @@ Record the approved routes in the project's root `AGENTS.md`.
 
 | Output | Proposed skill | When the agent reads it |
 | --- | --- | --- |
-| Conversation with a person | `human-text` and its language reference | At the first prompt of a session, before the first reply |
-| Artifacts for people or agents: ADRs, docs, specs, tickets, reports, `CONTEXT.md`, `LESSONS.md` | `asd-ste100` | Before the agent writes or edits the artifact, also for a draft in chat |
+| Conversation with a person | `writing-for-people` and its language reference | At the first prompt of a session, before the first reply |
+| Artifacts for people or agents: ADRs, docs, specs, tickets, reports, `CONTEXT.md`, `LESSONS.md` | `writing-docs` | Before the agent writes or edits the artifact, also for a draft in chat |
 | Reusable rules: skills, `AGENTS.md`, procedural references | `writing-for-agents` | Before the agent writes or edits the rules |
 
 - A route becomes a project requirement only after the user approves the configuration.
@@ -45,9 +45,9 @@ For each selected route, choose one of three: keep an existing rule, add a proje
 
 Translate the approved triggers into the instruction language. Keep the style details in the installed skills.
 
-> At the first prompt of a session, before replying to the user, read the installed `human-text` skill and its applicable language reference unless already in context. Apply it to conversation. Reuse the guidance while available; reload after context loss or a source change.
+> At the first prompt of a session, before replying to the user, read the installed `writing-for-people` skill and its applicable language reference unless already in context. Apply it to conversation. Reuse the guidance while available; reload after context loss or a source change.
 
-> Before writing or editing artifact prose, read the installed `asd-ste100` skill unless already in context. Apply it to documentation, ADRs, specs, tickets, reports, context and lessons, including drafts returned in chat. Preserve project format and language; non-English prose uses an adaptation, not a claim of English conformance.
+> Before writing or editing artifact prose, read the installed `writing-docs` skill unless already in context. Apply it to documentation, ADRs, specs, tickets, reports, context and lessons, including drafts returned in chat. Preserve project format and language; non-English prose uses an adaptation, not a claim of English conformance.
 
 > Before writing or editing reusable rules, read the installed `writing-for-agents` skill unless already in context. Use it for skills, `AGENTS.md` and procedural references. For mixed documents, select the route by section purpose.
 

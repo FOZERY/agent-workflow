@@ -1,9 +1,9 @@
 ---
-name: human-text
+name: writing-for-people
 description: "Write clear, natural text for a person: replies, explanations, questions, handoffs and document prose. Use when writing for people or making their text clearer."
 ---
 
-# Human text
+# Writing for people
 
 The reader is a busy colleague who knows the field but not this task.
 Write the way a good colleague explains out loud.

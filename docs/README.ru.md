@@ -49,19 +49,20 @@ flowchart TB
 | Скилл | Когда использовать |
 | --- | --- |
 | [`ask-workflow`](../skills/ask-workflow/SKILL.md) | Нужен совет о следующем шаге, без запуска работы. |
-| [`home-repo-init`](../skills/home-repo-init/SKILL.md) | Нужна общая точка входа для нескольких репозиториев без переноса кода и правил. |
+| [`setup-home-repo`](../skills/setup-home-repo/SKILL.md) | Нужна общая точка входа для нескольких репозиториев без переноса кода и правил. |
 | [`grill-with-docs`](../skills/grill-with-docs/SKILL.md) | Заодно с обсуждением дизайна нужно обновить глоссарий или записать решение. |
 | [`domain-modeling`](../skills/domain-modeling/SKILL.md) | Нужно согласовать термины предметной области или записать архитектурное решение. |
 | [`research`](../skills/research/SKILL.md) | Нужен отчёт со ссылками на первоисточники. |
 | [`prototype`](../skills/prototype/SKILL.md) | Нужно сравнить варианты интерфейса или проверить модель состояния на временном прототипе. |
-| [`excalidraw-diagram`](../skills/excalidraw-diagram/SKILL.md) | Схема поможет объяснить дизайн. После твоего согласия отдельный агент создаст редактируемую схему и PNG для просмотра. |
+| [`draw-diagram`](../skills/draw-diagram/SKILL.md) | Схема поможет объяснить дизайн. После твоего согласия отдельный агент создаст редактируемую схему и PNG для просмотра. |
 | [`retro`](../skills/retro/SKILL.md) | Нужны предложения по улучшению харнесса на основе прошедшей сессии. |
 | [`refactor-codebase`](../skills/refactor-codebase/SKILL.md) | Этап работы закончен, и нужно найти структурные проблемы в коде и переписать одну из них с сохранением поведения. |
 | [`refactor-docs`](../skills/refactor-docs/SKILL.md) | Нужно улучшить текст или структуру документа без изменения смысла. |
-| [`cleanup`](../skills/cleanup/SKILL.md) | Нужно разобрать устаревшие материалы и согласовать, какие из них убрать так, чтобы можно было восстановить. |
-| [`human-text`](../skills/human-text/SKILL.md) | Нужны понятные ответы и объяснения для людей. |
-| [`asd-ste100`](../skills/asd-ste100/SKILL.md) | Нужно написать техническую документацию, спецификацию, тикет или запись в память проекта. |
+| [`cleanup-artifacts`](../skills/cleanup-artifacts/SKILL.md) | Нужно разобрать устаревшие материалы и согласовать, какие из них убрать так, чтобы можно было восстановить. |
+| [`writing-for-people`](../skills/writing-for-people/SKILL.md) | Нужны понятные ответы и объяснения для людей. |
+| [`writing-docs`](../skills/writing-docs/SKILL.md) | Нужно написать техническую документацию, спецификацию, тикет или запись в память проекта. |
 | [`writing-for-agents`](../skills/writing-for-agents/SKILL.md) | Нужно написать переиспользуемые инструкции, например скилл или `AGENTS.md`. |
+| [`rephrase`](../skills/rephrase/SKILL.md) | Последний ответ получился слишком заумным, и его нужно пересказать простыми словами. |
 
 ### Внешние инструменты
 
@@ -82,7 +83,7 @@ npx skills@1.9.0 add FOZERY/agent-workflow --skill setup-workflow --agent codex
 
 В Codex запусти `$setup-workflow`. Для Claude Code установи с `--agent claude-code`, затем запусти `/setup-workflow`.
 Чтобы установить другой скилл, замени `setup-workflow` в команде установки на его имя.
-Setup пишет `AGENTS.md` по правилам `asd-ste100` и `writing-for-agents`. Если их нет, setup предложит их установить.
+Setup пишет `AGENTS.md` по правилам `writing-docs` и `writing-for-agents`. Если их нет, setup предложит их установить.
 Добавляй `--global` только для установки на уровне пользователя.
 
 Для других клиентов и способов установки смотри [руководство по размещению скиллов](../skills/setup-workflow/references/skills.md).

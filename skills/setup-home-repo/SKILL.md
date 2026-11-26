@@ -1,10 +1,10 @@
 ---
-name: home-repo-init
+name: setup-home-repo
 description: Set up a navigation and shared-material home for a project with several repositories.
 disable-model-invocation: true
 ---
 
-# Home repo initialization
+# Setup home repo
 
 Create or update a **home repo**: navigation to related repositories and a location for explicitly approved shared material.
 Keep child code, history, remotes, trackers, and repository-specific instructions where they are.

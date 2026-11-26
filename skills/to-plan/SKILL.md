@@ -41,7 +41,7 @@ Use the project's format. Otherwise, include these compact sections:
 
 Keep the breakdown proportional to the task. Group incidental setup and documentation with the change that needs them. Split work where its result can be meaningfully checked, not into a fixed number of steps.
 
-If the project selects `excalidraw-diagram`, a diagram may help explain an architectural alternative or service interaction. Use that skill's offer-and-consent procedure; only an approved, separate diagram worker generates it. This optional artifact does not launch implementers or make diagrams a prerequisite for a saved plan. Link the result rather than copying its scene data into the plan.
+If the project selects `draw-diagram`, a diagram may help explain an architectural alternative or service interaction. Use that skill's offer-and-consent procedure; only an approved, separate diagram worker generates it. This optional artifact does not launch implementers or make diagrams a prerequisite for a saved plan. Link the result rather than copying its scene data into the plan.
 
 ### Multiple services or repositories
 

@@ -1,6 +1,6 @@
 # Optional diagram configuration
 
-Read this file when the user selects `excalidraw-diagram` or changes its settings. It guides setup; it is not the project's runtime policy.
+Read this file when the user selects `draw-diagram` or changes its settings. It guides setup; it is not the project's runtime policy.
 Setup works without this skill. If the user declines it, the other selected routes stay as they are.
 
 ## Agree the open choices
@@ -21,7 +21,7 @@ Reuse the existing delegation, artifact and environment rules. Ask only about ch
 
 Get a bounded installation approval through [deployment](skills.md#install-plan-and-approval).
 
-The consent rules live in the `excalidraw-diagram` section of the [outline](AGENTS.md#outline) and in the skill itself. Setup draws no diagram and launches no helper probe.
+The consent rules live in the `draw-diagram` section of the [outline](AGENTS.md#outline) and in the skill itself. Setup draws no diagram and launches no helper probe.
 
 ## Check readiness without drawing
 
@@ -39,7 +39,7 @@ The consent rules live in the `excalidraw-diagram` section of the [outline](AGEN
 
 ## Write one project policy
 
-1. Use the `excalidraw-diagram` section of the [AGENTS.md outline](AGENTS.md#outline) as the only diagram policy in the project.
+1. Use the `draw-diagram` section of the [AGENTS.md outline](AGENTS.md#outline) as the only diagram policy in the project.
 2. Fill its skill pointer, delegation tool, artifact rules, allowed libraries and rendering permissions from the agreed facts.
 3. Add a diagram pointer only to the sections of selected skills that use diagrams.
 4. Keep the exact copy of `grill-with-docs` unchanged. Connect diagrams through project instructions.

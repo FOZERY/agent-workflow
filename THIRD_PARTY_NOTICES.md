@@ -7,8 +7,8 @@ Original contributions to this repository are covered by [LICENSE](LICENSE). The
 | Copyright holder | Covered material and source |
 | --- | --- |
 | Matt Pocock | Adapted setup; `grilling`, `grill-with-docs`, `research`, `wayfinder`, `to-spec`, `to-tickets`, `implement` (its worker mode adapted from `implement-spec`), `tdd`, `code-review`, `retro`, `writing-for-agents`, `domain-modeling`, `prototype` and `refactor-codebase` (adapted from `improve-codebase-architecture`, with the vocabulary and references of `codebase-design`), with their retained supporting files. [Setup license](https://github.com/mattpocock/skills/blob/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/LICENSE); [import baseline license](https://github.com/mattpocock/skills/blob/5863806dd4e15c63174bee4e7515a4256792ecfa/LICENSE). |
-| Kirill Sachkov | Retained project-aware setup/adaptation material and the `human-text` package (originally `plain-writing`), including its Russian reference. [Adaptation license](https://github.com/KirillSachkov/agent-kit/blob/3b5e37249118aff3d3dfb547977939145524d525/LICENSE); [communication license](https://github.com/KirillSachkov/agent-kit/blob/3b5e37249118aff3d3dfb547977939145524d525/provenance/communication-LICENSE). |
-| Lauren Tan | `investigate`, adapted from the `why`, `how` and `teach` skills of pstack in [cursor/plugins](https://github.com/cursor/plugins/tree/main/harness/pstack), licensed under MIT. |
+| Kirill Sachkov | Retained project-aware setup/adaptation material and the `writing-for-people` package (originally `plain-writing`), including its Russian reference. [Adaptation license](https://github.com/KirillSachkov/agent-kit/blob/3b5e37249118aff3d3dfb547977939145524d525/LICENSE); [communication license](https://github.com/KirillSachkov/agent-kit/blob/3b5e37249118aff3d3dfb547977939145524d525/provenance/communication-LICENSE). |
+| Lauren Tan | `investigate`, adapted from the `why`, `how` and `teach` skills, and `rephrase`, adapted from `bro`; both from pstack in [cursor/plugins](https://github.com/cursor/plugins/tree/main/harness/pstack), licensed under MIT. |
 | Anthropic | `simplify-codebase`, written from the approach of the `code-simplifier` agent in [claude-plugins-official](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier), licensed under Apache 2.0. The full [license text](skills/simplify-codebase/LICENSE) ships with the skill. |
 | HumanLayer | Historical attribution for PR-format visual examples previously distributed in this kit, credited to Dex Horthy's `show-me` via Matt's PR skill. [HumanLayer license](https://github.com/humanlayer/skills/blob/bba9d13ab34f0a87f1cc33df4dd196372393ddfc/LICENSE). |
 
@@ -18,21 +18,21 @@ The HumanLayer revision above is a verified license/source reference, not the pr
 
 ## ASD-STE100 source references
 
-The `asd-ste100` package contains original instructions and software examples informed by the [official ASD-STE100 site](https://www.asd-ste100.org/).
+The `writing-docs` package contains original instructions and software examples informed by the [official ASD-STE100 site](https://www.writing-docs.org/).
 ASD owns the standard and its registered trademark. This repository does not bundle the official PDF or dictionary.
 The MIT terms for this repository do not license the standard itself.
 This skill is not endorsed, certified or approved by ASD or the STEMG.
 
 ## Excalidraw diagrams and component libraries
 
-The `excalidraw-diagram` package retains generation guidance and renderer files from [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd).
+The `draw-diagram` package retains generation guidance and renderer files from [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd).
 The pinned revision has no declared license. These files are not covered by this repository's MIT grant.
 Obtain redistribution permission from the rights holder before publishing them or a distribution that includes them.
-The [package notice](skills/excalidraw-diagram/NOTICE.md) identifies the imported files and the separately licensed original integration material.
+The [package notice](skills/draw-diagram/NOTICE.md) identifies the imported files and the separately licensed original integration material.
 
 Four owner-supplied component collections byte-match [Excalidraw Libraries](https://github.com/excalidraw/excalidraw-libraries/tree/297a349eaff859e678f78d4dbc8e68df5fce42e5):
 Sticky Notes by ferminrp, Software Logos by drwnio.polyrand.net, System Design Components by Rohan Pithadiya, and Software Architecture by Youri Tjang.
-Their [source map](skills/excalidraw-diagram/references/libraries.md#provenance) and [Excalidraw MIT notice](skills/excalidraw-diagram/assets/libraries/LICENSE) ship with the package.
+Their [source map](skills/draw-diagram/references/libraries.md#provenance) and [Excalidraw MIT notice](skills/draw-diagram/assets/libraries/LICENSE) ship with the package.
 Keep those credits and terms with the files. Software logos remain subject to their owners' trademark rights.
 
 

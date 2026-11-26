@@ -39,6 +39,7 @@ The agent reads these settings as instructions, not as runtime flags. Their mean
 
 | Section | Settings |
 | --- | --- |
+| `investigate` | `execution`, `researcher` |
 | `implement` | `worker` |
 | `tdd` | `trigger`, `execution`, `skill` |
 | `simplify-codebase` | `trigger`, `execution`, `skill`, `finder` |
@@ -103,21 +104,23 @@ Read a file when its trigger applies.
 <Ownership and access rules for cross-repository task artifacts. Cloning and worktree permissions remain separate.>
 
 ## Writing
-<Conversation language and human-text startup pointer, if selected.>
-<Artifact language and asd-ste100 pointer, if selected.>
+<Conversation language and writing-for-people startup pointer, if selected.>
+<Artifact language and writing-docs pointer, if selected.>
 
 ## Skills
 Each selected skill has a section below. Before you run a skill, read its section.
 The section wins over the skill's own defaults. Keep the rest of the skill's procedure unchanged.
 If a required step cannot satisfy applicable constraints, report the conflict.
 
-### home-repo-init
+### setup-home-repo
 Runs: <runs>. Phase: <phase>.
 <Approved inventory roots, home membership and shared-material ownership when this skill is selected.>
 <Migration boundaries and required approval; existing child code, instructions and installed skills retain their owners.>
 
 ### investigate
 Runs: <runs>. Phase: <phase>.
+execution: <subagent | current-session>
+researcher: <agent, model and reasoning effort for the researcher subagents>
 The agent only reads every source below.
 <Each source in the user's words, with the steps to open it.>
 <Whether the agent may read production.>
@@ -126,19 +129,19 @@ The agent only reads every source below.
 ### grilling
 Runs: <runs>. Phase: <phase>.
 <Project discussion context and decision boundaries, if needed.>
-For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
+For relationships or alternatives worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### grill-with-docs
 Runs: <runs>. Phase: <phase>.
 <Documents to consult and their authority.>
 <Where to propose or record agreed terms and decisions; who approves changes.>
-For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
+For relationships or alternatives worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### domain-modeling
 Runs: <runs>. Phase: <phase>.
 <Authoritative glossary and ADR locations, formats and domain contexts.>
 <Approval and write rules for resolved terms and consequential decisions.>
-For domain relationships or decision alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
+For domain relationships or decision alternatives worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### research
 Runs: <runs>. Phase: <phase>.
@@ -149,31 +152,31 @@ Runs: <runs>. Phase: <phase>.
 Runs: <runs>. Phase: <phase>.
 <Map, child-ticket and dependency representation.>
 <Claim and resolution procedures; experiment, branch and publication constraints.>
-For relationships or alternatives worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
+For relationships or alternatives worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### prototype
 Runs: <runs>. Phase: <phase>.
 <Permitted experiment surfaces, data and environment boundaries.>
 <Artifact location, viewing method and capture/integration permissions.>
-For a supporting sketch, use [excalidraw-diagram](#excalidraw-diagram); it does not replace the runnable prototype.
+For a supporting sketch, use [draw-diagram](#draw-diagram); it does not replace the runnable prototype.
 
 ### to-plan
 Runs: <runs>. Phase: <phase>.
 <Task-linked plan location, naming, visibility, approval and revision rules.>
 <Receiving executor and the instructions that let it consume the plan plus its source task.>
-For interactions or architecture worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
+For interactions or architecture worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### to-spec
 Runs: <runs>. Phase: <phase>.
 <Requirement sources, specification format, destination and publication procedure.>
-For interactions or architecture worth visualizing, use [excalidraw-diagram](#excalidraw-diagram).
+For interactions or architecture worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### to-tickets
 Runs: <runs>. Phase: <phase>.
 <Ticket format, granularity, dependency representation and destination.>
 <Approval, readiness vocabulary and publication procedure.>
 
-### excalidraw-diagram
+### draw-diagram
 Runs: <runs>. Phase: <phase>.
 <Readable installed package entrypoint. Designated delegation tool, including Orca if selected.>
 <Task-artifact destination, naming, visibility and revision rules. Approved libraries and rendering permissions.>

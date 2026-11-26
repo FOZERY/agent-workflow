@@ -20,13 +20,13 @@ These rules are mandatory. They live only in `AGENTS.md`; skills and other proje
 Link each skill name that has a section under `## Skills` in the project's `AGENTS.md` to that section.
 
 ```markdown
-1. **Setup.** `setup-workflow` configures this file. `home-repo-init` creates a multi-repository home.
+1. **Setup.** `setup-workflow` configures this file. `setup-home-repo` creates a multi-repository home.
 2. **Clarify.** `investigate`, `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
 4. **Implement.** `implement`: the session is the orchestrator. It writes small changes itself and gives larger ones to workers. `tdd` and `simplify-codebase` run inside implementation.
 5. **Review.** `code-review`: the worker checks the Standards axis, the orchestrator checks the Spec axis.
 6. **Accept.** The user accepts the work. Commit, push and other delivery follow `## Git and delivery`.
-7. **Improve.** `retro`, `cleanup`, `refactor-codebase`, `refactor-docs`.
+7. **Improve.** `retro`, `cleanup-artifacts`, `refactor-codebase`, `refactor-docs`.
 ```
 
 ### Search variants
@@ -66,7 +66,7 @@ Write the entry yourself. In the same reply, tell the user which entry you added
 ## Block
 
 ```markdown
-<!-- agent-workflow:core v6 -->
+<!-- agent-workflow:core v7 -->
 setup-workflow owns this section. To change it, run setup again.
 
 ### Workflow
@@ -82,6 +82,7 @@ A skill section under `## Skills` can set these values:
 - `execution`: where the skill runs. Values: `current-session`, `subagent` or `separate-session`. A separate session is a new session, or a handoff that the user starts. This value grants no permission to delegate.
 - `skill`: the installed path of the skill's `SKILL.md`, for each client. A subagent that runs the skill reads this file.
 - `worker`: the agent, model and reasoning effort of the `implement` workers.
+- `researcher`: the agent, model and reasoning effort of the `investigate` researchers.
 - `finder`: the agent, model and reasoning effort of the `simplify-codebase` finder.
 - `standards-reviewer`, `spec-reviewer`: the agent, model and reasoning effort of each `code-review` axis.
 - `followup`: `report` means return the findings and wait. `fix-and-rereview` means fix the authorized findings and review again.
@@ -113,7 +114,7 @@ Continue the steps that do not depend on it.
 Say that work is done only after you run the agreed checks. Give their actual result.
 
 ### Editing this file
-Before you write or edit this file, read the installed `asd-ste100` and `writing-for-agents` skills unless they are already in context. Apply both.
+Before you write or edit this file, read the installed `writing-docs` and `writing-for-agents` skills unless they are already in context. Apply both.
 Keep this file under 300 lines. Put project details in `<agent-docs>/project/` and link them with a trigger.
 
 ### Review rounds

@@ -33,7 +33,7 @@ Setup writes project rules. With separate approval, it also installs skills. Set
 2. For an initial setup, or a change of instruction owner or memory, read [project artifacts](references/project-artifacts.md). Keep existing instructions, client wrappers and records.
 3. If shared files in a company repository are restricted, agree an allowed local loading mechanism with the user.
 4. If the project spans repositories, find out whether setup targets the home repository or one child. Follow the [home-repo boundaries](references/project-artifacts.md#multi-repository-homes) and keep the existing navigation.
-   If the home must be created or reorganized first, recommend that the user run `home-repo-init` separately. Setup does not do that migration.
+   If the home must be created or reorganized first, recommend that the user run `setup-home-repo` separately. Setup does not do that migration.
 5. On a rerun, show the current settings, the known skill availability and the open gaps. Ask what the user wants to change.
    Limit later reading, questions, edits and checks to that change and to what depends on it. If the user wants only an overview, stop here and write nothing.
 
@@ -55,7 +55,7 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
    - Memory: directory, reading and update checkpoints, writer and approval scope. Follow [project artifacts](references/project-artifacts.md).
    - Lessons: ask "When a disputed question is settled or you correct me, should I ask before I write a lesson, or write it myself and tell you?" Record the matching lessons variant from [core rules](references/core-rules.md).
 4. If Git settings are missing or change, read [delivery settings](references/delivery.md).
-5. Check whether `human-text` is installed for each selected client, in the project or user-wide. If it is not, recommend it for natural conversation with the user. Ask where to install it: user-wide or in the project. Install it only after approval, by the [install plan](references/skills.md#install-plan-and-approval), and configure its route in [writing routes](references/writing.md).
+5. Check whether `writing-for-people` is installed for each selected client, in the project or user-wide. If it is not, recommend it for natural conversation with the user. Ask where to install it: user-wide or in the project. Install it only after approval, by the [install plan](references/skills.md#install-plan-and-approval), and configure its route in [writing routes](references/writing.md).
 
 ### 2.2 Skills
 
@@ -64,7 +64,8 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 2. Use the selection to decide which skill-specific questions apply. If a later answer makes a selected skill unsuitable, return to the selection before final approval.
 3. For installation or a change of client or scope, read [deployment](references/skills.md).
 4. Before you propose settings for a selected skill, read its `SKILL.md`. Agree its sources, output location, project practices and allowed operations.
-5. For `investigate`, `to-plan`, `to-spec`, `to-tickets` and `wayfinder`, ask the questions in [skill questions](references/skill-questions.md). For `excalidraw-diagram`, read [diagram configuration](references/diagrams.md).
+   For each step that the skill runs in a subagent or another session, ask where the step runs and which agent, model and reasoning effort it uses. Offer only the places that the skill supports. List the agents and models that the harness offers.
+5. For `investigate`, `to-plan`, `to-spec`, `to-tickets` and `wayfinder`, ask the questions in [skill questions](references/skill-questions.md). For `draw-diagram`, read [diagram configuration](references/diagrams.md).
 
 ### 2.3 Implementation, TDD, simplify and review
 
@@ -125,7 +126,7 @@ Record each gap with its blocked step.
 ## 3. Draft and get approval
 
 1. Read [the AGENTS.md structure](references/AGENTS.md) and [core rules](references/core-rules.md). Follow their drafting rules.
-2. Read the installed `asd-ste100` and `writing-for-agents` skills and apply both to every file that you draft. If one is missing, stop this step, tell the user and offer its [bounded installation](references/skills.md#install-plan-and-approval).
+2. Read the installed `writing-docs` and `writing-for-agents` skills and apply both to every file that you draft. If one is missing, stop this step, tell the user and offer its [bounded installation](references/skills.md#install-plan-and-approval).
 3. Put the core block in `## Workflow rules` and fill its fields.
 4. Write the shared sections and the skill sections with the agreed facts. Use a skill default only where it fits the project rules and permissions. Follow the project's writing rules.
 5. Link existing practices instead of copying them. The setup references are drafting guides, not project runbooks.

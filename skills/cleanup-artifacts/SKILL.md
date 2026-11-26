@@ -1,10 +1,10 @@
 ---
-name: cleanup
+name: cleanup-artifacts
 description: Review stale project artifacts and remove the approved ones recoverably.
 disable-model-invocation: true
 ---
 
-# Cleanup
+# Cleanup artifacts
 
 Review working artifacts: research notes, temporary plans, task notes, handoffs, reports and generated diagrams. Start read-only. A request to run this skill is a request for a review, not a permission to delete. Leave text rewrites to `refactor-docs`.
 

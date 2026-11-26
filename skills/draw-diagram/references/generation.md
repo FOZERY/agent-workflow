@@ -1,5 +1,5 @@
 ---
-name: excalidraw-diagram
+name: draw-diagram
 description: Create Excalidraw diagram JSON files that make visual arguments. Use when the user wants to visualize workflows, architectures, or concepts.
 ---
 
@@ -451,7 +451,7 @@ You cannot judge a diagram from JSON alone. After generating or editing the Exca
 ### How to Render
 
 ```bash
-cd .claude/skills/excalidraw-diagram/references && uv run python render_excalidraw.py <path-to-file.excalidraw>
+cd .claude/skills/draw-diagram/references && uv run python render_excalidraw.py <path-to-file.excalidraw>
 ```
 
 This outputs a PNG next to the `.excalidraw` file. Then use the **Read tool** on the PNG to actually view it.
@@ -503,7 +503,7 @@ The loop is done when:
 ### First-Time Setup
 If the render script hasn't been set up yet:
 ```bash
-cd .claude/skills/excalidraw-diagram/references
+cd .claude/skills/draw-diagram/references
 uv sync
 uv run playwright install chromium
 ```

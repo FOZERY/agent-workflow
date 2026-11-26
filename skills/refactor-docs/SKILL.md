@@ -10,13 +10,13 @@ Rewrite the wording and the structure of existing documents, `CONTEXT.md` and `L
 
 Other work goes elsewhere:
 - a change to a decision, a requirement or a rule in `AGENTS.md` or a skill needs its own approved change;
-- removing files is `cleanup`;
+- removing files is `cleanup-artifacts`;
 - code is `refactor-codebase`.
 
 ## 1. Find the writing rules
 
 1. Read the project instructions for language, style, document format and required sources.
-2. If the project names a writing skill, use it. Otherwise use `asd-ste100` if it is installed, or the rules in step 3.
+2. If the project names a writing skill, use it. Otherwise use `writing-docs` if it is installed, or the rules in step 3.
 
 **Done when:** you know the writing rules, and every required source is readable.
 

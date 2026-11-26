@@ -11,7 +11,7 @@ Follow applicable project instructions for workflow, coding practices, automatio
 ## Communication
 
 - Communicate in Russian. Use the language required by the task or project for files and artifacts.
-- Before replying, read the installed [human-text](/Users/fozery/.agents/skills/human-text/SKILL.md) skill and its applicable language reference unless already in context. Reuse the guidance while available; reload after context loss or a source change.
+- Before replying, read the installed [writing-for-people](/Users/fozery/.agents/skills/writing-for-people/SKILL.md) skill and its applicable language reference unless already in context. Reuse the guidance while available; reload after context loss or a source change.
 - Preserve technical meaning, exact values and required document formats.
 
 ## Browser and desktop

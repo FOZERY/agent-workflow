@@ -1,9 +1,9 @@
 ---
-name: excalidraw-diagram
+name: draw-diagram
 description: "Offer an optional architecture, domain or interaction diagram during design. After user consent, delegate Excalidraw generation and visual checking to a separate subagent."
 ---
 
-# Excalidraw diagrams
+# Draw diagram
 
 A diagram supports a design conversation; it is not a required workflow phase or a substitute for decisions, contracts or runnable prototypes.
 Read applicable project instructions for sources, artifact locations, delegation, network access and permissions. This package can run without the rest of the kit.

@@ -1,5 +1,5 @@
 interface:
-  display_name: "Home Repo Init"
+  display_name: "Setup Home Repo"
   short_description: "Set up an approved home for navigation across repositories"
 policy:
   allow_implicit_invocation: false

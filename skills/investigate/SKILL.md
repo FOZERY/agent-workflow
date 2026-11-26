@@ -23,11 +23,12 @@ Study a task before the user discusses or plans it. Subagents gather the facts. 
 
 ## 2. Send the researchers
 
-1. Start two subagents with a fresh context, in parallel. Give each one the question, the task link, the sources and the absolute path of [RESEARCHER.md](RESEARCHER.md). Tell it to read that file in full and do its part.
+If the `execution` setting is `current-session`, or subagents are not available, do both parts yourself by [RESEARCHER.md](RESEARCHER.md). Otherwise:
+
+1. Start two subagents with a fresh context, in parallel, with the agent from the `researcher` setting. Give each one the question, the task link, the sources and the absolute path of `RESEARCHER.md`. Tell it to read that file in full and do its part.
    - The history researcher does the part "History".
    - The code researcher does the part "Code".
 2. For a small question about one place, start one subagent for both parts.
-3. If subagents are not available, do both parts yourself by `RESEARCHER.md`.
 
 **Done when:** each report came back, or you know which one is missing and why.
 
@@ -53,7 +54,7 @@ Use these sections, and drop an empty one:
 
 1. Start with the essence of the task in two or three sentences. If the facts contradict the user's question, say that first.
 2. Explain how the part of the system works, then why it is this way. For a task, add how you would approach it.
-3. Write the explanation by the `human-text` skill if it is installed.
+3. Write the explanation by the `writing-for-people` skill if it is installed.
 4. For a flow with three or more parts, draw Mermaid diagrams in steps. Each next diagram adds one part to the one before.
 5. Say "inference" wherever the facts file marks one.
 6. Give the short answer first. Go deeper when the user asks.
