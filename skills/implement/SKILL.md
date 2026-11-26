@@ -72,7 +72,7 @@ The user can change the mode or turn off steps for this task. Start nothing befo
 
 ## 4. Do the work
 
-If the caller gives a review base, use it. Otherwise, record the current commit as the starting commit and use it as the base.
+If the caller gives a review base, use it. Otherwise, use the base from the project's review coverage, if it names one. Otherwise, record the current commit as the starting commit and use it as the base.
 
 **Direct mode.** Follow [WORKER.md](WORKER.md) yourself, then go to step 6.
 

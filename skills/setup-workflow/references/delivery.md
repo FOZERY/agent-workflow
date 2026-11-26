@@ -43,7 +43,7 @@ Rules for permissions:
 
 ## Timing and safeguards
 
-1. If timing is open, ask, for example: "When can authorized commits begin?" Offer the checkpoints that fit: at agreed milestones during implementation, after the required checks and review pass, or after the user accepts the result. These are examples, not defaults.
+1. If timing is open, ask, for example: "When can authorized commits begin?" Offer the checkpoints that fit: at agreed milestones during implementation, after the required checks and review pass (recommended), or after the user accepts the result.
 2. If no checkpoint fits, ask for a custom checkpoint or its source.
 3. If it is still open, ask whether intermediate commits are allowed.
 

@@ -45,11 +45,13 @@ For each selected route, choose one of three: keep an existing rule, add a proje
 
 Translate the approved triggers into the instruction language. Keep the style details in the installed skills.
 
-> At the first prompt of a session, before replying to the user, read the installed `writing-for-people` skill and its applicable language reference unless already in context. Apply it to conversation. Reuse the guidance while available; reload after context loss or a source change.
+> Talk to the user in <language>. Before your first reply, read the installed `writing-for-people` skill and its <language> reference.
 
-> Before writing or editing artifact prose, read the installed `writing-technical` skill unless already in context. Apply it to documentation, ADRs, specs, tickets, reports, context and lessons, including drafts returned in chat. Preserve project format and language; non-English prose uses an adaptation, not a claim of English conformance.
+> Write documents, tickets, reports and memory in <language>. Before you write one, read the installed `writing-technical` skill.
 
-> Before writing or editing reusable rules, read the installed `writing-for-agents` skill unless already in context. Use it for skills, `AGENTS.md` and procedural references. For mixed documents, select the route by section purpose.
+> Before you write a skill or a procedure for agents, read the installed `writing-for-agents` skill.
+
+Skip a pointer when the user's global instructions already load that skill and the repository is personal. In a team repository, write the pointer, so that every member gets the same rules.
 
 1. In the preview, show the exact pointers, clients, profiles and project or global targets.
 2. Write a new pointer only after the selected client can read its target.

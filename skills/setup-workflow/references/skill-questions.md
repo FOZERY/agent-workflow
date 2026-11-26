@@ -20,19 +20,20 @@ Record each answer in the skill's section of the project's `AGENTS.md`.
 2. For each place, ask how the agent reaches it and which tools it uses, so that a new agent can repeat it. For example: the kubectl context, the browser tool, test users, the test queries of a migration.
 3. For a credential, record only the name of the variable or config that holds it.
 4. Ask which actions need the user's approval, for example a deploy to staging or writes to a shared environment. If the user names production, ask whether the agent may act there.
-5. Check that the agent can reach each place and tool now. Record each gap as a blocker of that place.
+5. Check statically that the agent can reach each place and tool: the config entry, the context name, the command on `PATH`. A live probe needs the user's approval. Record each gap as a blocker of that place.
 6. Record a short procedure in the `verify` section. Move a longer one to `<agent-docs>/project/verification.md`.
 
 ## to-plan
 
 1. Agree the plan location and naming. Keep the plan with the other artifacts of its task where the project permits.
 2. Ask about visibility. Offer only the allowed options: tracked in Git, ignored in the repository, or an approved private location.
-3. Ask about approval. Options: the agent saves a draft for review, or the user approves the plan before the agent saves it. Use the project's procedure for other checkpoints.
+3. Ask about approval. Options: the agent saves a draft for review (recommended), or the user approves the plan before the agent saves it. Use the project's procedure for other checkpoints.
 4. Ask who can change an approved plan. Options: the agent within agreed limits, the agent with approval for each change, or the plan owner only.
 5. Agree the executor that receives the plan. Check that it can take the plan and the source task without a new spec or tickets.
-6. Record that approval of a plan does not start implementation. The user starts implementation separately.
 
-## Trackers: to-spec, to-tickets, wayfinder
+## Trackers: to-spec, to-tickets, wayfinder, implement
+
+For `implement`, ask only when it updates the tickets of its tasks.
 
 1. Ask which sources own the requirements and the tickets.
 2. If `wayfinder` is selected, ask where its decision map belongs.

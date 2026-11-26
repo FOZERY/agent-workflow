@@ -111,7 +111,10 @@ if not block:
     err("core-rules.md: no versioned core block")
     defined = set()
 else:
-    defined = set(re.findall(r"^- `([a-z-]+)`(?:, `([a-z-]+)`)?:", block.group(2), re.M))
+    glossary = re.search(r"^## Skill settings\n(.*?)\n## ", core, re.S | re.M)
+    if not glossary:
+        err("core-rules.md: no '## Skill settings' section")
+    defined = set(re.findall(r"^- `([a-z-]+)`(?:, `([a-z-]+)`)?:", glossary.group(1) if glossary else "", re.M))
     defined = {k for pair in defined for k in pair if k}
 template = read("skills/setup-workflow/references/AGENTS.md")
 outline = re.search(r"## Skills\n(.*?)\n## Git and delivery", template, re.S).group(1)
@@ -122,7 +125,7 @@ for sec in re.split(r"^### ", outline, flags=re.M)[1:]:
     section_keys[name.strip()] = set(keys)
     for k in keys:
         if k not in defined:
-            err(f"AGENTS.md template: setting '{k}' in '{name.strip()}' is not defined in the core block")
+            err(f"AGENTS.md template: setting '{k}' in '{name.strip()}' is not defined in core-rules.md#skill-settings")
 table = re.search(r"## Automation settings.*?\n(\|.*?)\n\n", template, re.S).group(1)
 for row in table.splitlines()[2:]:
     cells = [c.strip() for c in row.strip("|").split("|")]

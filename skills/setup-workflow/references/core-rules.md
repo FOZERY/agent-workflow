@@ -9,7 +9,7 @@ These rules are mandatory. They live only in `AGENTS.md`; skills and other proje
 1. Copy the block between the `agent-workflow:core` markers, with the markers.
 2. Replace each angle-bracket field with the value agreed in setup:
    - `<agent-docs>`: the agent-documentation directory, `.docs` by default.
-   - `<phases>`: the phase list below, with only the selected skills. Remove a phase that has no selected skill, except Setup and Accept.
+   - `<phases>`: the phase list below, with only the selected skills. Always keep `setup-workflow` in Setup. Remove a phase that has no selected skill, except Setup and Accept.
    - `<search>`: one of the two search variants below, with the agreed agent and model in its own field.
    - `<lessons>`: one of the two lessons variants below.
 3. Keep all other text as written. To change a rule for every project, edit this file and increase the version in the marker.
@@ -23,8 +23,8 @@ Link each skill name that has a section under `## Skills` in the project's `AGEN
 1. **Setup.** `setup-workflow` configures this file. `setup-home-repo` creates a multi-repository home. `ask-workflow` recommends the next skill.
 2. **Clarify.** `investigate`, `recall`, `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`, `draw-diagram`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
-4. **Implement.** `implement`: the session is the orchestrator. It writes small changes itself and gives larger ones to workers. `tdd`, `simplify-codebase` and `verify` run inside implementation.
-5. **Review.** `code-review`: the worker checks the Standards axis, the orchestrator checks the Spec axis.
+4. **Implement.** `implement`, with `tdd`, `simplify-codebase` and `verify` inside it.
+5. **Review.** `code-review`, run by `implement`.
 6. **Accept.** The user accepts the work. Commit, push and other delivery follow `## Git and delivery`.
 7. **Improve.** `retro`, `cleanup-artifacts`, `refactor-codebase`, `refactor-docs`.
 ```
@@ -34,13 +34,8 @@ Link each skill name that has a section under `## Skills` in the project's `AGEN
 Subagent, with the agent and model agreed in setup:
 
 ```markdown
-Send bulk read-only lookups to a search subagent: searches across many files or folders, long logs and test output, web and documentation searches.
-Use <agent and model agreed in setup>. If it is not available, pick the first available of:
-1. A search or research agent that the user defined in this harness.
-2. The harness's built-in search role, such as Explore in Claude Code or scout in OMP.
-3. A general subagent on the cheapest model that the harness offers.
-Give the subagent the question and the scope. Ask for a short answer with paths and line numbers.
-Do a lookup yourself when it takes one or two commands or when no subagent is available.
+Send bulk read-only lookups to <agent and model agreed in setup>: searches across many files, long logs, web and documentation. If it is not available, use the cheapest search subagent of the harness. Ask for a short answer with paths and line numbers.
+Do a lookup of one or two commands yourself.
 ```
 
 Current session:
@@ -63,23 +58,12 @@ The agent decides:
 Write the entry yourself. In the same reply, tell the user which entry you added, so that the user can remove it.
 ```
 
-## Block
+## Skill settings
 
-```markdown
-<!-- agent-workflow:core v10 -->
-setup-workflow owns this section. To change it, run setup again.
+A skill section under `## Skills` of a project's `AGENTS.md` can set these values. Write only the value in `AGENTS.md`. Each skill that reads a setting says how it acts on it.
 
-### Workflow
-A task moves through these phases. A ready task starts at Implement.
-If `## Skills` has an `implement` section, start the `implement` skill first when you begin to change code for a task. A trivial edit, such as a typo, does not need it.
-The `## Skills` section tells each skill how to work in this project.
-
-<phases>
-
-### Skill settings
-A skill section under `## Skills` can set these values:
-- `trigger`: `auto` means `implement` starts the skill at its stage. `manual` means the user starts it.
-- `execution`: where the skill runs. Values: `current-session`, `subagent` or `separate-session`. A separate session is a new session, or a handoff that the user starts. This value grants no permission to delegate.
+- `trigger`: `auto` means `implement` starts the skill at its stage. `manual` means the step is off by default; the user starts the skill or turns the step on in `implement`.
+- `execution`: where the skill runs: `current-session` or `subagent`. This value grants no permission to delegate.
 - `skill`: the installed path of the skill's `SKILL.md`, for each client. A subagent that runs the skill reads this file.
 - `worker`: the agent, model and reasoning effort of the `implement` workers.
 - `researcher`: the agent, model and reasoning effort of the `investigate` researchers.
@@ -88,50 +72,44 @@ A skill section under `## Skills` can set these values:
 - `finder`: the agent, model and reasoning effort of the `simplify-codebase` finder.
 - `standards-reviewer`, `spec-reviewer`: the agent, model and reasoning effort of each `code-review` axis.
 - `followup`: `report` means return the findings and wait. `fix-and-rereview` means fix the authorized findings and review again.
-- `rounds`: the limit for `fix-and-rereview`. See Review rounds.
+- `rounds`: the limit of fix-and-review rounds for each review of a task. After the last round, the agent stops and asks the user.
+
+## Block
+
+```markdown
+<!-- agent-workflow:core v11 -->
+setup-workflow owns this section. To change it, run setup again.
+
+### Workflow
+A task moves through these phases. A ready task starts at Implement.
+When you begin to change code for a task, start `implement` if `## Skills` has its section. A trivial edit, such as a typo, does not need it.
+Before you run a skill, read its section under `## Skills`. The section wins over the skill's defaults.
+
+<phases>
 
 ### Questions
-When the user must decide or answer, ask through the harness's question tool, such as `AskUserQuestion` in Claude Code. Put all open questions of one round into one call. Give each question its options and the effect of each, and make it readable without the text above it.
-Ask in plain text only when the harness has no question tool, for example in a headless run.
+When the user must decide, ask through the harness's question tool, such as `AskUserQuestion` in Claude Code. Put all questions of one round into one call, each with its options. Ask in plain text only when there is no question tool.
 
 ### Session start
-Before your first reply in a session, read `<agent-docs>/CONTEXT.md` and `<agent-docs>/LESSONS.md`.
-After a context compaction or a resumed session, read them again.
-Check their facts against the current code and task sources before you act on them.
+Before your first reply, and again after a compaction or a resume, read `<agent-docs>/CONTEXT.md` and `<agent-docs>/LESSONS.md`. Check their facts against the code and the task sources before you act on them. They never override requirements, accepted decisions or mandatory rules.
 
 ### Search
 <search>
 
-### Delegated workers
-Give each subagent or worker the path to this file, the task sources and the skill paths it must follow.
-To run a skill in a subagent, give it the path to that skill's `SKILL.md` from the skill's section under `## Skills`. Tell it to read the file in full and follow it. Pass the inputs the skill needs, such as the scope, the base and the task sources. Do not summarize the skill in the brief.
-Some harnesses do not load `AGENTS.md` into subagents.
-A subagent launches its own subagents only where `## Skills` says the harness supports it.
+### Delegated work
+Give each subagent and worker the path to this file, the task sources and the `SKILL.md` paths that it must follow. Some harnesses do not load `AGENTS.md` into subagents.
+A subagent launches its own subagents only where `## Skills` says that the harness supports it.
 
-### Blockers
-If a required step cannot run, stop that step and tell the user what blocks it.
-Continue the steps that do not depend on it.
-
-### Done
+### Blockers and done
+If a required step cannot run, stop it, tell the user what blocks it and continue the steps that do not depend on it.
 Say that work is done only after you run the agreed checks. Give their actual result and the evidence.
 
+### Memory
+Before a handoff, a context boundary or the end of a task, update `<agent-docs>/CONTEXT.md` within the agreed authority: what changed, what is open, what comes next.
+Record a lesson in `<agent-docs>/LESSONS.md` when the user settles a disputed question, when the user corrects your approach, or when the same problem appears a second time. <lessons> Keep `LESSONS.md` short.
+Subagents and `implement` workers do not write these files. They report to the session that started them.
+
 ### Editing this file
-Before you write or edit this file, read the installed `writing-technical` and `writing-for-agents` skills unless they are already in context. Apply both.
-Keep this file under 300 lines. Put project details in `<agent-docs>/project/` and link them with a trigger.
-
-### Review rounds
-If review follow-up allows fixes, fix findings and review again, up to the `rounds` value of the `code-review` section. After the last round, stop and ask the user. A worker reports its open findings to the orchestrator, and the orchestrator asks the user.
-
-### Session end
-Before a handoff, a context boundary or the end of a task, update `<agent-docs>/CONTEXT.md` within the agreed update authority: what changed, what is open, what comes next.
-A subagent or an `implement` worker does not write `CONTEXT.md` or `LESSONS.md`. It reports to the session that started it, and that session writes them.
-
-### Lessons
-Record a lesson in `<agent-docs>/LESSONS.md` when one of these happens:
-- The user settles a disputed question and says which answer is right.
-- The user corrects your approach.
-- The same problem appears a second time.
-<lessons>
-Keep `LESSONS.md` short: every session reads all of it.
+Before you edit this file, read the installed `writing-technical` and `writing-for-agents` skills. Keep it under 300 lines. Put project details in `<agent-docs>/project/` and link them with a trigger.
 <!-- /agent-workflow:core -->
 ```

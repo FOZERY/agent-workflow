@@ -16,7 +16,7 @@ Setup writes project rules. With separate approval, it also installs skills. Set
 
 - **Ask.** Ask only what the project files and the user's answers do not already settle. Ask in small rounds. One answer can settle several questions.
   Use the question tool as `### Questions` in the [core block](references/core-rules.md#block) says.
-  Ask each choice with known options as a separate question. Ask an open question for project-specific details. If no option fits, let the user describe the workflow or point to its source.
+  Ask each choice with known options as a separate question, and mark one option as recommended. Ask an open question for project-specific details. If no option fits, let the user describe the workflow or point to its source.
 - **Permission.** Only an explicit "yes" from the user grants a permission. A recommendation, silence or an unanswered question grants nothing.
 - **Approval sets.** Rules, installation and later operations are three separate approvals. Approval of one set does not approve another.
   Approval of the rules or the installation does not approve implementation, publication or global changes.
@@ -64,7 +64,7 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 2. Use the selection to decide which skill-specific questions apply. If a later answer makes a selected skill unsuitable, return to the selection before final approval.
 3. For installation or a change of client or scope, read [deployment](references/skills.md).
 4. Before you propose settings for a selected skill, read its `SKILL.md`. Agree its sources, output location, project practices and allowed operations.
-   For each step that the skill runs in a subagent or another session, ask where the step runs and which agent, model and reasoning effort it uses. Offer only the places that the skill supports. List the agents and models that the harness offers.
+   For each step that has a setting in [skill settings](references/core-rules.md#skill-settings), ask where the step runs and which agent, model and reasoning effort it uses. If the user names no effort, write `default effort`. Offer only the places that the skill supports. List the agents and models that the harness offers.
 5. For `investigate`, `to-plan`, `to-spec`, `to-tickets` and `wayfinder`, ask the questions in [skill questions](references/skill-questions.md). For `draw-diagram`, read [diagram configuration](references/diagrams.md).
 
 ### 2.3 Implementation, TDD, simplify and review
@@ -81,10 +81,10 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
    7. Review follow-up: report findings and wait, or fix and review again?
    8. Review rounds: how many fix-and-review rounds before the agent stops and asks? Offer `3` as the default.
    9. Verify trigger and location: does `implement` start `verify` automatically after the implementation, or only when the user asks? Does it run in the current session (recommended) or a subagent? For a subagent, also ask its agent, model and reasoning effort, and record it as `verifier`. Ask the other `verify` questions in [skill questions](references/skill-questions.md#verify).
-4. Ask the [review coverage questions](references/AGENTS.md#review-coverage). Record the answers in `<agent-docs>/project/review.md`. `### Skill settings` in the [core block](references/core-rules.md#block) gives the meaning of the other answers.
+4. Ask the [review coverage questions](references/AGENTS.md#review-coverage). Record the answers in the `code-review` section in up to three lines, or in `<agent-docs>/project/review.md` if they are longer. [Skill settings](references/core-rules.md#skill-settings) give the meaning of the other answers.
 5. Before you record an answer, check that the skill can run it. For example, the session that runs `code-review` launches its reviewers as subagents. If the harness cannot launch subagents, show the gap and ask the user how review runs instead. An `execution` value does not remove the skill's own subagent steps.
-6. Record the installed `SKILL.md` path of `tdd`, `simplify-codebase`, `verify` and `code-review` for each client in their `skill` setting. Record the installed path of `implement/WORKER.md` in the `implement` section. Check that each path exists and that each worker can read it.
-7. Read the harness documentation in this setup before you state how deep subagents can launch subagents. Your memory of the harness is not a source. For Claude Code, read <https://code.claude.com/docs/en/sub-agents> and check `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` in the settings and the environment. Record the result in the `Subagent depth:` line under `## Skills`, where `### Delegated workers` in the core block looks for it.
+6. Record the installed `SKILL.md` path of `tdd`, `simplify-codebase`, `verify` and `code-review` for each client, with `~` for the home folder, in their `skill` setting. Record the installed path of `implement/WORKER.md` in the `implement` section. Check that each path exists and that each worker can read it.
+7. Read the harness documentation in this setup before you state how deep subagents can launch subagents. Your memory of the harness is not a source. For Claude Code, read <https://code.claude.com/docs/en/sub-agents> and check `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` in the settings and the environment. Record the result in the `Subagent depth:` line under `## Skills`, where `### Delegated work` in the core block looks for it. If you cannot read the documentation, write `not verified; subagents launch no subagents` and tell the user.
 
 The user can always start `tdd`, `simplify-codebase`, `verify` or `code-review` manually, whatever the trigger. With `manual`, `implement` shows the step as off, and the user can turn it on for a task.
 
@@ -120,7 +120,7 @@ Before you call a route usable, read the real calls of its skills and the [catal
 - A mandatory operation is forbidden.
 - A separate session is selected, but the client cannot start one and no user-started handoff is agreed. Setup does not create sessions.
 
-Record each gap with its blocked step.
+Record each gap with its blocked step in the report and in `CONTEXT.md`. `AGENTS.md` holds rules, not the current state: write a gap there only as a rule that stays true, such as "a deploy to staging needs approval".
 
 **Done when:** every applicable topic has an agreed answer, an authoritative source, or a recorded gap with its blocked action. Unselected workflows need no answers.
 
@@ -141,7 +141,7 @@ Record each gap with its blocked step.
 ## 4. Apply the changes
 
 1. Read the target files again and merge only the approved edits.
-2. On an initial setup, create or reuse the root `AGENTS.md`, `CONTEXT.md` and `LESSONS.md` as [project artifacts](references/project-artifacts.md) describes. Create the approved files under `<agent-docs>/project/`.
+2. On an initial setup, create or reuse `AGENTS.md` in the repository root, and `CONTEXT.md` and `LESSONS.md` in the agent-docs directory, as [project artifacts](references/project-artifacts.md) describes. Create the approved files under `<agent-docs>/project/`.
 3. On a rerun, keep unrelated settings and history. Update the core block as [core rules](references/core-rules.md#how-setup-uses-this-file) describes.
 4. Apply the approved loading and visibility changes. Create plans, specs, tickets, glossaries and ADRs only when a task needs them. A move or a storage migration needs its own approval.
 5. If the user approved installation, follow [deployment](references/skills.md#run-the-approved-plan).
@@ -152,9 +152,10 @@ Record each gap with its blocked step.
 ## 5. Verify and hand over
 
 1. Check that `AGENTS.md` has the core block with all fields filled, keeps the [size limit](references/AGENTS.md#drafting-rules), and gives every pointer a trigger.
-2. Check local pointers, artifact paths, client loading where you can observe it, and skill discovery and prerequisites.
-3. Check that each setting has one owner section and that the user's additions are present.
-4. Check the cases that apply:
+2. Read `AGENTS.md` against the [drafting rules](references/AGENTS.md#drafting-rules). It has `## Layout`. It names each source once. It repeats no rule of a linked document and no step of a skill. Remove each sentence that fails.
+3. Check local pointers, artifact paths, client loading where you can observe it, and skill discovery and prerequisites.
+4. Check that each setting has one owner section and that the user's additions are present.
+5. Check the cases that apply:
    - **Rerun:** unrelated settings and installations stay as they were.
    - **Conflict:** a project restriction wins over a skill default or a proposed permission, and the affected action is blocked.
    - **Home repository:** each child keeps its own instructions, and each session and worker can read the shared pointers.
@@ -162,7 +163,7 @@ Record each gap with its blocked step.
    - **Review coverage:** the pre-commit review covers the intended files at the agreed checkpoint, also with another reviewer or endpoint.
    - **Reach:** each added skill, tool, MCP integration and policy pointer is reachable by its reader, including delegated workers, or is recorded as a prerequisite.
    - **Gaps:** each missing helper, source or separate session is recorded with its blocked step or agreed handoff.
-5. For memory or writing changes, also use the checks in their references.
-6. Tell the user which checks were static and which ran live. Get approval before you launch a client or a helper as a probe.
+6. For memory or writing changes, also use the checks in their references.
+7. Tell the user which checks were static and which ran live. Get approval before you launch a client or a helper as a probe.
 
 **Done when:** you reported the saved files, the changed settings, the installation and discovery results, the limits of verification and the blocked actions. Tell the user how to run setup again: `$setup-workflow` in Codex, `/setup-workflow` in Claude Code. Stop after setup.

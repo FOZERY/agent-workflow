@@ -5,13 +5,15 @@ Read this file before you draft a project's `AGENTS.md`. The outline below is a 
 ## Drafting rules
 
 1. **Size.** Keep the file under 300 lines, including the core block. Put each procedure, standard, example list and long fact set in `<agent-docs>/project/` and link it.
-2. **Content.** The file holds five things: what the project is, its mandatory constraints and permissions, its main commands and tools, the workflow, and a table of pointers to details. The workflow is the core block and the skill sections. Everything else goes to a project file or stays in its existing source.
+2. **Content.** The file holds what the project is, its layout and repositories, its mandatory constraints and permissions, its main commands and tools, a table of pointers to details, and the workflow: the core block and the skill sections. Coding style, test rules, review checklists and other procedures stay in their existing source or go to `<agent-docs>/project/`. The file points to them.
 3. Fill the fields from the setup conversation. Omit the sections of unselected skills and every field without an agreed answer.
 4. Keep existing headings and the user's additions.
 5. Keep shared sources, paths and permissions in the shared sections. A skill section holds only the settings and facts of that skill.
+   - Name each source once, in the `## Project rules` table or in the one section that uses it.
+   - Write no fact that a linked document or the skill itself already states. A skill section holds only what the skill cannot know about this project.
 6. Write a section for every selected skill, also when it has no other setting. If the skill has no `trigger` setting, start the section with one filled line in this format: `Runs: <manual: the user calls the skill | auto: <caller> calls it at <stage>>. Phase: <phase from the phase list, or "any" for a skill outside it>.` The outline shows this line as `Runs: <runs>. Phase: <phase>.` Then give the values of its settings and at most five lines of project facts. Move a longer procedure to a project file and point to it.
 7. For a selected skill that the outline does not list, add a section with its exact name.
-8. Write the value of a setting only. Its meaning stays in `### Skill settings` of the core block.
+8. Write the value of a setting only. Its meaning is in [skill settings](core-rules.md#skill-settings) and in the skill that reads it.
 9. Give each pointer a trigger: "Read X when Y."
 10. List only the commands that an agent needs often, and name the file that holds the rest. Do not copy what the environment already holds, such as the full script list or config values.
 11. For writing-style pointers, use [writing routes](writing.md). For memory, use [project artifacts](project-artifacts.md). For diagrams, use [diagram configuration](diagrams.md).
@@ -36,7 +38,7 @@ Create a file only when the project has content for it. If an existing source ho
 
 ## Automation settings
 
-The agent reads these settings as instructions, not as runtime flags. Their meanings live in `### Skill settings` of the [core block](core-rules.md#block). Each section holds these settings:
+The agent reads these settings as instructions, not as runtime flags. Their meanings are in [skill settings](core-rules.md#skill-settings). Each section holds these settings:
 
 | Section | Settings |
 | --- | --- |
@@ -73,10 +75,13 @@ Replace each angle-bracket field with the agreed rule.
 # <Project name>
 
 ## Project
-<What the project is and who uses it, in 2-4 sentences. Stack. Pointers to the authoritative requirements, glossary and ADRs.>
+<What the project is and who uses it, in 2-4 sentences. Stack. Where the requirements come from.>
+
+## Layout
+<The main folders and what each holds, as a short file tree of up to 10 lines. Name the entry points. For several repositories, use `## Related repositories` instead.>
 
 ## Constraints
-<Mandatory restrictions and when to check them. Link the authoritative rule. Do not copy private policy.>
+<Mandatory restrictions that no linked document states, and when to check them. A mandatory document goes in `## Project rules`, marked mandatory. Do not copy private policy.>
 <Autonomy and human checkpoints. Permissions for read-only exploration, implementation delegation, concurrent work and external writes.>
 <Environment boundaries.>
 The user decides whether to accept the work.
@@ -110,10 +115,7 @@ Read a file when its trigger applies.
 <Artifact language and writing-technical pointer, if selected.>
 
 ## Skills
-Each selected skill has a section below. Before you run a skill, read its section.
-Subagent depth: <how deep subagents can launch subagents in each client, with the source that setup read>
-The section wins over the skill's own defaults. Keep the rest of the skill's procedure unchanged.
-If a required step cannot satisfy applicable constraints, report the conflict.
+Subagent depth: <how deep subagents can launch subagents in each client, and the source>
 
 ### setup-home-repo
 Runs: <runs>. Phase: <phase>.
@@ -132,19 +134,16 @@ The agent only reads every source below.
 ### grilling
 Runs: <runs>. Phase: <phase>.
 <Project discussion context and decision boundaries, if needed.>
-For relationships or alternatives worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### grill-with-docs
 Runs: <runs>. Phase: <phase>.
 <Documents to consult and their authority.>
 <Where to propose or record agreed terms and decisions; who approves changes.>
-For relationships or alternatives worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### domain-modeling
 Runs: <runs>. Phase: <phase>.
 <Authoritative glossary and ADR locations, formats and domain contexts.>
 <Approval and write rules for resolved terms and consequential decisions.>
-For domain relationships or decision alternatives worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### research
 Runs: <runs>. Phase: <phase>.
@@ -155,25 +154,21 @@ Runs: <runs>. Phase: <phase>.
 Runs: <runs>. Phase: <phase>.
 <Map, child-ticket and dependency representation.>
 <Claim and resolution procedures; experiment, branch and publication constraints.>
-For relationships or alternatives worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### prototype
 Runs: <runs>. Phase: <phase>.
 <Permitted experiment surfaces, data and environment boundaries.>
 <Artifact location, viewing method and capture/integration permissions.>
-For a supporting sketch, use [draw-diagram](#draw-diagram); it does not replace the runnable prototype.
 
 ### to-plan
 Runs: <runs>. Phase: <phase>.
 <Task-linked plan location, naming, visibility, approval and revision rules.>
 <Receiving executor and the instructions that let it consume the plan plus its source task.>
-For interactions or architecture worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### to-spec
 Runs: <runs>. Phase: <phase>.
 <Requirement sources, specification format, destination and publication procedure.>
 <Readiness label, if not `ready-for-agent`.>
-For interactions or architecture worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### to-tickets
 Runs: <runs>. Phase: <phase>.
@@ -182,12 +177,8 @@ Runs: <runs>. Phase: <phase>.
 
 ### draw-diagram
 Runs: <runs>. Phase: <phase>.
-<Readable installed package entrypoint. Designated delegation tool, including Orca if selected.>
-<Task-artifact destination, naming, visibility and revision rules. Approved libraries and rendering permissions.>
-Draw only after the user consents. An explicit request for the diagram counts as consent. Package selection is not consent.
-After consent, follow the linked package procedure: a separate subagent generates and checks the diagram.
-If a prerequisite is missing, report a diagram-only blocker and continue in text.
-Decisions and contracts stay authoritative in text. A diagram neither replaces a runnable prototype nor approves the design.
+<Designated delegation tool, including Orca if selected.>
+<Diagram destination, naming and visibility. Approved libraries and rendering permissions.>
 
 ### tdd
 trigger: <auto | manual>
@@ -195,15 +186,13 @@ execution: <current-session | subagent>
 skill: <installed path of tdd/SKILL.md per client>
 test-writer: <agent, model and reasoning effort for the subagent that writes the failing tests, if execution is subagent>
 
-Test types, seams, infrastructure and mocking limits: read `<agent-docs>/project/testing.md` when you write a test.
+<Testing rules: point to their source, for example `<agent-docs>/project/testing.md` or the project's own guide, with "read when you write a test".>
 
 ### implement
 Runs: <runs>. Phase: <phase>.
 worker: <agent, model and reasoning effort for workers>
 
 <Expected task inputs and implementation boundaries.>
-<If plan-based execution is selected: read the approved plan and source task as implementation input. Recheck relevant code before editing.>
-Use the TDD, simplify and review settings in this document.
 Workers read `<installed path of implement/WORKER.md per client>`.
 <Session tool for workers, approval for dispatch, and branch, worktree or workspace isolation rules.>
 <Integration owner, target branches and delivery procedure per repository.>
@@ -227,8 +216,8 @@ execution: <subagent | current-session>
 skill: <installed path of simplify-codebase/SKILL.md per client>
 finder: <agent, model and reasoning effort for the simplification finder>
 
-Coding standards and code that simplify-codebase must leave alone: read `<agent-docs>/project/standards.md` before simplifying.
-<Who consumes the code: published interfaces, released versions, stored data, and which input is untrusted. Compatibility or migration code that must stay.>
+<Coding standards: point to their source, for example `<agent-docs>/project/standards.md` or the project's own guide, with "read before simplifying".>
+<Who consumes the code and which compatibility code must stay, only where the linked standards do not say it.>
 <Checks to run after the edits.>
 
 ### code-review
@@ -240,7 +229,7 @@ followup: <report | fix-and-rereview>
 rounds: <number, default 3>
 
 <Agreed review procedure, including another skill if selected.>
-Standards, comparison base, endpoint, scope, checkpoint and evidence rules: read `<agent-docs>/project/review.md` before review.
+<Review coverage: the base, the scope and the checkpoint, in up to three lines. For a longer procedure, point to `<agent-docs>/project/review.md` with "read before review".>
 <For fix-and-rereview: correction authority and stop conditions.>
 
 ### retro
@@ -255,7 +244,5 @@ Runs: <runs>. Phase: <phase>.
 Procedures and templates: read `<agent-docs>/project/delivery.md` when you commit, push or open a PR.
 
 ## Project memory
-The Workflow rules section sets when to read and update memory.
-<Memory writer, update checkpoints, approval and retention.>
-`CONTEXT.md` and `LESSONS.md` never override requirements, accepted decisions or mandatory project rules.
+<Retention and update checkpoints that the core block does not state. Omit this section if there are none.>
 ```
