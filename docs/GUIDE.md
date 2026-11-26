@@ -43,6 +43,15 @@ Studies a task before you discuss it. Two researchers read the task's history (t
 /investigate how do lesson reminders get sent?
 ```
 
+### `/recall`
+
+Rebuilds where your recent work on a topic stands. It reads `CONTEXT.md`, the recent session transcripts of the project and, for a named feature or bug, the shared record: the tracker, merge requests and the other sources from the `investigate` settings. It checks each branch, PR and ticket against its current state and gives a short brief: summary, threads with their status, problems that repeat, and the next step. It changes nothing.
+
+```text
+/recall
+/recall the export work from last week
+```
+
 ### `research`
 
 Answers a question from primary sources, such as official docs, specs and source code, and saves a cited report in the repository. Use it for facts outside the project. The agent can start it.

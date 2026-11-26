@@ -52,6 +52,7 @@ flowchart LR
 | | [`setup-home-repo`](../skills/setup-home-repo/SKILL.md) | Ты | Делает общий дом для нескольких репозиториев, не перенося их код |
 | | [`ask-workflow`](../skills/ask-workflow/SKILL.md) | Ты | Советует следующий скилл для твоей ситуации |
 | Понять | [`investigate`](../skills/investigate/SKILL.md) | Ты | Изучает историю задачи и код, сохраняет файл фактов и объясняет задачу простыми словами |
+| | [`recall`](../skills/recall/SKILL.md) | Ты | Восстанавливает, где остановилась недавняя работа по теме и что делать дальше |
 | | [`research`](../skills/research/SKILL.md) | Агент | Отвечает на вопрос по первоисточникам, отчёт со ссылками |
 | Обсудить | [`grilling`](../skills/grilling/SKILL.md) | Агент | Задаёт вопросы, пока не закрыты все открытые решения по идее |
 | | [`grill-with-docs`](../skills/grill-with-docs/SKILL.md) | Ты | То же самое, и попутно записывает термины и решения |

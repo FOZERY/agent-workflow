@@ -52,6 +52,7 @@ The [skill guide](docs/GUIDE.md) describes each skill with an example prompt. Th
 | | [`setup-home-repo`](skills/setup-home-repo/SKILL.md) | You | Makes one home for several repositories without moving their code |
 | | [`ask-workflow`](skills/ask-workflow/SKILL.md) | You | Recommends the next skill for your situation |
 | Understand | [`investigate`](skills/investigate/SKILL.md) | You | Studies a task's history and code, saves a facts file and explains the task in plain words |
+| | [`recall`](skills/recall/SKILL.md) | You | Rebuilds where your recent work on a topic stands and what to do next |
 | | [`research`](skills/research/SKILL.md) | Agent | Answers a question from primary sources in a cited report |
 | Discuss | [`grilling`](skills/grilling/SKILL.md) | Agent | Asks questions until the open decisions of an idea are settled |
 | | [`grill-with-docs`](skills/grill-with-docs/SKILL.md) | You | The same, and records terms and decisions as it goes |

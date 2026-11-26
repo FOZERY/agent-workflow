@@ -32,6 +32,7 @@ Recommend the smallest route that reaches the goal. The map lists candidates, no
 | Set up a home for several repositories | `setup-home-repo` (manual) |
 | Configure project rules, permissions and selected skills | `setup-workflow` |
 | Study a new task before discussion: history, code and a plain explanation | `investigate` (manual) |
+| Find where recent work on a topic stands and what comes next | `recall` (manual) |
 | Test an idea and find open questions | `grilling` |
 | Test an idea and record terms and decisions | `grill-with-docs` |
 | Agree domain terms or record a decision (ADR) | `domain-modeling` |

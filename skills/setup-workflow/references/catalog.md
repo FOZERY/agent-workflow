@@ -9,7 +9,7 @@ Every skill is optional. For a skill that the user suggests, check its real sour
 | Group | Skills |
 | --- | --- |
 | Setup and guidance | `setup-home-repo`, `setup-workflow`, `ask-workflow` |
-| Task exploration | `investigate`, `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
+| Task exploration | `investigate`, `recall`, `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
 | Optional visual support | `draw-diagram` |
 | Implementation | `implement`, `tdd`, `simplify-codebase`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup-artifacts`, `refactor-codebase`, `refactor-docs` |
