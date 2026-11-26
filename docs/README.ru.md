@@ -11,14 +11,14 @@
 Нужен Node.js 22.20 или новее. В папке проекта поставь `setup-workflow` из GitHub:
 
 ```bash
-npx skills@latest add FOZERY/agent-workflow --skill setup-workflow --agent claude-code
+npx skills@latest add FOZERY/agent-workflow --skill setup-workflow
 ```
 
-Для Codex используй `--agent codex`. Для установки на всего пользователя добавь `--global`. Чтобы поставить другой скилл, замени `setup-workflow` на его имя. Другие клиенты и варианты установки описаны в [развёртывании скиллов](../skills/setup-workflow/references/skills.md).
+CLI сам найдёт агентов на твоей машине, например Claude Code, Codex или Cursor, и спросит, в какие поставить скилл. Для установки на всего пользователя добавь `--global`. Чтобы поставить другой скилл, замени `setup-workflow` на его имя. Чтобы CLI не спрашивал, перечисли агентов через `--agent`. Варианты установки и одноимённые копии описаны в [развёртывании скиллов](../skills/setup-workflow/references/skills.md).
 
 ## С чего начать
 
-1. Запусти `/setup-workflow` (`$setup-workflow` в Codex). Он спросит про правила, проверки, права, источники фактов и агентов, предложит скиллы и запишет `AGENTS.md`.
+1. Запусти `setup-workflow` в своём агенте: `/setup-workflow` в большинстве агентов, `$setup-workflow` в Codex. Он спросит про правила, проверки, права, источники фактов и агентов, предложит скиллы и запишет `AGENTS.md`.
 2. Дай агенту задачу. Новую задачу, которую ты плохо знаешь, начни с `/investigate`. Понятную задачу просто попроси реализовать: `implement` запустится сам.
 
 Не знаешь, какой скилл нужен? Запусти `/ask-workflow` со своим вопросом. Он посоветует скилл и ничего не запустит.

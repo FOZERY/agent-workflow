@@ -11,14 +11,14 @@ The kit adapts [Matt Pocock's skills](https://github.com/mattpocock/skills) and 
 Use Node.js 22.20 or later. In your project directory, install `setup-workflow` from GitHub:
 
 ```bash
-npx skills@latest add FOZERY/agent-workflow --skill setup-workflow --agent claude-code
+npx skills@latest add FOZERY/agent-workflow --skill setup-workflow
 ```
 
-For Codex, use `--agent codex`. Add `--global` for a user-wide install. To install another skill, replace `setup-workflow` with its name. For other clients and scopes, see [skill deployment](skills/setup-workflow/references/skills.md).
+The CLI finds the coding agents on your machine, such as Claude Code, Codex or Cursor, and asks which ones get the skill. Add `--global` for a user-wide install. To install another skill, replace `setup-workflow` with its name. To skip the question, name the agents with `--agent`. For scopes and same-name copies, see [skill deployment](skills/setup-workflow/references/skills.md).
 
 ## Get started
 
-1. Run `/setup-workflow` (`$setup-workflow` in Codex). It asks about your rules, checks, permissions, fact sources and agents, offers the skills, and writes `AGENTS.md`.
+1. Start `setup-workflow` in your agent: `/setup-workflow` in most agents, `$setup-workflow` in Codex. It asks about your rules, checks, permissions, fact sources and agents, offers the skills, and writes `AGENTS.md`.
 2. Give the agent a task. For a new task that you do not know well, start with `/investigate`. For a clear task, ask the agent to implement it: `implement` starts on its own.
 
 Not sure which skill fits? Run `/ask-workflow` with your question. It recommends a skill and starts nothing.
