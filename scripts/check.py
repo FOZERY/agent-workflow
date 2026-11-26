@@ -68,7 +68,7 @@ for d in sorted(os.listdir("skills")):
 for readme, you in (("README.md", "Human"), ("docs/README.ru.md", "Человек")):
     text = read(readme)
     for s, info in skills.items():
-        m = re.search(rf"\[`{re.escape(s)}`\]\([^)]*\) \| (\S+) \|", text)
+        m = re.search(rf"\[`/?{re.escape(s)}`\]\([^)]*\) \| (\S+) \|", text)
         if not m:
             err(f"{readme}: skill '{s}' is not in the table")
         elif (m.group(1) == you) != info["user_only"]:

@@ -2,32 +2,32 @@
 
 [English version](../README.md)
 
-Рабочий процесс из небольших скиллов для агентов, которые пишут код. Каждый скилл делает один шаг: изучить задачу, обсудить, спланировать, реализовать, проверить, извлечь урок. Правила проекта ложатся поверх шагов: `setup-workflow` записывает их в `AGENTS.md` проекта, а каждый скилл читает их оттуда.
+Рабочий процесс из небольших скиллов для агентов, которые пишут код. Каждый скилл делает один шаг: изучить задачу, обсудить, спланировать, реализовать, проверить, извлечь урок. Правила проекта ложатся поверх шагов: `/setup-workflow` записывает их в `AGENTS.md` проекта, а каждый скилл читает их оттуда.
 
-Набор адаптирует [скиллы Мэтта Покока](https://github.com/mattpocock/skills) и [pstack](https://github.com/cursor/plugins/tree/main/harness/pstack) Лорен Тан, и добавляет свои, например `to-plan`, `verify` и `writing-technical`. Автоматического конвейера нет. Шаги выбираешь ты, а права проекта решают, что агент может делать сам.
+Набор адаптирует [скиллы Мэтта Покока](https://github.com/mattpocock/skills) и [pstack](https://github.com/cursor/plugins/tree/main/harness/pstack) Лорен Тан, и добавляет свои, например `/to-plan`, `/verify` и `/writing-technical`. Автоматического конвейера нет. Шаги выбираешь ты, а права проекта решают, что агент может делать сам.
 
 ## Как устроен процесс
 
 ```mermaid
 flowchart LR
-    Setup["Настроить<br/>setup-workflow"] -.-> Task[Задача]
-    Task --> Understand["Понять<br/>investigate"]
-    Understand --> Discuss["Обсудить<br/>grilling"]
+    Setup["Настроить<br/>/setup-workflow"] -.-> Task[Задача]
+    Task --> Understand["Понять<br/>/investigate"]
+    Understand --> Discuss["Обсудить<br/>/grilling"]
     Task -->|понятная задача| Build
-    Discuss --> Plan["Спланировать<br/>to-plan, to-spec, to-tickets"]
-    Plan --> Build["Реализовать<br/>implement: tdd, simplify-codebase, code-review, verify"]
+    Discuss --> Plan["Спланировать<br/>/to-plan<br/>/to-spec<br/>/to-tickets"]
+    Plan --> Build["Реализовать<br/>/implement запускает:<br/>/tdd<br/>/simplify-codebase<br/>/code-review<br/>/verify"]
     Discuss --> Build
     Build -->|ты принимаешь| Done[Смержено]
-    Done -.-> Improve["Улучшить<br/>retro, refactor-codebase"]
+    Done -.-> Improve["Улучшить<br/>/retro<br/>/refactor-codebase"]
 ```
 
-Каждый шаг необязателен. Небольшая понятная задача сразу идёт в `implement`.
+Каждый шаг необязателен. Небольшая понятная задача сразу идёт в `/implement`. Скиллы записаны так, как их вызывают в Claude Code. В Codex вместо `/` пиши `$`.
 
 В [гайде по скиллам](GUIDE.ru.md) каждый скилл описан с примером запроса. [Маршруты](FLOW.ru.md) подсказывают, с какого шага начать для твоей задачи.
 
 ## Установка
 
-Нужен Node.js 22.20 или новее. В папке проекта поставь `setup-workflow` из GitHub:
+Нужен Node.js 22.20 или новее. В папке проекта поставь `/setup-workflow` из GitHub:
 
 ```bash
 npx skills@latest add FOZERY/agent-workflow --skill setup-workflow
@@ -37,8 +37,8 @@ CLI сам найдёт агентов на твоей машине, напри�
 
 ## С чего начать
 
-1. Запусти `setup-workflow` в своём агенте: `/setup-workflow` в большинстве агентов, `$setup-workflow` в Codex. Он спросит про правила, проверки, права, источники фактов и агентов, предложит скиллы и запишет `AGENTS.md`.
-2. Дай агенту задачу. Новую задачу, которую ты плохо знаешь, начни с `/investigate`. Понятную задачу просто попроси реализовать: `implement` запустится сам.
+1. Запусти `/setup-workflow` в своём агенте. В Codex пиши `$setup-workflow`. Он спросит про правила, проверки, права, источники фактов и агентов, предложит скиллы и запишет `AGENTS.md`.
+2. Дай агенту задачу. Новую задачу, которую ты плохо знаешь, начни с `/investigate`. Понятную задачу просто попроси реализовать: `/implement` запустится сам.
 
 Не знаешь, какой скилл нужен? Запусти `/ask-workflow` со своим вопросом. Он посоветует скилл и ничего не запустит.
 
@@ -48,39 +48,39 @@ CLI сам найдёт агентов на твоей машине, напри�
 
 | Шаг | Скилл | Запускает | Что делает |
 | --- | --- | --- | --- |
-| Настроить | [`setup-workflow`](../skills/setup-workflow/SKILL.md) | Человек | Согласует правила, проверки, права и агентов проекта и записывает `AGENTS.md` |
-| | [`setup-home-repo`](../skills/setup-home-repo/SKILL.md) | Человек | Делает общий дом для нескольких репозиториев, не перенося их код |
-| | [`ask-workflow`](../skills/ask-workflow/SKILL.md) | Человек | Советует следующий скилл для твоей ситуации |
-| Понять | [`investigate`](../skills/investigate/SKILL.md) | Человек | Изучает историю задачи и код, сохраняет файл фактов и объясняет задачу простыми словами |
-| | [`recall`](../skills/recall/SKILL.md) | Человек | Восстанавливает, где остановилась недавняя работа по теме и что делать дальше |
-| | [`research`](../skills/research/SKILL.md) | Агент | Отвечает на вопрос по первоисточникам и сохраняет отчёт со ссылками |
-| Обсудить | [`grilling`](../skills/grilling/SKILL.md) | Агент | Задаёт вопросы, пока не приняты все решения по идее |
-| | [`grill-with-docs`](../skills/grill-with-docs/SKILL.md) | Человек | То же самое, и попутно записывает термины и решения |
-| | [`domain-modeling`](../skills/domain-modeling/SKILL.md) | Агент | Ведёт глоссарий и ADR |
-| | [`prototype`](../skills/prototype/SKILL.md) | Агент | Делает временный код, чтобы ответить на вопрос о дизайне |
-| Спланировать | [`to-plan`](../skills/to-plan/SKILL.md) | Человек | Сохраняет план реализации задачи |
-| | [`to-spec`](../skills/to-spec/SKILL.md) | Человек | Превращает обсуждение в спецификацию в трекере |
-| | [`to-tickets`](../skills/to-tickets/SKILL.md) | Человек | Разбивает работу на тикеты с зависимостями |
-| | [`wayfinder`](../skills/wayfinder/SKILL.md) | Человек | Раскладывает большую неясную работу на тикеты-решения |
-| Реализовать | [`implement`](../skills/implement/SKILL.md) | Агент | Ведёт задачу: мелкое пишет сам, крупное отдаёт исполнителям, проверяет результат |
-| | [`tdd`](../skills/tdd/SKILL.md) | Агент | Пишет интеграционные и модульные тесты, которые доказывают реальное поведение, сначала тест |
-| | [`simplify-codebase`](../skills/simplify-codebase/SKILL.md) | Агент | Находит, что упростить в изменённом коде |
-| | [`verify`](../skills/verify/SKILL.md) | Агент | Проверяет, что изменение работает в запущенном продукте, так, как договорились в проекте |
-| | [`code-review`](../skills/code-review/SKILL.md) | Агент | Проверяет изменения по стандартам проекта и по задаче |
-| Улучшить | [`retro`](../skills/retro/SKILL.md) | Человек | Превращает ошибки недавних сессий в скиллы и правила |
-| | [`refactor-codebase`](../skills/refactor-codebase/SKILL.md) | Человек | После этапа работы находит структурные проблемы в коде и переписывает одну |
-| | [`refactor-docs`](../skills/refactor-docs/SKILL.md) | Человек | Делает документы понятнее, не меняя их смысла |
-| | [`cleanup-artifacts`](../skills/cleanup-artifacts/SKILL.md) | Человек | Разбирает устаревшие заметки и планы и убирает одобренные так, чтобы их можно было вернуть |
-| Писать | [`writing-for-people`](../skills/writing-for-people/SKILL.md) | Агент | Понятные ответы и объяснения для людей |
-| | [`writing-technical`](../skills/writing-technical/SKILL.md) | Агент | Чёткие технические документы на контролируемом английском |
-| | [`writing-for-agents`](../skills/writing-for-agents/SKILL.md) | Агент | Скиллы и `AGENTS.md`, которые агенты выполняют одинаково |
-| | [`rephrase`](../skills/rephrase/SKILL.md) | Человек | Пересказывает последний ответ простыми словами |
+| Настроить | [`/setup-workflow`](../skills/setup-workflow/SKILL.md) | Человек | Согласует правила, проверки, права и агентов проекта и записывает `AGENTS.md` |
+| | [`/setup-home-repo`](../skills/setup-home-repo/SKILL.md) | Человек | Делает общий дом для нескольких репозиториев, не перенося их код |
+| | [`/ask-workflow`](../skills/ask-workflow/SKILL.md) | Человек | Советует следующий скилл для твоей ситуации |
+| Понять | [`/investigate`](../skills/investigate/SKILL.md) | Человек | Изучает историю задачи и код, сохраняет файл фактов и объясняет задачу простыми словами |
+| | [`/recall`](../skills/recall/SKILL.md) | Человек | Восстанавливает, где остановилась недавняя работа по теме и что делать дальше |
+| | [`/research`](../skills/research/SKILL.md) | Агент | Отвечает на вопрос по первоисточникам и сохраняет отчёт со ссылками |
+| Обсудить | [`/grilling`](../skills/grilling/SKILL.md) | Агент | Задаёт вопросы, пока не приняты все решения по идее |
+| | [`/grill-with-docs`](../skills/grill-with-docs/SKILL.md) | Человек | То же самое, и попутно записывает термины и решения |
+| | [`/domain-modeling`](../skills/domain-modeling/SKILL.md) | Агент | Ведёт глоссарий и ADR |
+| | [`/prototype`](../skills/prototype/SKILL.md) | Агент | Делает временный код, чтобы ответить на вопрос о дизайне |
+| Спланировать | [`/to-plan`](../skills/to-plan/SKILL.md) | Человек | Сохраняет план реализации задачи |
+| | [`/to-spec`](../skills/to-spec/SKILL.md) | Человек | Превращает обсуждение в спецификацию в трекере |
+| | [`/to-tickets`](../skills/to-tickets/SKILL.md) | Человек | Разбивает работу на тикеты с зависимостями |
+| | [`/wayfinder`](../skills/wayfinder/SKILL.md) | Человек | Раскладывает большую неясную работу на тикеты-решения |
+| Реализовать | [`/implement`](../skills/implement/SKILL.md) | Агент | Ведёт задачу: мелкое пишет сам, крупное отдаёт исполнителям, проверяет результат |
+| | [`/tdd`](../skills/tdd/SKILL.md) | Агент | Пишет интеграционные и модульные тесты, которые доказывают реальное поведение, сначала тест |
+| | [`/simplify-codebase`](../skills/simplify-codebase/SKILL.md) | Агент | Находит, что упростить в изменённом коде |
+| | [`/verify`](../skills/verify/SKILL.md) | Агент | Проверяет, что изменение работает в запущенном продукте, так, как договорились в проекте |
+| | [`/code-review`](../skills/code-review/SKILL.md) | Агент | Проверяет изменения по стандартам проекта и по задаче |
+| Улучшить | [`/retro`](../skills/retro/SKILL.md) | Человек | Превращает ошибки недавних сессий в скиллы и правила |
+| | [`/refactor-codebase`](../skills/refactor-codebase/SKILL.md) | Человек | После этапа работы находит структурные проблемы в коде и переписывает одну |
+| | [`/refactor-docs`](../skills/refactor-docs/SKILL.md) | Человек | Делает документы понятнее, не меняя их смысла |
+| | [`/cleanup-artifacts`](../skills/cleanup-artifacts/SKILL.md) | Человек | Разбирает устаревшие заметки и планы и убирает одобренные так, чтобы их можно было вернуть |
+| Писать | [`/writing-for-people`](../skills/writing-for-people/SKILL.md) | Агент | Понятные ответы и объяснения для людей |
+| | [`/writing-technical`](../skills/writing-technical/SKILL.md) | Агент | Чёткие технические документы на контролируемом английском |
+| | [`/writing-for-agents`](../skills/writing-for-agents/SKILL.md) | Агент | Скиллы и `AGENTS.md`, которые агенты выполняют одинаково |
+| | [`/rephrase`](../skills/rephrase/SKILL.md) | Человек | Пересказывает последний ответ простыми словами |
 
 ## Внешние инструменты
 
-Эти инструменты не входят в набор. Если ты выбираешь `verify` для проекта с интерфейсом, setup советует инструменты проверки интерфейса и ничего не ставит без твоего согласия.
+Эти инструменты не входят в набор. Если ты выбираешь `/verify` для проекта с интерфейсом, setup советует инструменты проверки интерфейса и ничего не ставит без твоего согласия.
 
-- **Проверка интерфейса для `verify`:** [agent-browser](https://github.com/vercel-labs/agent-browser): агент открывает веб-страницы, прокликивает их и делает скриншоты. [agent-desktop](https://github.com/vercel-labs/agent-desktop) делает то же для нативных приложений.
+- **Проверка интерфейса для `/verify`:** [agent-browser](https://github.com/vercel-labs/agent-browser): агент открывает веб-страницы, прокликивает их и делает скриншоты. [agent-desktop](https://github.com/vercel-labs/agent-desktop) делает то же для нативных приложений.
 - **Работа с агентами:** [Orca](https://orca.dev/) для worktree и сессий агентов. Его [плагин Excalidraw](https://orca.dev/plugins/stablyai/orca-plugins/orca-excalidraw) рисует и редактирует схемы.
 - **Схемы в терминале:** [плагин termaid для Claude Code](https://termaid.com/claude-code.html) рисует схемы Mermaid из ответа прямо в терминале, пока ответ печатается. Поставь команду `termaid` через `brew install termaid`, потом выполни `/plugin install termaid --marketplace fasouto/termaid`.
 - **Интерфейсы:** [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) про API браузера, CSS, доступность и производительность. [learn-taste](https://github.com/emilkowalski/skills/blob/main/skills/learn-taste/SKILL.md) превращает повторяющиеся замечания по дизайну в предложения правил проекта.
