@@ -30,18 +30,18 @@ Recommend the smallest route that reaches the goal. The map lists candidates, no
 | Need | Skill |
 | --- | --- |
 | Set up a home for several repositories | `setup-home-repo` (manual) |
-| Configure project rules, permissions and selected skills | `setup-workflow` |
+| Configure project rules, permissions and selected skills | `setup-workflow` (manual) |
 | Study a new task before discussion: history, code and a plain explanation | `investigate` (manual) |
 | Find where recent work on a topic stands and what comes next | `recall` (manual) |
 | Test an idea and find open questions | `grilling` |
-| Test an idea and record terms and decisions | `grill-with-docs` |
+| Test an idea and record terms and decisions | `grill-with-docs` (manual) |
 | Agree domain terms or record a decision (ADR) | `domain-modeling` |
 | Research a question in primary sources | `research` |
-| Plan an effort too large for one session | `wayfinder` |
+| Plan an effort too large and too unclear for one session | `wayfinder` (manual) |
 | Answer a design question with a throwaway experiment | `prototype` |
 | Explain a design with a diagram, after the user agrees | `draw-diagram` |
-| Save an implementation plan for a task | `to-plan` |
-| Turn agreed requirements into a spec, then tickets | `to-spec`, `to-tickets` |
+| Save an implementation plan for a task | `to-plan` (manual) |
+| Turn agreed requirements into a spec, then tickets | `to-spec`, `to-tickets` (manual) |
 | Write tests first, or audit existing tests | `tdd` |
 | Implement an agreed task or fix a bug | `implement` |
 | Simplify changed code | `simplify-codebase` |
@@ -52,7 +52,7 @@ Recommend the smallest route that reaches the goal. The map lists candidates, no
 | Find structural problems after a stage of work and rewrite one | `refactor-codebase` (manual) |
 | Write replies; write documents; write skills and `AGENTS.md` | `writing-for-people`; `writing-technical`; `writing-for-agents` |
 | Restate the last reply in plain words | `rephrase` (manual) |
-| Rewrite documents; remove stale documents | `refactor-docs`; `cleanup-artifacts` |
+| Rewrite documents; remove stale documents | `refactor-docs`; `cleanup-artifacts` (manual) |
 
 - A task with requirements from an analyst can go straight to `implement`.
 - A task that is ready for the user's review needs that review, not another skill.

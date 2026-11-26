@@ -18,7 +18,7 @@ The HumanLayer revision above is a verified license/source reference, not the pr
 
 ## ASD-STE100 source references
 
-The `writing-technical` package contains original instructions and software examples informed by the [official ASD-STE100 site](https://www.writing-technical.org/).
+The `writing-technical` package contains original instructions and software examples informed by the [official ASD-STE100 site](https://www.asd-ste100.org/).
 ASD owns the standard and its registered trademark. This repository does not bundle the official PDF or dictionary.
 The MIT terms for this repository do not license the standard itself.
 This skill is not endorsed, certified or approved by ASD or the STEMG.

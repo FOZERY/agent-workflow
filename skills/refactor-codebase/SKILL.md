@@ -20,7 +20,7 @@ Choose the scope in this order:
 
 1. The module or problem that the user names.
 2. The commit range that the user gives: the commit, tag or branch where the stage began.
-3. The files that change most often in `git log`. If the changes are scattered, widen the scope.
+3. The files that change most often in `git log`. If no file stands out, ask the user for a module or a commit range.
 
 Read the project rules: `AGENTS.md`, the coding standards, the architecture notes, the linter and formatter configs, `GLOSSARY.md` and the ADRs of the area. Reopen an ADR only for a real problem, and say so in the candidate.
 
@@ -33,17 +33,14 @@ If the scope is empty, report that and stop.
 1. Run the typecheck and the tests that cover the scope. If a check fails, report it and stop.
 2. Record the current `HEAD` as the starting commit.
 
-## 3. Simplify
+## 3. Collect simplifications
 
 If the project has no `simplify-codebase` section, skip this step and say so.
 
-1. Start `simplify-codebase` in a subagent with a fresh context. Give it the path from the `skill` setting of the `simplify-codebase` section, and the files in scope as whole files. If subagents are not available, run it in this session.
-2. Wait for its findings. Leave the files unchanged meanwhile.
-3. Apply the findings yourself by step 6 of `simplify-codebase`.
-4. Run the typecheck and the covering tests again.
-5. Carry its proposals into step 4 as candidates.
+1. Start `simplify-codebase` as its finder, with the agent from the `finder` setting, unless its `execution` setting says otherwise. Give it the path from the `skill` setting, and the files in scope as whole files. If subagents are not available, run it in this session.
+2. Keep its findings and proposals. Leave the files unchanged: the user decides about them in step 5.
 
-**Done when:** each finding is applied or skipped with a reason, and the checks pass.
+**Done when:** you have the findings and the proposals, or a note that the step was skipped.
 
 ## 4. Scan
 
@@ -54,7 +51,7 @@ Give the scan to a subagent with a fresh context. If subagents are not available
 - **Practices of the stack.** The code goes against the practices of its language and framework, for the versions that the project uses.
 - **Performance.** The code does work that it could avoid.
 
-Apply the deletion test to each module that looks shallow. Keep the candidate only if deleting the module would concentrate complexity.
+Apply the deletion test to each module that looks shallow. Keep the candidate only if the test shows a pass-through: deleting the module makes its complexity vanish instead of spreading to its callers.
 
 Each candidate names the place in the code and the rule or practice that it breaks. Drop a finding that has neither. Mark a practice or performance finding `hypothesis` until the code or a measurement confirms it.
 
@@ -75,7 +72,9 @@ List the candidates in the chat, most valuable first. For each one give:
 
 End with the candidate that you would take first, and why. Draw a diagram only if the project's diagram rules allow it and the user agrees.
 
-Ask the user through the question tool which candidate to take. Offer "none". If the user takes none, report and stop.
+If step 3 found simplifications, list them as one more option, "simplifications only", and say whether they can go with a candidate.
+
+Ask the user through the question tool which candidate to take. Offer "none". If the user takes none, report and stop. The files stay unchanged.
 
 **Done when:** the user chose one candidate or none.
 
@@ -90,7 +89,7 @@ Ask the user through the question tool which candidate to take. Offer "none". If
 
 ## 7. Rewrite
 
-Run `implement` in this session with that task. Give it the starting commit from step 2 as the review base, so that the simplifications from step 3 belong to the task.
+Run `implement` in this session with that task. Add the simplifications from step 3 that the user chose. Give it the starting commit from step 2 as the review base.
 
 The behavior stays the same. Tests that passed before still pass, except the tests of replaced shallow modules, which go with them. Write new tests at the interface of the deepened module.
 
@@ -104,6 +103,6 @@ The behavior stays the same. Tests that passed before still pass, except the tes
 
 ## Stop and tell the user
 
-- A test needs an edit to pass. The change altered the behavior.
+- A test needs an assertion change to pass. The change altered the behavior. Edits of imports and paths do not count.
 - The rewrite reaches outside the files that the user agreed.
-- The candidate no longer passes the deletion test.
+- The candidate is no longer a pass-through by the deletion test.

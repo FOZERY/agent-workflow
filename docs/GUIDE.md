@@ -36,7 +36,7 @@ Answers a question about the workflow and recommends the next skill, with the co
 
 ### `/investigate`
 
-Studies a task before you discuss it. Two researchers read the task's history (tickets, commits, merge requests, wiki, chats, logs, as configured in setup) and the code around it. The skill saves the facts with their sources in `context.md` next to the task, then explains the task to you in plain words, with diagrams where they help. `implement` later gives that file to its workers.
+Studies a task before you discuss it. Two researchers read the task's history (tickets, commits, merge requests, wiki, chats, logs, as configured in setup) and the code around it. For a task, the skill saves the facts with their sources in `facts.md` next to the task. For a question without a task, it saves the file only if you ask. It then explains the task to you in plain words, with diagrams where they help. `implement` later gives that file to its workers.
 
 ```text
 /investigate JIRA-1234
@@ -96,7 +96,7 @@ Prototype the lesson status transitions for cancel, move and restore.
 
 ### `draw-diagram`
 
-Offers a diagram when a picture would explain a design. After you agree, a separate worker draws an editable Excalidraw file and a PNG. The agent can start it.
+Offers a diagram when a picture would explain a design. After you agree, a separate subagent draws an editable Excalidraw file and a PNG. The agent can start it.
 
 ```text
 Draw how a task moves from the tracker to a merged PR.
@@ -146,7 +146,8 @@ Implements an agreed task. The session is the orchestrator:
 2. It picks a size: trivial (edit and stop), small (writes it itself), normal (one worker) or large (several workers).
 3. It asks you once to confirm the mode, the steps and the test seams. You can turn off steps for a simple task.
 4. Workers write the code in separate sessions by `implement/WORKER.md`: tests, simplification, the full test suite and the Standards review.
-5. The orchestrator runs `verify` on the changed behavior, if it is on, and checks the result against the task (the Spec review). Then it commits if allowed and reports with the evidence.
+5. With several workers, it integrates the parts into one tree.
+6. On that tree, it runs `verify` on the changed behavior, if it is on, and checks the result against the task (the Spec review). Then it commits if allowed and reports with the evidence.
 
 The agent starts it when you ask for a change.
 
@@ -156,7 +157,7 @@ Implement JIRA-1234 by the plan in .docs/jira-1234/plan.md.
 
 ### `tdd`
 
-Test-first: one failing test, then the smallest code that passes it. Tests go through public interfaces at the seams that you confirmed. It can also audit existing tests and remove the ones that prove nothing. `implement` runs it when the project's setting says so.
+Test-first: one failing test, then the smallest code that passes it. Tests go through public interfaces at the seams that you confirmed. It can also audit existing tests and remove the ones that prove nothing. `implement` runs it when the project's setting says so. The agent can start it.
 
 ```text
 Add the late-homework rule test-first.
@@ -165,7 +166,7 @@ Audit the tests in src/billing and remove the ones that prove nothing.
 
 ### `simplify-codebase`
 
-Finds what to simplify in changed code: deep nesting, unclear names, duplication, and guards or abstractions that nobody needs. A finder subagent lists the findings, and the session that wrote the code applies them one at a time with the tests. Larger removals come to you as proposals. `implement` runs it when the project's setting says so.
+Finds what to simplify in changed code: deep nesting, unclear names, duplication, and guards or abstractions that nobody needs. A finder subagent lists the findings, and the session that wrote the code applies them one at a time with the tests. Larger removals come to you as proposals. `implement` runs it when the project's setting says so. The agent can start it.
 
 ```text
 Simplify what we changed in this branch.
@@ -191,7 +192,7 @@ Review this branch against main.
 
 ### `/retro`
 
-Reads recent sessions (their transcripts, `CONTEXT.md`, `LESSONS.md` and Git history) and finds mistakes that were found and fixed. It turns each lasting lesson into an instruction: a rule in a skill, a new skill, a project rule or a lesson. It edits only what you approve and records the retro in `CONTEXT.md`.
+Reads recent sessions (their transcripts, `CONTEXT.md`, `LESSONS.md` and Git history) and finds mistakes that were found and fixed. It turns each lasting lesson into an instruction: a rule in a skill, a new skill, a project rule or a lesson. It edits only what you approve and records the retro in `CONTEXT.md`. For a change to the core block or a skill setting, it gives you a `/setup-workflow` command.
 
 ```text
 /retro
@@ -200,7 +201,7 @@ Reads recent sessions (their transcripts, `CONTEXT.md`, `LESSONS.md` and Git his
 
 ### `/refactor-codebase`
 
-After a stage of work, finds where the structure of the code makes change hard: shallow modules, broken project rules, poor practices of the stack. You pick one candidate, discuss it with `grilling`, and `implement` rewrites it with the behavior kept.
+After a stage of work, finds where the structure of the code makes change hard: shallow modules, broken project rules, poor practices of the stack. It also collects simplifications and changes nothing yet. You pick one candidate or the simplifications, discuss it with `grilling`, and `implement` rewrites it with the behavior kept.
 
 ```text
 /refactor-codebase since tag v0.3

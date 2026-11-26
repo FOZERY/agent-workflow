@@ -1,6 +1,6 @@
 ---
 name: writing-for-people
-description: "Write clear, natural text for a person: replies, explanations, questions, handoffs and document prose. Use when writing for people or making their text clearer."
+description: "Write clear, natural text for a person in chat: replies, explanations, questions and handoffs. Use when writing to people or making their text clearer. For documents and other files, use writing-technical."
 ---
 
 # Writing for people

@@ -20,8 +20,8 @@ These rules are mandatory. They live only in `AGENTS.md`; skills and other proje
 Link each skill name that has a section under `## Skills` in the project's `AGENTS.md` to that section.
 
 ```markdown
-1. **Setup.** `setup-workflow` configures this file. `setup-home-repo` creates a multi-repository home.
-2. **Clarify.** `investigate`, `recall`, `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`.
+1. **Setup.** `setup-workflow` configures this file. `setup-home-repo` creates a multi-repository home. `ask-workflow` recommends the next skill.
+2. **Clarify.** `investigate`, `recall`, `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`, `draw-diagram`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
 4. **Implement.** `implement`: the session is the orchestrator. It writes small changes itself and gives larger ones to workers. `tdd`, `simplify-codebase` and `verify` run inside implementation.
 5. **Review.** `code-review`: the worker checks the Standards axis, the orchestrator checks the Spec axis.
@@ -66,7 +66,7 @@ Write the entry yourself. In the same reply, tell the user which entry you added
 ## Block
 
 ```markdown
-<!-- agent-workflow:core v9 -->
+<!-- agent-workflow:core v10 -->
 setup-workflow owns this section. To change it, run setup again.
 
 ### Workflow
@@ -83,6 +83,8 @@ A skill section under `## Skills` can set these values:
 - `skill`: the installed path of the skill's `SKILL.md`, for each client. A subagent that runs the skill reads this file.
 - `worker`: the agent, model and reasoning effort of the `implement` workers.
 - `researcher`: the agent, model and reasoning effort of the `investigate` researchers.
+- `test-writer`: the agent, model and reasoning effort of the `tdd` subagent.
+- `verifier`: the agent, model and reasoning effort of the `verify` subagent.
 - `finder`: the agent, model and reasoning effort of the `simplify-codebase` finder.
 - `standards-reviewer`, `spec-reviewer`: the agent, model and reasoning effort of each `code-review` axis.
 - `followup`: `report` means return the findings and wait. `fix-and-rereview` means fix the authorized findings and review again.
@@ -122,6 +124,7 @@ If review follow-up allows fixes, fix findings and review again, up to the `roun
 
 ### Session end
 Before a handoff, a context boundary or the end of a task, update `<agent-docs>/CONTEXT.md` within the agreed update authority: what changed, what is open, what comes next.
+A subagent or an `implement` worker does not write `CONTEXT.md` or `LESSONS.md`. It reports to the session that started it, and that session writes them.
 
 ### Lessons
 Record a lesson in `<agent-docs>/LESSONS.md` when one of these happens:

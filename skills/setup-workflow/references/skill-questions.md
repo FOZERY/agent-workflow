@@ -10,7 +10,7 @@ Record each answer in the skill's section of the project's `AGENTS.md`.
 3. Record each source in the user's words, with the steps to open it.
 4. For a credential, record only the name of the variable or config that holds it.
 5. If the user names production, ask whether the agent may read it.
-6. Agree where the facts file lives. Default: `context.md` with the other artifacts of the task.
+6. Agree where the facts file lives. Default: `facts.md` with the other artifacts of the task.
 7. Ask where the researchers run: in subagents (recommended) or in the current session. Record the answer as `execution`.
 8. If they run in subagents, ask which agent, model and reasoning effort they use. Record the answer as `researcher`.
 

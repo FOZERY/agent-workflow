@@ -16,7 +16,7 @@ Start with the task you already have. Make only the decisions and artifacts the 
 | Work that needs separate assignments in a tracker | Use [`to-tickets`](../skills/to-tickets/SKILL.md) from a plan, spec, or discussion. Approve the tickets and their dependencies before publication. |
 
 Before you start a route, check that its [skills and helpers](../skills/setup-workflow/references/catalog.md#dependencies) are installed in your client.
-Check project permissions for tracker, branch, and delegation actions. If a required step is unavailable or forbidden, report what blocks it.
+Check project permissions for tracker, branch, and delegation actions. If a required step is unavailable or forbidden, the agent reports what blocks it.
 
 ## Give the task to an executor
 
@@ -33,16 +33,16 @@ Each worker runs in a separate session with its own thread. The orchestrator rec
 
 ## Verify and accept
 
-Follow the project's settings for TDD, simplify and review. Manual means you start that activity separately. With `auto`, the worker runs `simplify-codebase` before review, so review sees the final code. A subagent finds the simplifications, and the worker applies them.
-Before any work starts, `implement` lists the mode and the steps for the task and asks you to confirm them. You can turn off a step for a simple task.
-Each worker checks the Standards axis of `code-review` on its own changes. The orchestrator then checks the Spec axis once, against the task, and sends findings back to the same worker.
+Follow the project's settings for TDD, simplify, verify and review. With `manual`, the step is off by default: you can turn it on when `implement` asks, or start the skill yourself. With `auto`, the worker runs `simplify-codebase` before review, so review sees the final code. A subagent finds the simplifications, and the worker applies them.
+Before any work starts, `implement` lists the mode and the steps for the task and asks you to confirm them. You can turn off a step for a simple task, unless a project rule makes it mandatory.
+Each worker checks the Standards axis of `code-review` on its own changes. After the parts are integrated, the orchestrator runs `verify` on the behaviors from the task, if it is on, and checks the Spec axis once, against the task. It sends failures and findings back to the same worker.
 See [review coverage and follow-up](../skills/setup-workflow/references/AGENTS.md#review-coverage) for scope, timing, and whether the agent can fix findings.
 
 Failed required checks or unresolved required findings block completion. Once all required checks and review pass, you decide whether to accept the result.
 You can stop after acceptance. Commit, push, opening a PR/MR, merge, and deployment follow the project's permissions.
-If the session exposed a recurring problem, [`retro`](../skills/retro/SKILL.md) proposes a change. You decide whether it becomes a rule or a lesson.
+If the session exposed a recurring problem, [`retro`](../skills/retro/SKILL.md) proposes where each lesson goes: a rule in a skill, a new skill, a project rule or a lesson. You approve each one.
 
-After a stage of work, such as several tasks or an epic, you can start [`refactor-codebase`](../skills/refactor-codebase/SKILL.md) by hand. It finds structural problems in the code of that stage, and you pick one. It then rewrites that one through `implement` with the behavior kept. `implement` never starts it.
+After a stage of work, such as several tasks or an epic, you can start [`refactor-codebase`](../skills/refactor-codebase/SKILL.md) by hand. It finds structural problems in the code of that stage and simplifications, and you pick one. It then rewrites that one through `implement` with the behavior kept. `implement` never starts it.
 
 ## Keep project rules and task artifacts separate
 

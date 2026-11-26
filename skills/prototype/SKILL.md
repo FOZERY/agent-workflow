@@ -5,7 +5,7 @@ description: Build a throwaway prototype to answer a design question. Use when t
 
 Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
 
-If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
+If the project's root `AGENTS.md` has no `agent-workflow:core` block, use this skill's defaults. In your report, say once that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex).
 
 # Prototype
 
@@ -27,4 +27,4 @@ The two branches produce very different artifacts, so getting this wrong wastes 
 3. **No persistence by default.** State lives in memory. Persistence is the thing the prototype is _checking_, not something it should depend on. If the question explicitly involves a database, hit a scratch DB or a local file with a clear "PROTOTYPE, wipe me" name.
 4. **Skip the polish.** No tests, no error handling beyond what makes the prototype _runnable_, no abstractions. The point is to learn something fast.
 5. **Surface the state.** After every action (logic) or on every variant switch (UI), print or render the full relevant state so the user can see what changed.
-6. **Capture it when done.** Fold any validated decision into the real code, then capture the prototype itself as a **primary source**: if the project permits commits, commit it to a throwaway branch, out of main. If an implementation issue exists, leave a context pointer to that branch there. Otherwise, report the branch or path to the user. Capture the answer too (the verdict and the question it settled) in the same place. The main branch keeps only the validated decision.
+6. **Capture it when done.** If the task includes the real change, fold each validated decision into the real code. Otherwise record the decision; the change goes through `to-plan` or `implement`. Then capture the prototype itself as a **primary source**: if the project permits commits, commit it to a throwaway branch, out of main. If an implementation issue exists, leave a context pointer to that branch there. Otherwise, report the branch or path to the user. Capture the answer too (the verdict and the question it settled) in the same place. The main branch keeps only the validated decision.

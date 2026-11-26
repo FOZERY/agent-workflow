@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Cleanup artifacts
 
-Review working artifacts: research notes, temporary plans, task notes, handoffs, reports and generated diagrams. Start read-only. A request to run this skill is a request for a review, not a permission to delete. Leave text rewrites to `refactor-docs`.
+Review working artifacts: research notes, temporary plans, task notes, handoffs, reports and generated diagrams. Start read-only. Running this skill gives no permission to delete: only the owner's approval of exact paths does. Leave text rewrites to `refactor-docs`.
 
 ## 1. Find the scope
 
@@ -47,7 +47,7 @@ Show the plan in the chat. Write a report file only if the user or the project a
 1. List the candidates that you propose to change, and each kept candidate that the user could question. Use one action per row: keep, archive, move to Trash, or prune named entries. For a kept row, write `none` in the recovery column.
 2. Expand a folder into its files.
 3. Include every link repair and recovery copy in the plan.
-4. If the user asked only for a review, stop here. Otherwise ask the owner to approve the exact paths and actions.
+4. If the user asked only for a review or a report, stop here. Otherwise ask the owner to approve the exact paths and actions.
 
 A general request such as "clean the repository" does not approve the list.
 

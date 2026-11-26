@@ -5,7 +5,7 @@ description: "Simplify code changed in the current task and roll back overengine
 
 Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
 
-If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
+If the project's root `AGENTS.md` has no `agent-workflow:core` block, use this skill's defaults. In your report, say once that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex).
 
 # Simplify codebase
 
@@ -19,7 +19,7 @@ Make the code that this task changed easier to read and cheaper to own. Choose c
 - **Finder.** Does steps 1 to 5 and reports findings. The finder does not edit files.
 - **Author.** The session that wrote the code. It applies the findings in step 6.
 
-In a subagent or a separate session, you are the finder only. Return the findings to the caller. In the session that wrote the code, you take both roles.
+In a subagent, you are the finder only. Return the findings to the caller. In the session that wrote the code, you take both roles.
 
 ## Principles
 

@@ -1,12 +1,12 @@
 ---
 name: verify
-description: "Check that an implemented change works in the running product, the way the project agreed: locally with test data, end to end, in a test namespace or on staging. Use after implementation, when implement calls it, or when the user asks to check that a feature works."
+description: "Check that an implemented change works in the running product, the way the project agreed: locally with test data, end to end, in a test namespace or on staging. Use when implement calls it, or when the user asks to check that a change or a feature works."
 argument-hint: "[task, change or behavior to check]"
 ---
 
 Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
 
-If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
+If the project's root `AGENTS.md` has no `agent-workflow:core` block, use this skill's defaults. In your report, say once that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex).
 
 # Verify
 
@@ -32,7 +32,7 @@ Prove that a change works in the running product, not only in the tests. The `ve
 
 1. Follow the procedure: start the app, deploy, connect to the namespace or load the test data.
 2. Check that you are in the right place: the cluster context, the namespace, the URL, the test account.
-3. Check that the environment runs the change, for example by the commit, the image tag or the build version. Without a build, check that the changed files have no edits outside the commit. A check on an old build proves nothing.
+3. Check that the environment runs the change, for example by the commit, the image tag or the build version. Without a build, check that the running code comes from the tree that the caller gave you, or from the working tree with the change. A check on an old build proves nothing.
 
 Act only on the environments and accounts that the procedure names. If the check needs another one, ask the user. Use credentials only from the variables or the config that the procedure names.
 
@@ -42,7 +42,7 @@ Act only on the environments and accounts that the procedure names. If the check
 
 1. Drive each behavior on the real path: the UI through the browser tool, API requests, CLI commands, the test queries of the project.
 2. Capture the action and the result, not only the final screen. Check side effects too: rows, messages, files, jobs.
-3. Save the evidence where the procedure says. Default: `.verify/<date>-<time>/`. If Git does not ignore `.verify/`, add it to `.git/info/exclude`.
+3. Save the evidence where the procedure says. Default: `.verify/<date>-<time>/`. If Git does not ignore `.verify/`, ask the user before you add it to `.git/info/exclude`.
 4. If a check fails, check the environment first. If the environment is fine, record the failure as a finding. Do not weaken a check so that it passes.
 
 **Done when:** each behavior passed, failed with evidence, or is blocked with a reason.

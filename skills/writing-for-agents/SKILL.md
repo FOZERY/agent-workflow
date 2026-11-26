@@ -69,7 +69,7 @@ If you are not sure, delete the sentence. Keep every limit that protects data, s
 
 ## 8. Test a procedure
 
-If the document has steps, give a fresh subagent a small real task. Tell it to read the document in full and follow it. Compare its path with the steps. Fix each step where it took another path or stopped early.
+If the document has steps, give a fresh subagent a small real task in a scratch repository or worktree. Forbid writes to trackers, remotes and the Trash, and tell it to assume the answer at each approval gate. Tell it to read the document in full and follow it. Compare its path with the steps. Fix each step where it took another path or stopped early.
 
 Skip this step for a document that has only rules.
 

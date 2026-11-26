@@ -73,20 +73,20 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 2. For review, ask which requirements, coding practices and examples guide it. Accept a project procedure or another review skill. Record the procedure and the choice of review skill as prose. There is no `review.skill` or `review.required` flag.
 3. Ask each question below that belongs to a selected skill, as a separate form question with its options. Each such question is required, also when the user has no preference.
    1. TDD trigger: does `implement` start TDD automatically, or only when the user asks?
-   2. TDD location: the current session, a subagent that writes only the failing tests, or a separate session?
+   2. TDD location: the current session, or a subagent that writes only the failing tests? For a subagent, also ask its agent, model and reasoning effort, and record it as `test-writer`.
    3. Simplify trigger: does `implement` start `simplify-codebase` automatically after the implementation, or only when the user asks?
-   4. Simplify location: where does `simplify-codebase` look for simplifications: a subagent (recommended), the current session, or a separate session? The implementing session always applies them.
+   4. Simplify location: where does `simplify-codebase` look for simplifications: a subagent (recommended) or the current session? The implementing session always applies them.
    5. Review trigger: does `implement` start review automatically, or only when the user asks?
    6. Agents for each role: which agent, model and reasoning effort for the `implement` workers, the `simplify-codebase` finder, the Standards reviewer and the Spec reviewer? List what the harness and Orca offer. Assume no model names: harnesses name models and roles differently. A common split is a standard model for workers, the finder and Standards, and the strongest model for Spec.
    7. Review follow-up: report findings and wait, or fix and review again?
    8. Review rounds: how many fix-and-review rounds before the agent stops and asks? Offer `3` as the default.
-   9. Verify trigger and location: does `implement` start `verify` automatically after the implementation, or only when the user asks? Does it run in the current session (recommended), a subagent or a separate session? Ask the other `verify` questions in [skill questions](references/skill-questions.md#verify).
-4. Ask the [review coverage questions](references/AGENTS.md#review-coverage). `### Skill settings` in the [core block](references/core-rules.md#block) gives the meaning of each answer.
+   9. Verify trigger and location: does `implement` start `verify` automatically after the implementation, or only when the user asks? Does it run in the current session (recommended) or a subagent? For a subagent, also ask its agent, model and reasoning effort, and record it as `verifier`. Ask the other `verify` questions in [skill questions](references/skill-questions.md#verify).
+4. Ask the [review coverage questions](references/AGENTS.md#review-coverage). Record the answers in `<agent-docs>/project/review.md`. `### Skill settings` in the [core block](references/core-rules.md#block) gives the meaning of the other answers.
 5. Before you record an answer, check that the skill can run it. For example, the session that runs `code-review` launches its reviewers as subagents. If the harness cannot launch subagents, show the gap and ask the user how review runs instead. An `execution` value does not remove the skill's own subagent steps.
 6. Record the installed `SKILL.md` path of `tdd`, `simplify-codebase`, `verify` and `code-review` for each client in their `skill` setting. Record the installed path of `implement/WORKER.md` in the `implement` section. Check that each path exists and that each worker can read it.
-7. Read the harness documentation in this setup before you state how deep subagents can launch subagents. Your memory of the harness is not a source. For Claude Code, read <https://code.claude.com/docs/en/sub-agents> and check `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` in the settings and the environment. Record the result under `## Skills`, where `### Delegated workers` in the core block looks for it.
+7. Read the harness documentation in this setup before you state how deep subagents can launch subagents. Your memory of the harness is not a source. For Claude Code, read <https://code.claude.com/docs/en/sub-agents> and check `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` in the settings and the environment. Record the result in the `Subagent depth:` line under `## Skills`, where `### Delegated workers` in the core block looks for it.
 
-The user can always start `tdd`, `simplify-codebase` or `code-review` manually, whatever the trigger.
+The user can always start `tdd`, `simplify-codebase`, `verify` or `code-review` manually, whatever the trigger. With `manual`, `implement` shows the step as off, and the user can turn it on for a task.
 
 TDD keeps the red-green loop: one test, then one implementation step. It is not a test-writing phase before implementation. If TDD runs in a subagent, that subagent writes only the failing tests, from the requirements and the interface.
 

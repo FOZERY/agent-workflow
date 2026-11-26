@@ -19,7 +19,7 @@ Read this file before you write or edit an artifact in Russian. It adapts the pr
 - **Participles.** Use at most one participial or adverbial participial phrase per sentence. Turn the rest into verbs or separate sentences.
 - **Genitive chains.** Break a chain of three or more nouns in the genitive: «проверка соответствия требованиям безопасности» becomes «проверь, что код безопасен».
 - **Small words.** Keep «уже», «ещё», «может», «поэтому», «но». They carry meaning.
-- **«Только» and «не».** Put them next to the word that they change: «тесты запускаются только после ревью», not «только тесты запускаются после ревью» when you mean the time.
+- **«Только» and «не».** Put them next to the word that they change: «воркер запускает тесты только после ревью», not «только воркер запускает тесты после ревью» when you mean the time.
 - **«Это» and «который».** Each must point to one obvious noun. If «это» points to a whole sentence, name the thing instead.
 - **«И» and «или».** If both are in one sentence, show what each joins, or split the sentence.
 

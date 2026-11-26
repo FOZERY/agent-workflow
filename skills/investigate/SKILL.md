@@ -36,7 +36,7 @@ If the `execution` setting is `current-session`, or subagents are not available,
 
 Combine the reports into one facts file. Keep every source link and every `inference` mark. Add no fact that no report has. If two reports or sources disagree, keep both with their sources and add the conflict to the open questions.
 
-- For a task, save `context.md` with the other artifacts of the task, where `to-plan` saves its plan. The default is `.docs/<task-slug>/context.md`. If the file exists, update it.
+- For a task, save `facts.md` with the other artifacts of the task, where `to-plan` saves its plan. The default is `<agent-docs>/<task-slug>/facts.md`, where `<agent-docs>` is the project's agent-docs directory, `.docs` by default. If the file exists, update it.
 - For a question without a task, save the file only if the user asks.
 
 Use these sections, and drop an empty one:

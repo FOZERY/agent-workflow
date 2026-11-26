@@ -21,7 +21,7 @@ In scope:
 Out of scope:
 
 - Projects without code, for example travel planning.
-- The verification design. It is a separate discussion during implementation.
+- The verification procedure of each project. Each project agrees it in `setup-workflow` for the `verify` skill.
 
 ## Roles
 
@@ -55,7 +55,7 @@ There is one project agent for each project.
 - Wakes on events, for example a new issue, a CI failure or a PR comment.
   If a source has no events, the project agent checks it on a schedule. It also works when the person asks.
 - Sorts new work. If a bug needs reproduction, it starts an investigation without a "go" from the person.
-  An investigation reproduces the bug and finds the cause. It does not change code. It stays within an investigation budget.
+  An investigation here is a read-only check by the project agent, not the `investigate` skill. It reproduces the bug and finds the cause. It does not change code. It stays within an investigation budget.
 - Proposes "fix" or "discuss" for each item and sets the card to `Needs you`.
 - After "go", starts a work stream or puts it in the queue.
 - Enforces the limit of active work streams for the project.
@@ -69,7 +69,7 @@ There is one stream lead session for each work stream. The project agent adds a 
 
 - Runs next to the code on the server.
 - Follows the workflow and rules of the project root, for example its `AGENTS.md`.
-- Coordinates the work. It does not write code itself. Workers write the code.
+- Coordinates the work through `implement`. It writes only small changes itself. Workers write the rest.
 - Reports each stage change to the project agent.
 - Handles CI failures, merge conflicts and review comments until the merge.
 - Stays available until the merge. The project agent stores the session ID on the card, so a later message can resume the session.

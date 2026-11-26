@@ -11,6 +11,7 @@ Rules for the whole assignment:
 - Say that something works only with the output of a command that you ran. A build, a typecheck or a plausible explanation does not prove behavior.
 - For a bug, reproduce it first. Fix the cause. If you only add a guard that hides the failure, report the bug as not fixed.
 - If two fixes for the same guessed cause failed, stop fixing. Test the guess with a log, a test or a smaller case first.
+- Leave `CONTEXT.md` and `LESSONS.md` to the orchestrator. Put what they should record in your report.
 
 ## 1. Prepare
 
@@ -20,7 +21,7 @@ Use the starting commit from the brief as the review base. Track the exact file 
 
 ## 2. Write the code
 
-Write or update tests when the assignment requires them. Follow the project's testing procedure. If TDD is confirmed, use `tdd` at the seams from the brief. If the project runs TDD in a subagent, that subagent writes only the failing tests.
+Write or update tests when the assignment requires them. Follow the project's testing procedure. If TDD is confirmed, use `tdd` at the seams from the brief. If the project runs TDD in a subagent, that subagent writes only the failing tests. Use the agent from the `test-writer` setting of the `tdd` section.
 
 To run a skill in a subagent, give it the path from the `skill` setting of that skill's section. Tell it to read the file in full and follow it, and pass its inputs. Do not summarize the skill in the brief.
 
@@ -30,7 +31,7 @@ Run the typecheck and single test files regularly.
 
 ## 3. Simplify
 
-If `simplify-codebase` is confirmed, run it in a subagent with a fresh context, unless its section sets another `execution`. Use the agent from its `finder` setting. Pass the starting commit and the owned file paths. The subagent only finds simplifications and returns them. It does not edit files. Wait for its findings and do not edit those files meanwhile.
+If `simplify-codebase` is confirmed, run it in a subagent with a fresh context, unless its section sets `execution: current-session`. Use the agent from its `finder` setting. Pass the starting commit and the owned file paths. The subagent only finds simplifications and returns them. It does not edit files. Wait for its findings and do not edit those files meanwhile.
 
 Apply the findings yourself by step 6 of `simplify-codebase`. Keep its proposals for your report. The user decides about them.
 
@@ -64,6 +65,6 @@ Report to the orchestrator:
 - the Standards review outcome and any open findings;
 - the steps that did not run, and the blockers.
 
-## 8. Fix Spec findings
+## 8. Fix returned findings
 
-The orchestrator can return Spec findings to this session. Fix them and run the full test suite again. If the Standards review is confirmed and its follow-up is `fix-and-rereview`, review again by step 5. Then report again by step 7. In direct mode, return to step 5 of `implement` instead.
+The orchestrator can return findings to this session: Spec findings, failed `verify` checks or approved `simplify-codebase` proposals. Fix them and run the full test suite again. If the Standards review is confirmed and its follow-up is `fix-and-rereview`, review again by step 5. Then report again by step 7. In direct mode, return to step 6 of `implement` instead.

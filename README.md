@@ -4,14 +4,14 @@
 
 A workflow for coding agents, built from small skills. Each skill does one step: study a task, discuss it, plan it, implement it, review it, learn from it. Your project's rules sit on top of the steps: `setup-workflow` writes them into the project's `AGENTS.md`, and every skill reads them there.
 
-The kit adapts [Matt Pocock's skills](https://github.com/mattpocock/skills) and ideas from [pstack](https://github.com/cursor/plugins/tree/main/harness/pstack) by Lauren Tan, and adds its own setup, implementation and writing skills. It runs no automatic pipeline. You choose the steps, and the project's permissions decide what the agent may do alone.
+The kit adapts [Matt Pocock's skills](https://github.com/mattpocock/skills) and skills from [pstack](https://github.com/cursor/plugins/tree/main/harness/pstack) by Lauren Tan, and adds its own skills, such as `to-plan`, `verify` and `writing-technical`. It runs no automatic pipeline. You choose the steps, and the project's permissions decide what the agent may do alone.
 
 ## Install
 
 Use Node.js 22.20 or later. In your project directory, install `setup-workflow` from GitHub:
 
 ```bash
-npx skills@1.9.0 add FOZERY/agent-workflow --skill setup-workflow --agent claude-code
+npx skills@latest add FOZERY/agent-workflow --skill setup-workflow --agent claude-code
 ```
 
 For Codex, use `--agent codex`. Add `--global` for a user-wide install. To install another skill, replace `setup-workflow` with its name. For other clients and scopes, see [skill deployment](skills/setup-workflow/references/skills.md).
@@ -90,6 +90,6 @@ For an example of user-wide instructions, see the [global AGENTS.md reference](a
 
 ## Status and license
 
-The skills were checked in isolated projects and in daily use. A full run from setup to a merged PR has not been tested end to end.
+The skills were checked in isolated projects and in daily use. A full run from setup to a merged PR has not been tested end to end. To check the links and the contracts between the skills, run `python3 scripts/check.py`. CI runs it on every push.
 
 Original contributions are [MIT-licensed](LICENSE). Third-party material keeps its [notices and rights](THIRD_PARTY_NOTICES.md), including the Excalidraw package's unresolved redistribution permission. Keep the applicable [notices](THIRD_PARTY_NOTICES.md#distribution) with installed or exported skills.

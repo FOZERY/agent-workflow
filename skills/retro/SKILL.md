@@ -35,7 +35,7 @@ Skip empty sessions and sessions about another project. For more than two transc
 
 ## 3. Keep what matters
 
-1. Group the events into classes. A mistake class counts when it happened twice or more. A single correction by the user also counts, and so does a mistake that the agent admitted itself.
+1. Group the events into classes. Keep a class if it happened twice or more, if the user corrected it, or if the agent admitted it.
 2. Keep a class only if it will still be true in six months and would change what a future agent does.
 3. Drop it if `AGENTS.md`, `LESSONS.md` or the skill already says it clearly and nothing showed it was ignored.
 4. Drop one-off details such as SHAs, versions and counts.
@@ -44,7 +44,7 @@ Skip empty sessions and sessions about another project. For more than two transc
 
 Take the narrowest place that every affected agent reads:
 
-1. **A rule in an existing skill**, when the mistake happened inside that skill's work. If the skill should have run and did not, change its description.
+1. **A rule in an existing skill**, when the mistake happened inside that skill's work. If an agent-started skill should have run and did not, change its description. If a user-started skill should have been suggested, change the place that suggests it, such as `ask-workflow` or the skill of the step before.
 2. **A new skill**, when the lesson is a procedure with several steps that no skill covers.
 3. **A project rule in `AGENTS.md`**, when the lesson applies to most tasks in the project.
 4. **A `LESSONS.md` entry**, for confirmed experience that is not a rule.
@@ -55,7 +55,7 @@ If a rule already exists and the mistake still happened, make the rule clearer o
 
 List the proposals, most severe first:
 
-- **Accepted:** the mistake with its evidence, the new or changed text, and where it goes.
+- **Proposed:** the mistake with its evidence, the new or changed text, and where it goes.
 - **Rejected:** the class and the reason.
 - **Later:** what needs a larger change.
 
@@ -63,7 +63,7 @@ Wait for the user's approval of each proposal.
 
 ## 6. Apply the approved changes
 
-1. Edit `AGENTS.md` through `setup-workflow`. Edit `LESSONS.md` and the project's own skills directly, by `writing-for-agents`.
+1. For a change inside the `agent-workflow:core` block or a skill setting, give the user the `/setup-workflow` command (`$setup-workflow` in Codex) with the approved change. Edit the rest of `AGENTS.md`, `LESSONS.md` and the project's own skills directly, by `writing-for-agents`.
 2. For a skill that comes from a shared kit, write the proposed change for that kit's repository. Leave the installed copy unchanged.
 3. Add a retro entry to `CONTEXT.md`: the date, the window, and what was applied or left open.
 

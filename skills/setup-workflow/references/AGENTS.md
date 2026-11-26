@@ -30,6 +30,7 @@ Project rules that are too long for `AGENTS.md` go to `<agent-docs>/project/`. T
 | `testing.md` | Test types, seams, infrastructure, mocking limits | You write or change a test. |
 | `delivery.md` | Commit convention, PR and deploy procedure, templates | You commit, push or open a PR. |
 | `review.md` | Review standards, comparison base, evidence rules | Before review. |
+| `verification.md` | The long verification procedure: environments, access, test data | Before `verify` runs a check. |
 
 Create a file only when the project has content for it. If an existing source holds the content, link it and do not copy it.
 
@@ -41,8 +42,8 @@ The agent reads these settings as instructions, not as runtime flags. Their mean
 | --- | --- |
 | `investigate` | `execution`, `researcher` |
 | `implement` | `worker` |
-| `verify` | `trigger`, `execution`, `skill` |
-| `tdd` | `trigger`, `execution`, `skill` |
+| `verify` | `trigger`, `execution`, `skill`, `verifier` |
+| `tdd` | `trigger`, `execution`, `skill`, `test-writer` |
 | `simplify-codebase` | `trigger`, `execution`, `skill`, `finder` |
 | `code-review` | `trigger`, `skill`, `standards-reviewer`, `spec-reviewer`, `followup`, `rounds` |
 | Workflow rules | `search`, recorded in the core block and not in a skill section |
@@ -51,7 +52,7 @@ The agent reads these settings as instructions, not as runtime flags. Their mean
 
 Ask each question that is not answered yet:
 
-1. When does review run: before the commit, after it, or at both points?
+1. When does review run: before the commit, after it, or at both points? `implement` runs review before the commit. For review after the commit, record a project procedure that the user starts, such as a PR review.
 2. At each point, what does it compare: commits, or a base and the working tree?
 3. How is the base selected: the target branch, a named revision, or a project rule?
 4. Which changes are in scope? For working-tree review, say which of staged, unstaged and untracked changes are included.
@@ -110,6 +111,7 @@ Read a file when its trigger applies.
 
 ## Skills
 Each selected skill has a section below. Before you run a skill, read its section.
+Subagent depth: <how deep subagents can launch subagents in each client, with the source that setup read>
 The section wins over the skill's own defaults. Keep the rest of the skill's procedure unchanged.
 If a required step cannot satisfy applicable constraints, report the conflict.
 
@@ -170,6 +172,7 @@ For interactions or architecture worth visualizing, use [draw-diagram](#draw-dia
 ### to-spec
 Runs: <runs>. Phase: <phase>.
 <Requirement sources, specification format, destination and publication procedure.>
+<Readiness label, if not `ready-for-agent`.>
 For interactions or architecture worth visualizing, use [draw-diagram](#draw-diagram).
 
 ### to-tickets
@@ -188,8 +191,9 @@ Decisions and contracts stay authoritative in text. A diagram neither replaces a
 
 ### tdd
 trigger: <auto | manual>
-execution: <current-session | subagent | separate-session>
+execution: <current-session | subagent>
 skill: <installed path of tdd/SKILL.md per client>
+test-writer: <agent, model and reasoning effort for the subagent that writes the failing tests, if execution is subagent>
 
 Test types, seams, infrastructure and mocking limits: read `<agent-docs>/project/testing.md` when you write a test.
 
@@ -207,18 +211,19 @@ Workers read `<installed path of implement/WORKER.md per client>`.
 
 ### verify
 trigger: <auto | manual>
-execution: <current-session | subagent | separate-session>
+execution: <current-session | subagent>
 skill: <installed path of verify/SKILL.md per client>
+verifier: <agent, model and reasoning effort for the verify subagent, if execution is subagent>
 
 <Where to check: local run with test data, end-to-end run, test namespace or staging. How to reach it, in the user's words.>
 <Tools and access: for example the kubectl context and namespace, the browser tool, test users. Credentials only as variable or config names.>
 <Actions that need approval, for example a deploy to staging or writes to a shared environment.>
-<Evidence location, if not `.verify/<run>/`.>
+<Evidence location, if not `.verify/<date>-<time>/`.>
 Long procedure: read `<agent-docs>/project/verification.md` before a check.
 
 ### simplify-codebase
 trigger: <auto | manual>
-execution: <current-session | subagent | separate-session>
+execution: <subagent | current-session>
 skill: <installed path of simplify-codebase/SKILL.md per client>
 finder: <agent, model and reasoning effort for the simplification finder>
 

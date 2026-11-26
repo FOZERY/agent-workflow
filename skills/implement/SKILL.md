@@ -74,7 +74,7 @@ The user can change the mode or turn off steps for this task. Start nothing befo
 
 If the caller gives a review base, use it. Otherwise, record the current commit as the starting commit and use it as the base.
 
-**Direct mode.** Follow [WORKER.md](WORKER.md) yourself, then go to step 5.
+**Direct mode.** Follow [WORKER.md](WORKER.md) yourself, then go to step 6.
 
 **Worker modes.**
 
@@ -85,37 +85,45 @@ If the caller gives a review base, use it. Otherwise, record the current commit 
    - the shared contracts and the seams to test;
    - the confirmed steps and the starting commit;
    - the report that you expect.
-3. Start each worker in a separate session with the session tool from the project's `implement` section and the agent from the `worker` setting. Give it the brief. Tell it to read [WORKER.md](WORKER.md) in full and follow it, and give the absolute path of that file.
+3. Start each worker in a separate session with the session tool from the project's `implement` section and the agent from the `worker` setting. Give it the brief. Tell it to read `WORKER.md` in full and follow it. Give the path that the `implement` section records for the worker's client. If there is none, give the absolute path of [WORKER.md](WORKER.md).
 4. Start independent assignments in parallel. Start dependent assignments when their prerequisites are ready. Route contract changes through you and tell the affected workers.
 5. Wait for the reports. Do not edit the workers' files meanwhile.
 
 **Done when:** every worker reported, or you finished the direct work, and the confirmed checks of each part passed.
 
-## 5. Check against the task
+## 5. Integrate
+
+Skip this step in direct mode and with one worker.
+
+With several workers, integrate the parts in dependency order into one tree, through the project's delivery procedure. Run the agreed checks on the combined result, including cross-repository interactions.
+
+**Done when:** one tree holds all parts, and its checks passed or the failures are known.
+
+## 6. Check against the task
+
+Check the final tree: the integrated tree, or the tree of the only worker or of the direct work.
 
 If `verify` is confirmed:
 
-1. Run `verify` with the behaviors that the user confirmed in step 3, the task sources and the branch or worktree of each part. Run it in this session, unless its section sets another `execution`.
-2. If a check fails, send the failure with its evidence to the worker that owns the code, in the same worker session. In direct mode, fix it yourself by [WORKER.md](WORKER.md) step 8. Then run `verify` again for the failed behaviors.
+1. Run `verify` with the behaviors that the user confirmed in step 3, the task sources and the final tree. Tell it that the user confirmed the list, so that it does not ask again. Run it in this session, unless its section sets another `execution`.
+2. If a check fails, send the failure with its evidence to the worker that owns the code, in the same worker session. In direct mode, fix it yourself by [WORKER.md](WORKER.md) step 8. Integrate the fix by step 5, then run `verify` again for the failed behaviors.
 3. If a behavior is blocked, say why in the report. Do not claim verification for it.
 
 Skip the rest of this step if the user turned off the Spec review.
 
 1. Run `code-review` from this session with the Spec axis only. Its reviewer is a fresh subagent with the `spec-reviewer` setting.
-2. Pass the task sources, the base, the changed paths with the worktree or branch of each part, and the evidence paths. The reviewer reads each part in its own worktree or branch.
+2. Pass the task sources, the base, the final tree and the evidence paths.
 3. Read the findings, not the whole diff.
 4. If the `followup` setting of `code-review` is `report`, give the findings to the user and wait.
-5. If it is `fix-and-rereview`, send the findings to the worker that owns the code, in the same worker session. In direct mode, fix them yourself by [WORKER.md](WORKER.md) step 8. Then run the Spec review again.
+5. If it is `fix-and-rereview`, send the findings to the worker that owns the code, in the same worker session. In direct mode, fix them yourself by [WORKER.md](WORKER.md) step 8. Integrate the fixes by step 5. Run `verify` again for the behaviors that the fixes touch, then run the Spec review again.
 
-The round limit is the `rounds` setting of `code-review`, `3` by default. If the Spec review or a worker's Standards review reaches it, stop and ask the user.
+The round limit is the `rounds` setting of `code-review`, `3` by default. It counts the rounds of each review on this task. If the Spec review or a worker's Standards review reaches it, stop and ask the user.
 
-**Done when:** every confirmed drive passed or is in the report, and the Spec review has no open findings, or the user decided about the remaining ones.
+**Done when:** every confirmed check passed or is in the report, and the Spec review has no open findings, or the user decided about the remaining ones.
 
-## 6. Integrate and finish
+## 7. Finish
 
-With several workers, integrate the parts in dependency order through the project's delivery procedure. Run the agreed checks on the combined result, including cross-repository interactions.
-
-Run the full test suite once on the final tree, unless the only worker already ran it on that tree.
+Run the full test suite once on the final tree, unless the only worker already ran it on that tree. If the project has no test suite, say so in the report.
 
 If you may commit, commit only the assigned changes to the target branch. Otherwise, hand off the changed paths without a commit.
 
@@ -132,5 +140,7 @@ Report to the user:
 - the Standards and Spec outcomes;
 - the `simplify-codebase` proposals that wait for the user;
 - what remains blocked or waits for approval.
+
+If the user approves `simplify-codebase` proposals, send them to the worker that owns the code, or apply them yourself in direct mode, by [WORKER.md](WORKER.md) step 8.
 
 **Done when:** the agreed checks and the confirmed reviews passed, and the user has the report.
