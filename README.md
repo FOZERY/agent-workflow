@@ -31,7 +31,7 @@ The kit does not run an automated pipeline or enforce permissions.
 1. **Set up the project.** Run `setup-workflow` for initial setup or when rules change. Approve changes to `AGENTS.md` and skill installation separately.
 2. **Prepare the task if needed.** Clarify open decisions or make a plan. If the task is ready, skip this step.
 3. **Implement and verify.** Authorize an executor that accepts your task inputs. Get the results of project checks and any required review before accepting the work.
-4. **Improve the harness if useful.** Run `retro` when a session exposes a problem worth fixing in the agent's setup.
+4. **Improve the harness if useful.** Run `retro` after some work to turn its mistakes into skills or rules.
 
 ```mermaid
 flowchart TB
@@ -56,7 +56,7 @@ Use the [workflow guide](docs/FLOW.md#route-map) to choose a route and hand the 
 | [`research`](skills/research/SKILL.md) | A question needs a cited report based on primary sources. |
 | [`prototype`](skills/prototype/SKILL.md) | You need a throwaway experiment to choose a UI or test a state model. |
 | [`draw-diagram`](skills/draw-diagram/SKILL.md) | A visual would clarify a design. After you consent, a separate worker creates an editable diagram and a PNG preview. |
-| [`retro`](skills/retro/SKILL.md) | You want the agent to propose improvements based on what happened in a session. |
+| [`retro`](skills/retro/SKILL.md) | You want the mistakes from recent sessions turned into a new skill, a rule in a skill, a project rule or a lesson. |
 | [`refactor-codebase`](skills/refactor-codebase/SKILL.md) | A stage of work is done, and you want to find structural problems in the code and rewrite one with the behavior kept. |
 | [`refactor-docs`](skills/refactor-docs/SKILL.md) | Existing docs need clearer wording or structure without a change in meaning. |
 | [`cleanup-artifacts`](skills/cleanup-artifacts/SKILL.md) | You want to review stale artifacts and approve which ones to remove recoverably. |

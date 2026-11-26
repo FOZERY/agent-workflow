@@ -46,7 +46,7 @@ Recommend the smallest route that reaches the goal. The map lists candidates, no
 | Simplify changed code | `simplify-codebase` |
 | Review uncommitted changes, a branch, a PR or a commit | `code-review` |
 | Prepare or publish a PR | The project's delivery rules |
-| Improve the agent setup after a session | `retro` |
+| Turn mistakes from recent sessions into skills or rules | `retro` (manual) |
 | Find structural problems after a stage of work and rewrite one | `refactor-codebase` (manual) |
 | Write replies; write documents; write skills and `AGENTS.md` | `writing-for-people`; `writing-technical`; `writing-for-agents` |
 | Restate the last reply in plain words | `rephrase` (manual) |
