@@ -130,6 +130,7 @@ The agent only reads every source below.
 <Each source in the user's words, with the steps to open it.>
 <Whether the agent may read production.>
 <Facts file location, if not the default.>
+<Scripts that open a source: the source and the command.>
 
 ### grilling
 Runs: <runs>. Phase: <phase>.
@@ -203,6 +204,7 @@ verifier: <agent, model and reasoning effort for the verify subagent, if executi
 <Tools and access: for example the kubectl context and namespace, the browser tool, test users. Credentials only as variable or config names.>
 <Actions that need approval, for example a deploy to staging or writes to a shared environment.>
 <Evidence location, if not `.verify/<date>-<time>/`.>
+<Scripts that run a check: the check and the command.>
 Long procedure: read `<agent-docs>/project/verification.md` before a check.
 
 ### simplify-codebase

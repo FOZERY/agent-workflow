@@ -48,6 +48,7 @@ Take the narrowest place that every affected agent reads:
 2. **A new skill**, when the lesson is a procedure with several steps that no skill covers.
 3. **A project rule in `AGENTS.md`**, when the lesson applies to most tasks in the project.
 4. **A `LESSONS.md` entry**, for confirmed experience that is not a rule.
+5. **A script**, when agents repeated the same manual steps across sessions, such as reading logs through a browser. Propose what it takes, calls and returns, and the skill section that will point to it.
 
 If a rule already exists and the mistake still happened, make the rule clearer or move it to a place that the agent reads at the right moment. If a lint rule, a test or a CI check could catch the mistake, add that as a separate proposal under "Later".
 

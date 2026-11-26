@@ -56,5 +56,11 @@ Act only on the environments and accounts that the procedure names. If the check
    - the blocked behaviors and the reasons;
    - what you did not check.
 3. If you found a trap of the environment, such as a rollout delay, a cache or a flaky step, propose a line for the project's verification procedure. Write it only after the user agrees.
+4. If a check took many manual steps that every run repeats, such as logging in, opening a dashboard and filtering logs in the browser, propose a script for it:
+   - what it takes and returns, for example a service and a time range in, the logs as JSON out;
+   - what it calls: the API or CLI of the environment first, browser automation only when there is no API;
+   - where it lives: the project's scripts folder, or one that the user names.
+
+   Write it only after the user approves. Read credentials only from the variables or the config that the procedure names. Then add one line to the `verify` section: the check that the script does, and its command.
 
 **Done when:** the user or the caller has the report.

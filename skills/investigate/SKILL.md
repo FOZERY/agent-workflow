@@ -60,4 +60,12 @@ Use these sections, and drop an empty one:
 6. Give the short answer first. Go deeper when the user asks.
 7. End with the open questions and the path of the facts file.
 
+If a researcher reported a source that took many manual steps, or you reached one that way, propose a script for it to the user:
+
+- what it takes and returns, for example a service and a time range in, the logs as JSON out;
+- what it calls: the source's API or CLI first, browser automation only when there is no API;
+- where it lives: the project's scripts folder, or one that the user names.
+
+Write the script only after the user approves. Read credentials only from the variables or the config that the `investigate` section names. Then add one line to that section: the source that the script opens, and its command.
+
 Stop after the explanation. The user chooses the next step, for example `grilling`, `to-plan` or `implement`.

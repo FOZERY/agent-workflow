@@ -9,6 +9,7 @@ Rules for both parts:
 - Name what the sources do not answer.
 - Use only the sources from the brief. If a source is not reachable, say so and continue with the others.
 - Quote short parts. Link long ones.
+- If a source took many manual steps that the next run would repeat, such as logging in and filtering logs in a browser, list the steps. Name the API or the command behind them, if you found one.
 - Keep the report under 600 words.
 
 ## History
