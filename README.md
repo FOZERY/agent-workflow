@@ -6,23 +6,6 @@ A workflow for coding agents, built from small skills. Each skill does one step:
 
 The kit adapts [Matt Pocock's skills](https://github.com/mattpocock/skills) and skills from [pstack](https://github.com/cursor/plugins/tree/main/harness/pstack) by Lauren Tan, and adds its own skills, such as `to-plan`, `verify` and `writing-technical`. It runs no automatic pipeline. You choose the steps, and the project's permissions decide what the agent may do alone.
 
-## Install
-
-Use Node.js 22.20 or later. In your project directory, install `setup-workflow` from GitHub:
-
-```bash
-npx skills@latest add FOZERY/agent-workflow --skill setup-workflow
-```
-
-The CLI finds the coding agents on your machine, such as Claude Code, Codex or Cursor, and asks which ones get the skill. Add `--global` for a user-wide install. To install another skill, replace `setup-workflow` with its name. To skip the question, name the agents with `--agent`. For scopes and same-name copies, see [skill deployment](skills/setup-workflow/references/skills.md).
-
-## Get started
-
-1. Start `setup-workflow` in your agent: `/setup-workflow` in most agents, `$setup-workflow` in Codex. It asks about your rules, checks, permissions, fact sources and agents, offers the skills, and writes `AGENTS.md`.
-2. Give the agent a task. For a new task that you do not know well, start with `/investigate`. For a clear task, ask the agent to implement it: `implement` starts on its own.
-
-Not sure which skill fits? Run `/ask-workflow` with your question. It recommends a skill and starts nothing.
-
 ## The workflow
 
 ```mermaid
@@ -41,6 +24,23 @@ flowchart LR
 Every step is optional. A small, clear task goes straight to `implement`.
 
 The [skill guide](docs/GUIDE.md) describes each skill with an example prompt. The [workflow routes](docs/FLOW.md) show which step to take for the task that you have.
+
+## Install
+
+Use Node.js 22.20 or later. In your project directory, install `setup-workflow` from GitHub:
+
+```bash
+npx skills@latest add FOZERY/agent-workflow --skill setup-workflow
+```
+
+The CLI finds the coding agents on your machine, such as Claude Code, Codex or Cursor, and asks which ones get the skill. Add `--global` for a user-wide install. To install another skill, replace `setup-workflow` with its name. To skip the question, name the agents with `--agent`. For scopes and same-name copies, see [skill deployment](skills/setup-workflow/references/skills.md).
+
+## Get started
+
+1. Start `setup-workflow` in your agent: `/setup-workflow` in most agents, `$setup-workflow` in Codex. It asks about your rules, checks, permissions, fact sources and agents, offers the skills, and writes `AGENTS.md`.
+2. Give the agent a task. For a new task that you do not know well, start with `/investigate`. For a clear task, ask the agent to implement it: `implement` starts on its own.
+
+Not sure which skill fits? Run `/ask-workflow` with your question. It recommends a skill and starts nothing.
 
 ## Skills by step
 
