@@ -65,7 +65,7 @@ for d in sorted(os.listdir("skills")):
         err(f"{p}: user-only skill has no agents/openai.yaml")
 
 # 2. Every skill is listed in the docs, with the right starter.
-for readme, you in (("README.md", "You"), ("docs/README.ru.md", "Ты")):
+for readme, you in (("README.md", "Human"), ("docs/README.ru.md", "Человек")):
     text = read(readme)
     for s, info in skills.items():
         m = re.search(rf"\[`{re.escape(s)}`\]\([^)]*\) \| (\S+) \|", text)

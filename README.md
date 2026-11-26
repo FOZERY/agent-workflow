@@ -44,37 +44,37 @@ The [skill guide](docs/GUIDE.md) describes each skill with an example prompt. Th
 
 ## Skills by step
 
-"You" means that the skill runs only when you type it. "Agent" means that the agent can also start it when the task fits.
+"Human" means that the skill runs only when a person types it. "Agent" means that the agent can also start it when the task fits.
 
 | Step | Skill | Starts | What it does |
 | --- | --- | --- | --- |
-| Set up | [`setup-workflow`](skills/setup-workflow/SKILL.md) | You | Agrees the project rules, checks, permissions and agents, and writes `AGENTS.md` |
-| | [`setup-home-repo`](skills/setup-home-repo/SKILL.md) | You | Makes one home for several repositories without moving their code |
-| | [`ask-workflow`](skills/ask-workflow/SKILL.md) | You | Recommends the next skill for your situation |
-| Understand | [`investigate`](skills/investigate/SKILL.md) | You | Studies a task's history and code, saves a facts file and explains the task in plain words |
-| | [`recall`](skills/recall/SKILL.md) | You | Rebuilds where your recent work on a topic stands and what to do next |
+| Set up | [`setup-workflow`](skills/setup-workflow/SKILL.md) | Human | Agrees the project rules, checks, permissions and agents, and writes `AGENTS.md` |
+| | [`setup-home-repo`](skills/setup-home-repo/SKILL.md) | Human | Makes one home for several repositories without moving their code |
+| | [`ask-workflow`](skills/ask-workflow/SKILL.md) | Human | Recommends the next skill for your situation |
+| Understand | [`investigate`](skills/investigate/SKILL.md) | Human | Studies a task's history and code, saves a facts file and explains the task in plain words |
+| | [`recall`](skills/recall/SKILL.md) | Human | Rebuilds where your recent work on a topic stands and what to do next |
 | | [`research`](skills/research/SKILL.md) | Agent | Answers a question from primary sources in a cited report |
 | Discuss | [`grilling`](skills/grilling/SKILL.md) | Agent | Asks questions until the open decisions of an idea are settled |
-| | [`grill-with-docs`](skills/grill-with-docs/SKILL.md) | You | The same, and records terms and decisions as it goes |
+| | [`grill-with-docs`](skills/grill-with-docs/SKILL.md) | Human | The same, and records terms and decisions as it goes |
 | | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Agent | Keeps the glossary and ADRs |
 | | [`prototype`](skills/prototype/SKILL.md) | Agent | Builds throwaway code to answer a design question |
-| Plan | [`to-plan`](skills/to-plan/SKILL.md) | You | Saves an implementation plan for a task |
-| | [`to-spec`](skills/to-spec/SKILL.md) | You | Turns the discussion into a spec in the tracker |
-| | [`to-tickets`](skills/to-tickets/SKILL.md) | You | Splits work into tickets with dependencies |
-| | [`wayfinder`](skills/wayfinder/SKILL.md) | You | Maps a large, unclear effort as decision tickets |
+| Plan | [`to-plan`](skills/to-plan/SKILL.md) | Human | Saves an implementation plan for a task |
+| | [`to-spec`](skills/to-spec/SKILL.md) | Human | Turns the discussion into a spec in the tracker |
+| | [`to-tickets`](skills/to-tickets/SKILL.md) | Human | Splits work into tickets with dependencies |
+| | [`wayfinder`](skills/wayfinder/SKILL.md) | Human | Maps a large, unclear effort as decision tickets |
 | Implement | [`implement`](skills/implement/SKILL.md) | Agent | Orchestrates a task: writes small changes, gives larger ones to workers, checks the result |
 | | [`tdd`](skills/tdd/SKILL.md) | Agent | Writes integration and module tests that prove real behavior, test first |
 | | [`simplify-codebase`](skills/simplify-codebase/SKILL.md) | Agent | Finds what to simplify in changed code |
 | | [`verify`](skills/verify/SKILL.md) | Agent | Checks that a change works in the running product, the way the project agreed |
 | | [`code-review`](skills/code-review/SKILL.md) | Agent | Reviews a diff against the project standards and the task |
-| Improve | [`retro`](skills/retro/SKILL.md) | You | Turns mistakes from recent sessions into skills and rules |
-| | [`refactor-codebase`](skills/refactor-codebase/SKILL.md) | You | Finds structural problems after a stage of work and rewrites one |
-| | [`refactor-docs`](skills/refactor-docs/SKILL.md) | You | Rewrites documents for clarity without changing what they say |
-| | [`cleanup-artifacts`](skills/cleanup-artifacts/SKILL.md) | You | Reviews stale notes and plans and removes the approved ones recoverably |
+| Improve | [`retro`](skills/retro/SKILL.md) | Human | Turns mistakes from recent sessions into skills and rules |
+| | [`refactor-codebase`](skills/refactor-codebase/SKILL.md) | Human | Finds structural problems after a stage of work and rewrites one |
+| | [`refactor-docs`](skills/refactor-docs/SKILL.md) | Human | Rewrites documents for clarity without changing what they say |
+| | [`cleanup-artifacts`](skills/cleanup-artifacts/SKILL.md) | Human | Reviews stale notes and plans and removes the approved ones recoverably |
 | Write | [`writing-for-people`](skills/writing-for-people/SKILL.md) | Agent | Clear replies and explanations for people |
 | | [`writing-technical`](skills/writing-technical/SKILL.md) | Agent | Clear technical documents in controlled English |
 | | [`writing-for-agents`](skills/writing-for-agents/SKILL.md) | Agent | Skills and `AGENTS.md` that agents follow the same way every time |
-| | [`rephrase`](skills/rephrase/SKILL.md) | You | Restates the last reply in plain words |
+| | [`rephrase`](skills/rephrase/SKILL.md) | Human | Restates the last reply in plain words |
 
 ## External tools
 
