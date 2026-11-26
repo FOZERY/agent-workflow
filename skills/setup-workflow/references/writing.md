@@ -1,7 +1,7 @@
 # Project writing contract
 
 Read this file when you configure writing routes, languages, clients or instruction loading.
-The writing skills are independent. Setup's own use of `writing-docs` and `writing-for-agents` in [step 3](../SKILL.md#3-draft-and-get-approval) does not depend on the routes selected here.
+The writing skills are independent. Setup's own use of `writing-technical` and `writing-for-agents` in [step 3](../SKILL.md#3-draft-and-get-approval) does not depend on the routes selected here.
 Record the approved routes in the project's root `AGENTS.md`.
 
 ## Routes and languages
@@ -15,7 +15,7 @@ Record the approved routes in the project's root `AGENTS.md`.
 | Output | Proposed skill | When the agent reads it |
 | --- | --- | --- |
 | Conversation with a person | `writing-for-people` and its language reference | At the first prompt of a session, before the first reply |
-| Artifacts for people or agents: ADRs, docs, specs, tickets, reports, `CONTEXT.md`, `LESSONS.md` | `writing-docs` | Before the agent writes or edits the artifact, also for a draft in chat |
+| Artifacts for people or agents: ADRs, docs, specs, tickets, reports, `CONTEXT.md`, `LESSONS.md` | `writing-technical` | Before the agent writes or edits the artifact, also for a draft in chat |
 | Reusable rules: skills, `AGENTS.md`, procedural references | `writing-for-agents` | Before the agent writes or edits the rules |
 
 - A route becomes a project requirement only after the user approves the configuration.
@@ -47,7 +47,7 @@ Translate the approved triggers into the instruction language. Keep the style de
 
 > At the first prompt of a session, before replying to the user, read the installed `writing-for-people` skill and its applicable language reference unless already in context. Apply it to conversation. Reuse the guidance while available; reload after context loss or a source change.
 
-> Before writing or editing artifact prose, read the installed `writing-docs` skill unless already in context. Apply it to documentation, ADRs, specs, tickets, reports, context and lessons, including drafts returned in chat. Preserve project format and language; non-English prose uses an adaptation, not a claim of English conformance.
+> Before writing or editing artifact prose, read the installed `writing-technical` skill unless already in context. Apply it to documentation, ADRs, specs, tickets, reports, context and lessons, including drafts returned in chat. Preserve project format and language; non-English prose uses an adaptation, not a claim of English conformance.
 
 > Before writing or editing reusable rules, read the installed `writing-for-agents` skill unless already in context. Use it for skills, `AGENTS.md` and procedural references. For mixed documents, select the route by section purpose.
 

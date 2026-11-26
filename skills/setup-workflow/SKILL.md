@@ -126,7 +126,7 @@ Record each gap with its blocked step.
 ## 3. Draft and get approval
 
 1. Read [the AGENTS.md structure](references/AGENTS.md) and [core rules](references/core-rules.md). Follow their drafting rules.
-2. Read the installed `writing-docs` and `writing-for-agents` skills and apply both to every file that you draft. If one is missing, stop this step, tell the user and offer its [bounded installation](references/skills.md#install-plan-and-approval).
+2. Read the installed `writing-technical` and `writing-for-agents` skills and apply both to every file that you draft. If one is missing, stop this step, tell the user and offer its [bounded installation](references/skills.md#install-plan-and-approval).
 3. Put the core block in `## Workflow rules` and fill its fields.
 4. Write the shared sections and the skill sections with the agreed facts. Use a skill default only where it fits the project rules and permissions. Follow the project's writing rules.
 5. Link existing practices instead of copying them. The setup references are drafting guides, not project runbooks.

@@ -1,9 +1,9 @@
 ---
-name: writing-docs
+name: writing-technical
 description: "Write or edit technical artifacts in ASD-STE100 style: documentation, skills, AGENTS.md, READMEs, ADRs, specifications, tickets, reports, CONTEXT.md and LESSONS.md. Use for artifact prose for people or agents, including drafts returned in chat."
 ---
 
-# Writing docs
+# Writing technical
 
 Write technical artifacts so that the reader can identify the fact, action and condition without guessing.
 Keep the project's document format, language, technical meaning and approval rules.

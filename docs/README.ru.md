@@ -60,7 +60,7 @@ flowchart TB
 | [`refactor-docs`](../skills/refactor-docs/SKILL.md) | Нужно улучшить текст или структуру документа без изменения смысла. |
 | [`cleanup-artifacts`](../skills/cleanup-artifacts/SKILL.md) | Нужно разобрать устаревшие материалы и согласовать, какие из них убрать так, чтобы можно было восстановить. |
 | [`writing-for-people`](../skills/writing-for-people/SKILL.md) | Нужны понятные ответы и объяснения для людей. |
-| [`writing-docs`](../skills/writing-docs/SKILL.md) | Нужно написать техническую документацию, спецификацию, тикет или запись в память проекта. |
+| [`writing-technical`](../skills/writing-technical/SKILL.md) | Нужно написать техническую документацию, спецификацию, тикет или запись в память проекта. |
 | [`writing-for-agents`](../skills/writing-for-agents/SKILL.md) | Нужно написать переиспользуемые инструкции, например скилл или `AGENTS.md`. |
 | [`rephrase`](../skills/rephrase/SKILL.md) | Последний ответ получился слишком заумным, и его нужно пересказать простыми словами. |
 
@@ -83,7 +83,7 @@ npx skills@1.9.0 add FOZERY/agent-workflow --skill setup-workflow --agent codex
 
 В Codex запусти `$setup-workflow`. Для Claude Code установи с `--agent claude-code`, затем запусти `/setup-workflow`.
 Чтобы установить другой скилл, замени `setup-workflow` в команде установки на его имя.
-Setup пишет `AGENTS.md` по правилам `writing-docs` и `writing-for-agents`. Если их нет, setup предложит их установить.
+Setup пишет `AGENTS.md` по правилам `writing-technical` и `writing-for-agents`. Если их нет, setup предложит их установить.
 Добавляй `--global` только для установки на уровне пользователя.
 
 Для других клиентов и способов установки смотри [руководство по размещению скиллов](../skills/setup-workflow/references/skills.md).

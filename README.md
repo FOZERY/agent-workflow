@@ -61,7 +61,7 @@ Use the [workflow guide](docs/FLOW.md#route-map) to choose a route and hand the 
 | [`refactor-docs`](skills/refactor-docs/SKILL.md) | Existing docs need clearer wording or structure without a change in meaning. |
 | [`cleanup-artifacts`](skills/cleanup-artifacts/SKILL.md) | You want to review stale artifacts and approve which ones to remove recoverably. |
 | [`writing-for-people`](skills/writing-for-people/SKILL.md) | You want clear replies and explanations for people. |
-| [`writing-docs`](skills/writing-docs/SKILL.md) | You are writing technical docs, specs, tickets, or project memory. |
+| [`writing-technical`](skills/writing-technical/SKILL.md) | You are writing technical docs, specs, tickets, or project memory. |
 | [`writing-for-agents`](skills/writing-for-agents/SKILL.md) | You are writing reusable instructions such as a skill or `AGENTS.md`. |
 | [`rephrase`](skills/rephrase/SKILL.md) | The last reply was too dense, and you want it restated in plain words. |
 
@@ -84,7 +84,7 @@ npx skills@1.9.0 add FOZERY/agent-workflow --skill setup-workflow --agent codex
 
 In Codex, run `$setup-workflow`. For Claude Code, install with `--agent claude-code`, then run `/setup-workflow`.
 To install a different skill, replace `setup-workflow` in the install command with its name.
-Setup writes `AGENTS.md` by the rules of `writing-docs` and `writing-for-agents`. If they are missing, setup offers to install them.
+Setup writes `AGENTS.md` by the rules of `writing-technical` and `writing-for-agents`. If they are missing, setup offers to install them.
 Add `--global` only for a user-wide install.
 
 For other clients or installation scopes, see [skill deployment](skills/setup-workflow/references/skills.md).

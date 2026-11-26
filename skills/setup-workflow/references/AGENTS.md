@@ -105,7 +105,7 @@ Read a file when its trigger applies.
 
 ## Writing
 <Conversation language and writing-for-people startup pointer, if selected.>
-<Artifact language and writing-docs pointer, if selected.>
+<Artifact language and writing-technical pointer, if selected.>
 
 ## Skills
 Each selected skill has a section below. Before you run a skill, read its section.

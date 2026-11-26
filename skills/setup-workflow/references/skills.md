@@ -74,7 +74,7 @@ Claude Code also has a bundled `simplify`. The kit's `simplify-codebase` has ano
 
    ```bash
    npx skills@1.9.0 add FOZERY/agent-workflow --skill writing-for-people --agent codex
-   npx skills@1.9.0 add FOZERY/agent-workflow --skill writing-docs --agent codex
+   npx skills@1.9.0 add FOZERY/agent-workflow --skill writing-technical --agent codex
    ```
 
 5. Use `--global` only for approved global destinations. Use `--copy` only when that method is agreed. Use `--yes` only after the user approved the exact plan. Name each skill and client explicitly; use no all-skills or all-agents selector.

@@ -48,7 +48,7 @@ Recommend the smallest route that reaches the goal. The map lists candidates, no
 | Prepare or publish a PR | The project's delivery rules |
 | Improve the agent setup after a session | `retro` |
 | Find structural problems after a stage of work and rewrite one | `refactor-codebase` (manual) |
-| Write replies; write documents; write skills and `AGENTS.md` | `writing-for-people`; `writing-docs`; `writing-for-agents` |
+| Write replies; write documents; write skills and `AGENTS.md` | `writing-for-people`; `writing-technical`; `writing-for-agents` |
 | Restate the last reply in plain words | `rephrase` (manual) |
 | Rewrite documents; remove stale documents | `refactor-docs`; `cleanup-artifacts` |
 

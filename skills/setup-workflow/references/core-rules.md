@@ -66,7 +66,7 @@ Write the entry yourself. In the same reply, tell the user which entry you added
 ## Block
 
 ```markdown
-<!-- agent-workflow:core v7 -->
+<!-- agent-workflow:core v8 -->
 setup-workflow owns this section. To change it, run setup again.
 
 ### Workflow
@@ -114,7 +114,7 @@ Continue the steps that do not depend on it.
 Say that work is done only after you run the agreed checks. Give their actual result.
 
 ### Editing this file
-Before you write or edit this file, read the installed `writing-docs` and `writing-for-agents` skills unless they are already in context. Apply both.
+Before you write or edit this file, read the installed `writing-technical` and `writing-for-agents` skills unless they are already in context. Apply both.
 Keep this file under 300 lines. Put project details in `<agent-docs>/project/` and link them with a trigger.
 
 ### Review rounds

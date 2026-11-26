@@ -16,7 +16,7 @@ Every skill is optional. For a skill that the user suggests, check its real sour
 
 - `ask-workflow` is an optional guide for workflow questions. It installs alone, before or after setup, and runs no procedures. Its selection selects no other skill.
 - `setup-home-repo` creates or revises a multi-repository home: navigation, approved shared material and client entry points. The user runs it manually and separately. `setup-workflow` can configure the home's procedures later. Neither skill calls the other.
-- `writing-for-people`, `writing-docs` and `writing-for-agents` are separate writing skills. Configure their project use through [writing routes](writing.md). Setup recommends `writing-for-people` when it is not installed; the user can decline it.
+- `writing-for-people`, `writing-technical` and `writing-for-agents` are separate writing skills. Configure their project use through [writing routes](writing.md). Setup recommends `writing-for-people` when it is not installed; the user can decline it.
 - `rephrase` restates the last reply in plain words. The user runs it. It follows `writing-for-people` when that skill is installed.
 - `draw-diagram` is an optional bundled skill. No other skill needs it, and setup does not have to install it. Configure it through [diagram configuration](diagrams.md).
 - `to-plan` saves one implementation plan with its task. It needs no spec, no tickets and no other skill.
@@ -27,7 +27,7 @@ These skills call the listed skills. Check that the client and its worker sessio
 
 | Caller | Calls |
 | --- | --- |
-| `setup-workflow` | `writing-docs` and `writing-for-agents`, to write `AGENTS.md` and the project files |
+| `setup-workflow` | `writing-technical` and `writing-for-agents`, to write `AGENTS.md` and the project files |
 | `grill-with-docs` | `grilling` and `domain-modeling` |
 | `wayfinder` | `grilling` and `domain-modeling` for discussion; `research` and `prototype` for their ticket types; skills named in the map Notes |
 | `implement` | `tdd` where it applies, `simplify-codebase` when its trigger is `auto`, and `code-review`: the Standards axis in each worker, the Spec axis in the orchestrator |

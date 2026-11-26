@@ -16,7 +16,7 @@ Other work goes elsewhere:
 ## 1. Find the writing rules
 
 1. Read the project instructions for language, style, document format and required sources.
-2. If the project names a writing skill, use it. Otherwise use `writing-docs` if it is installed, or the rules in step 3.
+2. If the project names a writing skill, use it. Otherwise use `writing-technical` if it is installed, or the rules in step 3.
 
 **Done when:** you know the writing rules, and every required source is readable.
 

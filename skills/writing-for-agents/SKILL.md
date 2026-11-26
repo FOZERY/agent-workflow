@@ -5,7 +5,7 @@ description: Write or edit documents that agents read. Use when you create or ch
 
 # Writing for agents
 
-Write a document that an agent follows the same way on every run. This skill decides what goes into the document and where. Write each sentence by the `writing-docs` skill.
+Write a document that an agent follows the same way on every run. This skill decides what goes into the document and where. Write each sentence by the `writing-technical` skill.
 
 ## 1. Find the job
 
