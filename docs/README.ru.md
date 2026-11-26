@@ -32,7 +32,7 @@ flowchart LR
     Understand --> Discuss["Обсудить<br/>grilling"]
     Task -->|понятная задача| Build
     Discuss --> Plan["Спланировать<br/>to-plan, to-spec, to-tickets"]
-    Plan --> Build["Реализовать<br/>implement: tdd, simplify-codebase, code-review"]
+    Plan --> Build["Реализовать<br/>implement: tdd, simplify-codebase, verify, code-review"]
     Discuss --> Build
     Build -->|ты принимаешь| Done[Смержено]
     Done -.-> Improve["Улучшить<br/>retro, refactor-codebase"]
@@ -66,6 +66,7 @@ flowchart LR
 | Реализовать | [`implement`](../skills/implement/SKILL.md) | Агент | Ведёт задачу: мелкое пишет сам, крупное отдаёт исполнителям, проверяет результат |
 | | [`tdd`](../skills/tdd/SKILL.md) | Агент | Сначала падающий тест, потом код, который его проходит |
 | | [`simplify-codebase`](../skills/simplify-codebase/SKILL.md) | Агент | Находит, что упростить в изменённом коде |
+| | [`verify`](../skills/verify/SKILL.md) | Агент | Проверяет, что изменение работает в запущенном продукте, так, как договорились в проекте |
 | | [`code-review`](../skills/code-review/SKILL.md) | Агент | Проверяет изменения по стандартам проекта и по задаче |
 | Улучшить | [`retro`](../skills/retro/SKILL.md) | Ты | Превращает ошибки недавних сессий в скиллы и правила |
 | | [`refactor-codebase`](../skills/refactor-codebase/SKILL.md) | Ты | После этапа работы находит структурные проблемы в коде и переписывает одну |

@@ -77,7 +77,7 @@ There is one stream lead session for each work stream. The project agent adds a 
 
 ### Workers
 
-The stream lead runs the `implement` skill as its orchestrator. Workers are subagents or separate sessions that follow `implement/WORKER.md`.
+The stream lead runs the `implement` skill as its orchestrator. Workers are separate sessions that follow `implement/WORKER.md`.
 
 ## State
 
@@ -146,7 +146,7 @@ Telegram topics cannot contain other topics. For this reason, each project has i
 
 ## Open questions
 
-1. **Verification.** Decide how agents prove that a change works, and when the person looks at the result.
+1. **Verification.** `verify` checks each change by the procedure that the project agreed in setup, and `implement` runs it. Still open: when the person looks at the evidence.
 2. **Limits.** Set the number of active streams for each project and the investigation budget.
 3. **Runtime.** [Hermes Agent](https://github.com/NousResearch/hermes-agent) is the candidate for the assistant and the project agents. Its documentation states:
    - one profile for each agent, with its own bot token, memory, skills and schedules;

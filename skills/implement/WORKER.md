@@ -6,6 +6,12 @@ Read the project instructions and the brief before you edit. If the brief is unc
 
 Run only the steps that the brief confirms. If a step cannot run, report the blocker and continue the steps that do not depend on it.
 
+Rules for the whole assignment:
+
+- Say that something works only with the output of a command that you ran. A build, a typecheck or a plausible explanation does not prove behavior.
+- For a bug, reproduce it first. Fix the cause. If you only add a guard that hides the failure, report the bug as not fixed.
+- If two fixes for the same guessed cause failed, stop fixing. Test the guess with a log, a test or a smaller case first.
+
 ## 1. Prepare
 
 Use the starting commit from the brief as the review base. Track the exact file paths that your assignment owns.

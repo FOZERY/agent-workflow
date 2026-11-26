@@ -1,0 +1,5 @@
+interface:
+  display_name: "Verify"
+  short_description: "Check that a change works in the running product"
+policy:
+  allow_implicit_invocation: true

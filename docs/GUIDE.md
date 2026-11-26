@@ -146,7 +146,7 @@ Implements an agreed task. The session is the orchestrator:
 2. It picks a size: trivial (edit and stop), small (writes it itself), normal (one worker) or large (several workers).
 3. It asks you once to confirm the mode, the steps and the test seams. You can turn off steps for a simple task.
 4. Workers write the code in separate sessions by `implement/WORKER.md`: tests, simplification, the full test suite and the Standards review.
-5. The orchestrator checks the result against the task (the Spec review), commits if allowed and reports.
+5. The orchestrator runs `verify` on the changed behavior, if it is on, and checks the result against the task (the Spec review). Then it commits if allowed and reports with the evidence.
 
 The agent starts it when you ask for a change.
 
@@ -169,6 +169,14 @@ Finds what to simplify in changed code: deep nesting, unclear names, duplication
 
 ```text
 Simplify what we changed in this branch.
+```
+
+### `verify`
+
+Checks that a change works in the running product, not only in the tests. How to check is agreed in `setup-workflow`: run locally with test data, run the e2e path, check in a test namespace through `kubectl` and a browser, or deploy to staging. What to check comes from the task: the skill lists the behaviors from the acceptance checks, you confirm them and the actions that need approval, and it reports each result with evidence. `implement` runs it when the project's setting says so. The agent can start it.
+
+```text
+Verify the lesson cancellation in the test namespace.
 ```
 
 ### `code-review`

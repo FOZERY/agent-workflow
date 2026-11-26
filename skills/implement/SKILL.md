@@ -20,6 +20,7 @@ Each role gets its agent from a project setting:
 | Worker | A separate session with its own thread | `worker` in the project's `implement` section |
 | Standards reviewer | Subagent of the worker | `standards-reviewer` in the `code-review` section |
 | Spec reviewer | Subagent of the orchestrator | `spec-reviewer` in the `code-review` section |
+| Verifier | This session, or the place from `execution` | `execution` in the `verify` section |
 | Simplify finder | Subagent of the worker | `finder` in the `simplify-codebase` section |
 
 ## 1. Read the task
@@ -53,6 +54,7 @@ Ask the user through the question tool, in one call:
    - TDD, with its trigger and where it runs;
    - `simplify-codebase`, with its trigger;
    - the full test suite;
+   - `verify`, with its trigger, if the task changes behavior that a user or a system can observe;
    - the Standards review and the Spec review;
    - the review follow-up and the round limit;
    - the commit or the handoff.
@@ -61,6 +63,7 @@ In the question:
 - Show a step whose skill has `trigger: manual` as off. The user can turn it on.
 - Let the `trigger` of `code-review` cover both review axes.
 - If TDD is on, list the seams to test, so that the user confirms them.
+- If `verify` is on, list the behaviors to check and their environment by step 2 of `verify`, and the actions that need approval, so that the user confirms them.
 - If a project rule makes a step mandatory, say so.
 
 The user can change the mode or turn off steps for this task. Start nothing before the answer. Run only the confirmed steps.
@@ -90,17 +93,23 @@ If the caller gives a review base, use it. Otherwise, record the current commit 
 
 ## 5. Check against the task
 
-Skip this step if the user turned off the Spec review.
+If `verify` is confirmed:
+
+1. Run `verify` with the behaviors that the user confirmed in step 3, the task sources and the branch or worktree of each part. Run it in this session, unless its section sets another `execution`.
+2. If a check fails, send the failure with its evidence to the worker that owns the code, in the same worker session. In direct mode, fix it yourself by [WORKER.md](WORKER.md) step 8. Then run `verify` again for the failed behaviors.
+3. If a behavior is blocked, say why in the report. Do not claim verification for it.
+
+Skip the rest of this step if the user turned off the Spec review.
 
 1. Run `code-review` from this session with the Spec axis only. Its reviewer is a fresh subagent with the `spec-reviewer` setting.
-2. Pass the task sources, the base, and the changed paths with the worktree or branch of each part. The reviewer reads each part in its own worktree or branch.
+2. Pass the task sources, the base, the changed paths with the worktree or branch of each part, and the evidence paths. The reviewer reads each part in its own worktree or branch.
 3. Read the findings, not the whole diff.
 4. If the `followup` setting of `code-review` is `report`, give the findings to the user and wait.
 5. If it is `fix-and-rereview`, send the findings to the worker that owns the code, in the same worker session. In direct mode, fix them yourself by [WORKER.md](WORKER.md) step 8. Then run the Spec review again.
 
 The round limit is the `rounds` setting of `code-review`, `3` by default. If the Spec review or a worker's Standards review reaches it, stop and ask the user.
 
-**Done when:** the Spec review has no open findings, or the user decided about the remaining ones.
+**Done when:** every confirmed drive passed or is in the report, and the Spec review has no open findings, or the user decided about the remaining ones.
 
 ## 6. Integrate and finish
 
@@ -119,6 +128,7 @@ Report to the user:
 - the mode and the steps that the user turned off;
 - what changed, per worker or repository;
 - the checks that ran and their results;
+- the verified behaviors with their evidence paths, and the behaviors that were not verified;
 - the Standards and Spec outcomes;
 - the `simplify-codebase` proposals that wait for the user;
 - what remains blocked or waits for approval.

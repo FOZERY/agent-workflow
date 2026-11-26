@@ -45,6 +45,7 @@ Recommend the smallest route that reaches the goal. The map lists candidates, no
 | Write tests first, or audit existing tests | `tdd` |
 | Implement an agreed task or fix a bug | `implement` |
 | Simplify changed code | `simplify-codebase` |
+| Check that a change works in the running product | `verify` |
 | Review uncommitted changes, a branch, a PR or a commit | `code-review` |
 | Prepare or publish a PR | The project's delivery rules |
 | Turn mistakes from recent sessions into skills or rules | `retro` (manual) |

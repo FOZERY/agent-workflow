@@ -32,7 +32,7 @@ flowchart LR
     Understand --> Discuss["Discuss<br/>grilling"]
     Task -->|clear task| Build
     Discuss --> Plan["Plan<br/>to-plan, to-spec, to-tickets"]
-    Plan --> Build["Implement<br/>implement: tdd, simplify-codebase, code-review"]
+    Plan --> Build["Implement<br/>implement: tdd, simplify-codebase, verify, code-review"]
     Discuss --> Build
     Build -->|you accept| Done[Merged]
     Done -.-> Improve["Improve<br/>retro, refactor-codebase"]
@@ -66,6 +66,7 @@ The [skill guide](docs/GUIDE.md) describes each skill with an example prompt. Th
 | Implement | [`implement`](skills/implement/SKILL.md) | Agent | Orchestrates a task: writes small changes, gives larger ones to workers, checks the result |
 | | [`tdd`](skills/tdd/SKILL.md) | Agent | Writes a failing test first, then the code that passes it |
 | | [`simplify-codebase`](skills/simplify-codebase/SKILL.md) | Agent | Finds what to simplify in changed code |
+| | [`verify`](skills/verify/SKILL.md) | Agent | Checks that a change works in the running product, the way the project agreed |
 | | [`code-review`](skills/code-review/SKILL.md) | Agent | Reviews a diff against the project standards and the task |
 | Improve | [`retro`](skills/retro/SKILL.md) | You | Turns mistakes from recent sessions into skills and rules |
 | | [`refactor-codebase`](skills/refactor-codebase/SKILL.md) | You | Finds structural problems after a stage of work and rewrites one |

@@ -23,7 +23,7 @@ Link each skill name that has a section under `## Skills` in the project's `AGEN
 1. **Setup.** `setup-workflow` configures this file. `setup-home-repo` creates a multi-repository home.
 2. **Clarify.** `investigate`, `recall`, `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
-4. **Implement.** `implement`: the session is the orchestrator. It writes small changes itself and gives larger ones to workers. `tdd` and `simplify-codebase` run inside implementation.
+4. **Implement.** `implement`: the session is the orchestrator. It writes small changes itself and gives larger ones to workers. `tdd`, `simplify-codebase` and `verify` run inside implementation.
 5. **Review.** `code-review`: the worker checks the Standards axis, the orchestrator checks the Spec axis.
 6. **Accept.** The user accepts the work. Commit, push and other delivery follow `## Git and delivery`.
 7. **Improve.** `retro`, `cleanup-artifacts`, `refactor-codebase`, `refactor-docs`.
@@ -66,7 +66,7 @@ Write the entry yourself. In the same reply, tell the user which entry you added
 ## Block
 
 ```markdown
-<!-- agent-workflow:core v8 -->
+<!-- agent-workflow:core v9 -->
 setup-workflow owns this section. To change it, run setup again.
 
 ### Workflow
@@ -111,7 +111,7 @@ If a required step cannot run, stop that step and tell the user what blocks it.
 Continue the steps that do not depend on it.
 
 ### Done
-Say that work is done only after you run the agreed checks. Give their actual result.
+Say that work is done only after you run the agreed checks. Give their actual result and the evidence.
 
 ### Editing this file
 Before you write or edit this file, read the installed `writing-technical` and `writing-for-agents` skills unless they are already in context. Apply both.

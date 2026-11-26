@@ -41,6 +41,7 @@ The agent reads these settings as instructions, not as runtime flags. Their mean
 | --- | --- |
 | `investigate` | `execution`, `researcher` |
 | `implement` | `worker` |
+| `verify` | `trigger`, `execution`, `skill` |
 | `tdd` | `trigger`, `execution`, `skill` |
 | `simplify-codebase` | `trigger`, `execution`, `skill`, `finder` |
 | `code-review` | `trigger`, `skill`, `standards-reviewer`, `spec-reviewer`, `followup`, `rounds` |
@@ -203,6 +204,17 @@ Workers read `<installed path of implement/WORKER.md per client>`.
 <Session tool for workers, approval for dispatch, and branch, worktree or workspace isolation rules.>
 <Integration owner, target branches and delivery procedure per repository.>
 <Checkpoints before returning the result to the user.>
+
+### verify
+trigger: <auto | manual>
+execution: <current-session | subagent | separate-session>
+skill: <installed path of verify/SKILL.md per client>
+
+<Where to check: local run with test data, end-to-end run, test namespace or staging. How to reach it, in the user's words.>
+<Tools and access: for example the kubectl context and namespace, the browser tool, test users. Credentials only as variable or config names.>
+<Actions that need approval, for example a deploy to staging or writes to a shared environment.>
+<Evidence location, if not `.verify/<run>/`.>
+Long procedure: read `<agent-docs>/project/verification.md` before a check.
 
 ### simplify-codebase
 trigger: <auto | manual>

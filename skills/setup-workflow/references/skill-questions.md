@@ -14,6 +14,15 @@ Record each answer in the skill's section of the project's `AGENTS.md`.
 7. Ask where the researchers run: in subagents (recommended) or in the current session. Record the answer as `execution`.
 8. If they run in subagents, ask which agent, model and reasoning effort they use. Record the answer as `researcher`.
 
+## verify
+
+1. Ask: "After implementation, how do we check here that a feature works? For example: run it locally with test data, run the e2e path, check it in a test namespace, deploy to staging." Accept several answers for different kinds of change.
+2. For each place, ask how the agent reaches it and which tools it uses, so that a new agent can repeat it. For example: the kubectl context, the browser tool, test users, the test queries of a migration.
+3. For a credential, record only the name of the variable or config that holds it.
+4. Ask which actions need the user's approval, for example a deploy to staging or writes to a shared environment. If the user names production, ask whether the agent may act there.
+5. Check that the agent can reach each place and tool now. Record each gap as a blocker of that place.
+6. Record a short procedure in the `verify` section. Move a longer one to `<agent-docs>/project/verification.md`.
+
 ## to-plan
 
 1. Agree the plan location and naming. Keep the plan with the other artifacts of its task where the project permits.
