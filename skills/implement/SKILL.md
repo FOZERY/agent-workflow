@@ -54,8 +54,8 @@ Ask the user through the question tool, in one call:
    - TDD, with its trigger and where it runs;
    - `simplify-codebase`, with its trigger;
    - the full test suite;
-   - `verify`, with its trigger, if the task changes behavior that a user or a system can observe;
    - the Standards review and the Spec review;
+   - `verify`, with its trigger, if the task changes behavior that a user or a system can observe;
    - the review follow-up and the round limit;
    - the commit or the handoff.
 
@@ -101,25 +101,25 @@ With several workers, integrate the parts in dependency order into one tree, thr
 
 ## 6. Check against the task
 
-Check the final tree: the integrated tree, or the tree of the only worker or of the direct work.
+Check the final tree: the integrated tree, or the tree of the only worker or of the direct work. Run the Spec review first. It is cheap, and its fixes would invalidate a `verify` run.
 
-If `verify` is confirmed:
-
-1. Run `verify` with the behaviors that the user confirmed in step 3, the task sources and the final tree. Tell it that the user confirmed the list, so that it does not ask again. Run it in this session, unless its section sets another `execution`.
-2. If a check fails, send the failure with its evidence to the worker that owns the code, in the same worker session. In direct mode, fix it yourself by [WORKER.md](WORKER.md) step 8. Integrate the fix by step 5, then run `verify` again for the failed behaviors.
-3. If a behavior is blocked, say why in the report. Do not claim verification for it.
-
-Skip the rest of this step if the user turned off the Spec review.
+**Spec review.** Skip it if the user turned it off.
 
 1. Run `code-review` from this session with the Spec axis only. Its reviewer is a fresh subagent with the `spec-reviewer` setting.
-2. Pass the task sources, the base, the final tree and the evidence paths.
+2. Pass the task sources, the base and the final tree.
 3. Read the findings, not the whole diff.
 4. If the `followup` setting of `code-review` is `report`, give the findings to the user and wait.
-5. If it is `fix-and-rereview`, send the findings to the worker that owns the code, in the same worker session. In direct mode, fix them yourself by [WORKER.md](WORKER.md) step 8. Integrate the fixes by step 5. Run `verify` again for the behaviors that the fixes touch, then run the Spec review again.
+5. If it is `fix-and-rereview`, send the findings to the worker that owns the code, in the same worker session. In direct mode, fix them yourself by [WORKER.md](WORKER.md) step 8. Integrate the fixes by step 5, then run the Spec review again.
+
+**Verify.** Skip it if the user did not confirm it.
+
+1. Run `verify` with the behaviors that the user confirmed in step 3, the task sources and the final tree. Tell it that the user confirmed the list, so that it does not ask again. Run it in this session, unless its section sets another `execution`.
+2. If a check fails, send the failure with its evidence to the worker that owns the code, in the same worker session. In direct mode, fix it yourself by [WORKER.md](WORKER.md) step 8. Integrate the fix by step 5. Run the Spec review on the fix, then run `verify` again for the failed behaviors.
+3. If a behavior is blocked, say why in the report. Do not claim verification for it.
 
 The round limit is the `rounds` setting of `code-review`, `3` by default. It counts the rounds of each review on this task. If the Spec review or a worker's Standards review reaches it, stop and ask the user.
 
-**Done when:** every confirmed check passed or is in the report, and the Spec review has no open findings, or the user decided about the remaining ones.
+**Done when:** the Spec review has no open findings, or the user decided about the remaining ones, and every confirmed check passed or is in the report.
 
 ## 7. Finish
 

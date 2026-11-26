@@ -147,7 +147,7 @@ Implements an agreed task. The session is the orchestrator:
 3. It asks you once to confirm the mode, the steps and the test seams. You can turn off steps for a simple task.
 4. Workers write the code in separate sessions by `implement/WORKER.md`: tests, simplification, the full test suite and the Standards review.
 5. With several workers, it integrates the parts into one tree.
-6. On that tree, it runs `verify` on the changed behavior, if it is on, and checks the result against the task (the Spec review). Then it commits if allowed and reports with the evidence.
+6. On that tree, it checks the result against the task (the Spec review), then runs `verify` on the changed behavior, if it is on. Then it commits if allowed and reports with the evidence.
 
 The agent starts it when you ask for a change.
 

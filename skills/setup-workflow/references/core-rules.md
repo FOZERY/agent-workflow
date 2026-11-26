@@ -23,8 +23,8 @@ Link each skill name that has a section under `## Skills` in the project's `AGEN
 1. **Setup.** `setup-workflow` configures this file. `setup-home-repo` creates a multi-repository home. `ask-workflow` recommends the next skill.
 2. **Clarify.** `investigate`, `recall`, `grilling`, `grill-with-docs`, `wayfinder`, `research`, `prototype`, `domain-modeling`, `draw-diagram`.
 3. **Plan.** `to-plan`, `to-spec`, `to-tickets`.
-4. **Implement.** `implement`, with `tdd`, `simplify-codebase` and `verify` inside it.
-5. **Review.** `code-review`, run by `implement`.
+4. **Implement.** `implement`, with `tdd` and `simplify-codebase` inside it.
+5. **Check.** `code-review`, then `verify`. `implement` runs both.
 6. **Accept.** The user accepts the work. Commit, push and other delivery follow `## Git and delivery`.
 7. **Improve.** `retro`, `cleanup-artifacts`, `refactor-codebase`, `refactor-docs`.
 ```

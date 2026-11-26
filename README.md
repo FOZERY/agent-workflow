@@ -32,7 +32,7 @@ flowchart LR
     Understand --> Discuss["Discuss<br/>grilling"]
     Task -->|clear task| Build
     Discuss --> Plan["Plan<br/>to-plan, to-spec, to-tickets"]
-    Plan --> Build["Implement<br/>implement: tdd, simplify-codebase, verify, code-review"]
+    Plan --> Build["Implement<br/>implement: tdd, simplify-codebase, code-review, verify"]
     Discuss --> Build
     Build -->|you accept| Done[Merged]
     Done -.-> Improve["Improve<br/>retro, refactor-codebase"]

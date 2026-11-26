@@ -35,7 +35,7 @@ Each worker runs in a separate session with its own thread. The orchestrator rec
 
 Follow the project's settings for TDD, simplify, verify and review. With `manual`, the step is off by default: you can turn it on when `implement` asks, or start the skill yourself. With `auto`, the worker runs `simplify-codebase` before review, so review sees the final code. A subagent finds the simplifications, and the worker applies them.
 Before any work starts, `implement` lists the mode and the steps for the task and asks you to confirm them. You can turn off a step for a simple task, unless a project rule makes it mandatory.
-Each worker checks the Standards axis of `code-review` on its own changes. After the parts are integrated, the orchestrator runs `verify` on the behaviors from the task, if it is on, and checks the Spec axis once, against the task. It sends failures and findings back to the same worker.
+Each worker checks the Standards axis of `code-review` on its own changes. After the parts are integrated, the orchestrator checks the Spec axis against the task, then runs `verify` on the behaviors from the task, if it is on. It sends failures and findings back to the same worker.
 See [review coverage and follow-up](../skills/setup-workflow/references/AGENTS.md#review-coverage) for scope, timing, and whether the agent can fix findings.
 
 Failed required checks or unresolved required findings block completion. Once all required checks and review pass, you decide whether to accept the result.
