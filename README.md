@@ -58,7 +58,6 @@ The [skill guide](docs/GUIDE.md) describes each skill with an example prompt. Th
 | | [`grill-with-docs`](skills/grill-with-docs/SKILL.md) | You | The same, and records terms and decisions as it goes |
 | | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Agent | Keeps the glossary and ADRs |
 | | [`prototype`](skills/prototype/SKILL.md) | Agent | Builds throwaway code to answer a design question |
-| | [`draw-diagram`](skills/draw-diagram/SKILL.md) | Agent | Draws an Excalidraw diagram after you agree |
 | Plan | [`to-plan`](skills/to-plan/SKILL.md) | You | Saves an implementation plan for a task |
 | | [`to-spec`](skills/to-spec/SKILL.md) | You | Turns the discussion into a spec in the tracker |
 | | [`to-tickets`](skills/to-tickets/SKILL.md) | You | Splits work into tickets with dependencies |
@@ -81,15 +80,13 @@ The [skill guide](docs/GUIDE.md) describes each skill with an example prompt. Th
 
 Setup does not install or turn on these tools.
 
-- **Agent workspace:** [Orca](https://orca.dev/) for worktrees and agent sessions. Its [Excalidraw plugin](https://orca.dev/plugins/stablyai/orca-plugins/orca-excalidraw) edits diagrams without `draw-diagram`.
+- **Agent workspace:** [Orca](https://orca.dev/) for worktrees and agent sessions. Its [Excalidraw plugin](https://orca.dev/plugins/stablyai/orca-plugins/orca-excalidraw) draws and edits diagrams.
 - **UI work:** [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) for browser APIs, CSS, accessibility and performance. [learn-taste](https://github.com/emilkowalski/skills/blob/main/skills/learn-taste/SKILL.md) turns repeated design feedback into proposed project rules.
 - **UI checks:** [agent-browser](https://github.com/vercel-labs/agent-browser) for web pages. [agent-desktop](https://github.com/vercel-labs/agent-desktop) for native apps.
 - **Library docs:** [find-docs](https://github.com/upstash/context7/blob/master/skills/find-docs/SKILL.md) for current API references through the Context7 CLI.
-
-For an example of user-wide instructions, see the [global AGENTS.md reference](agents-files/AGENTS.reference.md). It is a snapshot, not a project instruction.
 
 ## Status and license
 
 The skills were checked in isolated projects and in daily use. A full run from setup to a merged PR has not been tested end to end. To check the links and the contracts between the skills, run `python3 scripts/check.py`. CI runs it on every push.
 
-Original contributions are [MIT-licensed](LICENSE). Third-party material keeps its [notices and rights](THIRD_PARTY_NOTICES.md), including the Excalidraw package's unresolved redistribution permission. Keep the applicable [notices](THIRD_PARTY_NOTICES.md#distribution) with installed or exported skills.
+Original contributions are [MIT-licensed](LICENSE). Third-party material keeps its [notices and rights](THIRD_PARTY_NOTICES.md). Keep the applicable [notices](THIRD_PARTY_NOTICES.md#distribution) with installed or exported skills.

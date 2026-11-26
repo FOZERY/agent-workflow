@@ -58,7 +58,6 @@ flowchart LR
 | | [`grill-with-docs`](../skills/grill-with-docs/SKILL.md) | Ты | То же самое, и попутно записывает термины и решения |
 | | [`domain-modeling`](../skills/domain-modeling/SKILL.md) | Агент | Ведёт глоссарий и ADR |
 | | [`prototype`](../skills/prototype/SKILL.md) | Агент | Делает временный код, чтобы ответить на вопрос о дизайне |
-| | [`draw-diagram`](../skills/draw-diagram/SKILL.md) | Агент | Рисует схему в Excalidraw, если ты согласен |
 | Спланировать | [`to-plan`](../skills/to-plan/SKILL.md) | Ты | Сохраняет план реализации задачи |
 | | [`to-spec`](../skills/to-spec/SKILL.md) | Ты | Превращает обсуждение в спецификацию в трекере |
 | | [`to-tickets`](../skills/to-tickets/SKILL.md) | Ты | Разбивает работу на тикеты с зависимостями |
@@ -81,15 +80,13 @@ flowchart LR
 
 `setup-workflow` не устанавливает и не включает эти инструменты.
 
-- **Работа с агентами:** [Orca](https://orca.dev/) для worktree и сессий агентов. Его [плагин Excalidraw](https://orca.dev/plugins/stablyai/orca-plugins/orca-excalidraw) редактирует схемы без `draw-diagram`.
+- **Работа с агентами:** [Orca](https://orca.dev/) для worktree и сессий агентов. Его [плагин Excalidraw](https://orca.dev/plugins/stablyai/orca-plugins/orca-excalidraw) рисует и редактирует схемы.
 - **Интерфейсы:** [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) про API браузера, CSS, доступность и производительность. [learn-taste](https://github.com/emilkowalski/skills/blob/main/skills/learn-taste/SKILL.md) превращает повторяющиеся замечания по дизайну в предложения правил проекта.
 - **Проверка интерфейса:** [agent-browser](https://github.com/vercel-labs/agent-browser) для веб-страниц. [agent-desktop](https://github.com/vercel-labs/agent-desktop) для нативных приложений.
 - **Документация библиотек:** [find-docs](https://github.com/upstash/context7/blob/master/skills/find-docs/SKILL.md) для актуальных справок по API через Context7 CLI.
-
-Пример глобальных инструкций пользователя есть в [образце AGENTS.md](../agents-files/AGENTS.reference.md). Это снимок, а не инструкция проекта.
 
 ## Статус и лицензия
 
 Скиллы проверены в изолированных проектах и в ежедневной работе. Полный прогон от настройки до смерженного PR целиком не проверялся. Ссылки и связи между скиллами проверяет `python3 scripts/check.py`. CI запускает его при каждом пуше.
 
-Собственный код набора распространяется по [лицензии MIT](../LICENSE). Сторонние материалы сохраняют свои [уведомления и права](../THIRD_PARTY_NOTICES.md), включая нерешённый вопрос о праве распространения пакета Excalidraw. Сохраняй нужные [уведомления](../THIRD_PARTY_NOTICES.md#distribution) вместе с установленными или выгруженными скиллами.
+Собственный код набора распространяется по [лицензии MIT](../LICENSE). Сторонние материалы сохраняют свои [уведомления и права](../THIRD_PARTY_NOTICES.md). Сохраняй нужные [уведомления](../THIRD_PARTY_NOTICES.md#distribution) вместе с установленными или выгруженными скиллами.

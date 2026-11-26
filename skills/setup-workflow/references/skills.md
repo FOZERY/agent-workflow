@@ -21,7 +21,6 @@ Each Matt-derived skill can be installed alone, but it keeps its runtime prerequ
 5. If the lock file names no usable source, or the remote is empty, tell the user and ask for the path to a local checkout.
 6. For each approved skill, record its source, version, compatibility and full reference files. Keep its provenance and notices.
 7. If another source has a skill with the same name, ask the user before you use it. A same name does not make two skills the same.
-8. For `draw-diagram`, keep all references, the renderer, the four bundled libraries and the provenance notice. Some upstream material has no stated license, and the kit's MIT license does not cover it. Read the notice before redistribution. A same-named upstream global copy is a different skill. Replace it only with the user's approval.
 
 ## Clients and scope
 
@@ -89,7 +88,6 @@ Claude Code also has a bundled `simplify`. The kit's `simplify-codebase` has ano
 2. Repeat the [same-name check](#check-same-name-copies).
 3. Report each skill as present, discoverable, or tested by invocation. Check extra project prerequisites only for routes that need them.
 4. Tell the user if the client needs a reload. Launch no other agent or changing workflow only to test discovery.
-5. For diagrams, also check through [diagram configuration](diagrams.md) that a worker can read the sources and assets, write to the artifact destination, and reach the renderer, browser and network it needs. Discovery alone does not prove that a worker can make and check a preview.
 6. Report which skills are ready for the agreed use, which are installed but not verified, and which are unavailable or not compatible.
 
 The installer lock files are the install record. Keep no second copy of their data.

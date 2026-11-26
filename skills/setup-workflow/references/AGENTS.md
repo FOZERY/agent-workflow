@@ -16,7 +16,7 @@ Read this file before you draft a project's `AGENTS.md`. The outline below is a 
 8. Write the value of a setting only. Its meaning is in [skill settings](core-rules.md#skill-settings) and in the skill that reads it.
 9. Give each pointer a trigger: "Read X when Y."
 10. List only the commands that an agent needs often, and name the file that holds the rest. Do not copy what the environment already holds, such as the full script list or config values.
-11. For writing-style pointers, use [writing routes](writing.md). For memory, use [project artifacts](project-artifacts.md). For diagrams, use [diagram configuration](diagrams.md).
+11. For writing-style pointers, use [writing routes](writing.md). For memory, use [project artifacts](project-artifacts.md).
 12. For a multi-repository home, keep its navigation owner and add the `Related repositories` section. Omit that section for one repository.
 13. For an extra coding practice, link its source in the relevant skill section. Do not copy the guide.
 14. For an addition without an agreed answer, record the blocked action and its owner. Write no placeholder instruction.
@@ -174,11 +174,6 @@ Runs: <runs>. Phase: <phase>.
 Runs: <runs>. Phase: <phase>.
 <Ticket format, granularity, dependency representation and destination.>
 <Approval, readiness vocabulary and publication procedure.>
-
-### draw-diagram
-Runs: <runs>. Phase: <phase>.
-<Designated delegation tool, including Orca if selected.>
-<Diagram destination, naming and visibility. Approved libraries and rendering permissions.>
 
 ### tdd
 trigger: <auto | manual>

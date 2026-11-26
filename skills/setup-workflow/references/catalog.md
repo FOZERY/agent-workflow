@@ -10,7 +10,6 @@ Every skill is optional. For a skill that the user suggests, check its real sour
 | --- | --- |
 | Setup and guidance | `setup-home-repo`, `setup-workflow`, `ask-workflow` |
 | Task exploration | `investigate`, `recall`, `grilling`, `grill-with-docs`, `domain-modeling`, `research`, `prototype`, `wayfinder`, `to-plan`, `to-spec`, `to-tickets` |
-| Optional visual support | `draw-diagram` |
 | Implementation | `implement`, `tdd`, `simplify-codebase`, `verify`, `code-review` |
 | Retrospective and maintenance | `retro`, `cleanup-artifacts`, `refactor-codebase`, `refactor-docs` |
 | Writing | `writing-for-people`, `writing-technical`, `writing-for-agents`, `rephrase` |
@@ -20,7 +19,6 @@ Every skill is optional. For a skill that the user suggests, check its real sour
 - `verify` checks a change in the running product by the procedure that setup records in its section: where to check, with which tools and which actions need approval.
 - `writing-for-people`, `writing-technical` and `writing-for-agents` are separate writing skills. Configure their project use through [writing routes](writing.md). Setup recommends `writing-for-people` when it is not installed; the user can decline it.
 - `rephrase` restates the last reply in plain words. The user runs it. It follows `writing-for-people` when that skill is installed.
-- `draw-diagram` is an optional bundled skill. No other skill needs it, and setup does not have to install it. Configure it through [diagram configuration](diagrams.md).
 - `to-plan` saves one implementation plan with its task. It needs no spec, no tickets and no other skill.
 
 ## Dependencies

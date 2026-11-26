@@ -10,7 +10,7 @@ disable-model-invocation: true
 Produce one Markdown implementation plan for a task whose desired outcome is already understood. Work from a request, discussion, ticket or specification; no upstream artifact or other skill is required.
 Read applicable project instructions for sources, artifact locations, writing rules and workflow settings. Use the defaults below where the project specifies none.
 If the project's root `AGENTS.md` has no `agent-workflow:core` block, tell the user that the project is not set up and suggest `/setup-workflow` (`$setup-workflow` in Codex). Continue only if the user says so.
-Planning permits investigation and the authorized plan write, not implementation, tracker mutations or implementation-agent launches. Follow project approval gates. The optional diagram branch below permits only separately approved drawing delegation.
+Planning permits investigation and the authorized plan write, not implementation, tracker mutations or implementation-agent launches. Follow project approval gates.
 
 ## 1. Establish the task and destination
 
@@ -40,8 +40,6 @@ Use the project's format. Otherwise, include these compact sections:
 - **Open decisions:** only unresolved choices or blockers, with the affected work. Omit this section when none remain.
 
 Keep the breakdown proportional to the task. Group incidental setup and documentation with the change that needs them. Split work where its result can be meaningfully checked, not into a fixed number of steps.
-
-If the project selects `draw-diagram`, a diagram may help explain an architectural alternative or service interaction. Use that skill's offer-and-consent procedure; only an approved, separate diagram worker generates it. This optional artifact does not launch implementers or make diagrams a prerequisite for a saved plan. Link the result rather than copying its scene data into the plan.
 
 ### Multiple services or repositories
 

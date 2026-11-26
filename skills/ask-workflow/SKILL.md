@@ -39,7 +39,6 @@ Recommend the smallest route that reaches the goal. The map lists candidates, no
 | Research a question in primary sources | `research` |
 | Plan an effort too large and too unclear for one session | `wayfinder` (manual) |
 | Answer a design question with a throwaway experiment | `prototype` |
-| Explain a design with a diagram, after the user agrees | `draw-diagram` |
 | Save an implementation plan for a task | `to-plan` (manual) |
 | Turn agreed requirements into a spec, then tickets | `to-spec`, `to-tickets` (manual) |
 | Write tests first, or audit existing tests | `tdd` |

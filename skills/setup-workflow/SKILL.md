@@ -65,7 +65,7 @@ Go through the parts below in order. On a rerun, ask only the parts that the cha
 3. For installation or a change of client or scope, read [deployment](references/skills.md).
 4. Before you propose settings for a selected skill, read its `SKILL.md`. Agree its sources, output location, project practices and allowed operations.
    For each step that has a setting in [skill settings](references/core-rules.md#skill-settings), ask where the step runs and which agent, model and reasoning effort it uses. If the user names no effort, write `default effort`. Offer only the places that the skill supports. List the agents and models that the harness offers.
-5. For `investigate`, `to-plan`, `to-spec`, `to-tickets` and `wayfinder`, ask the questions in [skill questions](references/skill-questions.md). For `draw-diagram`, read [diagram configuration](references/diagrams.md).
+5. For `investigate`, `to-plan`, `to-spec`, `to-tickets` and `wayfinder`, ask the questions in [skill questions](references/skill-questions.md).
 
 ### 2.3 Implementation, TDD, simplify and review
 

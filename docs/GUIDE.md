@@ -94,13 +94,6 @@ Builds throwaway code to answer a design question. For logic, it makes one HTML 
 Prototype the lesson status transitions for cancel, move and restore.
 ```
 
-### `draw-diagram`
-
-Offers a diagram when a picture would explain a design. After you agree, a separate subagent draws an editable Excalidraw file and a PNG. The agent can start it.
-
-```text
-Draw how a task moves from the tracker to a merged PR.
-```
 
 ## Plan
 

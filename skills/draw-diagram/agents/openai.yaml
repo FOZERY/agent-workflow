@@ -1,5 +1,0 @@
-interface:
-  display_name: "Draw Diagram"
-  short_description: "Offer design diagrams; delegate drawing after user consent"
-policy:
-  allow_implicit_invocation: true
