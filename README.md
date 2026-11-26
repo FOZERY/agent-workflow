@@ -64,7 +64,7 @@ The [skill guide](docs/GUIDE.md) describes each skill with an example prompt. Th
 | | [`to-tickets`](skills/to-tickets/SKILL.md) | You | Splits work into tickets with dependencies |
 | | [`wayfinder`](skills/wayfinder/SKILL.md) | You | Maps a large, unclear effort as decision tickets |
 | Implement | [`implement`](skills/implement/SKILL.md) | Agent | Orchestrates a task: writes small changes, gives larger ones to workers, checks the result |
-| | [`tdd`](skills/tdd/SKILL.md) | Agent | Writes a failing test first, then the code that passes it |
+| | [`tdd`](skills/tdd/SKILL.md) | Agent | Writes integration and module tests that prove real behavior, test first |
 | | [`simplify-codebase`](skills/simplify-codebase/SKILL.md) | Agent | Finds what to simplify in changed code |
 | | [`verify`](skills/verify/SKILL.md) | Agent | Checks that a change works in the running product, the way the project agreed |
 | | [`code-review`](skills/code-review/SKILL.md) | Agent | Reviews a diff against the project standards and the task |

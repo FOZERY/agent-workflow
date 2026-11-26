@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", wants integration tests, or wants to audit or prune existing tests.
+description: "Write tests that prove real behavior, test first: integration and module tests through the real flow of the application, with mocks only at external boundaries. Use when implement calls it, when the user wants to build or fix something test-first, or when the user wants to know whether existing tests prove anything."
 ---
 
 Read applicable project instructions before starting. Use their sources, artifact locations and workflow settings where specified; otherwise use this skill’s defaults. If a required step conflicts with applicable constraints, report the blocked step.
@@ -9,68 +9,82 @@ If the project's root `AGENTS.md` has no `agent-workflow:core` block, use this s
 
 # Test-Driven Development
 
-TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle: consult them before and during the loop, not after.
+A test proves that a real behavior of the application works. Write a test only when you can name the realistic bug that would make it fail.
 
-When exploring the codebase, read `GLOSSARY.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
+When exploring the codebase, read `GLOSSARY.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching. Read the project's testing rules and use its test commands.
 
-## What a good test is
+## 1. Decide whether a test fits
 
-Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification: "user can checkout with valid cart" tells you exactly what capability exists, and it survives refactors because it doesn't care about internal structure.
+Write a test for a behavior with an input and an observable result that an independent source pins down: business logic, a request and response contract, a state change, a transformation, validation.
 
-Check each test against two edits. Break the behavior, for example return a wrong value or skip an effect: the test must fail. Change only the internals and keep every observable result: the test must pass. The red run before the code is the first edit. Judge the second by reading the test. Derive the expected value from the requirement. Assert the error type that callers branch on, not the message.
+Write no new test for configuration, wiring, glue code, trivial getters, constants or the framework's own behavior. Write none when it would need brittle mocks, production-only state or large unrelated fixture churn. Use the closest executable check instead, such as a reproduction command or `verify`, and name it in your report.
 
-See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
+## 2. Choose the level
 
-## When the loop fits
+Take the highest level that stays fast and deterministic:
 
-Use the loop for a behavior with an input and an observable output that an independent source pins down: business logic, a request and response contract, a transformation, validation.
+1. **Integration test of a flow.** Enter through a real entry point of the application: an HTTP route, a CLI command, a job handler, a page with only the network faked. Run the real modules, the test database of the project and the real side effects.
+2. **Module test.** Call the public interface of one module with its real internal collaborators. Use it when the flow cannot reach a case cheaply, such as many inputs of a calculation.
+3. **Browser and end-to-end tests.** Write them only after the behavior works at a faster level. `verify` checks the running product.
 
-Write no new test when it would need broad harness setup, brittle mocks, slow end-to-end infrastructure, production-only state or large unrelated fixture churn. Write none when nothing independent says what the result must be, as with configuration, wiring and glue code. Use the closest executable check instead, such as a targeted script, a reproduction command or `verify`, and name it in your report.
+Test at the layer that the claim names: an HTTP response does not prove what the page shows. Do not extract a helper only to give it a test.
 
-## Fixing a bug
+## 3. Agree the seams
 
-1. Write the test that would have caught the bug. It encodes the intended behavior, not the current code.
-2. Run it before you fix anything. It must fail for the reported reason. If it passes or fails for another reason, correct the test or the reproduction first.
-3. Make the smallest fix that passes it, and keep the nearby contracts.
-4. Run it again, and the other tests of that area if the project has them.
+A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside.
 
-If the bug is flaky, make the test deterministic. Land the focused regression test first. Add tests for related failures only after it.
+**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. Seams listed in an approved plan, in the orchestrator's assignment or by the user for this task count as confirmed; confirm only seams you add.
 
-## Seams: where tests go
+Ask: "What's the public interface, and which seams should we test?" For each proposed seam, give its level and one line on what it catches and what it misses.
 
-A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
+## 4. Run the loop
 
-**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. Seams listed in an approved plan, in the orchestrator's assignment or by the user for this task count as confirmed; confirm only seams you add. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
+1. List the behaviors to prove at the agreed seams, one line each.
+2. Take the next behavior. Name the realistic bug that its test must catch.
+3. Write one test for it. Write the expected value as a literal from the requirement.
+4. Run it. It must fail because the behavior is missing or wrong, such as an unknown command or a wrong value. If it fails in the test setup, passes, or fails for another reason, fix the test first.
+5. Write only enough code to pass it. Run it again.
+6. Go to step 2. Write the next test only after this one passes.
+7. Run the project's full test suite.
 
-Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
+For a bug, the first behavior is the reported one. Its test reproduces the bug and fails for the reported reason before you change the code. If the bug is flaky, make the test deterministic. Add tests for related failures only after the fix.
 
-## Anti-patterns
+Refactoring is not part of the loop. `simplify-codebase` does it after the implementation.
 
-- **Implementation-coupled**: mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
-- **Tautological**: the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth: a known-good literal, a worked example, the spec.
-- **Exercise without a claim**: the test runs lines, copies identities or lists exports, so coverage rises but no credible defect can be detected. The tell: the assertions still pass on broken behavior.
-- **The harness does the job**: a mock implements the behavior the test claims to prove, a fixture supplies the acknowledgement or ordering that production must create, or a persistence check reads a store that the real path never writes. One identical fake for different dependency APIs hides their differences.
-- **The wrong cause goes red**: a negative case fails on a different guard, or never reaches the intended branch. Check the failing condition, not only that something rejected the input.
-- **Declaration posing as behavior**: source greps, import lists, capability flags and call-shape checks certify the declaration while the user path is broken. Test the behavior that the declaration promises.
-- **One proof repeated**: private helper tests, per-provider replays of shared logic and several layers that run the same regression scenario all protect one contract. Keep distinct transport and lifecycle risks, not copies of one scenario.
-- **Tests keeping code alive**: a helper or production escape hatch exists only because tests call it. Test the real entry point and remove the hook, not replace it with another test-only abstraction.
-- **Horizontal slicing**: writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead: one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
+## 5. Check each test
 
-## Rules of the loop
-
-- **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
-- **One slice at a time.** One seam, one test, one minimal implementation per cycle.
-- **Refactoring is not part of the loop.** It belongs to `simplify-codebase` after the implementation, not the red → green implementation cycle.
+- **Two edits.** Break the behavior, for example return a wrong value or skip an effect: the test must fail. Change only the internals and keep every observable result: the test must pass. The red run in step 4 is the first edit. Judge the second by reading the test.
+- **Real collaborators.** Mock only external boundaries: network services, payment, email, the clock and randomness. Use the project's test database, not a database mock. Keep real the side effects that the test depends on. Never assert on a mock. Read [mocking.md](mocking.md) when you add a mock.
+- **Independent expected values.** Take them from the requirement, a worked example or a known literal, never from the code under test.
+- **State, not calls.** Assert what a caller can observe: the result, the stored state that the interface reads back, the error type that callers branch on.
 - **Tests follow the requirement.** Do not change a test to match a wrong implementation. Weaken an assertion only when the required behavior changed, and say why.
-- **Slow tests last.** Write browser and end-to-end tests after the behavior works at a faster seam. `verify` checks the running product.
 
-## Report
+Signs of a bad test:
 
-For each new test, give the red output before the code and the green output after it. For each behavior that you checked without a new test, name the check and the reason.
+- **Implementation-coupled**: mocks internal collaborators, tests private methods, or verifies through a side channel. It breaks on a refactor that keeps the behavior.
+- **Tautological**: the assertion recomputes the expected value the way the code does, so it passes by construction.
+- **The harness does the job**: a mock or a fixture supplies the behavior, the ordering or the stored state that production must create.
+- **The wrong cause goes red**: a negative case fails on a different guard, or never reaches the intended branch.
 
-## Auditing existing tests
+See [tests.md](tests.md) for examples.
 
-To audit or prune existing tests, read [audit.md](audit.md). Use the anti-patterns above as investigation prompts, not as automatic removal rules.
+## 6. Report
+
+- For each new test: its level, the bug that it catches, the red output before the code and the green output after it.
+- For each behavior that you checked without a new test: the check and the reason.
+- The result of the full test suite.
+
+## Review existing tests
+
+Judge existing tests by the same rules. For each test, name the realistic bug that would escape if it disappeared. These signs mark a test that proves nothing:
+
+- **Exercise without a claim**: it runs lines, copies identities or lists exports, and still passes on broken behavior.
+- **Change detector**: only a deliberate decision can fail it, such as a constant's value, a message's wording or a private structure. If users depend on the value, such as a default data path or a wire format, test it through behavior instead.
+- **Declaration posing as behavior**: source greps, import lists and call-shape checks pass while the user path is broken.
+- **One proof repeated**: several tests or layers protect the same contract with the same scenario.
+- **Tests keeping code alive**: a helper or a production hook exists only because tests call it.
+
+Give each test one verdict: keep, repair, combine or remove. Repair a test that catches only part of its bug, such as a message without the stored state. For an audit or a pruning batch, read [audit.md](audit.md). Keep a test until you can name the stronger test that covers its bug.
 
 ## In a subagent
 

@@ -157,7 +157,7 @@ Implement JIRA-1234 by the plan in .docs/jira-1234/plan.md.
 
 ### `tdd`
 
-Test-first: one failing test, then the smallest code that passes it. Tests go through public interfaces at the seams that you confirmed. For a bug, the first test reproduces it and must fail for the reported reason. Where a test would be brittle or slow, or nothing independent says what the result must be, it uses the closest executable check instead and says so. It can also audit existing tests and remove the ones that prove nothing. `implement` runs it when the project's setting says so. The agent can start it.
+Test-first, and only tests that prove real behavior. Before each test it names the bug that the test must catch. It prefers integration tests that run a real flow of the application and module tests through a public interface, and mocks only external services, time and randomness. One failing test, then the smallest code that passes it, at the seams that you confirmed. For a bug, the first test reproduces it. For configuration and glue code it writes no test and names the check it used instead. It can also review existing tests by the same rules and remove the ones that prove nothing. `implement` runs it when the project's setting says so. The agent can start it.
 
 ```text
 Add the late-homework rule test-first.
