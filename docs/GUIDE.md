@@ -167,7 +167,7 @@ Simplify what we changed in this branch.
 
 ### `verify`
 
-Checks that a change works in the running product, not only in the tests. How to check is agreed in `setup-workflow`: run locally with test data, run the e2e path, check in a test namespace through `kubectl` and a browser, or deploy to staging. What to check comes from the task: the skill lists the behaviors from the acceptance checks, you confirm them and the actions that need approval, and it reports each result with evidence. `implement` runs it when the project's setting says so. The agent can start it.
+Checks that a change works in the running product, not only in the tests. How to check is agreed in `setup-workflow`: run locally with test data, run the e2e path, check in a test namespace through `kubectl` and `agent-browser`, or deploy to staging. What to check comes from the task: the skill lists the behaviors from the acceptance checks, you confirm them and the actions that need approval, and it reports each result with evidence. `implement` runs it when the project's setting says so. The agent can start it.
 
 ```text
 Verify the lesson cancellation in the test namespace.

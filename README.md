@@ -78,11 +78,12 @@ The [skill guide](docs/GUIDE.md) describes each skill with an example prompt. Th
 
 ## External tools
 
-Setup does not install or turn on these tools.
+These tools are not part of the kit. Setup recommends the UI check tools when you select `verify` for a project with a UI, and installs nothing without your approval.
 
+- **UI checks for `verify`:** [agent-browser](https://github.com/vercel-labs/agent-browser) lets the agent open, click through and screenshot web pages. [agent-desktop](https://github.com/vercel-labs/agent-desktop) does the same for native apps.
 - **Agent workspace:** [Orca](https://orca.dev/) for worktrees and agent sessions. Its [Excalidraw plugin](https://orca.dev/plugins/stablyai/orca-plugins/orca-excalidraw) draws and edits diagrams.
+- **Diagrams in the terminal:** the [termaid plugin for Claude Code](https://termaid.com/claude-code.html) draws the Mermaid diagrams of a reply in the terminal while it streams. Install the `termaid` command with `brew install termaid`, then run `/plugin install termaid --marketplace fasouto/termaid`.
 - **UI work:** [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) for browser APIs, CSS, accessibility and performance. [learn-taste](https://github.com/emilkowalski/skills/blob/main/skills/learn-taste/SKILL.md) turns repeated design feedback into proposed project rules.
-- **UI checks:** [agent-browser](https://github.com/vercel-labs/agent-browser) for web pages. [agent-desktop](https://github.com/vercel-labs/agent-desktop) for native apps.
 - **Library docs:** [find-docs](https://github.com/upstash/context7/blob/master/skills/find-docs/SKILL.md) for current API references through the Context7 CLI.
 
 ## Status and license

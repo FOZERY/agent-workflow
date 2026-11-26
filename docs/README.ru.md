@@ -78,11 +78,12 @@ flowchart LR
 
 ## Внешние инструменты
 
-`setup-workflow` не устанавливает и не включает эти инструменты.
+Эти инструменты не входят в набор. Если ты выбираешь `verify` для проекта с интерфейсом, setup советует инструменты проверки интерфейса и ничего не ставит без твоего согласия.
 
+- **Проверка интерфейса для `verify`:** [agent-browser](https://github.com/vercel-labs/agent-browser): агент открывает веб-страницы, прокликивает их и делает скриншоты. [agent-desktop](https://github.com/vercel-labs/agent-desktop) делает то же для нативных приложений.
 - **Работа с агентами:** [Orca](https://orca.dev/) для worktree и сессий агентов. Его [плагин Excalidraw](https://orca.dev/plugins/stablyai/orca-plugins/orca-excalidraw) рисует и редактирует схемы.
+- **Схемы в терминале:** [плагин termaid для Claude Code](https://termaid.com/claude-code.html) рисует схемы Mermaid из ответа прямо в терминале, пока ответ печатается. Поставь команду `termaid` через `brew install termaid`, потом выполни `/plugin install termaid --marketplace fasouto/termaid`.
 - **Интерфейсы:** [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) про API браузера, CSS, доступность и производительность. [learn-taste](https://github.com/emilkowalski/skills/blob/main/skills/learn-taste/SKILL.md) превращает повторяющиеся замечания по дизайну в предложения правил проекта.
-- **Проверка интерфейса:** [agent-browser](https://github.com/vercel-labs/agent-browser) для веб-страниц. [agent-desktop](https://github.com/vercel-labs/agent-desktop) для нативных приложений.
 - **Документация библиотек:** [find-docs](https://github.com/upstash/context7/blob/master/skills/find-docs/SKILL.md) для актуальных справок по API через Context7 CLI.
 
 ## Статус и лицензия

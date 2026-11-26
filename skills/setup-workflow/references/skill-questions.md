@@ -18,10 +18,11 @@ Record each answer in the skill's section of the project's `AGENTS.md`.
 
 1. Ask: "After implementation, how do we check here that a feature works? For example: run it locally with test data, run the e2e path, check it in a test namespace, deploy to staging." Accept several answers for different kinds of change.
 2. For each place, ask how the agent reaches it and which tools it uses, so that a new agent can repeat it. For example: the kubectl context, the browser tool, test users, the test queries of a migration.
-3. For a credential, record only the name of the variable or config that holds it.
-4. Ask which actions need the user's approval, for example a deploy to staging or writes to a shared environment. If the user names production, ask whether the agent may act there.
-5. Check statically that the agent can reach each place and tool: the config entry, the context name, the command on `PATH`. A live probe needs the user's approval. Record each gap as a blocker of that place.
-6. Record a short procedure in the `verify` section. Move a longer one to `<agent-docs>/project/verification.md`.
+3. If the project has a UI and the user names no tool to drive it, recommend [agent-browser](https://github.com/vercel-labs/agent-browser) for web pages or [agent-desktop](https://github.com/vercel-labs/agent-desktop) for native apps. Check whether the command is on `PATH`. Install it only after the user approves.
+4. For a credential, record only the name of the variable or config that holds it.
+5. Ask which actions need the user's approval, for example a deploy to staging or writes to a shared environment. If the user names production, ask whether the agent may act there.
+6. Check statically that the agent can reach each place and tool: the config entry, the context name, the command on `PATH`. A live probe needs the user's approval. Record each gap as a blocker of that place.
+7. Record a short procedure in the `verify` section. Move a longer one to `<agent-docs>/project/verification.md`.
 
 ## to-plan
 

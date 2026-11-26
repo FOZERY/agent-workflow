@@ -40,7 +40,7 @@ Act only on the environments and accounts that the procedure names. If the check
 
 ## 4. Run the checks
 
-1. Drive each behavior on the real path: the UI through the browser tool, API requests, CLI commands, the test queries of the project.
+1. Drive each behavior on the real path: the UI through the tool that the procedure names, such as `agent-browser` for web pages or `agent-desktop` for native apps, API requests, CLI commands, the test queries of the project. Read the tool's `--help` before the first use.
 2. Capture the action and the result, not only the final screen. Check side effects too: rows, messages, files, jobs.
 3. Save the evidence where the procedure says. Default: `.verify/<date>-<time>/`. If Git does not ignore `.verify/`, ask the user before you add it to `.git/info/exclude`.
 4. If a check fails, check the environment first. If the environment is fine, record the failure as a finding. Keep each check as it was confirmed. To change a check, get the user's approval.
